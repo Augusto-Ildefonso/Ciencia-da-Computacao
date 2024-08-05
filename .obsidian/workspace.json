@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "b5e2f36261831f5c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Git e Github/Git.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -86,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md",
+                "file": "Git e Github/Git.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md",
+                "file": "Git e Github/Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md"
+                "file": "Git e Github/Git.md"
               }
             }
           }
@@ -147,12 +160,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "438b94d4540289e9",
+  "active": "b5e2f36261831f5c",
   "lastOpenFiles": [
+    "a.txt",
+    "USP/2º Semestre/Introdução a Ciência da Computação II.md",
     "Untitled.canvas",
     "2024-08-05.md",
     "Git e Github/Git.md",
-    "USP/2º Semestre/Introdução a Ciência da Computação II.md",
     "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
     "USP/2º Semestre",
     "USP",
