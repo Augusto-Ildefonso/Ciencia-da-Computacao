@@ -1,0 +1,6 @@
+# Introdução
+A internet é uma rede global de redes que conecta milhões de dispositivos através de: email eletrônico, compartilhamento de arquivos (FTP), jogos online, aplicativos mobile, páginas web, etc.
+Já Web (World Wide Web) representa um conjunto de informações acessadas via internet por meio de hyperlinks (referenciando URLs (Uniform Resource Identifier)). Ou seja, a web é uma das redes presentes na internet. Os recursos presentes na web são acessados por meio de navegadores fazendo o uso do protocolo HTTP ou HTTPS.
+Os recursos na web costumam ser apresentados na forma de webpages - que formam websites.
+## Arquitetura
+Em uma aplicação Web, há dois tipos de "sub-programas", um _client-side_ e outro _server-side_. O código _client-side_ (HTML, CSS e Javascript) é o que está na página do navegador e que interage diretamente com as entradas do usuário. Já o código _server-side_ está em um servidor e responde às requisições HTTP que chegam até ele. Para o código _server-side_, pode-se utilizar C#, Java, Javascript, Python, PHP, Ruby e mais - basicamente, qualquer linguagem que entenda e responda requisições HTTP.
