@@ -38,3 +38,31 @@ Intel é little endian e Sun Microsystens é big endian.
 Diferentes arquiteturas:
 - 32 bits -> o ponteiro vai ter 4 bytes
 - 64 bits -> o ponteiro vai ter 8 bytes
+# Recursão
+Recursividade consiste na ideia de dividir o problema consecutivamente em pedaços menores até se tornar algo trivial.
+Para ter um algoritmo recursivo, ele deve cumprir três regras:
+- Deve ter um caso básico
+- Deve se aproximar do caso básico a cada estado
+- Deve chamar a si mesmo recursivamente
+Exemplo de código recursivo:
+```
+#include <stdio.h>
+
+int fat(int x){
+	if(x == 1){
+		return(1);
+	} else{
+		return(x * fat(x-1));
+	}
+}
+
+int main(void){
+	int x;
+
+	scanf("%d", &x);
+
+	printf("%d! = %d\n", x, fat(x));
+
+	return(0);
+}
+```
