@@ -18,10 +18,16 @@ Características:
 - Não há necessidade de o desenvolvedor saber a representação interna de um tipo de dado
 - Não se preocupa com a eficiência de tempo e espaço, porque elas são questões de implementação
 Para ser TAD tem que ser encapsulado.
+Um TAD é um modelo matemático que pode ser representado por uma tupla (v, o), onde v é o conjunto de valores e o é o conjunto de operações.
 ## Ocultamento de Informação
 Os dados armazenados podem ser manipulados apenas pelas operações definidas na interface - *Information Hiding (Ocultamento de Informação)*
 Ocultamento dos detalhes de representação e implementação, sendo que apenas a funcionalidade (interface) é conhecida.
 Só tem acesso às operações de manipulação dos dados e não aos dados em si.
+## Estruturas de Dados e TAD
+Uma vez definido um TAD e especificadas as operações associadas, ele pode ser implementado em uma linguagem de programação.
+Uma estrutura de dados pode ser vista, então, como uma implementação de TAD. Ela implica na escolha de uma estrutura de dados para representá-lo, a qual é acessada pelas operações que o TAD define.
+Uma estrutura de dados é construída a partir dos tipos básicos (inteiros, real, char) ou dos tipos estruturados (array, struct) de uma linguagem de programação.
+Podem existir diversas implementações para um mesmo TAD, cada uma com suas vantagens e desvantagens.
 ## Vantagens
 - É possível esconder os detalhes de implementação do usuário. Ele só olha o módulo de interface e sabe como usar (usuário)
 - Organização dos dados e controle, pois impede os usuários de acessarem o TAD (desenvolvedor)
@@ -30,55 +36,25 @@ Só tem acesso às operações de manipulação dos dados e não aos dados em si
 - Correção
 - Independência de representação
 ## Implementação
+Requer que operações sejam definidas sobre os valores sem estarem atreladas a uma implementação específica. O programador que usa um tipo de dado double, int ou um array de int, não precisa saber como os mesmos são representados internamente na memória do computador. O mesmo princípio pode ser aplicado a listas, pilhas, etc. Se existe uma implementação disponível de uma lista, por exemplo, um programador pode utilizá-la como se fosse uma caixa preta, e acessá-la por meio das operações que o TAD lista suporta.
 O conceito de TAD é suportado por algumas linguagens de programação procedimentais. Exemplo: Java, C, C++, Python, entre outras.
 Para definir um TAD:
 - O programador projetista descreve o TAD em dois módulos separados:
 	- Um módulo de implementação que contém a definição do TAD: representação (declaração) da estrutura de dados e implementação de cada operação suportada (em C este módulo é um (ou alguns) arquivos .c).
 	- Um módulo de interface de acesso: apresenta as informações possíveis.
 - Os programadores usuários podem, por meio da interface de acesso, usar o TAD sem conhecer os detalhes representacionais e sem acessar o módulo de definição.
+Na implementação de um TAD, a escolha da estrutura de dados empregada tem papel importante. Uma escolha mal feita pode resultar em implementações ineficientes ou mesmo não-factíveis.
 ## Encapsulamento
 Usamos uma struct para fazer o encapsulamento. Criamos ela no módulo de definição.
 
 ## Módulo de interface
 É um arquivo .h que contém os protótipos das funções. Temos um outro arquivo .c que contém o código das funções e nele também estão definidas as estruturas de dados. Para usarmos temos que colocar na pasta do código principal o .o e o .h.
-## Extra
-Ele pode ser implementado por hardware ou por software. No caso do software, existe um programa que consiste de instruções de hardware já existentes que serão usadas para interpretar esse dado. Ou seja, há uma especificação de como o novo tipo de dado pode ser interpretado a partir dos tipos de dados já existentes e também de como as operações definidas para ele ocorrerão.
-Um TAD consiste em duas partes: uma definição de valores e uma definição de operadores. A definição de valores determina o conjunto de valores para o TAD e é dividida em duas partes:
-- Uma cláusula de definição
-- Uma cláusula de condição
-Vale mencionar que usamos a notação de colchetes para indicar as partes de um tipo abstrato.
-A outra parte é a definição de operadores. Cada operador é definido como uma função abstrata com três partes:
-- Cabeçalho
-- Pré-condições opcionais
-- Pós-condições
-Veja agora um exemplo em C de um tipo de dado abstrato chamado RATIONAL:
-```
-// Definição de valor
-abstract typedef <integer, integer> RATIONAL;
-condition RATIONAL[1] <> 0;
-
-// Definição de operador
-abstract RATIONAL makerational(a, b)
-int a, b;
-precondition b <> 0;
-postcondition makerational[0] == a;
-			  makerational[1] == b;
-
-abstract RATIONAL add(a,b) /* written a + b */
-RATIONAL a,b;
-postcondition add[1] == a[1] * b[1] ;
-              add[0] == a[0] * b[1] + b[0] * a [1];
-              
-abstract RATIONAL mult(a,b) /* written a * b*/
-RATIONAL a,b;
-postcondition mult[0] == a[0] * b[0] ;
-              mult[1] == a[1] * b[1] ;
-              
-abstract equal(a,b) /* written a == b */
-RATIONAL a,b;
-postcondition equal == (a[0] * b[1] == b[0] * a[1]) ;
-```
-As palavras abstract typedef introduzem uma definição de valor e a palavra condition é usada para indicar condições impostas sobre o tipo recém-definido.
-Agora para a definição de operadores, o cabeçalho é as duas primeiras linhas de cada operação. A palavra abstract indica que não é uma função de C e sim uma função abstrata. O comentário com a palavra-chave written indica uma nova forma de escrever a função. A pós-condição (postcondition) indica o que a função faz.
-A pré-condição (precondition) especifica restrições que devem ser atendidas antes da aplicação da operação.
-
+## Makefile
+É um arquivo que contém um conjunto de diretivas usadas pela ferramente de automação de compilação make para gerar um alvo/meta.
+Flags:
+- -std: indica o padrão C a ser seguido na compilação
+- -o: define o nome de arquivos de saída
+- -Wall: mostra todos os warnings
+- -pedantic-errors: mostra todos os erros, independente do padrão
+- -lm: include a biblioteca matemática
+- -c: somente compila (gera o .o)
