@@ -38,6 +38,8 @@ Intel é little endian e Sun Microsystens é big endian.
 Diferentes arquiteturas:
 - 32 bits -> o ponteiro vai ter 4 bytes
 - 64 bits -> o ponteiro vai ter 8 bytes
+## Funções Novas
+- memcpy - copia os valores do número de bytes da origem para o destino
 # Recursão
 Recursividade consiste na ideia de dividir o problema consecutivamente em pedaços menores até se tornar algo trivial.
 Para ter um algoritmo recursivo, ele deve cumprir três regras:

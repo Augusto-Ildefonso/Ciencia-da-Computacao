@@ -137,6 +137,10 @@ Então abrimos ele com o editor de texto e adicionamos as regras para mostrar qu
 Vale mencionar que podemos criar .gitignore em subdiretórios para que eles tenham um escopo daquele diretório, se criarmos na raíz ele terá o escopo do repositório.
 O .gitignore funciona com regras, elas podem ser vistas nesse [link](https://www.w3schools.com/git/git_ignore.asp?remote=github).
 É possível ignorar arquivos e pastas e não mostrar no .gitignore que será distribuído. Essas regras vão ser mostradas no arquivo `.git/info/exclude`. Ele funciona do mesmo modo que o .gitignore mas não é mostrado para ninguém.
+# Conectando via SSH com o Github
+Geralmente usamos a conexão SSH quando estamos em redes não seguras. O SSH é um secure shell protocol que é usado para gerenciar redes, transferir arquivos remotamente e acessar sistemas remotos. Ele usa um par de chaves (uma pública e uma privada) para estabelecer a conexão, isso garante uma conexão segura mesmo em redes não seguras. A chave pública é a que é compartilhada.
+Então com as chaves geradas, copiamos a chave pública para a clipboard e adicionamos ela no Github.
+Assim, só testar a conexão e verificar que ele retorna o nome do seu usuário.
 
 # Comandos
 ### Versão do git
@@ -288,3 +292,34 @@ Esse comando empurra as mudanças da branch especificada para a origem. Ele tamb
 $ git clone url diretório
 ```
 Esse comando permite clonar um repositório do Github, ele já criará um diretório para o código. Podemos especificar o diretório que queremos se colocarmos o nome do diretório após a URL, mas não é obrigatório
+## Chave SSH
+```
+$ ssh-keygen
+```
+ou então
+```
+$ ssh-keygen -t rsa -b 4096 -C "usuario@dominio"
+```
+Aparecerá uma mensagem para selecionar o local do arquivo ou então pressione enter para usar o arquivo sugerido. Em seguida pedirá para adicionar uma passphrase (opcional), que garante mais uma camada de segurança.
+## Adicionando chave SSH ao agente
+```
+$ ssh-add caminho/ate/arquivo/sem/.pub
+```
+Para remover usamos um -d antes do caminho.
+## Copiar algo para clipboard
+```
+$ clip < arquivo
+```
+## Testar conexão com Github
+```
+$ ssh -T git@github.com
+```
+Ele pode falar que não foi possível estabelecer a autenticidade, mas só seguir com o yes que dá certo.
+## Adicionando repositório remoto com SSH
+```
+$ git remote add ssh-origin git@github.com:User/Repositorio
+```
+## Mudando origem de HTTPS para SSH
+```
+$ git remote set-url remote-name git@github.com:username/repository_.git
+```
