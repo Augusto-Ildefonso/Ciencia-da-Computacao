@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "92daf6911a9bd8ed",
+        "id": "c059df59a92caedd",
         "type": "tabs",
         "children": [
           {
-            "id": "f0dc9eca9fb1121f",
+            "id": "628461020ee228be",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -18,21 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "a5324672d0b35382",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Git e Github/Git.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -99,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Git e Github/Git.md",
+                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Git e Github/Git.md",
+                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -139,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Git e Github/Git.md"
+                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md"
               }
             }
           }
@@ -161,8 +148,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a5324672d0b35382",
+  "active": "24d1aa128ccc6f1a",
   "lastOpenFiles": [
+    "Anotações rápidas.md",
+    "2024-08-08.md",
     "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
     "Git e Github/Git.md",
     "USP/2º Semestre/Introdução a Ciência da Computação II.md",
@@ -175,7 +164,6 @@
     "2024-08-05.md",
     "USP/2º Semestre",
     "USP",
-    "Anotações rápidas.md",
     "Welcome.md",
     "Git e Github",
     "Ganesh/Web.md",

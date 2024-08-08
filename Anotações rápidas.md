@@ -1,1 +1,0 @@
-Em C, para poder usar as setas nos inputs, usamos as funções da biblioteca editline. Usamos a função readline para ler o input, permitindo as setas para os lados. E usamos a função add_history para adicionar o input em um histórico e assim poder usar as setas para cima e para baixo. Além disso, ao compilar temos que usar a flag -lreadline no momento de compilar o .o.
