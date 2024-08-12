@@ -28,6 +28,7 @@ Uma vez definido um TAD e especificadas as operações associadas, ele pode ser 
 Uma estrutura de dados pode ser vista, então, como uma implementação de TAD. Ela implica na escolha de uma estrutura de dados para representá-lo, a qual é acessada pelas operações que o TAD define.
 Uma estrutura de dados é construída a partir dos tipos básicos (inteiros, real, char) ou dos tipos estruturados (array, struct) de uma linguagem de programação.
 Podem existir diversas implementações para um mesmo TAD, cada uma com suas vantagens e desvantagens.
+Ela permite organizar, armazenar e processar esses dados.
 ## Vantagens
 - É possível esconder os detalhes de implementação do usuário. Ele só olha o módulo de interface e sabe como usar (usuário)
 - Organização dos dados e controle, pois impede os usuários de acessarem o TAD (desenvolvedor)
@@ -50,7 +51,8 @@ Usamos uma struct para fazer o encapsulamento. Criamos ela no módulo de defini�
 ## Módulo de interface
 É um arquivo .h que contém os protótipos das funções. Temos um outro arquivo .c que contém o código das funções e nele também estão definidas as estruturas de dados. Para usarmos temos que colocar na pasta do código principal o .o e o .h.
 ## Makefile
-É um arquivo que contém um conjunto de diretivas usadas pela ferramente de automação de compilação make para gerar um alvo/meta.
+É um arquivo que contém um conjunto de diretivas usadas pela ferramenta de automação de compilação make para gerar um alvo/meta. O nome do arquivo tem que ser Makefile.
+O `all` é uma receita para o que deve ser compilado no final.
 Flags:
 - -std: indica o padrão C a ser seguido na compilação
 - -o: define o nome de arquivos de saída
@@ -58,3 +60,42 @@ Flags:
 - -pedantic-errors: mostra todos os erros, independente do padrão
 - -lm: include a biblioteca matemática
 - -c: somente compila (gera o .o)
+## Item 
+O cliente irá usar o item, definir o tipo de dado que será passado para ele, entre outros. A vantagem de usar o item é que não será necessário mudar o TAD para mudar o tipo de dado que será trabalhado. A estrutura de dados não acessa os dados, ela acessa o item.
+### Interface do Item
+```
+#ifndef ITEM_H -> Esse nome _H é uma convenção assim como escrever em maiúsculo
+	#define ITEM_H
+
+	#include <stdbool.h>
+
+	typedef struct item_ ITEM;
+
+	ITEM* item_criar(int chave, void* comp);
+	bool item_apagar(ITEM* **item);
+	int item_get_chave(ITEM* item);
+	bool item_set_chave(ITEM* item, int chave);
+	void* item_get_dados(ITEM* item);
+#endif
+```
+Os # são instruções de pré-processamento, ou seja, ele define coisas que devem ser definidas, executadas, antes da compilação.
+O ifndef significa "if not defined", ou seja, ele só irá executar esse trecho uma vez, caso ele já tenha sido executado e o ITEM_H tenha sido definido, ele não irá executar. Isso é bom pois como temos vários arquivos usando essas funções, várias funções com mesmo nome seriam criadas, o que é um problema. Então, usando esse ifndef ele só ira executar se não tiver sido definido anteriormente.
+### Implementação
+```
+#include <stdlib.h>
+#include <stdio.h>
+#include "item.h"
+
+struct item_{
+	int chave; // Indexador
+	void *dados; // Ponteiro para o dado
+}
+
+ITEM* item_criar(int chave, void *dado){
+	...
+}
+
+...
+```
+O que permite o cliente usar o tipo de dado que ele quiser, sem ter que mudar o TAD, é o uso do tipo `void` para o ponteiro dos dados.
+Outra convenção é usar nos nomes das funções o nome do TAD, exemplo: item_{resto do nome}.

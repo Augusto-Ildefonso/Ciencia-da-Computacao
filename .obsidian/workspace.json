@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "c059df59a92caedd",
+        "id": "8c08005bf75f4181",
         "type": "tabs",
         "children": [
           {
-            "id": "628461020ee228be",
+            "id": "e1213742dae3a9fc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
+                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
+                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
+                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md"
+                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md"
               }
             }
           }
@@ -148,14 +148,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "628461020ee228be",
+  "active": "e1213742dae3a9fc",
   "lastOpenFiles": [
-    "Anotações rápidas.md",
-    "2024-08-08.md",
     "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
-    "Git e Github/Git.md",
     "USP/2º Semestre/Introdução a Ciência da Computação II.md",
     "Untitled.canvas",
+    "Anotações rápidas.md",
+    "2024-08-08.md",
+    "Git e Github/Git.md",
     "Python/Curso - Geek University.md",
     "Python/Curso - Geek University/List Comprehension.md",
     "Python/Curso - Geek University",
