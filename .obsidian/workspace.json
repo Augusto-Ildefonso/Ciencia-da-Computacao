@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md",
+                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md",
+                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md",
+                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "USP/2º Semestre/Introdução a Ciência da Computação II.md"
+                "file": "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md"
               }
             }
           }
@@ -150,8 +150,8 @@
   },
   "active": "e1213742dae3a9fc",
   "lastOpenFiles": [
-    "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
     "USP/2º Semestre/Introdução a Ciência da Computação II.md",
+    "USP/2º Semestre/Algoritmos e Estrutura de Dados I.md",
     "Untitled.canvas",
     "Anotações rápidas.md",
     "2024-08-08.md",
