@@ -99,3 +99,34 @@ ITEM* item_criar(int chave, void *dado){
 ```
 O que permite o cliente usar o tipo de dado que ele quiser, sem ter que mudar o TAD, é o uso do tipo `void` para o ponteiro dos dados.
 Outra convenção é usar nos nomes das funções o nome do TAD, exemplo: item_{resto do nome}.
+
+# Pilhas (Stacks)
+O conceito é de objetos empilhados um em cima do outro. A pilha tem uma ordem de entrada e saída, começa enchendo pela base (primeiro) e quando for retirar, retira por cima (último).
+Elas auxiliam em problemas práticos em computação. Exemplos:
+- O botão "back" de um navegador web ou a opção "undo" de um editor de textos
+- Controle de chamada de procedimentos (memória stack)
+- Estrutura de dados auxiliar em alguns algoritmo como a busca em profundida
+Pilhas são estruturas de dados nas quais as inserções e remoções são realizadas na mesma extremidade da estrutura, chamada de topo. Dessa maneira o último elemento que foi inserido é sempre o primeiro a ser removido. Isso se chama Política Last-in/First-out (LIFO).
+Geralmente usamos pilhas quando queremos que os elementos entrem em uma ordem e saiam na ordem contrária.
+## Organização vs Alocação de memória
+Alocação Estática: reserva memória em tempo de compilação
+Alocação Dinâmica: em tempo de execução
+![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/f08fdfbac13c0f1d3cd30aa9529357bae376f0d0/Imagens/1.png)
+1. Sequência e Estática: uso de arrays
+2. Encadeada e Estática: arrays simulando a memória principal
+3. Sequência e Dinâmica: alocação dinâmica de array
+4. Encadeada e Dinâmica: uso de ponteiros
+## Operações principais
+- Empilhar(P, x): insere o elemento x no topo de P
+- Desempilhar(P): remove o elemento do topo de P, e retorna esse elemento
+## Operações auxiliares
+- Criar(P): cria uma pilha P vazia
+- Apagar(P): apaga a pilha P da memória
+- Topo(P): retorna o elemento do topo de P, sem remover
+- Tamanho(P): retorna o número de elementos em P
+- Vazia(P): indica se a pilha P está vazia
+- Cheia(P): indica se a pilha está cheia (útil para implementações sequenciais)
+## Implementação Sequencial
+É uma implementação simples.
+Uma variável mantém o controle da posição do topo, e pode ser utilizada também para informar o número de elementos da pilha (tamanho).
+O tamanho da pilha é topo-1.
