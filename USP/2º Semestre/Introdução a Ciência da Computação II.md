@@ -99,3 +99,32 @@ printf("%f", (double) ((fim - inicio) / CLOCKS_PER_SEC));
 É quando tem uma chamada recursiva no final do código. Eles são mais facilmente transformáveis em programas iterativos. A recursão pode virar uma condição
 Uma rotina apresenta recursão de cauda se a chamada recursiva está no final do seu código, tendo como única função criar um "looping" que será repetido até que a condição de parada seja satisfeita.
 Pode ser eliminada facilmente se empregarmos, em seu lugar, uma estrutura de repetição que esteja condicionada à expressão de teste usada na versão recursiva.
+
+# Análise de Algoritmos
+## Algoritmo
+É um conjunto de instruções que devem ser seguidas para solucionar um determinado problema.
+Qualquer procedimento computacional bem definido que toma algum valor ou conjunto de valores de entrada e produz algum valor ou conjunto de valores de saída.
+Ferramenta para desenvolver um problema computacional bem especificado.
+Assim como o hardware de um computador, constitui uma tecnologia, pois o desempenho total do sistema depende da escolha de um algoritmo eficiente tanto quanto da escolha de um hardware rápido.
+Deseja-se que um algoritmo termine e seja correto.
+## Recursos de um algoritmo
+Uma vez que um algoritmo está pronto/disponível, é importante determinar os recursos necessários para sua execução:
+- Tempo
+- Memória
+## Análise de algoritmos
+Um algoritmo que soluciona um determinado problema, mas requer o processamento de um ano, não deve ser usado. Antes de escolher trocar um algoritmo por outro, só porque ele roda mais rápido em determinada máquina, temos que considerar alguns fatores:
+- Características da máquina em que o algoritmo foi testado (quantidade de memória)
+- Linguagem de programação
+	- Compilada x Interpretada
+ 	- Alto x Baixo Nível
+- Implementação pouco cuidadosa do algoritmo x contra a "super" implementação do algoritmo y.
+- Quantidade de dados processados
+
+A comunidade de computação começou a pesquisar formas de comparar algoritmos de forma independente de:
+- Hardware
+- Linguagem de programação
+- Habilidade do programador
+Portanto, deseja-se comparar algoritmos e não programas (essa área é conhecida como "análise/complexidade de algoritmos").
+## Eficiência de algoritmos
+Estimamos a eficiência de um algoritmo em função do tamanho do problema. Em geral, assume-se que "n" é o tamanho do problema, ou número de elementos que serão processados. E calcula-se o número de operações que serão realizadas sobre os n elementos.
+O melhor algoritmo é aquele que requer menos operações sobre a entrada, pois é o mais rápido e, diferente do tempo de execução que varia de máquina para máquina, o número de operações não, então é uma boa medida de desempenho de um algoritmo. As operações que falamos são as usadas para resolver o problema. O tempo de cada operação é constante, o que muda é a quantidade de vezes.
