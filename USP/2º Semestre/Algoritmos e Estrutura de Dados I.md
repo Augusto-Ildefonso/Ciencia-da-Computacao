@@ -101,13 +101,21 @@ O que permite o cliente usar o tipo de dado que ele quiser, sem ter que mudar o 
 Outra convenção é usar nos nomes das funções o nome do TAD, exemplo: item_{resto do nome}.
 
 # Pilhas (Stacks)
+Link: https://www.geeksforgeeks.org/stack-data-structure/
 O conceito é de objetos empilhados um em cima do outro. A pilha tem uma ordem de entrada e saída, começa enchendo pela base (primeiro) e quando for retirar, retira por cima (último).
 Elas auxiliam em problemas práticos em computação. Exemplos:
 - O botão "back" de um navegador web ou a opção "undo" de um editor de textos
 - Controle de chamada de procedimentos (memória stack)
 - Estrutura de dados auxiliar em alguns algoritmo como a busca em profundeza
-Pilhas são estruturas de dados nas quais as inserções e remoções são realizadas na mesma extremidade da estrutura, chamada de topo. Dessa maneira o último elemento que foi inserido é sempre o primeiro a ser removido. Isso se chama Política Last-in/First-out (LIFO).
+Pilhas são estruturas de dados lineares que seguem uma ordem específica para as operações. Nesse TAD, as inserções e remoções são realizadas na mesma extremidade da estrutura, chamada de topo. Dessa maneira o último elemento que foi inserido é sempre o primeiro a ser removido. Isso se chama Política Last-in/First-out (LIFO).
 Geralmente usamos pilhas quando queremos que os elementos entrem em uma ordem e saiam na ordem contrária.
+Aplicações das pilhas são:
+- Recursão
+- Evaluating e Parsing de expressões
+- Busca em profundidade
+- Operações de refazer e desfazer
+- Histórico do navegador
+- Chamadas de funções
 ## Organização vs Alocação de memória
 Alocação Estática: reserva memória em tempo de compilação
 Alocação Dinâmica: em tempo de execução
@@ -117,48 +125,161 @@ Alocação Dinâmica: em tempo de execução
 3. Sequência e Dinâmica: alocação dinâmica de array
 4. Encadeada e Dinâmica: uso de ponteiros
 ## Operações principais
-- Empilhar(P, x): insere o elemento x no topo de P (push)
-- Desempilhar(P): remove o elemento do topo de P, e retorna esse elemento (pop)
+- **Empilhar(P, x)**: insere o elemento x no topo de P (push)
+- **Desempilhar(P)**: remove o elemento do topo de P, e retorna esse elemento (pop)
+- Topo(P): retorna o elemento do topo de P, sem remover
+- Vazia(P): indica se a pilha P está vazia
+- Cheia(P): indica se a pilha está cheia (útil para implementações sequenciais)
 ## Operações auxiliares
 - Criar(P): cria uma pilha P vazia
 - Apagar(P): apaga a pilha P da memória
-- Topo(P): retorna o elemento do topo de P, sem remover
 - Tamanho(P): retorna o número de elementos em P
-- Vazia(P): indica se a pilha P está vazia
-- Cheia(P): indica se a pilha está cheia (útil para implementações sequenciais)
-## Implementação Sequencial
+## Implementação Sequencial (Estática)
 É uma implementação simples.
 Uma variável mantém o controle da posição do topo, e pode ser utilizada também para informar o número de elementos da pilha (tamanho).
 O tamanho da pilha é topo-1.
+**Módulo de interface**
+```
+#ifndef PILHA_H
+	#define PILHA_H
+	#include <stdbool.h>
+
+	typedef struct pilha_ PILHA;
+
+	PILHA *pilha_criar(void);
+	void pilha_apagar(PILHA **pilha);
+	bool pilha_vazia(PILHA *pilha);
+	bool pilha_cheia(PILHA *pilha);
+	int pilha_tamanho(PILHA *pilha);
+	ITEM *pilha_topo(PILHA *pilha);
+	bool pilha_empilhar(PILHA *pilha, ITEM *item);
+	ITEM *pilha_desempilhar(PILHA *pilha);
+	void pilha_print(PILHA *p);
+	void pilha_inverter(PILHA *p);
+#endif
+```
 **Módulo de Implementação**
 ```
-#include "stack.h"
-
-struct stack{
+struct pilha{
 	ITEM* item[TAM];
 	int tamanho;
 };
 
-bool stack_push(STACK* stack, ITEM* item){
-	if(stack->tamanho < TAM){
-		stack->item[stack->tamanho] = item;
-		stack->tamanho++;
-		return true;
+PILHA* pilha_criar(void) {
+	PILHA* pilha = (PILHA *) malloc(sizeof (PILHA));
+	if (pilha != NULL)
+		pilha->tamanho = 0;
+	return (pilha);
+}
+
+bool pilha_vazia(PILHA* pilha) {
+	if (pilha != NULL)
+		return ((pilha->tamanho == 0) ? true : false);
+	return(false);
+}
+
+bool pilha_cheia(PILHA *pilha) {
+	if (pilha != NULL)
+		return ((pilha->tamanho == TAM) ? true : false);
+	return(false);
+}
+
+int pilha_tamanho(PILHA *pilha) {
+	return ((pilha != NULL) ? pilha->tamanho : -1);
+}
+
+bool pilha_empilhar(PILHA *pilha, ITEM* item) {
+	if ((pilha!=NULL) && (!pilha_cheia(pilha)) {
+		pilha->item[pilha->tamanho] = item;
+		pilha->tamanho++;
+		return (true);
+	}
+	return (false);
+}
+
+ITEM* pilha_desempilhar(PILHA* pilha) {
+	ITEM* i;
+	if ((pilha != NULL) && (!pilha_vazia(pilha))) {
+		i = pilha_topo(pilha);
+		pilha->item[pilha->tamanho-1] = NULL;
+		pilha->tamanho--;
+		return (i);
+	}
+	return (NULL);
+}
+
+Falta algumas funções
+```
+## Implementação Encadeada (Diâmica)
+Substituímos os itens por nós. Veja abaixo o que é o nó:
+```
+typedef struct no_ NO;
+
+// Pode ter o que quiser dentro, só é necessário um dos elementos ser um
+// ponteiro para a própria struct
+
+struct no_{
+	ITEM* item;
+	NO* anterior;
+};
+```
+**Módulo de interface**
+```
+#ifndef PILHA_H
+	#define PILHA_H
+	#include <stdbool.h>
+
+	typedef struct pilha_ PILHA;
+
+	PILHA *pilha_criar(void);
+	void pilha_apagar(PILHA **pilha);
+	bool pilha_vazia(PILHA *pilha);
+	bool pilha_cheia(PILHA *pilha);
+	int pilha_tamanho(PILHA *pilha);
+	ITEM *pilha_topo(PILHA *pilha);
+	bool pilha_empilhar(PILHA *pilha, ITEM *item);
+	ITEM *pilha_desempilhar(PILHA *pilha);
+	void pilha_print(PILHA *p);
+	void pilha_inverter(PILHA *p);
+#endif
+```
+**Módulo de implementação**
+```
+struct pilha_ {
+	NO* topo;
+	int tamanho;
+}
+
+PILHA* pilha_criar(void){
+	PILHA* p = (PILHA*) malloc(sizeof(PILHA));
+
+	if((p = (PILHA*) malloc(sizeof(PILHA))) != NULL){
+		p->topo = NULL;
+		p->tamanho = 0;
+	}
+}
+
+bool pilha_empilhar(PILHA* p, ITEM* it){
+	if(!pilha_cheia(p)){
+		NO* aux;
+		aux = (NO*) malloc(sizeof(NO));
+
+		if(aux != NULL){
+			aux->item = it;
+			aux->anterior = pilha->topo;
+			p->topo = aux;
+			p->tamanho++;
+			return true;
+		}
+
+		return false;
 	}
 	
-	return false;
-}
-
-ITEM* stack_pop(STACK* stack){
-	ITEM* item = NULL;
-	if(stack != NULL){
-		item = stack->item[stack->tamanho-1];
-
-		stack->tamanho--;
-		
-		stack->item[tam] = NULL;
-	}
-
-	return item;
 }
 ```
+Nessa implementação não existe indexação.
+Além disso, as vantagens dessa implementação são:
+- Não tem que saber a quantidade de dados previamente
+A desvantagem é:
+- O código fica mais complexo
+- Não tem acesso indexado
