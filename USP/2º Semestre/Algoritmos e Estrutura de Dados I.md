@@ -210,7 +210,7 @@ ITEM* pilha_desempilhar(PILHA* pilha) {
 
 Falta algumas funções
 ```
-## Implementação Encadeada (Diâmica)
+## Implementação Encadeada (Dinâmica)
 Substituímos os itens por nós. Veja abaixo o que é o nó:
 ```
 typedef struct no_ NO;
