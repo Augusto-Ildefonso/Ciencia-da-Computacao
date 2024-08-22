@@ -232,7 +232,9 @@ Depois
 Por exemplo, uma operação de desempilhar pode ser feita da seguinte maneira:
 Antes
 ![Pilha encadeada](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2012-50-41.png)
-
+Depois
+![Pilha Encadeada](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2012-53-56.png)
+O topo é o início. Pode-se implementar as operações utilizando a abordagem de listas ligadas simples. Utilizando o TAD Pilha, a interface e o programa cliente não mudam, apenas a implementação (Pilha.c) muda.
 
 **Módulo de interface**
 ```
@@ -294,6 +296,7 @@ Além disso, a vantagem dessa implementação é:
 A desvantagem é:
 - O código fica mais complexo
 - Não tem acesso indexado
-A lógica por trás dessa implementação é:
+## Sequencial x Encadeada
+
 ## Extra
 A flag -I no Makefile serve para especificar o caminho dos arquivos .h (para quando eles estão em outra pasta).
