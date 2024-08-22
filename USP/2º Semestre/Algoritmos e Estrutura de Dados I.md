@@ -297,6 +297,22 @@ A desvantagem é:
 - O código fica mais complexo
 - Não tem acesso indexado
 ## Sequencial x Encadeada
-
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2013-00-19.png)
+### Sequencial
+- Implementação simples
+- Tamanho da pilha definido a priori
+### Encadeada
+- Alocação dinâmica permite gerenciar melhor estruturas cujo tamanho não é conhecido a priori ou que variam muito de tamanho
+## Aplicação de pilhas
+### Avaliação de expressões aritméticas
+#### Notação Infixa
+Ela é ambígua. Tem a necessidade de precedência de operadores ou utilização de parênteses. Sintaxe: A + B * C.
+#### Notação Polonesa (prefixa)
+Os operadores precedem os operandos. Ela dispensa o uso de parênteses. Sintaxe: - * AB/CD (expressão: (A  * B) - (C / D)).
+#### Notação Polonesa Reversa (posfixa)
+Os operadores sucedem os operandos. Ela dispensa o uso de parênteses. Sintaxe: AB * CD /- (expressão: (A * B) - (C / D)).
+Expressões nessa notação podem ser avaliadas usando pilhas. A expressão é avaliada da esquerda para direita. Os operandos são empilhados. Os operadores fazem com que: dois operandos sejam empilhados, o cálculo realizado e o resultado empilhado.
+### Sequência de parênteses e chaves
+Dada uma sequência de parênteses, ela pode ser bem formada: ( ( ) { ( ) } ), ou mal formada: ( { ) }.
 ## Extra
 A flag -I no Makefile serve para especificar o caminho dos arquivos .h (para quando eles estão em outra pasta).
