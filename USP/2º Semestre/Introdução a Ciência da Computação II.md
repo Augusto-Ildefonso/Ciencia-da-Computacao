@@ -163,3 +163,4 @@ Se $T_1 (n) = O(f(n))$ e $T_2 (n) = O(g(n))$:
 Se T(x) é um polinômio de grau n, então $T(x) = \Theta(x^n)$ 
 Se $log_{k}n = O(n)$ para qualquer constante k, pois logaritmos crescem muito vagarosamente. 
 ### Funções e taxas de crescimento
+![Tabela](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2008-59-03.png?token=GHSAT0AAAAAACVHHSZPC6R7YP5BJDL2SPE6ZWHFCHQ)
