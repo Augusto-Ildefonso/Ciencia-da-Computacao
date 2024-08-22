@@ -111,7 +111,7 @@ Geralmente usamos pilhas quando queremos que os elementos entrem em uma ordem e 
 ## Organização vs Alocação de memória
 Alocação Estática: reserva memória em tempo de compilação
 Alocação Dinâmica: em tempo de execução
-![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/1.png?token=GHSAT0AAAAAACVHHSZO3DN24WOTO5L7FOI4ZWD44YQ)
+![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/1.png)
 1. Sequência e Estática: uso de arrays
 2. Encadeada e Estática: arrays simulando a memória principal
 3. Sequência e Dinâmica: alocação dinâmica de array

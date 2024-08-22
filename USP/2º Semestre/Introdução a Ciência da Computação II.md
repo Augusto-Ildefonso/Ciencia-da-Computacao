@@ -164,8 +164,8 @@ Se T(x) é um polinômio de grau n, então $T(x) = \Theta(x^n)$
 Se $log_{k}n = O(n)$ para qualquer constante k, pois logaritmos crescem muito vagarosamente. 
 ### Funções e taxas de crescimento
 A tabela está em ordem de eficiência, no topo o mais eficiente (menor crescimento) para o menos eficiente.
-![Tabela](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2008-59-03.png?token=GHSAT0AAAAAACVHHSZPC6R7YP5BJDL2SPE6ZWHFCHQ)
-![Gráfico](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2009-01-08.png?token=GHSAT0AAAAAACVHHSZOUHF2YZKIUVLDPYQAZWHFEBA)
+![Tabela](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2008-59-03.png)
+![Gráfico](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2009-01-08.png)
 Apesar de ser importante, não se costuma incluir constantes ou termos de menor ordem em taxas de crescimento. Queremos medir a taxa de crescimento da função, o que torna os "termos menores" irrelevantes. As constantes também dependem do tempo exato de cada operação, como ignoramos os custos reais das operações, ignoramos também as constantes. Não se diz que $T(n) = O(2n^2)$ ou que $T(n) = O(n^2+2)$, diz-se apenas $T(n) = O(n^2)$.
 ### Exercício
 Dados $f(n) = n^{1,5}$ e $g(x) = n \log n$, qual é o melhor algoritmo?
