@@ -136,15 +136,30 @@ $$\sum_{i=0}^{n} 2^i = 2^{n+1} - 1$$
 $$\sum_{i=0}^{n} a^i = \frac{a^{n+1} - 1}{a-1}$$
 $$\sum_{i = 1}^{n} i = \frac{n(n+1)}{2} \approx \frac{n^2}{2}$$
 ## Notações
+Nessas notações T(n) é a taxa do nosso próprio algoritmo. Quando eu falo que meu algoritmo (T(n)) é uma das notações abaixo eu estou falando que eles seguem a regra de cada algoritmo. Para verificar se a notação está correta, eu substituo as fórmulas e acho a constante c, se existir é verdade, se não, não é verdade.s
 ### Big-Oh
 Também chamado de Oh ou "da ordem de", ele é usado quando a taxa de crescimento de T(n) é menor ou igual à taxa de f(n). Se existirem constantes c e $n_0$ tal que T(n) $\leq$ c * f(n) quando n $\geq$ $n_0$, temos:
 $$T(n) = O(f(n))$$
+Ao dizer que T(n) = O(f(n)), garante-se que T(n) cresce em uma taxa não maior do que f(n), ou seja, f(n) é seu limite superior.
 ### Ômega
 Ele é usado quando a taxa de crescimento de T(n) é maior ou igual à taxa de f(n). Se existirem constantes c e $n_0$ tal que T(n) $\geq$ c * f(n) quando n $\geq$ $n_0$, temos:
 $$T(n) = \Omega(f(n))$$
+Ao fizer que f(n) = $\Omega (T(n))$ tem-se que T(n) é o limite inferior de f(n).
 ### Theta
 Ele é usado quando a taxa de crescimento de T(n) é igual à taxa de f(n). Ou seja, se e somente se T(n) = O(f(n)) e T(n) = $\Omega(f(n))$. Temos:
 $$T(n) = \Theta(f(n))$$
+ou
+$$c_1 \times f(n) \leq T(n) \leq c_2 \times f(n)$$
+Quando $T(n) = \Theta(f(n))$, então existem constantes positivas $c_1$ e $c_2$ tais que T(n) pode ser "imprensada" entre $c1 \times f(n)$ e $c_2 \times f(n)$.
 ### Little-Oh
-Também chamado de o minúsculo, ele é usado quando a taxa de crescimento de T(n) é menor do que à taxa de f(n). Se existirem quaisquer constantes c e $n_0$ tal que T(n) $\leq$ c * f(n) quando n $\geq$ $n_0$, temos:
+Também chamado de o minúsculo, ele é usado quando a taxa de crescimento de T(n) é menor do que à taxa de f(n). Se existirem quaisquer constantes c e $n_0$ tal que T(n) < c * f(n) quando n $\geq$ $n_0$, temos:
 $$T(n) = o(f(n))$$
+O uso das notações permite comparar a taxa de crescimento das funções correspondentes aos algoritmos. Não faz sentido comparar pontos isolados das funções, já que podem não corresponder ao comportamento assintótico.
+## Taxas de crescimento
+### Regras
+Se $T_1 (n) = O(f(n))$ e $T_2 (n) = O(g(n))$:
+- $T_1 (n) + T_2 (n) = max(O(f(n)), O(g(n)))$, ou seja, pegamos para o valor de O(n) a função cuja a taxa de crescimento é maior
+- $T_1 \times T_2 = O(f(n) \times g(n))$ 
+Se T(x) é um polinômio de grau n, então $T(x) = \Theta(x^n)$ 
+Se $log_{k}n = O(n)$ para qualquer constante k, pois logaritmos crescem muito vagarosamente. 
+### Funções e taxas de crescimento
