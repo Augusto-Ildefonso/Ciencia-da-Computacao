@@ -99,7 +99,6 @@ printf("%f", (double) ((fim - inicio) / CLOCKS_PER_SEC));
 É quando tem uma chamada recursiva no final do código. Eles são mais facilmente transformáveis em programas iterativos. A recursão pode virar uma condição
 Uma rotina apresenta recursão de cauda se a chamada recursiva está no final do seu código, tendo como única função criar um "looping" que será repetido até que a condição de parada seja satisfeita.
 Pode ser eliminada facilmente se empregarmos, em seu lugar, uma estrutura de repetição que esteja condicionada à expressão de teste usada na versão recursiva.
-
 # Análise de Algoritmos
 ## Algoritmo
 É um conjunto de instruções que devem ser seguidas para solucionar um determinado problema.
@@ -119,7 +118,6 @@ Um algoritmo que soluciona um determinado problema, mas requer o processamento d
  	- Alto x Baixo Nível
 - Implementação pouco cuidadosa do algoritmo x contra a "super" implementação do algoritmo y.
 - Quantidade de dados processados
-
 A comunidade de computação começou a pesquisar formas de comparar algoritmos de forma independente de:
 - Hardware
 - Linguagem de programação
@@ -128,3 +126,25 @@ Portanto, deseja-se comparar algoritmos e não programas (essa área é conhecid
 ## Eficiência de algoritmos
 Estimamos a eficiência de um algoritmo em função do tamanho do problema. Em geral, assume-se que "n" é o tamanho do problema, ou número de elementos que serão processados. E calcula-se o número de operações que serão realizadas sobre os n elementos.
 O melhor algoritmo é aquele que requer menos operações sobre a entrada, pois é o mais rápido e, diferente do tempo de execução que varia de máquina para máquina, o número de operações não, então é uma boa medida de desempenho de um algoritmo. As operações que falamos são as usadas para resolver o problema. O tempo de cada operação é constante, o que muda é a quantidade de vezes.
+## Análise assintótica
+Deve-se preocupar com a eficiência de algoritmos quando o tamanho de n for grande. A eficiência assintótica de um algoritmo descreve a eficiência relativa dele quando n torna-se grande. 
+Portanto, para comparar 2 algoritmos, determinam-se as taxas de crescimento de cada um: o algoritmo com menor taxa de crescimento rodará mais rápido quando o tamanho do problema for grande.
+Vale ressaltar que algumas funções podem não crescer com o valor de n.
+Também pode-se aplicar os conceitos de análise assintótica para a quantidade de memória usada por um algoritmo. Mas não é tão útil, pois é difícil estimar os detalhes exatos do uso de memória e o impacto disso.
+Usaremos potências e logaritmos nas análises. Para os logaritmos usaremos a base 2, a menos que seja dito o contrário. Também usaremos algumas séries:
+$$\sum_{i=0}^{n} 2^i = 2^{n+1} - 1$$
+$$\sum_{i=0}^{n} a^i = \frac{a^{n+1} - 1}{a-1}$$
+$$\sum_{i = 1}^{n} i = \frac{n(n+1)}{2} \approx \frac{n^2}{2}$$
+## Notações
+### Big-Oh
+Também chamado de Oh ou "da ordem de", ele é usado quando a taxa de crescimento de T(n) é menor ou igual à taxa de f(n). Se existirem constantes c e $n_0$ tal que T(n) $\leq$ c * f(n) quando n $\geq$ $n_0$, temos:
+$$T(n) = O(f(n))$$
+### Ômega
+Ele é usado quando a taxa de crescimento de T(n) é maior ou igual à taxa de f(n). Se existirem constantes c e $n_0$ tal que T(n) $\geq$ c * f(n) quando n $\geq$ $n_0$, temos:
+$$T(n) = \Omega(f(n))$$
+### Theta
+Ele é usado quando a taxa de crescimento de T(n) é igual à taxa de f(n). Ou seja, se e somente se T(n) = O(f(n)) e T(n) = $\Omega(f(n))$. Temos:
+$$T(n) = \Theta(f(n))$$
+### Little-Oh
+Também chamado de o minúsculo, ele é usado quando a taxa de crescimento de T(n) é menor do que à taxa de f(n). Se existirem quaisquer constantes c e $n_0$ tal que T(n) $\leq$ c * f(n) quando n $\geq$ $n_0$, temos:
+$$T(n) = o(f(n))$$
