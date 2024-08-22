@@ -211,7 +211,7 @@ ITEM* pilha_desempilhar(PILHA* pilha) {
 Falta algumas funções
 ```
 ## Implementação Encadeada (Dinâmica)
-Substituímos os itens por nós. Veja abaixo o que é o nó:
+Ponteiros podem ser usados para construir estruturas, tais como Pilhas, a partir de componentes simples chamados nós. Substituímos os itens por nós. Veja abaixo o que é o nó:
 ```
 typedef struct no_ NO;
 
@@ -223,6 +223,14 @@ struct no_{
 	NO* anterior;
 };
 ```
+Encadeamentos são úteis pois podem ser utilizadas para implementar o TAD pilha. Uma vantagem é o fato de não ser necessário informar o número de elementos em tempo de compilação.
+Por exemplo, uma operação de empilhar pode ser feita da seguinte maneira:
+Antes
+![Pilha Encadeada](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2011-45-27.png)
+Depois
+
+
+
 **Módulo de interface**
 ```
 #ifndef PILHA_H
@@ -284,6 +292,5 @@ A desvantagem é:
 - O código fica mais complexo
 - Não tem acesso indexado
 A lógica por trás dessa implementação é:
-![Pilha Encadeada](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2011-45-27.png)
 ## Extra
 A flag -I no Makefile serve para especificar o caminho dos arquivos .h (para quando eles estão em outra pasta).
