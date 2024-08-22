@@ -278,8 +278,12 @@ bool pilha_empilhar(PILHA* p, ITEM* it){
 }
 ```
 Nessa implementação não existe indexação.
-Além disso, as vantagens dessa implementação são:
+Além disso, a vantagem dessa implementação é:
 - Não tem que saber a quantidade de dados previamente
 A desvantagem é:
 - O código fica mais complexo
 - Não tem acesso indexado
+A lógica por trás dessa implementação é:
+![Pilha Encadeada](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2011-45-27.png)
+## Extra
+A flag -I no Makefile serve para especificar o caminho dos arquivos .h (para quando eles estão em outra pasta).
