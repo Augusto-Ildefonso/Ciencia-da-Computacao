@@ -103,10 +103,7 @@ Outra convenção é usar nos nomes das funções o nome do TAD, exemplo: item_{
 # Pilhas (Stacks)
 Link: https://www.geeksforgeeks.org/stack-data-structure/
 O conceito é de objetos empilhados um em cima do outro. A pilha tem uma ordem de entrada e saída, começa enchendo pela base (primeiro) e quando for retirar, retira por cima (último).
-Elas auxiliam em problemas práticos em computação. Exemplos:
-- O botão "back" de um navegador web ou a opção "undo" de um editor de textos
-- Controle de chamada de procedimentos (memória stack)
-- Estrutura de dados auxiliar em alguns algoritmo como a busca em profundeza
+Elas auxiliam em problemas práticos em computação.
 Pilhas são estruturas de dados lineares que seguem uma ordem específica para as operações. Nesse TAD, as inserções e remoções são realizadas na mesma extremidade da estrutura, chamada de topo. Dessa maneira o último elemento que foi inserido é sempre o primeiro a ser removido. Isso se chama Política Last-in/First-out (LIFO).
 Geralmente usamos pilhas quando queremos que os elementos entrem em uma ordem e saiam na ordem contrária.
 Aplicações das pilhas são:
