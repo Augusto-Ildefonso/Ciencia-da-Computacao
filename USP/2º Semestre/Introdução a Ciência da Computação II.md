@@ -163,4 +163,21 @@ Se $T_1 (n) = O(f(n))$ e $T_2 (n) = O(g(n))$:
 Se T(x) é um polinômio de grau n, então $T(x) = \Theta(x^n)$ 
 Se $log_{k}n = O(n)$ para qualquer constante k, pois logaritmos crescem muito vagarosamente. 
 ### Funções e taxas de crescimento
+A tabela está em ordem de eficiência, no topo o mais eficiente (menor crescimento) para o menos eficiente.
 ![Tabela](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2008-59-03.png?token=GHSAT0AAAAAACVHHSZPC6R7YP5BJDL2SPE6ZWHFCHQ)
+![Gráfico](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2009-01-08.png?token=GHSAT0AAAAAACVHHSZOUHF2YZKIUVLDPYQAZWHFEBA)
+Apesar de ser importante, não se costuma incluir constantes ou termos de menor ordem em taxas de crescimento. Queremos medir a taxa de crescimento da função, o que torna os "termos menores" irrelevantes. As constantes também dependem do tempo exato de cada operação, como ignoramos os custos reais das operações, ignoramos também as constantes. Não se diz que $T(n) = O(2n^2)$ ou que $T(n) = O(n^2+2)$, diz-se apenas $T(n) = O(n^2)$.
+### Exercício
+Dados $f(n) = n^{1,5}$ e $g(x) = n \log n$, qual é o melhor algoritmo?
+$$f(n) = n^{1,5} = \frac{n^{1,5}}{n} = n^{0,5} = (n^{0,5})^2 = n$$
+$$g(x) = n \log n = \frac{n \log n}{n} = \log n = (\log n)^2 = \log^2n$$
+Como o crescimento de $\log^2n$ é maior do que o crescimento de $n$, temos que o algoritmo g(x) é mais eficiente.
+## Análise de algoritmos
+Para proceder a análise de algoritmos e determinar as taxas de crescimento, necessitamos de um modelo de computador e das operações que executa. Assume-se o uso do computador tradicional, em que as instruções de um programa são executadas sequencialmente e com memória infinita, por simplicidade.
+Temos que ter um repertório de funções simples, como soma, multiplicação, comparação, atribuição, etc. Por simplicidade e viabilidade da análise, assume-se que cada instrução demora exatamente uma unidade de tempo para ser executada (obviamente em situações reais, isso pode não ser verdade: a leitura de um dado do disco pode demorar mais do que uma soma).
+Operações complexas como inversão de matrizes e ordenação de vetores, não são realizadas em uma única unidade de tempo, obviamente: devem ser analisadas em partes.
+Considera-se somente o algoritmo e suas entradas (de tamanho n). Para uma entrada de tamanho n, pode-se calcular $T_{melhor} (n)$, $T_{média}$, $T_{pior}(n)$, ou seja, o melhor tempo de execução, o tempo médio e o pior, respectivamente:
+$$T_{melhor}(x) \leq T_{média}(x) \leq T_{pior}(x)$$
+Atenção, para mais de uma entrada, essas funções teriam mais de um argumento.
+Geralmente, utiliza-se somente a análise do pior caso $T_{pior}(x)$, pois ela fornece os limites para todas as entradas, incluindo particularmente as entradas ruins.
+Logicamente, muitas vezes, o tempo médio pode ser útil, principalmente em sistemas executados rotineiramente. Porém dá mais trabalho calcular o tempo médio. E o melhor tempo não tem muita utilidade
