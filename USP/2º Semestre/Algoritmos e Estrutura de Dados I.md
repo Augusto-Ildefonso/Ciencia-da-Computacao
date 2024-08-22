@@ -228,8 +228,10 @@ Por exemplo, uma operação de empilhar pode ser feita da seguinte maneira:
 Antes
 ![Pilha Encadeada](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2011-45-27.png)
 Depois
-
-
+![Pilha encadeada](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2012-46-40.png)
+Por exemplo, uma operação de desempilhar pode ser feita da seguinte maneira:
+Antes
+![Pilha encadeada]
 
 **Módulo de interface**
 ```
