@@ -240,4 +240,21 @@ O que não é verdadeiro sempre.
 #### Busca binária
 Ele é um algoritmo de dividir-e-conquistar. Tem que ter um vetor, não pode usar uma lista encadeada. O vetor tem que estar ordenado.
 Funcionamento: vamos dividir ele no meio. Comparamos esse elemento com a chave. Se for igual, já sai, se for menor fazemos mais uma chamada da função para o lado esquerdo, se for maior fazemos o mesmo para o lado direito. E ai repetimos esse processo para cada sub vetor que obtemos até achar o elemento igual a chave.
-
+![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-26%2011-23-04.png)
+```
+int busca_binaria(int v[], int inf, int sup, int x) {
+	int meio;
+	if (inf<=sup) {
+		meio=(inf+sup)/2;
+		if (x==v[meio]){
+			return(meio);
+		} else if (x<v[meio]){
+			return(busca_binaria(v,inf,meio-1,x));
+		} else{
+			return(busca_binaria(v,meio+1,sup,x));
+		}
+	} else{
+		return(-1);
+	}
+}
+```
