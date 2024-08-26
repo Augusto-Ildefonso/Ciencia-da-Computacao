@@ -208,7 +208,7 @@ ITEM* pilha_desempilhar(PILHA* pilha) {
 Falta algumas funções
 ```
 ## Implementação Encadeada (Dinâmica)
-Ponteiros podem ser usados para construir estruturas, tais como Pilhas, a partir de componentes simples chamados nós. Substituímos os itens por nós. Veja abaixo o que é o nó:
+Ponteiros podem ser usados para construir estruturas, tais como Pilhas, a partir de componentes simples chamados nós. Substituímos os itens por nós. Dividimos o nó em duas regiões: uma que tem as informações e uma que tem um ponteiro para outro nó. Veja abaixo o que é o nó:
 ```
 typedef struct no_ NO;
 
@@ -221,6 +221,7 @@ struct no_{
 };
 ```
 Encadeamentos são úteis pois podem ser utilizadas para implementar o TAD pilha. Uma vantagem é o fato de não ser necessário informar o número de elementos em tempo de compilação.
+A função pilha_cheia retorna verdadeiro quando atingir o limite da memória, não ter mais memória disponível para alocar.
 Por exemplo, uma operação de empilhar pode ser feita da seguinte maneira:
 Antes
 ![Pilha Encadeada](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2011-45-27.png)
@@ -286,6 +287,21 @@ bool pilha_empilhar(PILHA* p, ITEM* it){
 	}
 	
 }
+
+ITEM* pilha_desempilhar(PILHA* pilha){
+	if((pilha != NULL) && (!pilha_vazia(pilha))){
+		NO* pno = pilha->topo;
+		ITEM* item = pilha->topo->item;
+
+		pilha->topo = pilha->topo->anterior;
+		pno->anterior = NULL;
+		free(pno);
+		pno = NULL;
+		pilha->tamanho--;
+		return item;
+	}
+	return NULL;
+}
 ```
 Nessa implementação não existe indexação.
 Além disso, a vantagem dessa implementação é:
@@ -295,6 +311,7 @@ A desvantagem é:
 - Não tem acesso indexado
 ## Sequencial x Encadeada
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2013-00-19.png)
+Na sequencial, há um array de ponteiros para itens, por isso, terei que percorrer o vetor para apagar os itens, por causa disso é O(n), depende de n (isso ocorre porque usamos o TAD item, se tivesse usado um tipo sem ser de ponteiro, não precisaríamos percorrer ele todo, daria um free no array maior só). Na encadeada é a mesma coisa, só que para os nós.
 ### Sequencial
 - Implementação simples
 - Tamanho da pilha definido a priori

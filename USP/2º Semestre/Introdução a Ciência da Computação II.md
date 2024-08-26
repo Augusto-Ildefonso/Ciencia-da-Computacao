@@ -180,4 +180,64 @@ Considera-se somente o algoritmo e suas entradas (de tamanho n). Para uma entrad
 $$T_{melhor}(x) \leq T_{média}(x) \leq T_{pior}(x)$$
 Atenção, para mais de uma entrada, essas funções teriam mais de um argumento.
 Geralmente, utiliza-se somente a análise do pior caso $T_{pior}(x)$, pois ela fornece os limites para todas as entradas, incluindo particularmente as entradas ruins.
-Logicamente, muitas vezes, o tempo médio pode ser útil, principalmente em sistemas executados rotineiramente. Porém dá mais trabalho calcular o tempo médio. E o melhor tempo não tem muita utilidade
+Logicamente, muitas vezes, o tempo médio pode ser útil, principalmente em sistemas executados rotineiramente. Porém dá mais trabalho calcular o tempo médio. E o melhor tempo não tem muita utilidade.
+Existem basicamente duas formas de estimar o tempo de execução de programas e decidir quais são os melhores:
+- Método Empírico
+	- Executando e anotando o tempo de processamento e a quantidade de memória gasta
+	- Diferentes complexidades -> tempos diferentes
+- Método Analítico ou Teórico
+	- Determinar uma expressão matemática que descreva o comportamento do algoritmo em relação ao tempo e à memória
+	- Número de operações realizadas -> independe do computador, sistema operacional ou linguagem de programação
+É desejável e possível estimar qual o melhor algoritmo sem ter que executá-los. O objetivo é obter uma expressão matemática que avalie complexidades. O modelo possui as seguintes características:
+- Somente o comportamento assintótico será avaliado
+	- A expressão fornecerá valores válidos somente quando a quantidade de dados correspondentes crescer o suficiente
+- Não serão consideradas constantes aditivas ou multiplicativas na expressão obtida
+- Fornece número de passos executados pelo algoritmo em função de uma certa entrada
+	- Somente a operação dominante é considerada
+## Regras para o cálculo
+### Repetições
+O tempo de execução de uma repetição é pelo menos o tempo dos comandos dentro da repetição (incluindo testes) vezes o número de vezes que é executada.
+### Repetições aninhadas
+A análise é feito de dentro para fora. O tempo total de comandos dentro de um grupo de repetições aninhadas é o tempo de execução dos comandos multiplicado pelo produto do tamanho de todas as repetições.
+### Comandos consecutivos
+É a soma dos tempos de cada um, o que pode significar o máximo entre eles.
+### Se, senão, então
+Para a cláusula condicional, o tempo de execução nunca é maior do que o tempo do teste mais o tempo do maior entre os comandos relativos ao então e os comandos relativos ao senão.
+### Chamadas à sub-rotinas
+Uma sub-rotina deve ser analisada primeiro e depois ter suas unidades de tempo incorporadas ao programa/sub-rotina que a chamou.
+### Sub-rotinas recursivas
+Se a recursão é um disfarce da repetição (e, portanto, a recursão está mal empregada, em geral), basta analisá-la como tal.
+Em muitos casos (incluindo casos em que a recursividade é bem empregada), é difícil transformá-la em repetição. Nesses casos, para fazer a análise do algoritmo, pode ser necessário recorrer a análise de recorrência. Recorrência é a equação ou desigualdade que descreve uma função em termos do seu valor em entradas menores (caso típico: algoritmo de dividir-e-conquistar, algoritmos que desmembram o problema em vários subproblemas que são semelhantes ao problema original, mas menores em tamanho, resolvem os subproblemas recursivamente e depois combinam essas soluções com o objetivo de criar uma solução para o problema original).
+### Resolução de recorrências
+Muitas vezes, a recorrência pode ser resolvida com base na prática e experiência do analista. Alguns métodos para resolver recorrências:
+- Método da substituição
+- Método da árvore de recursão
+- Método mestre
+#### Método da substituição
+Supõe-se (aleatoriamente ou com base na experiência) um limite superior para a função e verifica-se se ela não extrapola este limite. Faz o uso da indução matemática. O nome do método vem da substituição da resposta pelo palpite. Pode-se apertar o palpite para achar funções mais exatas.
+O passo a passo é
+1. Faço uma hipótese
+2. Verifico ela para o caso base (Base da indução)
+3. Assumimos que a hipótese é verdadeira para n
+4. Mostramos que T(n) = expressão da hipótese
+##### Exemplo
+1. Hipótese
+$$T(n) = O(n^2) <=> T(n) \leq c \times n^2$$
+2. Base da indução
+$$T(0) = 2 <=> T(0) = 2 \leq c \times 0^2 <=> 2 \leq 0$$
+Para o caso base já falha, logo não funciona para n = 0.
+$$T(1) = 2 <=> T(1) = 2 \leq c \times 1^2 <=>2 \leq c$$
+Logo para n = 1 funciona
+3. Assumindo que é verdadeira para n
+$$T(n) = T(n-1) + T(n-2) + 6$$
+$$T(k) = c \times(k-1)^2 + c \times (k-2)^2 + 6$$
+$$T(k) = c \times (k^2 - 2k + 1) + c \times (k^2 - 4k +4) + 6$$ $$T(k) = 2ck^2 - 6ck +5c + 6$$
+Usando a hipótese:
+$$T(k) \leq O(k^2)$$
+$$2ck^2 - 6ck +5c + 6 \leq c k^2$$
+$$ck^2 -6ck + 5c + 6 \leq 0$$
+O que não é verdadeiro sempre.
+#### Busca binária
+Ele é um algoritmo de dividir-e-conquistar. Tem que ter um vetor, não pode usar uma lista encadeada. O vetor tem que estar ordenado.
+Funcionamento: vamos dividir ele no meio. Comparamos esse elemento com a chave. Se for igual, já sai, se for menor fazemos mais uma chamada da função para o lado esquerdo, se for maior fazemos o mesmo para o lado direito. E ai repetimos esse processo para cada sub vetor que obtemos até achar o elemento igual a chave.
+
