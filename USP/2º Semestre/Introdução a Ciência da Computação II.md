@@ -264,4 +264,7 @@ $$T(n) = T(\frac{n}{2}) + O(c)$$Se n > 1.
 Nesse caso, temos um tempo constante O(c) para as operações da função (comparações e divisão/diminuição do problema) e o tempo $T(\frac{n}{2})$ para os subprocessos recursivos. Fazendo pela substituição, podemos escolher $T(n) = O(\log{n})$, e resolvendo vemos que é verdade. Então $T(n) = O(\log{n})$.
 #### Método da árvore de recursão
 Esboça-se uma árvore que, nível a nível, representa as recursões sendo chamadas. Em seguida, em cada nível/nó da árvore, são acumulados os tempos necessários para o processamento. No final, tem-se a estimativa de tempo do problema. Este método pode ser utilizado para fazer uma suposição mais informada no método da substituição.
-![[Pasted image 20240829085222.png]]
+![[Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2008-52-12.png)
+Percebe-se que a cada nível divide-se por 2, então como no último nível é 1, temos que $\frac{n}{2^i} = 1$, assim, $n = 2^i$ -> $log_{2}{n} = i$.
+##### Mergesort
+É um algoritmo de ordenação de arranjos por intercalação.
