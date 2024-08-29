@@ -136,7 +136,7 @@ $$\sum_{i=0}^{n} 2^i = 2^{n+1} - 1$$
 $$\sum_{i=0}^{n} a^i = \frac{a^{n+1} - 1}{a-1}$$
 $$\sum_{i = 1}^{n} i = \frac{n(n+1)}{2} \approx \frac{n^2}{2}$$
 ## Notações
-Nessas notações T(n) é a taxa do nosso próprio algoritmo. Quando eu falo que meu algoritmo (T(n)) é uma das notações abaixo eu estou falando que eles seguem a regra de cada algoritmo. Para verificar se a notação está correta, eu substituo as fórmulas e acho a constante c, se existir é verdade, se não, não é verdade.s
+Nessas notações T(n) é a taxa do nosso próprio algoritmo. Quando eu falo que meu algoritmo (T(n)) é uma das notações abaixo eu estou falando que eles seguem a regra de cada algoritmo. Para verificar se a notação está correta, eu substituo as fórmulas e acho a constante c, se existir é verdade, se não, não é verdade.
 ### Big-Oh
 Também chamado de Oh ou "da ordem de", ele é usado quando a taxa de crescimento de T(n) é menor ou igual à taxa de f(n). Se existirem constantes c e $n_0$ tal que T(n) $\leq$ c * f(n) quando n $\geq$ $n_0$, temos:
 $$T(n) = O(f(n))$$
@@ -237,7 +237,7 @@ $$T(k) \leq O(k^2)$$
 $$2ck^2 - 6ck +5c + 6 \leq c k^2$$
 $$ck^2 -6ck + 5c + 6 \leq 0$$
 O que não é verdadeiro sempre.
-#### Busca binária
+##### Busca binária
 Ele é um algoritmo de dividir-e-conquistar. Tem que ter um vetor, não pode usar uma lista encadeada. O vetor tem que estar ordenado.
 Funcionamento: vamos dividir ele no meio. Comparamos esse elemento com a chave. Se for igual, já sai, se for menor fazemos mais uma chamada da função para o lado esquerdo, se for maior fazemos o mesmo para o lado direito. E ai repetimos esse processo para cada sub vetor que obtemos até achar o elemento igual a chave.
 ![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-26%2011-23-04.png)
@@ -258,3 +258,10 @@ int busca_binaria(int v[], int inf, int sup, int x) {
 	}
 }
 ```
+Custo:
+$T(n) = O(c)$, se n = 0
+$$T(n) = T(\frac{n}{2}) + O(c)$$Se n > 1.
+Nesse caso, temos um tempo constante O(c) para as operações da função (comparações e divisão/diminuição do problema) e o tempo $T(\frac{n}{2})$ para os subprocessos recursivos. Fazendo pela substituição, podemos escolher $T(n) = O(\log{n})$, e resolvendo vemos que é verdade. Então $T(n) = O(\log{n})$.
+#### Método da árvore de recursão
+Esboça-se uma árvore que, nível a nível, representa as recursões sendo chamadas. Em seguida, em cada nível/nó da árvore, são acumulados os tempos necessários para o processamento. No final, tem-se a estimativa de tempo do problema. Este método pode ser utilizado para fazer uma suposição mais informada no método da substituição.
+![[Pasted image 20240829085222.png]]
