@@ -6,7 +6,9 @@ Ele é divido em:
 - Imagens
 - Python
 - USP
+ 
 A pasta de imagens contém as imagens que utilizo nos arquivos.
+
 A pasta USP contém as anotações das disciplinas da faculdade, entre elas:
 - Algoritmos e Estruturas de Dados I
 - Introdução a Ciência da Computação II
