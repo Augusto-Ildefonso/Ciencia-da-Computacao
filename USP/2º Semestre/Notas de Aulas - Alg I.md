@@ -341,4 +341,25 @@ Modelar situações em que é preciso armazenar um conjunto ordenado de elemento
 - fila_criar(): cria uma fila F vazia (aloca espaço para fila e retorna o endereço)
 - fila_inserir(fila, x): insere o elemento x no final da fila. Retorna true se foi possível inserir e false caso contrário.
 - fila_remover(fila): remove o elemento no início da fila e retorna esse elemento. Retorna NULL se não foi possível remover.
-- 
+## Operações Auxiliares
+- fila_frente(fila): retorna o elemento no início da fila, sem remover
+- fila_tamanho(fila): retorna o número de elementos da fila
+- fila_vazia(fila): indica se a fila está vazia
+- fila_cheia(fila): indica se a fila está cheia (útil para implementações estáticas)
+## Implementação
+### Alocação sequencial
+Os elementos da fila ficam, necessariamente, em sequência (um do lado do outro), na memória. Todo o espaço reservado permanece reservado durante todo o tempo de execução do programa, independentemente de estar sendo efetivamente usado ou não.
+**Início:** aponta para/indica o primeiro da fila, ou seja, o primeiro elemento a sair.
+**Fim:** aponta para/indica o fim da fila, ou seja, onde o próximo elemento estará.
+Podemos manter o início fixo e sempre fazer um shift para esquerda quando removemos um elemento ($O(n)$), e quando adicionamos mudamos o fim($O(1)$). Isso é custoso porque quando tivermos arrays grandes irá demandar muito. 
+Para não ter esse problema, faz-se uma implementação circular. Ou seja, fazer com que o início não seja fixo na primeira posição do vetor. Pode-se permitir que Fim volte ao início do vetor quando esse contador atingir o final do vetor. Essa implementação é conhecida como fila circular. Para isso deve-se ver a fila como um anel (fila circular). Também deve-se ter um campo extra para guardar o número de elementos, a fim de evitar problemas com as verificações de vazio e cheio. Não há diferença de fila sequencial e fila circular, por isso vale mais a pena implementar uma fila circular.
+~~~C
+#include "fila.h"
+
+struct fila_{
+	ITEM* fila{TAM_MAX};
+		int inicio; // Posição do 1º elemento da fila
+	int fim; // Posição do último elemento da fila
+	int tamanho;
+}
+~~~
