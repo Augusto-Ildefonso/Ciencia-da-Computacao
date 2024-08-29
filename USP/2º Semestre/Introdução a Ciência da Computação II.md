@@ -267,4 +267,10 @@ Esboça-se uma árvore que, nível a nível, representa as recursões sendo cham
 ![[Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2008-52-12.png)
 Percebe-se que a cada nível divide-se por 2, então como no último nível é 1, temos que $\frac{n}{2^i} = 1$, assim, $n = 2^i$ -> $log_{2}{n} = i$.
 ##### Mergesort
-É um algoritmo de ordenação de arranjos por intercalação.
+É um algoritmo de ordenação de arranjos por intercalação. Ele é do tipo dividir-e-conquistar.
+Exemplo de árvore
+![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2009-09-24.png)
+E assim por diante. O custo de cada nível é $n$. O total de largura da árvore vai ser $\log{n}$. Por isso:
+$$T(n) = n \times (\log{n}+1) = n\times \log{n}+n = O(n\log{n})$$
+O mais 1 é porque ele começa no 0.
+Abaixo tem a lógica do mergesort:
