@@ -47,7 +47,6 @@ Para definir um TAD:
 Na implementação de um TAD, a escolha da estrutura de dados empregada tem papel importante. Uma escolha mal feita pode resultar em implementações ineficientes ou mesmo não-factíveis.
 ## Encapsulamento
 Usamos uma struct para fazer o encapsulamento. Criamos ela no módulo de definição.
-
 ## Módulo de interface
 É um arquivo .h que contém os protótipos das funções. Temos um outro arquivo .c que contém o código das funções e nele também estão definidas as estruturas de dados. Para usarmos temos que colocar na pasta do código principal o .o e o .h.
 ## Makefile
@@ -330,3 +329,16 @@ Expressões nessa notação podem ser avaliadas usando pilhas. A expressão é a
 Dada uma sequência de parênteses, ela pode ser bem formada: ( ( ) { ( ) } ), ou mal formada: ( { ) }.
 ## Extra
 A flag -I no Makefile serve para especificar o caminho dos arquivos .h (para quando eles estão em outra pasta).
+# Filas (Queue) e Deques
+Quando há uma competição por recursos em programação, é normal usar uma fila.
+## O que é?
+É uma estrutura para armazenar um conjunto de elementos, que funciona da seguinte forma:
+- Novos elementos sempre entram no fim da fila
+- O único elemento que se pode retirar da fila em um dado momento é seu primeiro elemento
+## Para que serve?
+Modelar situações em que é preciso armazenar um conjunto ordenado de elementos, no qual o primeiro elemento a entrar no conjunto será também o primeiro elemento a sair do conjunto e assim por diante. Política FIFO: First-In/First-Out.
+## Operações Principais
+- fila_criar(): cria uma fila F vazia (aloca espaço para fila e retorna o endereço)
+- fila_inserir(fila, x): insere o elemento x no final da fila. Retorna true se foi possível inserir e false caso contrário.
+- fila_remover(fila): remove o elemento no início da fila e retorna esse elemento. Retorna NULL se não foi possível remover.
+- 
