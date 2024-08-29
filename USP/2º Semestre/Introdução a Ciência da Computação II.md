@@ -274,3 +274,4 @@ E assim por diante. O custo de cada nível é $n$. O total de largura da árvore
 $$T(n) = n \times (\log{n}+1) = n\times \log{n}+n = O(n\log{n})$$
 O mais 1 é porque ele começa no 0.
 Abaixo tem a lógica do mergesort:
+![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2009-14-59.png)
