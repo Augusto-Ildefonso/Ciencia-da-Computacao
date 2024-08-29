@@ -7,11 +7,12 @@ Monoestáveis: circuitos com um estado estável, o repouso. Muda de estado com s
 Biestáveis: circuitos com dois estados estáveis: repouso e ativo, somente mudam de estado com sinal externo. Exemplo: flip-flop.
 Também chamados de circuitos síncronos. O momento exato em que a saída pode mudar de estado é determinado por um sinal periódico: o clock. Geralmente um trem de pulsos de onda quadrada. Sensível à nível ou à borda (subida ou descida) do clock.
 A saída do flip-flop somente se modifica quando uma dada condição do sinal do clock acontece, geralmente, borda de subida ou descida do sinal.
-[Imagem]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2014-42-54.png)
 A saída copia a entrada D de acordo com o sinal de clock.
-[Imagem]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2014-43-22.png)
 Comuta a saída quando se aplica um pulso de clock.
-[Imagem]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2014-43-34.png)
 Geralmente, os flip-flops comerciais possuem entradas assíncronas, como clear (CLR) ou preset (PRE), as quais modificam a saída independente do sinal de clock.
-[Imagem]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2014-43-43.png)
+
 
