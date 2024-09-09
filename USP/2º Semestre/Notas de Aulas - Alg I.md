@@ -127,7 +127,7 @@ Alocação Dinâmica: em tempo de execução
 - Vazia(P): indica se a pilha P está vazia
 - Cheia(P): indica se a pilha está cheia (útil para implementações sequenciais)
 ## Operações auxiliares
-- Criar(P): cria uma pilha P vazia
+- Criar(): cria uma pilha P vazia
 - Apagar(P): apaga a pilha P da memória
 - Tamanho(P): retorna o número de elementos em P
 ## Implementação Sequencial (Estática)
@@ -358,7 +358,7 @@ Para não ter esse problema, faz-se uma implementação circular. Ou seja, fazer
 
 struct fila_{
 	ITEM* fila{TAM_MAX};
-		int inicio; // Posição do 1º elemento da fila
+	int inicio; // Posição do 1º elemento da fila
 	int fim; // Posição do último elemento da fila
 	int tamanho;
 }
