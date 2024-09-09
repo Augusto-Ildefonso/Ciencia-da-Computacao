@@ -347,7 +347,7 @@ Modelar situações em que é preciso armazenar um conjunto ordenado de elemento
 - fila_vazia(fila): indica se a fila está vazia
 - fila_cheia(fila): indica se a fila está cheia (útil para implementações estáticas)
 ## Implementação
-### Alocação sequencial
+## Sequencial
 Os elementos da fila ficam, necessariamente, em sequência (um do lado do outro), na memória. Todo o espaço reservado permanece reservado durante todo o tempo de execução do programa, independentemente de estar sendo efetivamente usado ou não.
 **Início:** aponta para/indica o primeiro da fila, ou seja, o primeiro elemento a sair.
 **Fim:** aponta para/indica o fim da fila, ou seja, onde o próximo elemento estará.
@@ -360,6 +360,20 @@ struct fila_{
 	ITEM* fila{TAM_MAX};
 	int inicio; // Posição do 1º elemento da fila
 	int fim; // Posição do último elemento da fila
+	int tamanho;
+}
+~~~
+## Encadeada
+O módulo de interface é o mesmo da implementação dinâmica. A implementação encadeada utiliza o nó. Há também uma mudança na estrutura da fila, que passará a usar um ponteiro para o início e um para o fim.
+~~~C
+struct no{
+	ITEM *item;
+	NO *proximo;
+}
+
+struct fila_{
+	NO *inicio;
+	NO *fim;
 	int tamanho;
 }
 ~~~
