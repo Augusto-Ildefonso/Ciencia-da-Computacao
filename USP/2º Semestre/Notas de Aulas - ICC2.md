@@ -267,7 +267,7 @@ Esboça-se uma árvore que, nível a nível, representa as recursões sendo cham
 ![[Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2008-52-12.png)
 Percebe-se que a cada nível divide-se por 2, então como no último nível é 1, temos que $\frac{n}{2^i} = 1$, assim, $n = 2^i$ -> $log_{2}{n} = i$.
 ##### Mergesort
-	É um algoritmo de ordenação de arranjos por intercalação. Ele é do tipo dividir-e-conquistar. Ele usa uma ordenação por intercalação.
+É um algoritmo de ordenação de arranjos por intercalação. Ele é do tipo dividir-e-conquistar. Ele usa uma ordenação por intercalação.
 Exemplo de árvore
 ![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2009-09-24.png)
 E assim por diante. O custo de cada nível é $n$. O total de largura da árvore vai ser $\log{n}$. Por isso:
@@ -276,3 +276,12 @@ O mais 1 é porque ele começa no 0.
 Abaixo tem a lógica do mergesort:
 ![imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2009-14-59.png)
 Se for um número ímpar é só colocar o meio para um dos lados.
+#### Método Mestre
+Fornece limites para recorrência da forma: $T(n) = aT(\frac{n}{b})+f(n)$, em que $a \geq 1$, $b > 1$ e f(n) é uma função dada. Envolve a memorização de três casos básicos que podem ser aplicados para muitas recorrências simples.
+Teorema:
+- Seja $a \geq 1$ e $b > 1$ constantes, seja f(n) uma função e seja T(n) definida como:
+$$T(n) = aT(\frac{n}{b}) + f(n)$$
+- Então T(n) pode ser limitado assintoticamente como:
+	- Se $f(n) = O(n^{log_{b}a-x})$ para algum x > 0, então $T(n) = \Theta(n^{\log_ba})$
+	- Se $f(n) = \Theta(n^{\log_ba})$, então $T(n) = \Theta(n^{\log_ba}logn)$
+	- Se $f(n) = \Omega(n^{\log_ba+x})$ para algum x > 0 e se $a\times f(\frac{n}{b}) \leq c \times f(n)$ para algum c < 1 e para todo n suficientemente grande, então $T(n) = \Theta(f(n))$
