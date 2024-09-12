@@ -486,8 +486,13 @@ bool lista_inserir_posicao(LISTA *l, int pos, ITEM *item){
 
 	if(!lista_cheia(l) && (pos <= l->fim - 1)){
 		for(i = (l->fim-1); i >= pos; i--){
-			l->lista
+			l->lista[i+1] = l->lista[i];
 		}
+
+		l->lista[pos] = item; // insere novo item
+		l->fim++; // incrementa tamanho
+
+		return true
 	}
 }
 ~~~
