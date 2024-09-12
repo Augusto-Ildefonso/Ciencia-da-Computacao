@@ -416,4 +416,6 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 - Imprimir lista
 ### Implementação sequencial
 Características:
--
+- Os itens da lista são armazenados em posições contíguas de memória
+- A lista pode ser percorrida em qualquer direção
+- A inserção de um novo item pode ser realizada após o último item com custo constante
