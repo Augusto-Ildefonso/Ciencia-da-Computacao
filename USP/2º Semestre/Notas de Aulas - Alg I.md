@@ -462,7 +462,9 @@ LISTA *lista_criar(void){
 
 	if(lista != NULL){
 		lista->inicio = inicial;
-		lis
+		lista->fim = lista->inicio; // Para lista vazia
 	}
+
+	return lista;
 }
 ~~~
