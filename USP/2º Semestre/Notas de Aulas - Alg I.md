@@ -469,8 +469,8 @@ LISTA *lista_criar(void){
 	return lista;
 }
 
-// A implementação abaixo é para uma lista não ordenada, pois ele adiciona no fim por padrão
-bool lista_inserir(LISTA *lista, ITEM *item){
+// A implementação abaixo é para uma lista não ordenada, pois ele adiciona no fim por padrão. A implementação de inserir no início é a mesma só trocando pelo inicio.
+bool lista_inserir_fim(LISTA *lista, ITEM *item){
 	if((lista != NULL) && (!lista_cheia(lista))){
 		(lista->lista[lista->fim]) = item;
 		lista->fim++;
@@ -483,3 +483,4 @@ bool lista_inserir(LISTA *lista, ITEM *item){
 ~~~
 Podemos criar um 4º campo na lista (struct lista_) para especificar se ela é ordenada ou não. Nesse caso, quando criarmos uma lista, teremos um parâmetro para a função que será um booleano para representar se é ordenado ou não. Isso implicará em como iremos implementar as outras funções.
 A inserção no fim serve para lista não ordenada. Para lista ordenada não vale isso pois não há garantir que ao adicionar o item no fim a lista continuará ordenada.
+Ao inserir no meio da lisa
