@@ -484,7 +484,11 @@ bool lista_inserir_fim(LISTA *lista, ITEM *item){
 bool lista_inserir_posicao(LISTA *l, int pos, ITEM *item){
 	int i;
 
-	if(!lista_cheia(l) && (pos <= l->fim - 1))
+	if(!lista_cheia(l) && (pos <= l->fim - 1)){
+		for(i = (l->fim-1); i >= pos; i--){
+			l->lista
+		}
+	}
 }
 ~~~
 Podemos criar um 4º campo na lista (struct lista_) para especificar se ela é ordenada ou não. Nesse caso, quando criarmos uma lista, teremos um parâmetro para a função que será um booleano para representar se é ordenado ou não. Isso implicará em como iremos implementar as outras funções.
