@@ -314,3 +314,8 @@ Terminologia:
 		- Números inteiros
 	- Métodos de ordenação independem desse fator
 Existem vários meios de implementar ordenação. Dependendo do problema, um algoritmo apresenta vantagens e desvantagens sobre outros. Para comparar faz-se análise de complexidade.
+Os algoritmos mais conhecidos baseados em troca são:
+- Bubble-sort, também chamado de método da bolha
+- Quick-sort, ou ordenação rápida ou ordenação por troca de partição
+## Bubble-sort
+É um dos métodos mais conhecidos e intuitivos. A ideia básica é percorrer o vetor várias vezes e a cada iteração comparar cada elemento com o seu sucessor (vetor[i] com vetor[i+1]) e trocá-los de lugar caso estejam na ordem incorreta.
