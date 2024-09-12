@@ -323,6 +323,13 @@ Os algoritmos mais conhecidos baseados em troca são:
 void bubblesort(int v[], int n){
 	int i, j, aux;
 
-	for
+	for(i = 0; i < n; i++){
+		for(j = 0; j < n-1; j++){
+			if(v[j] > v[j+1]){
+				aux = v[j];
+				v[j] = 
+			}
+		}
+	}
 }
 ~~~
