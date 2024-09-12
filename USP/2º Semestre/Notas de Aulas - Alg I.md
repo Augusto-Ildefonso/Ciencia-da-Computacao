@@ -456,4 +456,13 @@ struct lista_ {
 	int fim; // Fim da lista -1a posição livre para inserção
 	int tamanho;
 }
+
+LISTA *lista_criar(void){
+	LISTA *lista = (LISTA *) malloc(sizeof(LISTA));
+
+	if(lista != NULL){
+		lista->inicio = inicial;
+		lis
+	}
+}
 ~~~
