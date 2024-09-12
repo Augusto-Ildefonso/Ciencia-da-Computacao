@@ -448,5 +448,12 @@ Características:
 ~~~C
 #include "lista.h"
 #include <stdbool.h>
-#include <st
+#include <stdlib.h>
+
+struct lista_ {
+	ITEM *lista[TAM_MAX];
+	int inicio; // Início da lista
+	int fim; // Fim da lista -1a posição livre para inserção
+	int tamanho;
+}
 ~~~
