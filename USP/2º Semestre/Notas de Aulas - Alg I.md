@@ -403,4 +403,5 @@ Diversos tipos de aplicações requerem uma lista:
 - Fila (Queue): se as inserções são realizadas em um extremo e as remoções em outro.
 ### Como escolher o tipo de lista?
 Escolher entre uma ou outra organização de memória (sequencial ou encadeada) vai depender do comportamento da lista na aplicação (tamanho, operações mais frequentes, etc.).
-A eficiência das operações depe
+A eficiência das operações depende da organização usada e de outros fatores: se a lista está ordenada, se é grande ou pequena, etc.
+### TAD Li
