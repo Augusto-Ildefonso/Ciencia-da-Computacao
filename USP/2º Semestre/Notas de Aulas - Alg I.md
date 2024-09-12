@@ -434,7 +434,10 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 	ITEM *lista_busca(LISTA *lista, int chave);
 	int lista_tamanho(LISTA *lista);
 	bool lista_vazia(LISTA *lista);
-	boo
+	bool lista_cheia(LISTA *lista);
+	void lista_imprimir(LISTA *lista);
+
+#endif
 ~~~
 ### Implementação sequencial
 É um array de ponteiros para item.
@@ -442,3 +445,8 @@ Características:
 - Os itens da lista são armazenados em posições contíguas de memória
 - A lista pode ser percorrida em qualquer direção
 - A inserção de um novo item pode ser realizada após o último item com custo constante
+~~~C
+#include "lista.h"
+#include <stdbool.h>
+#include <st
+~~~
