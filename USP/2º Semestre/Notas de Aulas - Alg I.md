@@ -440,7 +440,7 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 
 #endif
 ~~~
-### Implementação sequencial da Lista Não Ordenada
+### Implementação Sequencial da Lista Não Ordenada
 É um array de ponteiros para item.
 Características:
 - Os itens da lista são armazenados em posições contíguas de memória
@@ -512,4 +512,13 @@ Características:
 - Por outro lado, a inserção e remoção são mais complexas pois deve manter os itens ordenados.
 ### TAD Lista Ordenada
 O TAD da lista ordenada é o mesmo do TAD lista, apenas difere na implementação. As operações diferentes serão a inserção, remoção e busca (recuperação) de itens.
-## Implementação Sequencial da Lista Ordenada
+### Implementação Sequencial da Lista Ordenada
+~~~C
+bool lista_inserir(LISTA *l, ITEM *item){
+	if(!ORDENADA){
+		return (lista_inserir_fim(l, item));
+	} else{
+		
+	}
+}
+~~~
