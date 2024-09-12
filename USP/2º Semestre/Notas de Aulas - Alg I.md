@@ -427,7 +427,10 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 
 	typedef struct lista_ LISTA;
 
-	LSITA
+	LISTA *lista_criar(void);
+	bool lista_inserir(LISTA *lista, ITEM *item);
+	bool lista_apagar(LISTA **lista);
+	ITEM *lista_remover()
 ~~~
 ### Implementação sequencial
 É um array de ponteiros para item.
