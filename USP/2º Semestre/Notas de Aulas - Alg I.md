@@ -398,4 +398,6 @@ Diversos tipos de aplicações requerem uma lista:
 - Simulações em geral
 - Compiladores, etc
 ### Casos Particulares de Listas
-- Deque (Double Ended QUEue): se as inserções e remoções sã
+- Deque (Double Ended QUEue): se as inserções e remoções são permitidas apenas nas extremidades da lista
+- Pilha (Stack): se as inserções e remoções são realizadas somente em um extremo
+- Fila (Queue): se as inserções são realizadas em um extremo e as remoções em outro.
