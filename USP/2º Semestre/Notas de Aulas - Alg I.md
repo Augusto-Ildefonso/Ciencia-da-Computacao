@@ -401,3 +401,6 @@ Diversos tipos de aplicações requerem uma lista:
 - Deque (Double Ended QUEue): se as inserções e remoções são permitidas apenas nas extremidades da lista
 - Pilha (Stack): se as inserções e remoções são realizadas somente em um extremo
 - Fila (Queue): se as inserções são realizadas em um extremo e as remoções em outro.
+### Como escolher o tipo de lista?
+Escolher entre uma ou outra organização de memória (sequencial ou encadeada) vai depender do comportamento da lista na aplicação (tamanho, operações mais frequentes, etc.).
+A eficiência das operações depe
