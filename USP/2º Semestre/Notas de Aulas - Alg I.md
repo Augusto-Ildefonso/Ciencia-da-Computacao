@@ -511,4 +511,4 @@ Características:
 - Essa ordem facilita a pesquisa/busca de itens
 - Por outro lado, a inserção e remoção são mais complexas pois deve manter os itens ordenados.
 ### TAD Lista Ordenada
-O TAD da lista ordenada é o mesmo do TAD lista, apenas difere na implementação
+O TAD da lista ordenada é o mesmo do TAD lista, apenas difere na implementação. As operações diferentes serão a inserção, remoção e busca (recuperação) de itens.
