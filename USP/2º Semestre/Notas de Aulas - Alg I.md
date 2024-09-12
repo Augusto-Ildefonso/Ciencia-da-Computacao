@@ -491,6 +491,7 @@ bool lista_inserir_posicao(LISTA *l, int pos, ITEM *item){
 
 		l->lista[pos] = item; // insere novo item
 		l->fim++; // incrementa tamanho
+		l->tamanho++;
 
 		return true;
 	} else{
