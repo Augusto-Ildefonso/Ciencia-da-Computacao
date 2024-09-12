@@ -404,4 +404,8 @@ Diversos tipos de aplicações requerem uma lista:
 ### Como escolher o tipo de lista?
 Escolher entre uma ou outra organização de memória (sequencial ou encadeada) vai depender do comportamento da lista na aplicação (tamanho, operações mais frequentes, etc.).
 A eficiência das operações depende da organização usada e de outros fatores: se a lista está ordenada, se é grande ou pequena, etc.
-### TAD Li
+### TAD Lista
+Vamos definir um TAD com as principais operações sobre uma lista. Para simplificar vamos definir apenas as operações podem ser definidas:
+- Criar lista
+- Inserir item (última posição)
+- Remover item (última )
