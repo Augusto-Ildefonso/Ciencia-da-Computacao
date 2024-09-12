@@ -508,5 +508,7 @@ Ao inserir no meio da lista, teremos um problema de deslocamento dos itens, pois
 ### Lista Ordenada
 Características:
 - Uma lista pode ser mantida em ordem crescente/decrescente segundo o valor de alguma chave
-- Essa ordem facilita a pesquisa de itens
-- Por outro lado, a inserção e remoção são
+- Essa ordem facilita a pesquisa/busca de itens
+- Por outro lado, a inserção e remoção são mais complexas pois deve manter os itens ordenados.
+### TAD Lista Ordenada
+O TAD da lista ordenada é o mesmo do TAD lista, apenas difere na implementação
