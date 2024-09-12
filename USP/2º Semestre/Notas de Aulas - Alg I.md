@@ -445,6 +445,7 @@ Características:
 - Os itens da lista são armazenados em posições contíguas de memória
 - A lista pode ser percorrida em qualquer direção
 - A inserção de um novo item pode ser realizada após o último item com custo constante
+Abaixo tem a implementação de uma lista sequencial não ordenada
 ~~~C
 #include "lista.h"
 #include <stdbool.h>
@@ -467,5 +468,10 @@ LISTA *lista_criar(void){
 
 	return lista;
 }
+
+bool lista_inserir_fim(LISTA *lista, ITEM *item){
+	if(lista != N)
+}
 ~~~
 Podemos criar um 4º campo na lista (struct lista_) para especificar se ela é ordenada ou não. Nesse caso, quando criarmos uma lista, teremos um parâmetro para a função que será um booleano para representar se é ordenado ou não. Isso implicará em como iremos implementar as outras funções.
+A inserção no fim serve para lista não ordenada.
