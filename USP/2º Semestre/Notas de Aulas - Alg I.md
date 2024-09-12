@@ -470,7 +470,10 @@ LISTA *lista_criar(void){
 }
 
 bool lista_inserir_fim(LISTA *lista, ITEM *item){
-	if(lista != N)
+	if((lista != NULL) && (!lista_cheia(lista))){
+		(lista->lista[lista->fim]) = item;
+		lista->fim++
+	}
 }
 ~~~
 Podemos criar um 4º campo na lista (struct lista_) para especificar se ela é ordenada ou não. Nesse caso, quando criarmos uma lista, teremos um parâmetro para a função que será um booleano para representar se é ordenado ou não. Isso implicará em como iremos implementar as outras funções.
