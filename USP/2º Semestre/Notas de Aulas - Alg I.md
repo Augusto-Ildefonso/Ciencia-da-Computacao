@@ -385,4 +385,4 @@ Sua principal propriedade estrutural diz respeito às posições relativas dos i
 - Em geral, $x_i$ precede $x_{i+1}$ para $i = 1, 2, \, ... \, , n-1$ e $x_i$ sucede $x_{i-1}$ para $i = 2, 3, \, ... \, , n$.
 ### Operações
 As operações mais frequentes em listas são a busca, a inclusão e a remoção de um determinado elemento.
-Outras operações: altera
+Outras operações: alteração de um elemento da lista, combinação de duas ou mais listas
