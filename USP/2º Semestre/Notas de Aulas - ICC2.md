@@ -319,3 +319,4 @@ Os algoritmos mais conhecidos baseados em troca são:
 - Quick-sort, ou ordenação rápida ou ordenação por troca de partição
 ## Bubble-sort
 É um dos métodos mais conhecidos e intuitivos. A ideia básica é percorrer o vetor várias vezes e a cada iteração comparar cada elemento com o seu sucessor (vetor[i] com vetor[i+1]) e trocá-los de lugar caso estejam na ordem incorreta.
+a
