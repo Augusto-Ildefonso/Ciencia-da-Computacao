@@ -414,6 +414,12 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 - Verificar se a lista está vazia
 - Verificar se a lista está cheia
 - Imprimir lista
+### Módulo de interface
+~~~C
+#ifndef LISTA_H
+	#define LISTA_H
+#define 
+~~~
 ### Implementação sequencial
 É um array de ponteiros para item.
 Características:
