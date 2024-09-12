@@ -518,7 +518,9 @@ bool lista_inserir(LISTA *l, ITEM *item){
 	if(!ORDENADA){
 		return (lista_inserir_fim(l, item));
 	} else{
-		
+		int x = lista_busca_ordenada(l, item_get_chave(item));
+
+		return lista_inserir_posicao(lista, x, item);
 	}
 }
 ~~~
