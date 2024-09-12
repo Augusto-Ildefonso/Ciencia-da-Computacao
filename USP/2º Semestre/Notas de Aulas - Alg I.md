@@ -387,4 +387,11 @@ Sua principal propriedade estrutural diz respeito às posições relativas dos i
 As operações mais frequentes em listas são a busca, a inclusão e a remoção de um determinado elemento.
 Outras operações: alteração de um elemento da lista, combinação de duas ou mais listas lineares em um única, ordenação dos nós segundo um determinado campo, determinação do primeiro ou último elemento da lista, etc.
 ### Aplicação
-Diversos t
+Diversos tipos de aplicações requerem uma lista:
+- Informações sobre funcionários de uma empresa
+- Notas de compras
+- Itens do estoque
+- Notas dos alunos
+- Lista telefônica
+- Lista de tarefas
+- 
