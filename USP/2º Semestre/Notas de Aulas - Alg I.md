@@ -408,4 +408,12 @@ A eficiência das operações depende da organização usada e de outros fatores
 Vamos definir um TAD com as principais operações sobre uma lista. Para simplificar vamos definir apenas as operações podem ser definidas:
 - Criar lista
 - Inserir item (última posição)
-- Remover item (última )
+- Remover item (última posição)
+- Recuperar item (dada uma chave)
+- Contar número de itens
+- Verificar se a lista está vazia
+- Verificar se a lista está cheia
+- Imprimir lista
+### Implementação sequencial
+Características:
+-
