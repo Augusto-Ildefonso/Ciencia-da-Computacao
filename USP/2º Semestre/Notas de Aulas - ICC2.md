@@ -285,3 +285,22 @@ $$T(n) = aT(\frac{n}{b}) + f(n)$$
 	- Se $f(n) = O(n^{log_{b}a-x})$ para algum x > 0, então $T(n) = \Theta(n^{\log_ba})$
 	- Se $f(n) = \Theta(n^{\log_ba})$, então $T(n) = \Theta(n^{\log_ba}logn)$
 	- Se $f(n) = \Omega(n^{\log_ba+x})$ para algum x > 0 e se $a\times f(\frac{n}{b}) \leq c \times f(n)$ para algum c < 1 e para todo n suficientemente grande, então $T(n) = \Theta(f(n))$
+# O Problema da Ordenação
+Ordenação ou classificação é largamente utilizada:
+- Listas telefônicas
+- Grandes sistemas de Banco de Dados e processamento de dados
+	- 25% da computação em ordenação
+- Algoritmos de ordenação são ilustrativos:
+	- Como resolver problemas computacionais
+	- Como lidar com estruturas de dados
+	- Como desenvolver algoritmos elegantes e como analisar e comparar seus desempenhos
+Ordenar é organizar uma sequência de elementos de modo que os mesmos estabeleçam alguma relação de ordem. Diz-se que os elementos $k_1,\, ...\, , \, k_n$ estarão dispostos de modo que $k_1 \leq k_2 \leq \, ... \, \leq k_n$.
+Facilita a busca/localização/recuperação de um elemento dentro do conjunto a que pertence.
+Ocasionalmente, dá menos trabalho buscar um elemento em um conjunto desordenado do que ordenar primeiro e buscar depois. Por outro lado, se a busca for uma operação frequente, vale a pena ordenar (a classificação pode ser feita somente uma vez). Mas isso depende das circunstâncias.
+Terminologia:
+- Ordenação de registros (em um "arquivo"), em que cada registro é ordenado por sua chave
+- Ordenação interna x externa
+	- Interna: se todos os registros cabem na memória principal (um único array)
+	- Externa: se os dados não cabem na memória principal, precisando ser armazenados em fita ou disco
+- Ordenação estável
+	- Ordenação original de registros com mesma chave é preservada após a ordenação dos registros
