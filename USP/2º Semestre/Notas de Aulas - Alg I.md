@@ -379,4 +379,5 @@ struct fila_{
 ~~~
 # Listas
 ## Listas Lineares Sequenciais
-Uma lista linear é uma sequência de componentes de um mesmo tipo. É uma sequência de zero ou mais itens $x_1, x_2,\, ... \, , $
+Uma lista linear é uma sequência de componentes de um mesmo tipo. É uma sequência de zero ou mais itens $x_1, x_2,\, ... , x_n$ na qual $x_i$ é de um determinado tipo e $n$ representa o tamanho da lista.
+Sua principal propriedade estrutural diz respeito às posições relativas dos it
