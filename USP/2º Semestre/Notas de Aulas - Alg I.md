@@ -394,4 +394,8 @@ Diversos tipos de aplicações requerem uma lista:
 - Notas dos alunos
 - Lista telefônica
 - Lista de tarefas
-- 
+- Gerenciamento de memória
+- Simulações em geral
+- Compiladores, etc
+### Casos Particulares de Listas
+- Deque (Double Ended QUEue): se as inserções e remoções sã
