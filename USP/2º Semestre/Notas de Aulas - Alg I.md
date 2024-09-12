@@ -422,7 +422,12 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 	#define TAM_MAX 100 /*Estimativa do tamanho máximo da lista*/
 	#define inicial 0
 	#define ERRO -32000
-	#define ORDENADA 0 /**
+	#define ORDENADA 0 /*0 = lista não ordenada; 1 = lista ordenada*/
+	#include "item.h"
+
+	typedef struct lista_ LISTA;
+
+	LSITA
 ~~~
 ### Implementação sequencial
 É um array de ponteiros para item.
