@@ -377,3 +377,5 @@ struct fila_{
 	int tamanho;
 }
 ~~~
+# Listas
+## Listas Lineares Sequenciais
