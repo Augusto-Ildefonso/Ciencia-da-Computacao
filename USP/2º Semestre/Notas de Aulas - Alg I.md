@@ -430,7 +430,11 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 	LISTA *lista_criar(void);
 	bool lista_inserir(LISTA *lista, ITEM *item);
 	bool lista_apagar(LISTA **lista);
-	ITEM *lista_remover()
+	ITEM *lista_remover(LISTA *lista, int chave);
+	ITEM *lista_busca(LISTA *lista, int chave);
+	int lista_tamanho(LISTA *lista);
+	bool lista_vazia(LISTA *lista);
+	boo
 ~~~
 ### Implementação sequencial
 É um array de ponteiros para item.
