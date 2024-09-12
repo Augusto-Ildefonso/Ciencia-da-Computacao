@@ -304,3 +304,13 @@ Terminologia:
 	- Externa: se os dados não cabem na memória principal, precisando ser armazenados em fita ou disco
 - Ordenação estável
 	- Ordenação original de registros com mesma chave é preservada após a ordenação dos registros
+- Ordenação sobre os próprios registros
+	- Os registros são trocados de posição
+- Ordenação por endereços
+	- Mantém-se uma tabela de ponteiros para os registros e alteram-se somente os ponteiros durante a ordenação
+- Registros a serem ordenados podem ser complexos ou não
+	- Exemplos:
+		- Dados de empregados de uma empresa, sendo que a ordenação deve ser pelo RG do empregado
+		- Números inteiros
+	- Métodos de ordenação independem desse fator
+Existem vários meios de implementar ordenação. Dependendo do problema, um algoritmo apresenta vantagens e desvantagens sobre outros. Para comparar faz-se análise de complexidade.
