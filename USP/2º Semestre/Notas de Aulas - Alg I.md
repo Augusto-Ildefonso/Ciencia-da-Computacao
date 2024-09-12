@@ -404,7 +404,7 @@ Diversos tipos de aplicações requerem uma lista:
 ### Como escolher o tipo de lista?
 Escolher entre uma ou outra organização de memória (sequencial ou encadeada) vai depender do comportamento da lista na aplicação (tamanho, operações mais frequentes, etc.).
 A eficiência das operações depende da organização usada e de outros fatores: se a lista está ordenada, se é grande ou pequena, etc.
-Escolhe-se a partir da operação mais frequente. Por exemplo, a operação de busca é melhor na ordenada, então se ela for a mais frequente usa-se a 
+Escolhe-se a partir da operação mais frequente. Por exemplo, a operação de busca é melhor na ordenada, então se ela for a mais frequente usa-se a lista ordenada.
 ### TAD Lista
 Vamos definir um TAD com as principais operações sobre uma lista. Para simplificar vamos definir apenas as operações podem ser definidas:
 - Criar lista
@@ -440,7 +440,7 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 
 #endif
 ~~~
-### Implementação sequencial
+### Implementação sequencial da Lista Não Ordenada
 É um array de ponteiros para item.
 Características:
 - Os itens da lista são armazenados em posições contíguas de memória
@@ -508,4 +508,5 @@ Ao inserir no meio da lista, teremos um problema de deslocamento dos itens, pois
 ### Lista Ordenada
 Características:
 - Uma lista pode ser mantida em ordem crescente/decrescente segundo o valor de alguma chave
-- 
+- Essa ordem facilita a pesquisa de itens
+- Por outro lado, a inserção e remoção são
