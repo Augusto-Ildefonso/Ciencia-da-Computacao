@@ -468,3 +468,4 @@ LISTA *lista_criar(void){
 	return lista;
 }
 ~~~
+Podemos criar um 4º campo na lista (struct lista_) para especificar se ela é ordenada ou não. Nesse caso, quando 
