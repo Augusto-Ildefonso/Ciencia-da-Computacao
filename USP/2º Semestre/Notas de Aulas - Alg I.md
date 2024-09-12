@@ -418,7 +418,11 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 ~~~C
 #ifndef LISTA_H
 	#define LISTA_H
-#define 
+	
+	#define TAM_MAX 100 /*Estimativa do tamanho máximo da lista*/
+	#define inicial 0
+	#define ERRO -32000
+	#define ORDENADA 0 /**
 ~~~
 ### Implementação sequencial
 É um array de ponteiros para item.
