@@ -415,6 +415,7 @@ Vamos definir um TAD com as principais operações sobre uma lista. Para simplif
 - Verificar se a lista está cheia
 - Imprimir lista
 ### Implementação sequencial
+É um array de ponteiros para item.
 Características:
 - Os itens da lista são armazenados em posições contíguas de memória
 - A lista pode ser percorrida em qualquer direção
