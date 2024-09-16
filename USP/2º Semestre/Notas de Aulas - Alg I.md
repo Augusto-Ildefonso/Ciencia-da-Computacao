@@ -531,6 +531,14 @@ Uma tarefa comum a ser executada sobre listas é a busca de itens dada uma chave
 - Busca binária
 Na busca sequencial, a ideia é procurar um elemento que tenha uma determinada chave, começando do início da lista, e parar quando a lista terminar ou quando o elemento for encontrado. Código:
 ~~~C
-int lista_busca_sequencial(LISTA *)
+int lista_busca_sequencial(LISTA *l, int x){
+	int i;
+
+	if(l != NULL && (!lista_vazia(l))){
+		for(i = 0; i < l->fim; i++){
+			if 
+		}
+	}
+}
 ~~~
 A função buscar na lista ordenada
