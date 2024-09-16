@@ -527,8 +527,9 @@ bool lista_inserir(LISTA *l, ITEM *item){
 
 ITEM *lista_remover(LISTA *l, int chave){
 	if(!lista_vazia(l)){
-		ITEM **
-		return l->lista[lista_busca(l, chave)];
+		ITEM *item;
+		item = l->lista[lista_busca(l, chave)];
+		
 	}
 }
 ~~~
