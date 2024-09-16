@@ -369,3 +369,4 @@ void quicksort(int v[], int ini, int fim){
 	}
 }
 ~~~
+O pior caso do quicksort é $n^2$ e ocorre quando o pivô for o menor ou maior elemento.
