@@ -551,7 +551,16 @@ int lista_busca_ordenada(LISTA *l, int x){
 	int i = 0;
 
 	if(l != NULL && (!lista_vazia(l))){
-		while(item_get_chave(l-))
+		while(item_get_chave(l->lista[i]) < x){
+			i++;
+			if(i >= l->fim){
+				break;
+			}
+		}
 	}
+	
+	return i
+
+	/* Ou
 }
 ~~~
