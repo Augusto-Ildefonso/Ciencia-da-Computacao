@@ -528,4 +528,6 @@ bool lista_inserir(LISTA *l, ITEM *item){
 ### Busca em Listas Sequenciais
 Uma tarefa comum a ser executada sobre listas é a busca de itens dada uma chave. No caso da lista não ordenada, a busca será sequencial (consultar todos os elementos). Porém, com uma lista ordenada, diferentes estratégias podem ser aplicadas que aceleram a busca:
 - Busca sequencial "otimizada"
-- Busca biná
+- Busca binária
+Na busca sequencial, 
+A função buscar na lista ordenada
