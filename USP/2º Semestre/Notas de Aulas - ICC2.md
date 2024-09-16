@@ -342,6 +342,8 @@ Considere um vetor v de n posições. Primeiro passo:
 Segundo passo: ordenar sub-vetores à esquerda e à direita do elemento pivô.
 ~~~C
 void quicksort(int v[], int ini, int fim){
-	int v[] = {4, 5, 2, 8, 1, 2, 4, 5, -1}
+	int v[] = {4, 5, 2, 8, 1, 2, 4, 5, -1};
+
+		int i, j; 
 }
 ~~~
