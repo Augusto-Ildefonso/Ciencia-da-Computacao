@@ -344,8 +344,12 @@ Segundo passo: ordenar sub-vetores à esquerda e à direita do elemento pivô.
 void quicksort(int v[], int ini, int fim){
 	int v[] = {4, 5, 2, 8, 1, 2, 4, 5, -1};
 
-		int i, j; 
-	i = in;
-	
+	int i, j; 
+	i = ini;
+	j = fim;
+
+	do{
+		while 
+	}
 }
 ~~~
