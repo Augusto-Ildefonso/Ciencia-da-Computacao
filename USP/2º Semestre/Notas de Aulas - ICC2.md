@@ -345,5 +345,7 @@ void quicksort(int v[], int ini, int fim){
 	int v[] = {4, 5, 2, 8, 1, 2, 4, 5, -1};
 
 		int i, j; 
+	i = in;
+	
 }
 ~~~
