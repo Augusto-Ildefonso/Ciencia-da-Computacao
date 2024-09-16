@@ -530,7 +530,7 @@ ITEM *lista_remover(LISTA *l, int chave){
 		ITEM *item;
 		item = l->lista[lista_busca(l, chave)];
 
-		for(i = (l->fim-1); i >= pos; i--){
+		for(i = pos; i >= l->fim - 1; i++){
 			l->lista[i] = l->lista[i+1];
 		}
 
@@ -580,4 +580,4 @@ A busca binária é um algoritmo de busca mais sofisticado e bem mais eficiente 
 - Busca binária somente funciona em vetores ordenados
 - Busca sequencial funciona com vetores ordenados ou não
 - A busca binária é muito eficiente. Ela é $O(\log_{2}n$). Para n = 1000000, aproximadamente 20 comparações são necessárias.
-Em listas ordenadas a remoção não altera a ordenação. Remover do fim tem custo constante, remover do início requer deslocamentos e remover do meio (item qualquer, desde que esteja no meio exato da lista requer deslocamentos)
+Em listas ordenadas a remoção não altera a ordenação. Remover do fim tem custo constante, remover do início requer deslocamentos e remover do meio (item qualquer, desde que esteja no meio exato da lista requer deslocamentos, já um item com chave específica que pode)
