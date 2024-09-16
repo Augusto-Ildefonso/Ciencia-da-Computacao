@@ -334,3 +334,9 @@ void bubblesort(int v[], int n){
 	}
 }
 ~~~
+## Quick-sort
+Considere um vetor v de n posições. Primeiro passo:
+- Elemento pivô: x (escolha do pivô é importantíssima)
+	- Colocar x em sua posição correta
+	- Ordenar de forma que os elementos à esquerda do pivô são menores ou iguais a ele e os elementos à direita são maiores ou igual a ele
+Segundo passo: ordenar sub-vetores à esquerda e à direita do elemento pivô.
