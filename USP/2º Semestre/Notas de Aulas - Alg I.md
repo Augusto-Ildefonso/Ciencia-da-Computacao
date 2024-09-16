@@ -562,4 +562,4 @@ int lista_busca_ordenada(LISTA *l, int x){
 	return i;
 }
 ~~~
-Outra estratégia para realizar a busca em listas ordenadas é a busca binária. A busca binária é um algoritmo de busca mais sofisticado e bem mais eficiente que a busca sequencial. Entretanto a busca binária somente pode ser aplicada em estruturas que permitem acessar cada elemento em tempo constante, tais como vetores. A ideia é dividi
+Outra estratégia para realizar a busca em listas ordenadas é a busca binária. A busca binária é um algoritmo de busca mais sofisticado e bem mais eficiente que a busca sequencial. Entretanto a busca binária somente pode ser aplicada em estruturas que permitem acessar cada elemento em tempo constante, tais como vetores. A ideia é, a cada iteração, dividir o vetor ao meio e descartar metade do vetor
