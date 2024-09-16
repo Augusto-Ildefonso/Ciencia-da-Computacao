@@ -529,7 +529,10 @@ ITEM *lista_remover(LISTA *l, int chave){
 	if(!lista_vazia(l)){
 		ITEM *item;
 		item = l->lista[lista_busca(l, chave)];
-		
+
+		for(i = (l->fim-1); i >= pos; i--){
+			l->lista[i+1] = l->lista[i];
+		}
 	}
 }
 ~~~
