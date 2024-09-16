@@ -559,8 +559,6 @@ int lista_busca_ordenada(LISTA *l, int x){
 		}
 	}
 	
-	return i
-
-	/* Ou
+	return i;
 }
 ~~~
