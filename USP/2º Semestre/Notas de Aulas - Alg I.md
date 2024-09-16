@@ -525,7 +525,11 @@ bool lista_inserir(LISTA *l, ITEM *item){
 	}
 }
 
-ITEM *lista_remover(LISTA *l, int x)
+ITEM *lista_remover(LISTA *l, int chave){
+	if(!lista_vazia(l)){
+		if()
+	}
+}
 ~~~
 ### Busca em Listas Sequenciais
 A busca tem como pré-condição uma chave x válida é informada. Já como pós-condição: caso obtenha sucesso, retorna o item da lista cuja chave x foi fornecida. Retorna erro caso não encontre a chave x. Se x ocorre mais de uma vez, retorna a primeira ocorrência
