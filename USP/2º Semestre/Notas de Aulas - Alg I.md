@@ -513,6 +513,7 @@ Características:
 ### TAD Lista Ordenada
 O TAD da lista ordenada é o mesmo do TAD lista, apenas difere na implementação. As operações diferentes serão a inserção, remoção e busca (recuperação) de itens.
 ### Implementação Sequencial da Lista Ordenada
+Usa as mesmas funções da não ordenada, porém f
 ~~~C
 bool lista_inserir(LISTA *l, ITEM *item){
 	if(!ORDENADA){
