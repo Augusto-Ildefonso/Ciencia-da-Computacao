@@ -526,7 +526,7 @@ bool lista_inserir(LISTA *l, ITEM *item){
 }
 ~~~
 ### Busca em Listas Sequenciais
-A busca tem como pré-condição uma chave x válida é informada. Já como pós-condição: caso obtenha sucesso, retorna o item da lista cuja chave x foi fornecida. Retorna erro caso não encont
+A busca tem como pré-condição uma chave x válida é informada. Já como pós-condição: caso obtenha sucesso, retorna o item da lista cuja chave x foi fornecida. Retorna erro caso não encontre a chave x. Se x ocorre mais de uma vez, retorna a primeira ocorrência
 Uma tarefa comum a ser executada sobre listas é a busca de itens dada uma chave. No caso da lista não ordenada, a busca será sequencial (consultar todos os elementos). Porém, com uma lista ordenada, diferentes estratégias podem ser aplicadas que aceleram a busca:
 - Busca sequencial "otimizada"
 - Busca binária
@@ -544,5 +544,4 @@ int lista_busca_sequencial(LISTA *l, int x){
 	}
 	return ERRO;
 }
-~~~
-A função buscar na lista ordenada tem como pré-condição uma chave c válida é informada
+A
