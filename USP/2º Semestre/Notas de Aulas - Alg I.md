@@ -547,5 +547,11 @@ int lista_busca_sequencial(LISTA *l, int x){
 ~~~
 Quando os elementos estão ordenados, a busca sequencial pode ser otimizada (acelerada). Ele procura o elemento, mas caso encontre algum valor maior do que a chave ele para a busca (já que ele não vai estar depois de um elemento maior que ele, como a lista é ordenada). A lista ordenada permite realizar buscas sequenciais mais rápidas uma vez que, caso a chave procurada não exista, pode-se parar a busca tão logo se encontre uma elemento com chave maior que a procurada. Código
 ~~~C
-int lista
+int lista_busca_ordenada(LISTA *l, int x){
+	int i = 0;
+
+	if(l != NULL && (!lista_vazia(l))){
+		while(item_get_chave(l-))
+	}
+}
 ~~~
