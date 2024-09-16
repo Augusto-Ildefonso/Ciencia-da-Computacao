@@ -544,4 +544,5 @@ int lista_busca_sequencial(LISTA *l, int x){
 	}
 	return ERRO;
 }
-A
+~~~
+Quando os elementos estão ordenados, a busca sequencial pode ser otimizada. Ele procura o elemento, mas caso encontre algum valor maior do que a chave ele para a lista (já que ele não vai estr)
