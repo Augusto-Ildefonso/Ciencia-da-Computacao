@@ -545,4 +545,4 @@ int lista_busca_sequencial(LISTA *l, int x){
 	return ERRO;
 }
 ~~~
-Quando os elementos estão ordenados, a busca sequencial pode ser otimizada. Ele procura o elemento, mas caso encontre algum valor maior do que a chave ele para a lista (já que ele não vai estr)
+Quando os elementos estão ordenados, a busca sequencial pode ser otimizada (acelerada). Ele procura o elemento, mas caso encontre algum valor maior do que a chave ele para a busca (já que ele não vai estar depois de um elemento maior que ele, como a lista é ordenada).
