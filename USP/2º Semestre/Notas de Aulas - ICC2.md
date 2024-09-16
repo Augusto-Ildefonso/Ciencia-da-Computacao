@@ -359,6 +359,10 @@ void quicksort(int v[], int ini, int fim){
 			i++;
 			j--;
 		}
-	} while(i < j)
+	} while(i < j);
+
+	if(j > ini){
+		quicksort(v, ini, j);
+	}
 }
 ~~~
