@@ -340,3 +340,8 @@ Considere um vetor v de n posições. Primeiro passo:
 	- Colocar x em sua posição correta
 	- Ordenar de forma que os elementos à esquerda do pivô são menores ou iguais a ele e os elementos à direita são maiores ou igual a ele
 Segundo passo: ordenar sub-vetores à esquerda e à direita do elemento pivô.
+~~~C
+void quicksort(int v[], int ini, int fim){
+	int v[] = {4, 5, 2, 8, 1, 2, 4, 5, -1}
+}
+~~~
