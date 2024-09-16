@@ -589,4 +589,5 @@ Conclusão da lista linear sequencial
 	- Custo para inserir e retirar elementos da lista dada uma posição (problema dos deslocamentos)
 - Lista ordenada
 	- busca é facilitada
-	- inserções e remoções implicam em desl
+	- inserções e remoções implicam em deslocamentos
+- Tamanho máximo da lista é (dependendo da linguagem) definido em tempo de compilação
