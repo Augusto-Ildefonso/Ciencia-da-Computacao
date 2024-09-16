@@ -349,7 +349,10 @@ void quicksort(int v[], int ini, int fim){
 	j = fim;
 
 	do{
-		while 
-	}
+		while (v[i] < pivo) i++;
+		while (v[j] > pivo) j++;
+
+		if()
+	} while(i < j)
 }
 ~~~
