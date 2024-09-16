@@ -562,4 +562,4 @@ int lista_busca_ordenada(LISTA *l, int x){
 	return i;
 }
 ~~~
-Outra estratégia para realizar a busca em listas ordenadas
+Outra estratégia para realizar a busca em listas ordenadas é a busca binária. A busca binária é um algoritmo de busca mais sofisticado e bem mais ef
