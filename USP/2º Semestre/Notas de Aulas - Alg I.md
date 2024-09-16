@@ -529,7 +529,7 @@ bool lista_inserir(LISTA *l, ITEM *item){
 Uma tarefa comum a ser executada sobre listas é a busca de itens dada uma chave. No caso da lista não ordenada, a busca será sequencial (consultar todos os elementos). Porém, com uma lista ordenada, diferentes estratégias podem ser aplicadas que aceleram a busca:
 - Busca sequencial "otimizada"
 - Busca binária
-Na busca sequencial, a ideia é procurar um elemento que tenha uma determinada chave, começando do início da lista, e parar quando a lista terminar ou quando o elemento for encontrado. Código:
+Na busca sequencial (ideal para lista não ordenada), a ideia é procurar um elemento que tenha uma determinada chave, começando do início da lista, e parar quando a lista terminar ou quando o elemento for encontrado. Código:
 ~~~C
 int lista_busca_sequencial(LISTA *l, int x){
 	int i;
@@ -544,4 +544,4 @@ int lista_busca_sequencial(LISTA *l, int x){
 	return ERRO;
 }
 ~~~
-A função buscar na lista ordenada
+A função buscar na lista ordenada tem como pré-condição uma chave c válida é informada
