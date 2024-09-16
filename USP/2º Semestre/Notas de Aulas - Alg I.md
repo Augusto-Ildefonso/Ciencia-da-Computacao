@@ -566,4 +566,4 @@ Outra estratégia para realizar a busca em listas ordenadas é a **busca binári
 A busca binária é um algoritmo de busca mais sofisticado e bem mais eficiente que a busca sequencial. Entretanto a busca binária somente pode ser aplicada em estruturas que permitem acessar cada elemento em tempo constante, tais como vetores. A ideia é, a cada iteração, dividir o vetor ao meio e descartar metade do vetor. É importante lembrar que:
 - Busca binária somente funciona em vetores ordenados
 - Busca sequencial funciona com vetores ordenados ou não
-- A busca binária é muito eficiente.
+- A busca binária é muito eficiente. Ela é $O(\log_{2}n$). Para n = 1000000, aproximadamente 20 comparações são necessárias.
