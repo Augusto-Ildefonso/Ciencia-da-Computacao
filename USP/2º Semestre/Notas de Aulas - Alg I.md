@@ -591,3 +591,7 @@ Conclusão da lista linear sequencial
 	- busca é facilitada
 	- inserções e remoções implicam em deslocamentos
 - Tamanho máximo da lista é (dependendo da linguagem) definido em tempo de compilação
+Essa implementação da lista é mais comumente utilizada em certas situações:
+- listas pequenas
+- tamanho máximo da lista é conhecido
+- Poucas ocorrências de utilização dos métodos de inserção e remoção
