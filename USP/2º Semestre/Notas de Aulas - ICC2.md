@@ -352,7 +352,13 @@ void quicksort(int v[], int ini, int fim){
 		while (v[i] < pivo) i++;
 		while (v[j] > pivo) j++;
 
-		if()
+		if(i < j){
+			int aux = v[i];
+			v[i] = v[j];
+			v[j] = aux;
+			i++;
+			j--;
+		}
 	} while(i < j)
 }
 ~~~
