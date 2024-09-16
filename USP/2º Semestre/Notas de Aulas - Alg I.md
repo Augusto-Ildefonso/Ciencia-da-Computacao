@@ -536,9 +536,12 @@ int lista_busca_sequencial(LISTA *l, int x){
 
 	if(l != NULL && (!lista_vazia(l))){
 		for(i = 0; i < l->fim; i++){
-			if 
+			if(item_get_chave(l->lista[i]) == x){
+				return i;
+			}
 		}
 	}
+	return ERRO;
 }
 ~~~
 A função buscar na lista ordenada
