@@ -580,3 +580,4 @@ A busca binária é um algoritmo de busca mais sofisticado e bem mais eficiente 
 - Busca binária somente funciona em vetores ordenados
 - Busca sequencial funciona com vetores ordenados ou não
 - A busca binária é muito eficiente. Ela é $O(\log_{2}n$). Para n = 1000000, aproximadamente 20 comparações são necessárias.
+Em listas ordenadas a remoção não altera a ordenação. Remover do fim tem custo constante, remover do início 
