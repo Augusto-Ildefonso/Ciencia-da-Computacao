@@ -562,3 +562,4 @@ int lista_busca_ordenada(LISTA *l, int x){
 	return i;
 }
 ~~~
+Outra estratégia para realizar a busca em listas ordenadas
