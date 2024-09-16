@@ -531,8 +531,10 @@ ITEM *lista_remover(LISTA *l, int chave){
 		item = l->lista[lista_busca(l, chave)];
 
 		for(i = (l->fim-1); i >= pos; i--){
-			l->lista[i+1] = l->lista[i];
+			l->lista[i-1] = l->lista[i];
 		}
+
+		return item;
 	}
 }
 ~~~
