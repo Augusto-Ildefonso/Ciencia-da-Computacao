@@ -596,3 +596,5 @@ Essa implementação da lista é mais comumente utilizada em certas situações:
 - tamanho máximo da lista é conhecido
 - Poucas ocorrências de utilização dos métodos de inserção e remoção
 ## Listas Lineares Simplesmente Encadeadas
+O nó aponta para o sucessor somente. As funções são:
+- 
