@@ -597,4 +597,6 @@ Essa implementação da lista é mais comumente utilizada em certas situações:
 - Poucas ocorrências de utilização dos métodos de inserção e remoção
 ## Listas Lineares Simplesmente Encadeadas
 O nó aponta para o sucessor somente. As funções são:
-- 
+- Criar lista
+- Inserir elemento
+- Remover elemento
