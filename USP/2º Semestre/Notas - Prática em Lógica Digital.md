@@ -20,5 +20,3 @@ Comuta a saída quando se aplica um pulso de clock.
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2014-43-34.png)
 Geralmente, os flip-flops comerciais possuem entradas assíncronas, como clear (CLR) ou preset (PRE), as quais modificam a saída independente do sinal de clock.
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-29%2014-43-43.png)
-
-# Registradores
