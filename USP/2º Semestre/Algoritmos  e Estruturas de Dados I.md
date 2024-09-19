@@ -4,11 +4,11 @@ O livro de referência usado nesse estudo foi:
 # Tipo Abstrato de Dado (TAD ou TDA)
 É um conjunto de valores e um conjunto de operações que podem ser realizadas sobre esses valores. Ele é um modelo para representar um tipo de dado estruturado.
 # Pilha (Stack)
-É um conjunto ordenado de itens, no qual podem ser adicionados novos itens ou retirados itens da pilha, através de uma extremidade chamada topo, que fica no final do conjunto. Ela é um objeto dinâmico e constantemente mutável.
-O conceito de pilha compreende a inserção e remoção dos itens.
-Ao acrescentar um item o topo da pilha move-se para cima, apontando para o novo topo. Ao remover um item da pilha, o topo move-se para baixo, apontando para o novo topo da pilha.
+É um conjunto ordenado de itens, no qual podem ser adicionados novos itens ou retirados itens da pilha, através de uma extremidade chamada topo, que fica no final do conjunto. Ela é um objeto dinâmico e constantemente mutável. <br>
+O conceito de pilha compreende a inserção e remoção dos itens. <br>
+Ao acrescentar um item o topo da pilha move-se para cima, apontando para o novo topo. Ao remover um item da pilha, o topo move-se para baixo, apontando para o novo topo da pilha. <br>
 O último elemento a ser inserido é o primeiro a ser eliminado. Isso é conhecido como político LIFO (Last-In/First-Out).
-A pilha não possui um registro dos itens que estiveram nela e saíram.
+A pilha não possui um registro dos itens que estiveram nela e saíram. <br>
 A pilha pode ser implementada de duas formas: sequencial (possui um limite de itens) ou encadeada (não possui limite de itens (exceto o limite físico da memória)).
 ## Operações Principais
 - push(Pilha, item): empilho/adiciono o item na Pilha. Conhecida como empilhar.
