@@ -600,3 +600,4 @@ O nó aponta para o sucessor somente. As funções são:
 - Criar lista
 - Inserir elemento
 - Remover elemento
+Nós não colocamos o typedef da struct nó no .h pois o que queremos que ele veja é a lista e não a implementação dela, assim como não importa para ele se usa nó ou não, esconde-se o nó, colocando ele no .c
