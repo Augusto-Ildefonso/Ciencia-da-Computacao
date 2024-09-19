@@ -20,7 +20,7 @@ A pilha pode ser implementada de duas formas: sequencial (possui um limite de it
 - criar(void): cria uma pilha vazia e retorna ela.
 - apagar(Pilha): apaga a pilha da memória.
 - tamanho(Pilha): retorna quantos elementos tem na pilha.
-<br>
+
 É conhecido como underflow a tentativa, inválida, de acessar a memória/desempilhar uma pilha vazia. <br>
 Uma pilha é usada para casos em que o último a entrar é o primeiro a sair ou então casos de padrão de agrupamentos.
 ## Implementação Estática
@@ -57,7 +57,7 @@ Não ha limite para o número de elementos de uma fila. <br>
 - tamanho(Fila): retorna o número de elementos da fila. <br>
 A ideia é usarmos dois vetores, chamados de front (para representar o início) e rear (para representar o final). <br>
 Para a fila, surgem alguns problemas, pois usando dois vetores,conforme removesse elementos e acrescentasse a posição do rear, ele chegaria ao final do vetor, mesmo removendo os elementos da fila e, assim, não seria possível adicionar mais elementos.
-<br>
+
 Por isso adota-se a estratégia de quando retirar um elemento do início, deslocar todos os outros elementos para frente. Com essa estratégia, não necessita mais do ponteiro front, pois ela está fixa no 0. Entretanto, nessa implementação, para filas com diversos elementos, quando removesse um único elemento, seria necessário deslocar diversos elementos, o que possui um custo alto. <br>
 Para melhorar a implementação, pode-se visualizar o vetor como um círculo (fila circular). Nessa implementação, sempre haverá um espaço para implementar um novo elemento, desde que o elemento seguinte esteja vazio (quando o contador atingir o fim do vetor, o ponteiro do fim será setado para o início). E não é mais necessário deslocar todos os elementos quando retirar um, pois, utilizando novamente um ponteiro para o início, é necessário deslocá-lo para a próxima posição. A desvantagem dessa implementação é que ela torna difícil determinar quando a fila está vazia. A condição para que a fila esteja vazia é que o ponteiro front seja igual ao ponteiro rear. <br>
 ## Implementação Sequencial/Circular
