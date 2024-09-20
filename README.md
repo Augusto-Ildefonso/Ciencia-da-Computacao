@@ -1,5 +1,6 @@
-# Estudos
+# Ciência da Computação
 Este repositório contém os meus estudos sobre diversas áreas da Computação.
+
 Ele é divido em:
 - Segurança da Informação
 - Git e Github
@@ -7,10 +8,8 @@ Ele é divido em:
 - Python
 - USP
 
-A pasta USP contém as anotações das disciplinas da faculdade, entre elas:
-- Algoritmos e Estruturas de Dados I
-- Introdução a Ciência da Computação II
-
-Para estudo recomedo olhar os arquivos com os nomes acima, as notas de aulas podem não estar bem formatadas e faltando algumas informações. 
+A pasta USP contém as anotações das disciplinas da faculdade, até o 2º semestre. Para estudo/consulta recomendo olhar os arquivos que não são chamados "Notas - Disciplina", pois eles não estão completamente orgnizados e faltam algumas informações, os arquivos com somente o nome da disciplina estão bem estruturados.
  
 A pasta de imagens contém as imagens que utilizo nos arquivos.
+
+Qualquer erro que encontrar pode me avisar.
