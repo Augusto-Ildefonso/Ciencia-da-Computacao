@@ -18,7 +18,7 @@ Disso temos também: $\displaystyle \lim_{x \to a} f(x) = 0$ e $|g(x)| \leq M$ =
 ## Limites Fundamentais
 1. $$\displaystyle \lim_{x \to 0} \frac{\sin{x}}{x} = 1$$
 2. $$\displaystyle \lim_{x \to 0} \frac{\ln(1+x)}{x} = 1$$
-3. $$\displaystyle \lim_{x \to 0} \frac{e^{x} - 1}{x} = 1$ $$
+3. $$\displaystyle \lim_{x \to 0} \frac{e^{x} - 1}{x} = 1 $$
 4. $$\displaystyle \lim_{x \to \infty} (1 + \frac{1}{x})^{x} = e$$ 
 5. $$\displaystyle \lim_{x \to \infty} (1 + \frac{a}{x})^{x} = e^{a}$$
 Extra: $\displaystyle \lim_{x\to \infty} x = \lim_{x \to 0} \frac{1}{x}$
