@@ -32,8 +32,11 @@ Extra: $\displaystyle \lim_{x\to \infty} x = \lim_{x \to 0} \frac{1}{x}$
 	$y = b$ é assíntota horizontal de $y = f(x)$ quando $\displaystyle \lim_{x \to \infty^{+-}} = b$ 
 # Derivadas
 $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x-a}$$
+
 ou
+
 $$f'(a) = \lim_{h \to 0} \frac{f(h+a) - f(a)}{h}$$
+
 A derivada só existe se o limite existe
 ## Notações
 1. $f'(a)$
@@ -41,30 +44,37 @@ A derivada só existe se o limite existe
 3. $y = f(x)$ -> $\displaystyle \frac{dy}{dx} = y'$
 ## Interpretações da Derivada
 1. Geométrica
-	A derivada é o coeficiente angular da reta tangente a um ponto. $$y - f(a) = f'(a) \, (x-a)$$
-2. Física
-	A derivada da função da posição é a velocidade instantânea e a derivada de $v(t)$ é a aceleração. $$x'(t) = v(t)$$
+	A derivada é o coeficiente angular da reta tangente a um ponto. 
+	$$y - f(a) = f'(a) \, (x-a)$$
+	
+1. Física
+	A derivada da função da posição é a velocidade instantânea e a derivada de $v(t)$ é a aceleração. 
+	$$x'(t) = v(t)$$
 ## Derivadas fundamentais
 1. Regra do tombo
+
 	$\displaystyle f(x) = x^{a}$, $a \in \mathbb{R}$
+	
 	$f'(x) = a \, x^{a - 1}$
 2. $\displaystyle f(x) = e^{x} \Longrightarrow f'(x) = e^{x}$
 3. $\displaystyle f(x) = \ln{x} \Longrightarrow f'(x) = \frac{1}{x}$
 4. $\displaystyle f(x) = \sin(x) \Longrightarrow f'(x) = \cos{x}$
 5. $\displaystyle f(x) = \cos{x} \Longrightarrow f'(x) = - \sin{x}$
-6. $\displaystyle f(x) = a^{x} \Longrightarrow f'(x) = a^{x} \, \ln{a}$, onde $a \in \mathbb{R}$
+6. $\displaystyle f(x) = a^{x} \Longrightarrow f'(x) = a^{x} \ln{a}$, onde $a \in \mathbb{R}$
 ## Existência de derivada
 Se $f: A \subset \mathbb{R} \longrightarrow \mathbb{R}$ é derivável em a, então $f$ é contínua em $a$.
 
 Se $f$ é descontínua em $x = a$, então a derivada não existe.
 ## Propriedades
 1. $\displaystyle (f+g)' (a) = f'(a) + g'(a)$
-2. $\displaystyle (k\, f)' (a) = k \, f'(a)$
-3. $\displaystyle (f \times g)' (a) = f'(a) \, g(a) + f(a) \, g'(a)$
-4. $\displaystyle \left( \frac{f}{g} \right)' (a) = \frac{f'(a) \, g(a) - f(a) \, g'(a)}{(g(a))^{2}}$ 
+2. $\displaystyle (k f)' (a) = k  f'(a)$
+3. $\displaystyle (f \times g)' (a) = f'(a)  g(a) + f(a)  g'(a)$
+4. $\displaystyle \left( \frac{f}{g} \right)' (a) = \frac{f'(a)  g(a) - f(a)  g'(a)}{(g(a))^{2}}$ 
 ## Regra da Cadeia
 $$f(x) = g(h(x))$$
-$$f'(x) = (g \circ h)' (x) = g'(h(x)) \, h'(x)$$
+
+$$f'(x) = (g \circ h)' (x) = g'(h(x))  h'(x)$$
+
 Dica: $\displaystyle f(x) = (x^{2} + 1)^{x} = e^{\ln{(x^{2} + 1)^{x}}} = e^{x \, \ln{(x^2 + 1)}}$  
 
 Dica: pode ser aplicada diversas vezes.
@@ -78,15 +88,23 @@ $\displaystyle f'''$ é a derivada terceira.
 $\displaystyle f^{(n)}$ é a derivada enésima.
 ## Derivação Implícita
 Exemplo: $y = f(x)$ e $\displaystyle y^{3} + y = x$
+
 $$\frac{d}{dx} (y^{3} +y) = \frac{d}{dx} (x)$$
+
 $$3y^{2} \, \frac{dy}{dx} + \frac{dy}{dx} = 1$$
+
 $$\frac{dy}{dx} (3y^{2} + 1) = 1$$
+
 $$\frac{dy}{dx} = \frac{1}{3y^{2} + 1} = \frac{1}{3 \, (f(x))^{2} + 1}$$
 ## Derivada da Função Inversa
 Usa a derivada implícita e a regra da cadeia.
+
 $$f \circ f^{-1} = y$$
+
 $$\frac{d}{dx} f(f^{-1}(x)) \, \cdot \, \frac{d}{dx} f^{-1}(x) = 1$$
+
 $$\frac{d}{dx} f^{-1} (x) = \frac{1}{\frac{d}{dx}f(f^{-1}(x))}$$
+
 Propriedade gráfica: o gráfica de $f^{-1}$ é "espelhado" do gráfico de $f$ pela reta $y = x$.
 ## Teoremas de Continuidade
 1. Teorema de Bolzano (Anulamento)
