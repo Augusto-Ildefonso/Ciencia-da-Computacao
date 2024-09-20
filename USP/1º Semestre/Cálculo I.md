@@ -10,11 +10,11 @@ $$\lim_{x \to a} f(x) = f(a)$$
 5. $\displaystyle \lim_{x \to a^{+}} f(x) = L$
 6. $\displaystyle \lim_{x \to b^{-}} f(x) = M$
 7. $\displaystyle \lim_{x \to a} f(x)$ existe <=> $L = M$
-8. Se $f: A \subset \mathbb{R} \to \mathbb{R}$ é contínua e $Im \, f: B = D$ e $g(x)$, $\displaystyle \lim_{x \to a} g(x) = L$, então: $\displaystyle \lim_{x \to a} f(g(x)) = f(L)$ 
+8. Se $f: A \subset \mathbb{R} \to \mathbb{R}$ é contínua e $Im \, f: B = D$ e $g(x)$, $\lim_{x \to a} g(x) = L$, então: $\displaystyle \lim_{x \to a} f(g(x)) = f(L)$ 
 ## Teorema do Confronto
-Se $f, g, h: A \to \mathbb{R}$ são tais que $f(x) < g(x) < h(x)$, $\forall x \in B \subset A$. $\displaystyle \lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L$. Então $\displaystyle \lim_{x \to a} g(x) = L$. 
+Se $f, g, h: A \to \mathbb{R}$ são tais que $f(x) < g(x) < h(x)$, $\forall x \in B \subset A$. $\displaystyle \lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L$. Então $\displaystyle \lim_{x \to a} g(x) = L$ . 
 
-Disso temos também: $\displaystyle \lim_{x \to a} f(x) = 0$ e $|g(x)| \leq M$ => $\displaystyle \lim_{x \to a} f(x) \, g(x) = 0$.
+Disso temos também: $\displaystyle \lim_{x \to a} f(x) = 0$ e $|g(x)| \leq M$ => $\lim_{x \to a} f(x) \, g(x) = 0$.
 ## Limites Fundamentais
 1. $\displaystyle \lim_{x \to 0} \frac{\sin{x}}{x} = 1$
 2. $\displaystyle \lim_{x \to 0} \frac{\ln(1+x)}{x} = 1$
