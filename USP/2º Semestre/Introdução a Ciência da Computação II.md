@@ -23,6 +23,8 @@ O método de divisão e conquista é divido em 3 partes em cada recursão:
 - Combinação: combina-se as soluções dadas pelos subproblemas ao problema original
 # Crescimento de funções
 Apesar de poder calcular precisamente a eficiência de cada algoritmo, geralmente, como as entradas são muito grandes, só é necessário calcular a ordem de crescimento do algoritmo, ou seja, estudamos a eficiência assintótica. Em geral, um algoritmo assintoticamente eficiente será melhor para todas as entradas, exceto as muito pequenas.
+
+Assumimos que todas funções usadas nas notações são assinstoticamente não ne
 ## Notações Assintóticas
 As funções que usamos para definir a análise assintótica estão no domínio dos naturais. A notação assintótica pode caracterizar qualquer aspecto do algoritmo, mas nesse caso será usada para determinar o tempo. Também vale ressaltar que podemos especificar a qual tempo que se refere a notação assintótica, pior caso por exemplo, mas essa notação também serve para caracterizar tempos de execução em geral, sem depender da entrada.
 1. Theta ($\Theta$)
