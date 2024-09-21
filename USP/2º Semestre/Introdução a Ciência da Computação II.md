@@ -32,4 +32,4 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 	
 	A definição de $\Theta (f(n))$ exige que todo membro de $T(n) \in \Theta (f(n))$ seja assintoticamente não negativo. Por consequência a própria $f(n)$ deve ser não negativa, se não o conjunto $\Theta (f(n))$ é vazio.
 	
-	Para resolver 
+	Para verificar se a "igualdade" $T(n) = \Theta (f(n))$ é verdadeira, temos que, a partir da desigualdade da definif 
