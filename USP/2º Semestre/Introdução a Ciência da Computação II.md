@@ -34,3 +34,4 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 	
 	Para verificar se a "igualdade" $T(n) = \Theta (f(n))$ é verdadeira, temos que, a partir da desigualdade da definição, achar um valor qualquer/arbitrário, para $c_{1}$, $c_{2}$ e $n$ que satisfaça a desigualdade. O valor de $c_{1}$ e $c_{2}$ podem ser diferentes, mas devem se referir para o mesmo valor de $n$. Podem existir mais de um par de constantes que verificam a desigualdade, mas o importante é que exista pelo menos uma opção.
 	 
+	Qualquer polinômio $\displaystyle p(n) = \sum_{i = 0}^{d} a$
