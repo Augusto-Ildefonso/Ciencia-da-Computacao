@@ -43,3 +43,5 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 	Pode-se encontrar a notação $O$ sendo usada para descrever limites assintoticamente justos (o que definimos usando a notação $\Theta$), mas aqui usaremos ele para descrever o limite assintótico superior de $T(n)$, sem menção de precisão.
 	
 	Essa notação permite, muitas vezes, descrever o tempo de execução de um algoritmo apenas inspecionando a estrutura global do algoritmo. O uso da notação $O$ para descrever o limite de tempo para o pior caso, induz também um limite de tempo de execução para cada, e toda, entrada do algoritmo, diferente de outras notações, como o $\Theta$.
+	
+	Quando dizemos que o tempo de execução é $O(n^{2})$
