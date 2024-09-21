@@ -40,3 +40,4 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 	
 	As notação $\Theta (n)$ contém $O(n)$ pois ela é uma noção mais forte. Logo, qualquer função quadrática que está em $\Theta (n^{2})$ também está em $O(n^{2})$. Além disso, qualquer função linear $an + b$ está em $O(n^{2})$, se tomarmos $c = a + |b|$ e $\displaystyle n_{0} = max \left(1, - \frac{b}{a} \right)$.
 	
+	Pode-se encontrar a notação $O$ sendo usada para descrever limites assintoticamente justos (o que definimos usando a notação $\Theta$), mas 
