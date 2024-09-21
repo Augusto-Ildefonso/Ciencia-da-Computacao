@@ -44,4 +44,4 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 	
 	Essa notação permite, muitas vezes, descrever o tempo de execução de um algoritmo apenas inspecionando a estrutura global do algoritmo. O uso da notação $O$ para descrever o limite de tempo para o pior caso, induz também um limite de tempo de execução para cada, e toda, entrada do algoritmo, diferente de outras notações, como o $\Theta$.
 	
-	Quando dizemos que o tempo de execução é $O(n^{2})$ estamos dizendo que existe uma função $T(n)$ que é $O(n^{2})$ tal que, para qualquer valor de n, não importando qual entrada específica de tamanho n seja escolhida, o tempo de execução para essa entrada tem um limite superior determinado pelo valor 
+	Quando dizemos que o tempo de execução é $O(n^{2})$ estamos dizendo que existe uma função $T(n)$ que é $O(n^{2})$ tal que, para qualquer valor de n, não importando qual entrada específica de tamanho n seja escolhida, o tempo de execução para essa entrada tem um limite superior determinado pelo valor $T(n)$.
