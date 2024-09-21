@@ -12,6 +12,18 @@ O tempo de execução é o número de operações primitivas/passos executados. 
 O foco da análise será o tempo do pior caso, mas é possível também calcular o tempo do melhor caso. Alguns motivos para escolher o tempo do pior caso é que ele oferece um limite superior para o tempo, ou seja, garantimos que para qualquer entrada, independentemente do número de elementos dela, o tempo nunca será superior ao determinado; para alguns algoritmos o pior caso é bem frequente (como busca de informações, que não estão presentes, em bancos de dados); por último, muitas vezes o tempo médio é tão ruim quanto o tempo do pior caso. Porém para análises probabilísticas, o tempo do caso médio é interessante, só que pode ser confuso por causa da definição do que seria uma entrada média.
 ## Ordem de crescimento
 Agora, tendo estabelecido as regras anteriores, vamos realizar mais uma simplificação, pois o que nos interessa é a taxa de crescimento, ou ordem de crescimento, da função. Para fazer a análise da taxa de crescimento consideramos somente a variável de maior expoente, ignorando as constantes (que são pouco significativas) e também os termos de menor grau (que quando comparados ao de maior são pouco significativos também, para grandes valores de n).
+
 Definimos um algoritmo como mais eficiente do que outro quando a sua taxa de crescimento é menor do que o outro. Vale ressaltar que como ignoramos as constantes e termos de ordem mais baixa, pode ser que para valores baixos de n, o algoritmo mais eficiente demore mais tempo do que o menos eficiente.
 ## Divisão e Conquista
 É um tipo de algoritmo, recursivo, que divide o problema em subproblemas, semelhantes ao original mas de menor tamanho, e ao resolver os subproblemas, retornam ele recursivamente, juntando os resultados, para assim resolver o problema original.
+
+O método de divisão e conquista é divido em 3 partes em cada recursão:
+- Divisão: divide-se o problema em determinado número de subproblemas que são instâncias menores do problema original
+- Conquista: resolve os subproblemas recursivamente, a não ser os subproblemas muito pequenos, que são resolvidos diretamente
+- Combinação: combina-se as soluções dadas pelos subproblemas ao problema original
+# Crescimento de funções
+Apesar de poder calcular precisamente a eficiência de cada algoritmo, geralmente, como as entradas são muito grandes, só é necessário calcular a ordem de crescimento do algoritmo, ou seja, estudamos a eficiência assintótica. Em geral, um algoritmo assintoticamente eficiente será melhor para todas as entradas, exceto as muito pequenas.
+## Notações Assintóticas
+As funções que usamos para definir a análise assintótica estão no domínio dos naturais. A notação assintótica pode caracterizar qualquer aspecto do algoritmo, mas nesse caso será usada para determinar o tempo. Também vale ressaltar que podemos especificar a qual tempo que se refere a notação assintótica, pior caso por exemplo, mas essa notação também serve para caracterizar tempos de execução em geral, sem depender da entrada.
+1. Theta ($\Theta$)
+	$T(n) = \Theta (f(n))$ significa que $\Theta(f(n))$ = {$T(n)$: existem constantes positivas $c_{1}$, $c_{2}$ e $n_{0}$ tais que $0 \leq c_{1} f(n) \leq T(n) \leq c_{2} f(n)$ para todo $n \geq n_{0}$}. Ou seja, é preciso existirem constantes $c_{1}$ e $c_{2}$ tais que $T(n)$ fique entre $c_{1} f(n)$ e $c_{2} f(n)$. Vale ressaltar que $T(n)$ é um subconjunto de $\Theta (f(n))$, ou seja, $T(n) \in \Theta (f(n))$, mas ao invés de representarmos com o $\in$ usamos o $=$, logo a notação fica $T(n) = \Theta (f(n))$. 
