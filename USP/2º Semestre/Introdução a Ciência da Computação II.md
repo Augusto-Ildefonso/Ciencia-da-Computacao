@@ -36,4 +36,4 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 	 
 	Qualquer polinômio $\displaystyle p(n) = \sum_{i = 0}^{d} a_{i} n^{i}$ onde $a_{i}$ são constantes e $a_{d} > 0$, temos $p(n) = \Theta (n^{d})$. Além disso, tendo em vista que qualquer constante é um polinômio de grau 0, podemos expressar qualquer função constante como $\Theta(n_{0})$ ou $\Theta (1)$, essa última é um abuso pois não mostramos qual variável está tendendo ao infinito. Porém usaremos ela com frequência para indicar uma constante ou uma função constante em relação a alguma variável.
 2. Big-Oh ($O$)
-	A notação $O$ estabelece um limite superior a função $T(n)$. Ela é lida como Big-Oh ou só O. Dizer $T(n) = O(f(n))$ significa que $O($
+	A notação $O$ estabelece um limite superior a função $T(n)$. Ela é lida como Big-Oh ou só O. Dizer $T(n) = O(f(n))$ significa que $O(f(n))$ = {$T(n)$: existem constantes positivas $c$ e $n_{0}$ tais que $0 \leq $}
