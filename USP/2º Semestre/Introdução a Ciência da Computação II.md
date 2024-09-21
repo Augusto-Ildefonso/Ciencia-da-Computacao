@@ -31,3 +31,5 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 	$T(n) = \Theta (f(n))$ significa que $\Theta(f(n))$ = {$T(n)$: existem constantes positivas $c_{1}$, $c_{2}$ e $n_{0}$ tais que $0 \leq c_{1} f(n) \leq T(n) \leq c_{2} f(n)$ para todo $n \geq n_{0}$}. Ou seja, é preciso existirem constantes $c_{1}$ e $c_{2}$ tais que $T(n)$ fique entre $c_{1} f(n)$ e $c_{2} f(n)$. Vale ressaltar que $T(n)$ é um subconjunto de $\Theta (f(n))$, ou seja, $T(n) \in \Theta (f(n))$, mas ao invés de representarmos com o $\in$ usamos o $=$, logo a notação fica $T(n) = \Theta (f(n))$. 
 	
 	A definição de $\Theta (f(n))$ exige que todo membro de $T(n) \in \Theta (f(n))$ seja assintoticamente não negativo. Por consequência a própria $f(n)$ deve ser não negativa, se não o conjunto $\Theta (f(n))$ é vazio.
+	
+	Para resolver 
