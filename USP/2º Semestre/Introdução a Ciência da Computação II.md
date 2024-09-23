@@ -106,4 +106,4 @@ Após tomar um palpite, testamos primeiro se ele é válido para o caso base. Se
 ### Método da árvore de recursão para resolver recorrências
 Em uma árvore de recursão, cada nó representa o custo de um único subproblema em algum lugar no conjunto de invocações de função recursiva. Somamos os custos em cada nível da árvore para obter o custo por nível e depois somamos todos os custos para determinar o custo total de todos os níveis da recursão.
 
-Geralmente usa-se a árvore de recursão para gerar um palpite e então confirmá-lo com o método da substituição.
+Geralmente usa-se a árvore de recursão para gerar um palpite e então confirmá-lo com o método da substituição. Se for cuidadoso ao montar a árvore, ela pode ser uma prova direta de uma solução para a recorrência.
