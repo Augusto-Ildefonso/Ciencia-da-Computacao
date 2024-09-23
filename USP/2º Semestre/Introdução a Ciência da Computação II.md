@@ -55,4 +55,4 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 
 Com isso, tiramos o seguinte teorema:  dizer que uma função $T(n) = \Theta(f(n))$, é válido se e somente se $T(n) = O(f(n))$ e $T(n) = \Omega(f(n))$.
 
-É necessário mencionar agora a diferença entre os usos dos sinais. Quando a notação assintótica está sozinha, como em $n = O(n^{2})$, o igual significa pertinência. Já quando a notação assintótica aparece em uma fórmula, como $2n^{2} + 3 n + 1 = 2 n^{2} + \Theta(n)$
+É necessário mencionar agora a diferença entre os usos dos sinais. Quando a notação assintótica está sozinha, como em $n = O(n^{2})$, o igual significa pertinência. Já quando a notação assintótica aparece em uma fórmula, como $2n^{2} + 3 n + 1 = 2 n^{2} + \Theta(n)$ significa que ela representa alguma função anônima que não nos preocupamos em nomear.
