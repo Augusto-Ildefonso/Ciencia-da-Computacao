@@ -123,4 +123,4 @@ Ordenar é rearranjar elementos de um conjunto de modo a estabelecer uma relaç�
 
 Os algoritmos de ordenação trabalham sobre registros de um arquivo, e deles somente uma parte importa: a chave, o resto dos dados dos arquivos não interferem na ordenação. Além disso, um algoritmo de ordenação é estável se a ordem relativa dos itens com a mesma chave se mantém inalterada após a ordenação.
 
-Também é necessária fazer uma diferenciação entre ordenação interna e externa. Chamam
+Também é necessária fazer uma diferenciação entre ordenação interna e externa. Dizemos que é uma ordenação interna se todos os registros cabem na memória principal (formam um único array). Já se o arquivo a ser ordenado não cabe na memória principal
