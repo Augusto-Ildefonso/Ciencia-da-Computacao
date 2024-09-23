@@ -63,4 +63,4 @@ O método de divisão e conquista é divido em 3 partes em cada recursão:
 - Conquista: resolve os subproblemas recursivamente, a não ser os subproblemas muito pequenos, que são resolvidos diretamente
 - Combinação: combina-se as soluções dadas pelos subproblemas ao problema original
 ## Recorrências
-Uma recorrência é uma equação ou desigualdade que descreve uma função em termos de seu valor para entradas menores. Por exemplo: $$T(n) = \begin{matrix} a1 && a2 b1 && b2 \end{matrix}$$
+Uma recorrência é uma equação ou desigualdade que descreve uma função em termos de seu valor para entradas menores. Por exemplo: $$T(n) = \left\{ \begin{matrix}  \end{matrix} \right.$$
