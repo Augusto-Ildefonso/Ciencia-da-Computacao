@@ -127,4 +127,4 @@ Também é necessária fazer uma diferenciação entre ordenação interna e ext
 
 Há também a ordenação por endereço, nela nós mantemos uma tabela de ponteiros para os registros e durante a ordenação os ponteiros que são alterados. Vale mencionar também que os registros a serem ordenados podem ser complexos ou não, mas os métodos de ordenação independem desse fator.
 
-Existem vários métodos de implementar a ordenação. Dependendo do problema, um algoritmo pode ser mais vantajoso do qe
+Existem vários métodos de implementar a ordenação. Dependendo do problema, um algoritmo pode ser mais vantajoso do que outro. Para fazer poder comparar faz-se análise de complexidade.
