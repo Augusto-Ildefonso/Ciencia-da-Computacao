@@ -14,7 +14,7 @@ O foco da análise será o tempo do pior caso, mas é possível também calcular
 Agora, tendo estabelecido as regras anteriores, vamos realizar mais uma simplificação, pois o que nos interessa é a taxa de crescimento, ou ordem de crescimento, da função. Para fazer a análise da taxa de crescimento consideramos somente a variável de maior expoente, ignorando as constantes (que são pouco significativas) e também os termos de menor grau (que quando comparados ao de maior são pouco significativos também, para grandes valores de n).
 
 Definimos um algoritmo como mais eficiente do que outro quando a sua taxa de crescimento é menor do que o outro. Vale ressaltar que como ignoramos as constantes e termos de ordem mais baixa, pode ser que para valores baixos de n, o algoritmo mais eficiente demore mais tempo do que o menos eficiente.
-# Crescimento de funções
+## Crescimento de funções
 Apesar de poder calcular precisamente a eficiência de cada algoritmo, geralmente, como as entradas são muito grandes, só é necessário calcular a ordem de crescimento do algoritmo, ou seja, estudamos a eficiência assintótica. Em geral, um algoritmo assintoticamente eficiente será melhor para todas as entradas, exceto as muito pequenas.
 ### Notações Assintóticas
 As funções que usamos para definir a análise assintótica estão no domínio dos naturais. A notação assintótica pode caracterizar qualquer aspecto do algoritmo, mas nesse caso será usada para determinar o tempo. Também vale ressaltar que podemos especificar a qual tempo que se refere a notação assintótica, pior caso por exemplo, mas essa notação também serve para caracterizar tempos de execução em geral, sem depender da entrada.
@@ -66,31 +66,31 @@ Se $T_1 (n) = O(f(n))$ e $T_2 (n) = O(g(n))$:
 - $T_1 \times T_2 = O(f(n) \times g(n))$ 
 Se T(x) é um polinômio de grau n, então $T(x) = \Theta(x^n)$ 
 Se $log_{k}n = O(n)$ para qualquer constante k, pois logaritmos crescem muito vagarosamente. 
-### Funções e taxas de crescimento
+#### Funções e taxas de crescimento
 A tabela está em ordem de eficiência, no topo o mais eficiente (menor crescimento) para o menos eficiente.
 ![Tabela](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2008-59-03.png)
 ![Gráfico](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2009-01-08.png)
-## Regras para o cálculo
-### Repetições
+### Regras para o cálculo
+#### Repetições
 O tempo de execução de uma repetição é pelo menos o tempo dos comandos dentro da repetição (incluindo testes) vezes o número de vezes que é executada.
-### Repetições aninhadas
+#### Repetições aninhadas
 A análise é feito de dentro para fora. O tempo total de comandos dentro de um grupo de repetições aninhadas é o tempo de execução dos comandos multiplicado pelo produto do tamanho de todas as repetições.
-### Comandos consecutivos
+#### Comandos consecutivos
 É a soma dos tempos de cada um, o que pode significar o máximo entre eles.
-### Se, senão, então
+#### Se, senão, então
 Para a cláusula condicional, o tempo de execução nunca é maior do que o tempo do teste mais o tempo do maior entre os comandos relativos ao então e os comandos relativos ao senão.
-### Chamadas à sub-rotinas
+#### Chamadas à sub-rotinas
 Uma sub-rotina deve ser analisada primeiro e depois ter suas unidades de tempo incorporadas ao programa/sub-rotina que a chamou.
 
 Já para sub-rotinas recursivas fazemos análise das recorrências.
-# Divisão e Conquista
+## Divisão e Conquista
 É um tipo de algoritmo, recursivo, que divide o problema em subproblemas, semelhantes ao original mas de menor tamanho, e ao resolver os subproblemas, retornam ele recursivamente, juntando os resultados, para assim resolver o problema original.
 
 O método de divisão e conquista é divido em 3 partes em cada recursão:
 - Divisão: divide-se o problema em determinado número de subproblemas que são instâncias menores do problema original
 - Conquista: resolve os subproblemas recursivamente, a não ser os subproblemas muito pequenos, que são resolvidos diretamente
 - Combinação: combina-se as soluções dadas pelos subproblemas ao problema original
-## Recorrências
+### Recorrências
 Uma recorrência é uma equação ou desigualdade que descreve uma função em termos de seu valor para entradas menores. Por exemplo: 
 $$T(n) = \left\{ \begin{matrix} \Theta(1) \text{, se n =1} \\ 2T \left(\frac{n}{2} \right)+\Theta(n) \text{, se n > 1}\end{matrix} \right.$$
 
@@ -98,16 +98,16 @@ Veremos 3 métodos para resolver recorrências (obter limites assintóticos):
 - Método da substituição: arriscamos um palpite para um limite e usamos indução matemática para provar que ele estava correto
 - Método da árvore de recursão: convertemos a recorrência em uma árvore cujos nós representam os custos envolvidos nos níveis de recursão. Usamos técnicas para limitar somatórios para resolver a recorrência.
 - Método mestre: nos dá limites para recorrências da forma $\displaystyle T(n) = aT \left(\frac{n}{b} \right) + f(n)$, onde $a \geq 1$, $b > 1$ e f(n) é uma função dada. Essa equação caracteriza um algoritmo de divisão e conquista que cria $a$ subproblemas, cada um com $\displaystyle \frac{1}{b}$ do tamanho original e no qual as etapas de divisão e conquista levam, juntas, o tempo de $f(n)$.
-### Método de substituição para resolver recorrências
+#### Método de substituição para resolver recorrências
 Ele consiste em duas etapas:
 1. Arriscar um palpite para a forma da solução
 2. Usar indução para determinar as constantes e mostrar que a solução funciona.
 Após tomar um palpite, testamos primeiro se ele é válido para o caso base. Se for, substituímos a função $T(n)$ pelo palpite na recorrência. Em seguida, usaremos a definição da notação para comparar o valor de $T(n)$ com a definição da notação e então tentaremos achar a constante. 
-### Método da árvore de recursão para resolver recorrências
+#### Método da árvore de recursão para resolver recorrências
 Em uma árvore de recursão, cada nó representa o custo de um único subproblema em algum lugar no conjunto de invocações de função recursiva. Somamos os custos em cada nível da árvore para obter o custo por nível e depois somamos todos os custos para determinar o custo total de todos os níveis da recursão.
 
 Geralmente usa-se a árvore de recursão para gerar um palpite e então confirmá-lo com o método da substituição. Se for cuidadoso ao montar a árvore, ela pode ser uma prova direta de uma solução para a recorrência.
-### Método mestre para resolver recorrências
+#### Método mestre para resolver recorrências
 Ele fornece uma receita para resolver recorrências no formato $\displaystyle T(n) = a T \left( \frac{n}{b} \right) + f(n)$, onde $a \geq 1$ e $b > 1$ são constantes e $f(n)$ é uma função assintoticamente positiva. Para usar esse método é preciso memorizar 3 casos, mas com eles poderá resolver diversas recorrências.
 
 Da fórmula acima, temos que a recorrência divide o problema em $a$ subproblemas de tamanho $\displaystyle \frac{n}{b}$. Os $a$ subproblemas são resolvidos recursivamente no tempo $\displaystyle T \left( \frac{n}{b} \right)$. A função $f(n)$ abrange o custo de dividir o problema e combinar os resultados dos subproblemas.
