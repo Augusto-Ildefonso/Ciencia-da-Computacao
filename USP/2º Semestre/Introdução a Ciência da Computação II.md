@@ -132,3 +132,7 @@ Existem vários métodos de implementar a ordenação. Dependendo do problema, u
 O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste em repetidas trocas de elementos adjacentes caso estejam na ordem errada. Entretanto, ele não é recomendado para casos com grande quantidade de dados, visto que a complexidade dele para o pior tempo é muito alta.
 
 Nele, primeiro, começando da esquerda, comparamos os elementos adjacentes e os maiores são colocados a direita, desse jeito o maior elemento está no fim mais a direita. Esse processo então continua para o segundo maior e assim por diante.
+
+O funcionamento dele é:
+1. Imagina-se o seguinte vetor {0, 4, 3, 6}
+2. O bubble-sort ir
