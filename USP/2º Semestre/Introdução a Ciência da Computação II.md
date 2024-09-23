@@ -104,4 +104,4 @@ Ele consiste em duas etapas:
 2. Usar indução para determinar as constantes e mostrar que a solução funciona.
 Após tomar um palpite, testamos primeiro se ele é válido para o caso base. Se for, substituímos a função $T(n)$ pelo palpite na recorrência. Em seguida, usaremos a definição da notação para comparar o valor de $T(n)$ com a definição da notação e então tentaremos achar a constante. 
 ### Método da árvore de recursão para resolver recorrências
-E
+Em uma árvore de recursão, cada nó representa o custo de um único subproblema em algum lugar no conjunto de invocações de função recursiva. Somamos os custos em cada nível da árvore para obter o custo por nível e depois somamos todos os custos para deter
