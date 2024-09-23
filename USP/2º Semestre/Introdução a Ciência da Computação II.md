@@ -112,4 +112,5 @@ Ele fornece uma receita para resolver recorrências no formato $\displaystyle T(
 
 Da fórmula acima, temos que a recorrência divide o problema em $a$ subproblemas de tamanho $\displaystyle \frac{n}{b}$. Os $a$ subproblemas são resolvidos recursivamente no tempo $\displaystyle T \left( \frac{n}{b} \right)$. A função $f(n)$ abrange o custo de dividir o problema e combinar os resultados dos subproblemas.
 
-Teorema: Seja $a \geq 1$ e $b > 1$, seja $f(n)$ uma função
+Teorema: Seja $a \geq 1$ e $b > 1$, seja $f(n)$ uma função e seja $T(n)$ definida por $\displaystyle T(n) = a T \left( \frac{n}{b} \right) + f(n)$, então $T(n)$ pode ser limitado assintoticamente por:
+- 
