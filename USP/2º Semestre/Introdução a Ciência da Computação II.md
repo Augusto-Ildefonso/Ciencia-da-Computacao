@@ -102,4 +102,4 @@ Veremos 3 métodos para resolver recorrências (obter limites assintóticos):
 Ele consiste em duas etapas:
 1. Arriscar um palpite para a forma da solução
 2. Usar indução para determinar as constantes e mostrar que a solução funciona.
-Após tomar um palpite, substituímos a função $T(n)$ pelo palpite na recorrência. Em seguida, v
+Após tomar um palpite, substituímos a função $T(n)$ pelo palpite na recorrência. Em seguida, usaremos a definição da notação para comparar o valor de $T(n)$ com a definição da notação e então tentaremos achar a constante. Após achá-la 
