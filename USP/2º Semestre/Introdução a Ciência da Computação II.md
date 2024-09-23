@@ -49,4 +49,4 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 	Quando dizemos que o tempo de execução é $O(n^{2})$ estamos dizendo que existe uma função $T(n)$ que é $O(n^{2})$ tal que, para qualquer valor de n, não importando qual entrada específica de tamanho n seja escolhida, o tempo de execução para essa entrada tem um limite superior determinado pelo valor $T(n)$.
 3. Ômega ($\Omega$)
 	
-	
+	Essa notação fornece o limite assintótico inferior da função $T(n)$. Ela é lida como "ômega grande"
