@@ -129,4 +129,4 @@ Há também a ordenação por endereço, nela nós mantemos uma tabela de pontei
 
 Existem vários métodos de implementar a ordenação. Dependendo do problema, um algoritmo pode ser mais vantajoso do que outro. Para fazer poder comparar faz-se análise de complexidade.
 ## Bubble-sort
-O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste na troca de 
+O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste em repetidas trocas de elementos adjacentes caso estejam na ordem errada. Entretanto, ele não é recomendado para casos com grande quantidade de dados, visto que ele possui uma 
