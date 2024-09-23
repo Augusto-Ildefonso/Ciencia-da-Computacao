@@ -66,4 +66,6 @@ O método de divisão e conquista é divido em 3 partes em cada recursão:
 Uma recorrência é uma equação ou desigualdade que descreve uma função em termos de seu valor para entradas menores. Por exemplo: 
 $$T(n) = \left\{ \begin{matrix} \Theta(1) \text{, se n =1} \\ 2T \left(\frac{n}{2} \right)+\Theta(n) \text{, se n > 1}\end{matrix} \right.$$
 
-Veremos 3 métodos para resolver recorrências (obter limite)
+Veremos 3 métodos para resolver recorrências (obter limites assintóticos):
+- Método da substituição: arriscamos um palpite para um limite e usamos indução matemática para provar que ele estava correto
+- 
