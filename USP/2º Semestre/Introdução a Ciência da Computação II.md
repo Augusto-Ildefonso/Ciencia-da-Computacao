@@ -53,9 +53,24 @@ Com isso, tiramos o seguinte teorema:  dizer que uma função $T(n) = \Theta(f(n
 4. Little-Oh ($o$)
 	
 	Ela é usada para expressar um limite superior que, diferente do big-oh, não é assintoticamente justo. Ela é chamada de "o pequeno". Dizer que $T(n) = o(f(n))$ significa que $o(f(n))$ = {$T(n)$: para qualquer constante positiva $c > 0$, existe uma constante $n_{0} > 0$ tal que $0 \leq T(n) < c f(n)$ para todo $n \geq n_{0}$}.
+	
 5. Ômega pequeno ($\omega$)
+	
 	A notação $\omega$ está para $\Omega$ assim como $o$ está para $O$. Logo, a notação $\omega$ fornece um limite inferior que não é assintoticamente justo/preciso. Definimos a notação como $\omega (f(n))$ = {$T(n)$: para qualquer constante positiva $c > 0$ existe uma constante $n_{0} > 0$ tal que $0 \leq c f(n) < T(n)$ para todo $n \geq n_{0}$}. Ela também pode ser definida como $T(n) \in \omega (f(n))$ se e somente se $f(n) \in o(T(n))$.
+	
 Muitas das propriedades de números reais se aplicam às notações, entre elas: transitividade, reflexividade, simetria e simetria de transposição. Mas vale ressaltar que dadas duas funções, nem sempre elas são comparáveis.
+## Taxas de crescimento
+### Regras
+Se $T_1 (n) = O(f(n))$ e $T_2 (n) = O(g(n))$:
+- $T_1 (n) + T_2 (n) = max(O(f(n)), O(g(n)))$, ou seja, pegamos para o valor de O(n) a função cuja a taxa de crescimento é maior
+- $T_1 \times T_2 = O(f(n) \times g(n))$ 
+Se T(x) é um polinômio de grau n, então $T(x) = \Theta(x^n)$ 
+Se $log_{k}n = O(n)$ para qualquer constante k, pois logaritmos crescem muito vagarosamente. 
+### Funções e taxas de crescimento
+A tabela está em ordem de eficiência, no topo o mais eficiente (menor crescimento) para o menos eficiente.
+![Tabela](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2008-59-03.png)
+![Gráfico](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2009-01-08.png)
+
 # Divisão e Conquista
 É um tipo de algoritmo, recursivo, que divide o problema em subproblemas, semelhantes ao original mas de menor tamanho, e ao resolver os subproblemas, retornam ele recursivamente, juntando os resultados, para assim resolver o problema original.
 
