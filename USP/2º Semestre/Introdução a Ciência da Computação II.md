@@ -144,4 +144,7 @@ Análise de complexidade:
 - Complexidade de tempo: $O(n^{2})$
 - Espaço auxiliar = $O(1)$
 
-As v
+As vantagens do bubble-sort são:
+- Ele é fácil de entender e implementar
+- Não requer memória adicional
+- É um algoritmo estável
