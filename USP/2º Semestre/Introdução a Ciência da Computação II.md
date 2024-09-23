@@ -68,4 +68,4 @@ $$T(n) = \left\{ \begin{matrix} \Theta(1) \text{, se n =1} \\ 2T \left(\frac{n}{
 
 Veremos 3 métodos para resolver recorrências (obter limites assintóticos):
 - Método da substituição: arriscamos um palpite para um limite e usamos indução matemática para provar que ele estava correto
-- 
+- Método da árvore de recursão: convertemos a recursão em uma árvore cujos nós representam os custos envolvidos nos níveis de recursão. Usamos técnicas para limitar somatórios para resolver
