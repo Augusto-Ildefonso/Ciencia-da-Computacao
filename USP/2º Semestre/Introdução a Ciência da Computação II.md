@@ -62,3 +62,5 @@ O método de divisão e conquista é divido em 3 partes em cada recursão:
 - Divisão: divide-se o problema em determinado número de subproblemas que são instâncias menores do problema original
 - Conquista: resolve os subproblemas recursivamente, a não ser os subproblemas muito pequenos, que são resolvidos diretamente
 - Combinação: combina-se as soluções dadas pelos subproblemas ao problema original
+## Recorrências
+Uma recorrência é uma equação ou desigualdade que descreve uma função em termos de seu valor para entradas menores. 
