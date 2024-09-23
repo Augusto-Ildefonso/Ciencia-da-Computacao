@@ -122,4 +122,4 @@ Além disso, é necessário mencionar que além da relação de maior e menor j�
 Ordenar é rearranjar elementos de um conjunto de modo a estabelecer uma relação de ordem entre eles (seja crescente ou decrescente), diz-se que os elementos $k_{1}, k_{2}, ..., k_{n}$ estarão dispostos de modo que $k_{1} \leq k_{2} \leq ... \leq k_{n}$. O principal objetivo da ordenação é facilitar a recuperação de itens do conjunto ordenado. Porém, às vezes da menos trabalho buscar um elemento em um conjunto desordenado do que em um ordenado. Basta então analisar se a busca é uma operação frequente, se for pode ser que valha a pena ordenar (isso só é feito uma vez), se não, pode ser que não valha.
 
 Notação:
-- Os algoritmos de ordenação trabalham sobre registros de um arquivo, e deles somente uma parte importa: a 
+- Os algoritmos de ordenação trabalham sobre registros de um arquivo, e deles somente uma parte importa: a chave, o resto dos dados dos arquivos não interferem na ordenação.
