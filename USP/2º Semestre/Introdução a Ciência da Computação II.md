@@ -134,5 +134,5 @@ O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste em repeti
 Nele, primeiro, começando da esquerda, comparamos os elementos adjacentes e os maiores são colocados a direita, desse jeito o maior elemento está no fim mais a direita. Esse processo então continua para o segundo maior e assim por diante.
 
 O funcionamento dele é:
-1. Imagina-se o seguinte vetor {0, 4, 3, 6}
-2. O bubble-sort irá, começando da esquerda, comparar os elementos e colocá-los a direita quando forem maiores, até que o maior elemento esteja no final mais a direita do vetor. Exemplo: {0, 4, 3, 6} -> {0, 3, 4, 6}
+1. Imagina-se o seguinte vetor {6, 0, 4, 3}
+2. O bubble-sort irá, começando da esquerda, comparar os elementos e colocá-los a direita quando forem maiores, até que o maior elemento esteja no final mais a direita do vetor. Exemplo: {6, 0, 3, 4} -> {0, 6, 3, 4} -> {0, 3}
