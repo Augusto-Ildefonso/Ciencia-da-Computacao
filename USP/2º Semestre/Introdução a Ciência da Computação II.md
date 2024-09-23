@@ -61,3 +61,4 @@ Com isso, tiramos o seguinte teorema:  dizer que uma função $T(n) = \Theta(f(n
 	Ela é usada para expressar um limite superior que, diferente do big-oh, não é assintoticamente justo. Ela é chamada de "o pequeno". Dizer que $T(n) = o(f(n))$ significa que $o(f(n))$ = {$T(n)$: para qualquer constante positiva $c > 0$, existe uma constante $n_{0} > 0$ tal que $0 \leq T(n) < c f(n)$ para todo $n \geq n_{0}$}.
 5. Ômega pequeno ($\omega$)
 	A notação $\omega$ está para $\Omega$ assim como $o$ está para $O$. Logo, a notação $\omega$ fornece um limite inferior que não é assintoticamente justo/preciso. Definimos a notação como $\omega (f(n))$ = {$T(n)$: para qualquer constante positiva $c > 0$ existe uma constante $n_{0} > 0$ tal que $0 \leq c f(n) < T(n)$ para todo $n \geq n_{0}$}. Ela também pode ser definida como $T(n) \in \omega (f(n))$ se e somente se $f(n) \in o(T(n))$.
+Muitas das propriedades de números reais se aplicam às notações, entre elas: transitividade, 
