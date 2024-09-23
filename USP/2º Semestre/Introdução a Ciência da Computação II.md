@@ -139,3 +139,9 @@ O funcionamento dele é:
 3. Agora que o maior elemento já está no lugar certo, iniciamos de novo da esquerda e repetimos o processo até que ele esteja no lugar certo e assim em diante até que ele esteja totalmente ordenado. Exemplo: {0, 4, 3, 6} -> {0, 3, 4, 6}.
 
 O número total de passagens é $n - 1$ e o número total de comparações é $\displaystyle \frac{n \times (n-1)}{2}$.
+
+Análise de complexidade:
+- Complexidade de tempo: $O(n^{2})$
+- Espaço auxiliar = $O(1)$
+
+As v
