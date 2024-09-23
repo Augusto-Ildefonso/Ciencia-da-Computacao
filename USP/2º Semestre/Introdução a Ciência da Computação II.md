@@ -108,4 +108,4 @@ Em uma árvore de recursão, cada nó representa o custo de um único subproblem
 
 Geralmente usa-se a árvore de recursão para gerar um palpite e então confirmá-lo com o método da substituição. Se for cuidadoso ao montar a árvore, ela pode ser uma prova direta de uma solução para a recorrência.
 ### Método mestre para resolver recorrências
-Ele fornece uma receita para resolver recorrências no formato $T(n) = a T(frac{}$
+Ele fornece uma receita para resolver recorrências no formato $\displaystyle T(n) = a T \left( \frac{n}{b} \right) + f(n)$, onde $$
