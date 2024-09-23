@@ -82,7 +82,7 @@ Para a cláusula condicional, o tempo de execução nunca é maior do que o temp
 ### Chamadas à sub-rotinas
 Uma sub-rotina deve ser analisada primeiro e depois ter suas unidades de tempo incorporadas ao programa/sub-rotina que a chamou.
 
-Já para sub-rotinas recursivas fazemos aná
+Já para sub-rotinas recursivas fazemos análise das recorrências.
 # Divisão e Conquista
 É um tipo de algoritmo, recursivo, que divide o problema em subproblemas, semelhantes ao original mas de menor tamanho, e ao resolver os subproblemas, retornam ele recursivamente, juntando os resultados, para assim resolver o problema original.
 
