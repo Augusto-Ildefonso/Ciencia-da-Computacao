@@ -50,3 +50,5 @@ Assumimos que todas funções usadas nas notações são assintoticamente não n
 3. Ômega ($\Omega$)
 	
 	Essa notação fornece o limite assintótico inferior da função $T(n)$. Ela é lida como "ômega grande" ou "ômega" somente. Dizer que $T(n) = \Omega(f(n))$ significa que $\Omega(f(n))$ = {$T(n)$: existem constantes positivas $c$ e $n_{0}$ tais que $0 \leq c f(n) \leq  T(n)$ para todo $n \geq n_{0}$}.
+
+Com isso, tiramos o seguinte teorema:  dizer que uma função $T(n) = \Theta(f(n))$, 
