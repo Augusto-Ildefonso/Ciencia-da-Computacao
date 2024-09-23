@@ -135,4 +135,4 @@ Nele, primeiro, começando da esquerda, comparamos os elementos adjacentes e os 
 
 O funcionamento dele é:
 1. Imagina-se o seguinte vetor {0, 4, 3, 6}
-2. O bubble-sort ir
+2. O bubble-sort irá, começando da esquerda, comparar os elementos e colocá-los a direita quando forem maiores, até que o maior elemento esteja no final mais a direita do vetor. Exemplo: {0, 4, 3, 6} -> {0, 3, 4, 6}
