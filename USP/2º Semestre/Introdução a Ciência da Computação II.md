@@ -69,4 +69,4 @@ $$T(n) = \left\{ \begin{matrix} \Theta(1) \text{, se n =1} \\ 2T \left(\frac{n}{
 Veremos 3 métodos para resolver recorrências (obter limites assintóticos):
 - Método da substituição: arriscamos um palpite para um limite e usamos indução matemática para provar que ele estava correto
 - Método da árvore de recursão: convertemos a recorrência em uma árvore cujos nós representam os custos envolvidos nos níveis de recursão. Usamos técnicas para limitar somatórios para resolver a recorrência.
-- Método mestre: nos dá limites para recorrências da forma $\displaystyle T(n) = aT \lef(\frac{n}{b}) + f(n)$ 
+- Método mestre: nos dá limites para recorrências da forma $\displaystyle T(n) = aT \left(\frac{n}{b} \right) + f(n)$, onde $a \geq 1$, $b > 1$ e f(n) é uma função dada. Essa equação caracteriza um algoritmo de divisão e conquista que cria $a$ subproblemas, cada
