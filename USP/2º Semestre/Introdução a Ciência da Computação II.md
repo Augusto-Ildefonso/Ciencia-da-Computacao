@@ -16,7 +16,7 @@ Agora, tendo estabelecido as regras anteriores, vamos realizar mais uma simplifi
 Definimos um algoritmo como mais eficiente do que outro quando a sua taxa de crescimento é menor do que o outro. Vale ressaltar que como ignoramos as constantes e termos de ordem mais baixa, pode ser que para valores baixos de n, o algoritmo mais eficiente demore mais tempo do que o menos eficiente.
 # Crescimento de funções
 Apesar de poder calcular precisamente a eficiência de cada algoritmo, geralmente, como as entradas são muito grandes, só é necessário calcular a ordem de crescimento do algoritmo, ou seja, estudamos a eficiência assintótica. Em geral, um algoritmo assintoticamente eficiente será melhor para todas as entradas, exceto as muito pequenas.
-## Notações Assintóticas
+### Notações Assintóticas
 As funções que usamos para definir a análise assintótica estão no domínio dos naturais. A notação assintótica pode caracterizar qualquer aspecto do algoritmo, mas nesse caso será usada para determinar o tempo. Também vale ressaltar que podemos especificar a qual tempo que se refere a notação assintótica, pior caso por exemplo, mas essa notação também serve para caracterizar tempos de execução em geral, sem depender da entrada.
 
 Assumimos que todas funções usadas nas notações são assintoticamente não negativas ($T(n)$ não negativo sempre que $n$ for suficientemente grande). Uma função assintoticamente positiva é uma função positiva para todo $n$ suficientemente grande
@@ -59,8 +59,8 @@ Com isso, tiramos o seguinte teorema:  dizer que uma função $T(n) = \Theta(f(n
 	A notação $\omega$ está para $\Omega$ assim como $o$ está para $O$. Logo, a notação $\omega$ fornece um limite inferior que não é assintoticamente justo/preciso. Definimos a notação como $\omega (f(n))$ = {$T(n)$: para qualquer constante positiva $c > 0$ existe uma constante $n_{0} > 0$ tal que $0 \leq c f(n) < T(n)$ para todo $n \geq n_{0}$}. Ela também pode ser definida como $T(n) \in \omega (f(n))$ se e somente se $f(n) \in o(T(n))$.
 	
 Muitas das propriedades de números reais se aplicam às notações, entre elas: transitividade, reflexividade, simetria e simetria de transposição. Mas vale ressaltar que dadas duas funções, nem sempre elas são comparáveis.
-## Taxas de crescimento
-### Regras
+### Taxas de crescimento
+#### Regras
 Se $T_1 (n) = O(f(n))$ e $T_2 (n) = O(g(n))$:
 - $T_1 (n) + T_2 (n) = max(O(f(n)), O(g(n)))$, ou seja, pegamos para o valor de O(n) a função cuja a taxa de crescimento é maior
 - $T_1 \times T_2 = O(f(n) \times g(n))$ 
@@ -118,3 +118,4 @@ Teorema: Seja $a \geq 1$ e $b > 1$, seja $f(n)$ uma função e seja $T(n)$ defin
 - Se $f(n) = \Omega(n^{\log_ba+x})$ para algum x > 0 e se $a\times f(\frac{n}{b}) \leq c \times f(n)$ para algum c < 1 e para todo n suficientemente grande, então $T(n) = \Theta(f(n))$
 
 Além disso, é necessário mencionar que além da relação de maior e menor já estabelecidas, para a primeira e a última, é necessário que a função seja polinomialmente maior (tenha 1 grau a mais, maior por um fator n).
+# Problemas de Ordenação
