@@ -125,4 +125,4 @@ Os algoritmos de ordenação trabalham sobre registros de um arquivo (eles que s
 
 Também é necessária fazer uma diferenciação entre ordenação interna e externa. Dizemos que é uma ordenação interna se todos os registros cabem na memória principal (formam um único array). Já se o arquivo a ser ordenado não cabe na memória principal e por isso precisam ser armazenados em uma fita ou disco, chamamos de ordenação externa. Na ordenação interna os arquivos podem ser acessados imediatamente, já na ordenação externa eles são acessados sequencialmente ou em grandes blocos.
 
-Há também a ordenação por en
+Há também a ordenação por endereço, nela nós mantemos uma tabela de ponteiros para os registros e durante a ordenação os ponteiros que são alterados.
