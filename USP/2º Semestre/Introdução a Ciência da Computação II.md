@@ -70,7 +70,19 @@ Se $log_{k}n = O(n)$ para qualquer constante k, pois logaritmos crescem muito va
 A tabela está em ordem de eficiência, no topo o mais eficiente (menor crescimento) para o menos eficiente.
 ![Tabela](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2008-59-03.png)
 ![Gráfico](https://raw.githubusercontent.com/Augusto-Ildefonso/Anotacoes-Aulas/master/Imagens/Captura%20de%20tela%20de%202024-08-22%2009-01-08.png)
+## Regras para o cálculo
+### Repetições
+O tempo de execução de uma repetição é pelo menos o tempo dos comandos dentro da repetição (incluindo testes) vezes o número de vezes que é executada.
+### Repetições aninhadas
+A análise é feito de dentro para fora. O tempo total de comandos dentro de um grupo de repetições aninhadas é o tempo de execução dos comandos multiplicado pelo produto do tamanho de todas as repetições.
+### Comandos consecutivos
+É a soma dos tempos de cada um, o que pode significar o máximo entre eles.
+### Se, senão, então
+Para a cláusula condicional, o tempo de execução nunca é maior do que o tempo do teste mais o tempo do maior entre os comandos relativos ao então e os comandos relativos ao senão.
+### Chamadas à sub-rotinas
+Uma sub-rotina deve ser analisada primeiro e depois ter suas unidades de tempo incorporadas ao programa/sub-rotina que a chamou.
 
+Já para sub-rotinas recursivas fazemos aná
 # Divisão e Conquista
 É um tipo de algoritmo, recursivo, que divide o problema em subproblemas, semelhantes ao original mas de menor tamanho, e ao resolver os subproblemas, retornam ele recursivamente, juntando os resultados, para assim resolver o problema original.
 
