@@ -72,3 +72,57 @@ struct fila_{
 	int tamanho;
 }
 ~~~
+## Listas Duplamente Encadeadas
+Nas listas duplamente encadeadas, cada nó mantém um ponteiro para o nó anterior e o posterior. A manipulação da lista é mais complexa, porém algumas operações são diretamente beneficiadas. Por exemplo: as operações de inserção e remoção em uma dada posição.
+A interface é a mesma das outras listas.
+
+Implementação:
+~~~C
+typedef struct no_ NO;
+struct no_{
+	ITEM* item;
+	NO* anterior;
+	NO* proximo;
+}
+struct lista_{
+	NO* inicio;
+	NO* fim;
+	int tamanho;
+	bool ordenada;
+}
+
+LISTA* lista_criar(bool ordenada){
+	LISTA* lista = (LISTA*) malloc(sizeof(LISTA));
+	if(lista != NULL){
+		lista->inicio = NULL;
+		lista->fim = NULL;
+		lista->tamanho = 0;
+		lista->ordenada = ordenada;
+	}
+
+	return lista;
+}
+
+void lista_esvazia(NO* p){
+	if(p != NULL){
+		if(p->proximo != NULL){
+			lista_esvazia(p->proximo);
+		}
+
+		item_apagar(&p->item);
+		p->anterior = NULL;
+		free(p);
+		p = NULL;
+	}
+}
+
+void lista_apagar(LISTA** p){
+	if(*p = NULL){
+		return;
+	}
+	lista_esvazia((*p)->inicio);
+	free(*p);
+	*p = NULL;
+}
+~~~
+As mudanças aparecem na inserção e remoção praticamente. 
