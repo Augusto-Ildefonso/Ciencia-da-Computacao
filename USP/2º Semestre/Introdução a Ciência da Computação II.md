@@ -149,4 +149,5 @@ As vantagens do bubble-sort são:
 - Não requer memória adicional
 - É um algoritmo estável
 
-As desvantagens são
+As desvantagens do bubble-sort são:
+- Tem uma complexidade de $O(n^{2})$ o que o torna
