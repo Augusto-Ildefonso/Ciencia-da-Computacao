@@ -1,3 +1,5 @@
+O livro de referência usado nesse estudo foi:
+>Algoritmos Teoria e Prática Cormen, Thomas H.
 # Análise de Algoritmos
 Quando pensamos em análise de algoritmos podemos pensar em medir diversos recursos, como memória, largura da banda de comunicação, hardware, entre outros. Porém o foco principal é medir o tempo de computação de um algoritmo.
 
@@ -129,9 +131,11 @@ Há também a ordenação por endereço, nela nós mantemos uma tabela de pontei
 
 Existem vários métodos de implementar a ordenação. Dependendo do problema, um algoritmo pode ser mais vantajoso do que outro. Para fazer poder comparar faz-se análise de complexidade.
 ## Bubble-sort
-O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste em repetidas trocas de elementos adjacentes caso estejam na ordem errada. Entretanto, ele não é recomendado para casos com grande quantidade de dados, visto que a complexidade dele para o pior tempo é muito alta.
+O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste em repetidas trocas de elementos adjacentes caso estejam na ordem errada. Entretanto, ele não é recomendado para casos com grande quantidade de dados, visto que a complexidade dele para o pior tempo é muito alta (em um vetor de $n$ elementos ele precisa de $n-1$ iterações)
 
 Nele, primeiro, começando da esquerda, comparamos os elementos adjacentes e os maiores são colocados a direita, desse jeito o maior elemento está no fim mais a direita. Esse processo então continua para o segundo maior e assim por diante.
+
+Pode-se aprimorar o algoritmo, detectando quando o vetor já está ordenado. Isso ocorre quando em um determinado passo, nenhuma troca é realizada e também diminuindo o número de vezes que o vetor é percorrido, de modo que o vetor percorra $n-i$ iterações.
 
 O funcionamento dele é:
 1. Imagina-se o seguinte vetor {6, 0, 4, 3}
@@ -152,3 +156,236 @@ As vantagens do bubble-sort são:
 As desvantagens do bubble-sort são:
 - Tem uma complexidade de $O(n^{2})$ o que o torna lento para entradas grandes
 - Ele faz o uso de um algoritmo de ordenação baseado em comparação, então ele usa um operador de comparação para determinar a ordem relativa dos dados de entrada, isso pode limitar a eficiência do algoritmo em alguns casos
+## Quick-Sort
+O Quick-Sort é um algoritmo de ordenação baseado na lógica de dividir e conquistar. Ele tem um tempo de execução no pior caso de $O(n^{2})$. Porém ele é a melhor opção prática para ordenação pois ele possui um tempo médio de execução de $O(n \, \log{n})$ e os fatores que ficam ocultos na representação anterior são pequenos.
+
+A lógica dele é: primeiro escolhe-se um elemento do vetor que será o pivô (pivot) e, a partir dele, dividirá o vetor. Essa divisão ocorre através da inserção do pivot na sua posição correta. Os vetores obtidos serão ordenados independentemente e combinados para produzir o resultado final.
+
+O processo do Quick-Sort é:
+1. Escolher um pivot
+2. Particionar o arranjo $A[p ... r]$ em  ao redor do pivô ($A[q]$) em dois subarranjos $A[p ... q-1]$ e $A[q+1 ... r]$. De modo que os elementos em $A[p ... q-1]$ são menores ou iguais a $A[q]$ e que os elementos em $A[q+1 ... r]$ são maiores ou iguais a $A[q]$ (Divisão)
+3. Ordenar os dois subarranjos $A[p ... q-1]$ e $A[q+1 ... r]$ por chamadas recursivas a quicksort. Para-se a recursão quando os vetores possuem somente 1 elemento (Conquista)
+4. Como os subarranjos já estão ordenados, não é necessário nenhum trabalho para combiná-los: o arranjo $A[p ... r]$ está ordenado
+
+Para escolher o pivô há algumas opções:
+- Sempre pegar ou o primeiro ou o último elemento. O problema desse método é que sempre terá o pior caso quando o vetor já estiver ordenado
+- Pegar um elemento aleatório como pivô. Esse método é bom pois ele não tem um padrão para o pior caso acontecer
+- Pegar a mediana como pivô. Esse é o melhor método em termos de complexidade do algoritmo, pois pode-se achar a mediana num tempo linear e a partição sempre dividirá o vetor na metade. Porém ele tem a desvantagem de que achar a mediana tem altas constantes, então ele se torna baixo na média.
+
+O processo da partição é a chave do Quick-sort. Há três algoritmos comuns para esse processo e todos tem complexidade de tempo $O(n)$:
+- Partição "ingênua" (naive): cria-se uma cópia do vetor. Primeiro coloca-se todos os menores elementos e depois os maiores, em seguida atribui a cópia ao vetor original. Isso requer $O(n)$ de espaço a mais
+- Partição de Lomuto: é um simples algoritmo que acompanha os índices dos menores elementos e mantém trocando
+- Partição de Hoare: é a mais rápida de todas. Nesse algoritmo, atravessa-se o vetor dos dois lados e fica trocando o maior elemento da esquerda com o menor da direita enquanto o vetor não foi particionado
+
+O funcionamento dele é:
+- Considera-se o vetor $\{10, 80, 30, 90, 40\}$, o último elemento como pivô e a partição de Lomuto
+- Primeiramente é comparado 10 com o pivô. Como ele é menor que o pivô, troca-se ele com ele mesmo.
+- Em seguida compara-se 80 com o pivô. Como ele maior do que o pivô, não há troca e move-se para o próximo elemento
+- Compara-se 30 com o pivô. Como é menor que ele, troca-se ele de lugar com o 80.
+- Compara-se 90 com o pivô. Como é maior que ele, não há troca e termina-se a travessia.
+- Em seguida coloca-se o pivô no lugar certo. A partição fica colocando o pivô no posição correta em relação ao vetor ordenado esperado. Essa repetição ordena o vetor.
+- Agora com o pivô no lugar correto, divide-se o vetor em dois subarranjos.
+- Repete o processo para os subarranjos.
+
+### Análise de complexidade
+Melhor caso: $\Omega (n \log{n})$
+- O melhor caso para o quick-sort ocorre quando o pivô escolhido divide os vetores de cada passo praticamente na metade. Nesse caso o algoritmo vai fazer partições balanceadas, o que leva a uma ordenação eficiente
+- O vetor de tamanho $n$ é dividido $m$ vezes, logo $m \approx \log_{2}{n}$
+- Cada parte do vetor realiza $n$ comparações
+	- Assim, $T(n) = 2 T(\frac{n}{2}) + n$
+- Pelo método da árvore de recorrência, tem-se que $T(n) = O(n \log_{2}{n})$
+
+Caso médio: $\Theta (n \log{n})$
+- O caso médio do quick-sort performa bem na prática, fazendo dele um dos algoritmos de ordenação mais rápidos
+- $T(n) \approx 1,386 n \log_{2}{n} - 0,846n = O(n \log_{2}{n})$ 
+
+Pior caso: 
+- Se o vetor já for ordenado e escolher o pivô como um dos extremos
+- Se o pivô é o maior ou menor elemento
+	- O que leva a subvetores desiguais, com $n$ chamadas recursivas da função partição, eliminando-se 1 elemento a cada chamada\
+	- $T(n) = T(n-1) + O(n)$
+		- $T(n) = \frac{1}{2} n(n+1) \longrightarrow T(n) = O(n^{2})$  
+	- Árvore de recursão:
+		- Nível 1: $O(n)$
+		- Nível 2: $O(n-1)$
+		- etc
+
+Esse algoritmo é um dos mais rápidos para uma variedade de situações, sendo provavelmente mais utilizado do que qualquer outro algoritmo.
+
+Para evitar o pior caso pode-se tanto escolher 3 elementos quaisquer do vetor e usar a mediana deles como pivô quanto escolher aleatoriamente o pivô.
+
+As vantagens do Quick-Sort são:
+- É um algoritmo de divisão-e-conquista o que o torna fácil para resolver problemas
+- É eficiente para grandes quantidades de dados
+- Requer uma pequena quantidade de memória para funcionar (baixo overhead)
+- É cache friendly pois ele trabalha no mesmo array e não copia os dados para um array auxiliar
+- É o algoritmo com propósito geral mais rápido para grandes quantidades de dados quando estabilidade não é necessária
+- Ele tem recursividade de cauda, então todas as otimizações de recursividade de cauda podem ser aplicadas
+
+As desvantagens do Quick-Sort são:
+- Ele tem uma complexidade de tempo no pior caso de $O(n^{2})$, que ocorre quando o pivô é mal escolhido
+- Não é uma boa escolha para sets de dados pequenos
+- Não é um algoritmo estável, ou seja, dois elementos com a mesma chave não terão a sua ordem preservada na saída, pois trocamos elementos de acordo com a posição do pivô e não com relação a posição original
+## Ordenação por inserção
+Os algoritmos de ordenação por inserção consistem em inserir um dado elemento em sua posição correta em um subconjunto já ordenado.
+### Inserção simples
+Também chamado de inserção direta, é um algoritmo de ordenação simples que iterativamente insere cada elemento de um conjunto não ordenado na posição corrente dele em uma porção ordenada da lista. Ele é um algoritmo estável. A complexidade de tempo dele é $O(n^{2})$ e a quantidade de espaço auxiliar é $O(1)$.
+
+A lógica dele é construir um array ordenado, elemento por elemento. Ele é considerado um algoritmo de ordenação interna.
+
+O funcionamento dele é:
+1. Começa com o segundo elemento do array como o primeiro elemento do vetor ordenado (o primeiro elemento do array já pertence ao vetor ordenado)
+2. Compara o segundo elemento com o primeiro elemento e checa se o segundo elemento é menor e então troca eles
+3. Move-se para o terceiro elemento e compara com o segundo elemento e depois com o primeiro e então troca ele conforme o necessário para colocá-lo na posição correta
+4. Continue o processo, comparando com os elementos anteriores até o array estar ordenado
+
+Análise de complexidade:
+- Melhor caso: $O(n)$, se a lista já está ordenada, onde $n$ é o número de elementos na lista
+- Caso médio: $O(n^{2})$, se a lista é ordenada aleatoriamente
+- Pior caso: $O(n^{2})$, se a lista está na ordem contrária
+- Complexidade de espaço: $O(n)$
+
+Inserção simples é eficiente em arquivos "quase ordenados" e um dos métodos mais intuitivos.
+
+As vantagens da inserção simples são:
+- Simples e fácil de implementar
+- Algoritmo de ordenação estável
+- Eficiente para listas pequenas e listas quase ordenadas
+- Espacialmente eficiente
+- O número de inversões é diretamente proporcional ao número de trocas
+
+As desvantagens da inserção simples são:
+- Ineficiente para listas longas
+- Não tão eficiente como outros algoritmos de ordenação para a maioria dos casos
+
+### Shell-Sort
+O Shell-Sort é uma variação da ordenação simples. Enquanto a inserção simples compara elementos adjacentes e move uma posição a frente, a Shell-Sort permite a troca de elementos distantes. 
+
+Elementos separados por h posições são ordenados de tal forma que todo h-ésimo elemento está em uma sequência ordenada. Essa sequência é dita estar h-ordenada.
+
+A ideia básica é dividir a entrada em sub-conjuntos de elementos de distância h e aplicar a inserção simples a cada um, sendo que h é reduzido sucessivamente. A cada iteração o vetor está mais ordenado.
+
+O funcionamento do Shell-Sort é:
+1. Inicializa o valor do intervalo, por exemplo h
+2. Divide-se a lista em pequenas subpartes, cada uma deve ter intervalos igual para h
+3. Ordena-se essas sublistas usando inserção simples
+4. Repita o processo 2 até a lista estar ordenada
+
+Os índices h são os incrementos que são adicionados a cada posição do vetor para se ter o próximo elemento do sub-conjunto. A cada iteração h decresce, daí o nome "incrementos decrescentes" do método. O último incremento deve sempre ser 1.
+
+Análise de complexidade:
+- Foi demonstrado que, com uma sequência adequada de incrementos de h, shell-sort é aproximadamente $O(n(\log{n})^{2})$.
+- Além disso, Knuth (1973) sugere que com uma função recursiva, tal que $h(1) = 1$ e $h(i+1) = 3 \times h(i) + 1$, tem-se uma complexidade de $O(n^{\frac{3}{2}})$
+- De acordo com o site geek for geeks:
+	- Pior caso $O(n^{2})$
+	- Melhor caso $\Omega(n \log{n})$: quando o array já é ordenado, o número total de comparações é igual ao tamanho dado do array
+	- Caso médio $O(n \log{n}) \approx O(n^{1,25})$
+	- Complexidade de espaço: $O(1)$
+
+## Ordenação por Seleção
+Nesses algoritmos, os elementos são selecionados e dispostos em suas posições corretas finais.
+### Seleção Direta
+Também chamado de seleção simples ou classificação de deslocamento descendente, esse algoritmo de ordenação é simples e eficiente.
+
+A ideia dele é selecionar repetidamente o menor (ou maior) elemento da porção não ordenada da lista e movê-lo para a parte ordenada da lista (trocá-lo com o primeiro elemento da parte não ordenada). Esse processo é repetido para o resto da parte não ordenada até que a lista toda esteja ordenada.
+
+O funcionamento da Seleção direta é:
+1. Selecionar o elemento que apresenta o menor valor
+2. Trocar o elemento de lugar com o primeiro elemento da sequência, $x[0]$
+3. Repetir as operações 1 e 2, envolvendo agora apenas os $n-1$ elementos restantes, depois os $n-2$ elementos, e assim em diante, até restar somente um elemento, o maior deles (ou se começar com o maior, irá restar o menor)
+
+No i-ésimo passo, o elemento com o menor valor entre $x[i], ..., x[n-1]$ é selecionado e trocado com $x[i]$. Como resultado, após $i$ passos, os elementos $x[0], ..., x[i-1]$ estão ordenados.
+
+Não existe melhora se a entrada está completamente ordenada ou desordenada. Esse algoritmo exige também pouco espaço. Ele é útil quando n é pequeno.
+
+Análise de complexidade:
+- A complexidade de tempo é $O(n^{2})$, pois tem dois loops aninhados:
+	- Um loop para selecionar o elemento do vetor, um por um: $O(n)$
+	- Outro loop para comparar esse elemento com todos os outros elementos do array: $O(n)$
+	- Logo, a complexidade temporal é $O(n) \times O(n) = O(n \times n) = O(n^{2})$
+- Complexidade de espaço auxiliar é $O(1)$ dado que a única memória extra usada é para variáveis temporais enquanto troca dois valores do vetor. A seleção direta nunca faz mais que $O(n)$ trocas e pode ser útil  quando escrever na memória é custoso
+
+As vantagens da seleção direta são:
+- Simples e fácil de entender
+- Trabalha bem com pequenos data sets
+
+As desvantagens da seleção direta são:
+- Tem uma complexidade de tempo de $O(n^{2})$ no pior cenário e no caso médio
+- Não trabalha bem com grandes data sets
+- Não é estável, ou seja, não preserva a ordem relativa entre itens com as mesmas chaves
+### Heap-Sort
+O Heap-Sort é uma técnica de ordenação baseada em comparação que utiliza a estrutura de dados heap como base. Ela pode ser vista como uma otimização da seleção simples. No Heap sort usamos a estrutura heap binária para poder rapidamente achar e mover o elemento máximo em $O(\log{n})$ ao invés de $O(n)$ e então atingir a complexidade de tempo de $O(n \log{n})$. Vale mencionar que ao dizer heap, não está sendo referido o espaço de armazenamento de variáveis dinâmicas, mas sim a estrutura de dados.
+
+Um heap é uma estrutura de dados em que há uma ordenação entre elementos. Ele pode ser representado por uma árvore binária. Ele observa conceitos de ordem e de forma:
+- Ordem: o item de qualquer nó deve satisfazer uma relação de ordem com os itens dos nós filhos.
+	- Heap máximo (ou descendente): pai $\geq$ filhos, sendo que a raiz é o maior elemento (propriedade de heap máximo)
+	- Heap mínimo (ou heap ascendente): pai $\leq$ filhos, sendo que a raiz é o menor elemento (propriedade de heap mínimo)
+- Forma: a árvore binária do heap deve estar completa até pelo menor seu penúltimo nível e, se o seu último nível não estiver completo, todos os nós do último nível deverão estar agrupados à esquerda
+
+Um heap pode ser representado por um vetor. Seguindo a ordem de indexação de cima para baixo e da esquerda para direita, além de indexar por nível (linha).
+
+Para acessar os elementos (pais e filhos) de cada nó usamos as seguintes expressões:
+- Filho esquerdo do nó k: $2k + 1$
+- Filho direito do nó k: $2k+2$
+- Pai do nó k: $\frac{k-1}{2}$
+
+Assume-se algumas propriedades também:
+- A raíz sempre está na posição $0$ do vetor
+- O comprimento(vetor) indica o número de elementos do vetor
+- O tamanho_do_heap(vetor) indica o número de elementos no heap armazenado dentro do vetor. Ou seja, embora $A[0, ..., comprimento(A)-1]$ contenha números válidos, nenhum elemento além de $A[tamanho\_do\_heap(A) - 1]$ é um elemento do heap, sendo que $tamanho\_do\_heap(A) \leq comprimento(A)$. 
+
+O funcionamento do heap-sort é:
+1. Construir um heap máximo
+2. Trocar a raíz, o maior elemento, com o elemento da última posição do vetor
+3. Remova o último elemento, que agora já está na posição correta
+4. Diminuir o tamanho da heap em 1
+5. Rearranjar o heap máximo (agora menor), se necessário
+6. Repetir o processo $n-1$ vezes
+
+O processo continua até todos os elementos terem sido incluídos no vetor de forma ordenada. É necessário:
+- Saber construir um heap a partir de um vetor qualquer (procedimento construir_heap)
+- Saber rearranjar o heap e manter a propriedade de heap máximo (procedimento rearranjar_heap)
+
+O procedimento de rearranjar_heap faz a manutenção da propriedade de heap máximo. Recebe como entrada um vetor A e um índice i. Assume que as árvores binárias com raízes nos filhos esquerdo e direito de i são heap máximos mas que a $A[i]$ pode ser menor que seus filhos, violando a propriedade de heap máximo. A função do procedimento rearranjar_heap é deixar $A[i]$ escorregar para a posição correta, de tal forma que a subárvore com raiz em i torne-se um heap máximo.
+
+Lembre-se que as folhas da heap (elementos da última linha) começam na posição $\frac{n}{2}$.
+
+A complexidade do procedimento construir_heap, considerando uma árvore binária de n elementos é:
+- O nível mais baixo tem aproximadamente $\frac{n}{2}$ nós e não precisam ser analisados
+- O próximo nível tem aproximadamente $\frac{n}{4}$ nós e cada um pode exigir até 1 reorganização
+- O nível acima tem aproximadamente $\frac{n}{8}$ nós e cada um pode exigir até 2 reorganizações
+- Altura da árvore: $\log_{2}{n}$
+- Somando os custos de cada nível:
+$$custo\_total = \frac{n}{2} \times 0 + \frac{n}{4} \times 1 + \frac{n}{8} \times 2 + ... + 1 \times \log_{2}{n}$$
+
+$$custo\_total = n \times \sum_{i = 0}^{log_{2}{n-1}} \frac{i}{2^{i+1}}$$
+
+$$custo\_total = \frac{n}{2} \sum_{i = 0}^{\log_{2}{n-1}} \frac{i}{2^{i}}$$
+- Soma geométrica ponderada: $\displaystyle \sum_{i = 0}^{\infty} i \times x^{i} = \frac{x}{(1-x)^{2}}$. Portanto:
+$$custo\_total = \frac{n}{2} \sum_{i = 0}^{\infty} i \times \left( \frac{1}{2} \right)^{i} = \frac{n}{2} \times \frac{\frac{1}{2}}{\left( 1 - \frac{1}{2} \right)^{2}} = O(n)$$
+
+O curso do heap-sort é $O(n \log{n})$, sendo eficiente mesmo quando o vetor já está ordenado. 
+
+Análise de complexidade do Heap-Sort:
+- Complexidade de tempo é $O(n \log{n})$
+- Espaço auxiliar: $O(\log{n})$ devido a chamada recursiva, porém o espaço auxiliar pode ser $O(1)$ para uma implementação iterativa
+
+
+
+Considerações:
+- O heap-sort é útil para arquivos com muitos registros (complexidade do anel interno do algoritmo)
+- É um algoritmo de ordenação interna
+- A implementação típica dele não é estável, mas pode ser feita estável
+- Quick-sort é cerca de 2x mais rápido (anel interno é mais simples)
+- Heap-sort é melhor que o shell-sort para grandes arquivos
+- Comportamento $O(n \log{n})$, qualquer que seja a entrada
+
+As vantagens do Heap-Sort são:
+- Complexidade de tempo eficiente: tem a complexidade de $O(n \log{n})$ para todos os casos. Isso o faz eficiente para ordenar grandes data sets. O fator $\log{n}$ vem da altura da árvore binária e garante que o algoritmo mantenha uma boa performance mesmo com uma grande quantidade de elementos
+- Uso de memória: o uso de memória pode ser mínimo (se usar uma implementação iterativa, no lugar de uma recursiva). Então a parte do que é necessário para segurar a lista initial de itens a serem ordenados, ele não precisa de memória adicional para trabalhar
+- Simplicidade: é mais simples de entender do que outro algoritmo de ordenação igualmente eficiente, porque ele não usa conceitos de computação avançada como recursão
+
+As desvantagens do Heap-Sort são:
+- Custoso: ele é custoso conforme as constantes são maiores, quando comparado ao merge-sort mesmo se o tempo de complexidade é $O(n \log{n})$ para os dois
+- Instável: heap-sort não é estável
+- Ineficiente: é pouco eficiente devido às altas constantes na complexidade de tempo
