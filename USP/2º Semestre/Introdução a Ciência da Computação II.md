@@ -129,7 +129,7 @@ Também é necessária fazer uma diferenciação entre ordenação interna e ext
 
 Há também a ordenação por endereço, nela nós mantemos uma tabela de ponteiros para os registros e durante a ordenação os ponteiros que são alterados. Vale mencionar também que os registros a serem ordenados podem ser complexos ou não, mas os métodos de ordenação independem desse fator.
 
-Existem vários métodos de implementar a ordenação. Dependendo do problema, um algoritmo pode ser mais vantajoso do que outro. Para fazer poder comparar faz-se análise de complexidade.
+Existem vários métodos de implementar a ordenação. Dependendo do problema, um algoritmo pode ser mais vantajoso do que outro.
 ## Bubble-sort
 O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste em repetidas trocas de elementos adjacentes caso estejam na ordem errada. Entretanto, ele não é recomendado para casos com grande quantidade de dados, visto que a complexidade dele para o pior tempo é muito alta (em um vetor de $n$ elementos ele precisa de $n-1$ iterações)
 
@@ -163,7 +163,7 @@ A lógica dele é: primeiro escolhe-se um elemento do vetor que será o pivô (p
 
 O processo do Quick-Sort é:
 1. Escolher um pivot
-2. Particionar o arranjo $A[p ... r]$ em  ao redor do pivô ($A[q]$) em dois subarranjos $A[p ... q-1]$ e $A[q+1 ... r]$. De modo que os elementos em $A[p ... q-1]$ são menores ou iguais a $A[q]$ e que os elementos em $A[q+1 ... r]$ são maiores ou iguais a $A[q]$ (Divisão)
+2. Particionar o arranjo $A[p ... r]$ ao redor do pivô ($A[q]$) em dois subarranjos $A[p ... q-1]$ e $A[q+1 ... r]$. De modo que os elementos em $A[p ... q-1]$ são menores ou iguais a $A[q]$ e que os elementos em $A[q+1 ... r]$ são maiores ou iguais a $A[q]$ (Divisão)
 3. Ordenar os dois subarranjos $A[p ... q-1]$ e $A[q+1 ... r]$ por chamadas recursivas a quicksort. Para-se a recursão quando os vetores possuem somente 1 elemento (Conquista)
 4. Como os subarranjos já estão ordenados, não é necessário nenhum trabalho para combiná-los: o arranjo $A[p ... r]$ está ordenado
 
@@ -229,7 +229,7 @@ As desvantagens do Quick-Sort são:
 ## Ordenação por inserção
 Os algoritmos de ordenação por inserção consistem em inserir um dado elemento em sua posição correta em um subconjunto já ordenado.
 ### Inserção simples
-Também chamado de inserção direta, é um algoritmo de ordenação simples que iterativamente insere cada elemento de um conjunto não ordenado na posição corrente dele em uma porção ordenada da lista. Ele é um algoritmo estável. A complexidade de tempo dele é $O(n^{2})$ e a quantidade de espaço auxiliar é $O(1)$.
+Também chamado de inserção direta, é um algoritmo de ordenação simples que iterativamente insere cada elemento de um conjunto não ordenado na posição correta dele em uma porção ordenada da lista. Ele é um algoritmo estável. A complexidade de tempo dele é $O(n^{2})$ e a quantidade de espaço auxiliar é $O(1)$.
 
 A lógica dele é construir um array ordenado, elemento por elemento. Ele é considerado um algoritmo de ordenação interna.
 
@@ -320,7 +320,7 @@ Um heap é uma estrutura de dados em que há uma ordenação entre elementos. El
 - Ordem: o item de qualquer nó deve satisfazer uma relação de ordem com os itens dos nós filhos.
 	- Heap máximo (ou descendente): pai $\geq$ filhos, sendo que a raiz é o maior elemento (propriedade de heap máximo)
 	- Heap mínimo (ou heap ascendente): pai $\leq$ filhos, sendo que a raiz é o menor elemento (propriedade de heap mínimo)
-- Forma: a árvore binária do heap deve estar completa até pelo menor seu penúltimo nível e, se o seu último nível não estiver completo, todos os nós do último nível deverão estar agrupados à esquerda
+- Forma: a árvore binária do heap deve estar completa até pelo menos seu penúltimo nível e, se o seu último nível não estiver completo, todos os nós do último nível deverão estar agrupados à esquerda
 
 Um heap pode ser representado por um vetor. Seguindo a ordem de indexação de cima para baixo e da esquerda para direita, além de indexar por nível (linha).
 
@@ -364,13 +364,11 @@ $$custo\_total = \frac{n}{2} \sum_{i = 0}^{\log_{2}{n-1}} \frac{i}{2^{i}}$$
 - Soma geométrica ponderada: $\displaystyle \sum_{i = 0}^{\infty} i \times x^{i} = \frac{x}{(1-x)^{2}}$. Portanto:
 $$custo\_total = \frac{n}{2} \sum_{i = 0}^{\infty} i \times \left( \frac{1}{2} \right)^{i} = \frac{n}{2} \times \frac{\frac{1}{2}}{\left( 1 - \frac{1}{2} \right)^{2}} = O(n)$$
 
-O curso do heap-sort é $O(n \log{n})$, sendo eficiente mesmo quando o vetor já está ordenado. 
+O custo do heap-sort é $O(n \log{n})$, sendo eficiente mesmo quando o vetor já está ordenado. 
 
 Análise de complexidade do Heap-Sort:
 - Complexidade de tempo é $O(n \log{n})$
 - Espaço auxiliar: $O(\log{n})$ devido a chamada recursiva, porém o espaço auxiliar pode ser $O(1)$ para uma implementação iterativa
-
-
 
 Considerações:
 - O heap-sort é útil para arquivos com muitos registros (complexidade do anel interno do algoritmo)
