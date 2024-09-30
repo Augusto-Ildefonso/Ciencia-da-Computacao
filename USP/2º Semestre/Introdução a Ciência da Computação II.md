@@ -112,8 +112,8 @@ Geralmente usa-se a árvore de recursão para gerar um palpite e então confirm�
 
 Algumas fórmulas úteis são:
 - Para uma soma de PA: $\displaystyle S_{n} = \frac{n(a_{1} + a_{n})}{2}$
-- Para uma soma de PG: $\displaystyle S_{n} = \frac{a_{1}(q^{n}-1)}{q-1}$
-- 
+- Para uma soma de PG: $\displaystyle S_{n} = \frac{a_{1}(q^{n}-1)}{q-1}$, onde $q$ é a razão
+- Para uma soma infinita de PG: $S_{\infty} = \frac{a_{1}}{1-q}$
 #### Método mestre para resolver recorrências
 Ele fornece uma receita para resolver recorrências no formato $\displaystyle T(n) = a T \left( \frac{n}{b} \right) + f(n)$, onde $a \geq 1$ e $b > 1$ são constantes e $f(n)$ é uma função assintoticamente positiva. Para usar esse método é preciso memorizar 3 casos, mas com eles poderá resolver diversas recorrências.
 
