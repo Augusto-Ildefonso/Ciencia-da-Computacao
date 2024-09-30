@@ -109,6 +109,9 @@ Após tomar um palpite, testamos primeiro se ele é válido para o caso base. Se
 Em uma árvore de recursão, cada nó representa o custo de um único subproblema em algum lugar no conjunto de invocações de função recursiva. Somamos os custos em cada nível da árvore para obter o custo por nível e depois somamos todos os custos para determinar o custo total de todos os níveis da recursão.
 
 Geralmente usa-se a árvore de recursão para gerar um palpite e então confirmá-lo com o método da substituição. Se for cuidadoso ao montar a árvore, ela pode ser uma prova direta de uma solução para a recorrência.
+
+Algumas fórmulas úteis são:
+- $Sn = n$
 #### Método mestre para resolver recorrências
 Ele fornece uma receita para resolver recorrências no formato $\displaystyle T(n) = a T \left( \frac{n}{b} \right) + f(n)$, onde $a \geq 1$ e $b > 1$ são constantes e $f(n)$ é uma função assintoticamente positiva. Para usar esse método é preciso memorizar 3 casos, mas com eles poderá resolver diversas recorrências.
 
