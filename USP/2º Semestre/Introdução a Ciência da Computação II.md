@@ -135,7 +135,44 @@ Também é necessária fazer uma diferenciação entre ordenação interna e ext
 Há também a ordenação por endereço, nela nós mantemos uma tabela de ponteiros para os registros e durante a ordenação os ponteiros que são alterados. Vale mencionar também que os registros a serem ordenados podem ser complexos ou não, mas os métodos de ordenação independem desse fator.
 
 Existem vários métodos de implementar a ordenação. Dependendo do problema, um algoritmo pode ser mais vantajoso do que outro.
-## Bubble-sort
+## Merge-Sort
+O Merge-Sort é um algoritmo que segue a lógica de dividir-e-conquistar. Ele recursivamente divide o vetor de entrada em subvetores menores e ordena esses subvetores. Em seguida ele junta eles novamente para obter o vetor ordenado.
+
+Ele basicamente divide o vetor ao meio até só ter 1 elemento em cada vetor, então ele ordena esses subvetores e junta eles novamente.
+
+Algumas aplicações do merge-sort são:
+- Ordenar longos datasets
+- Ordenação Externa
+- Contagem Inversa
+- Ordenar linked lists
+- Ele pode ser facilmente paralelizado já que podemos ordenar os subvetores independentemente e juntá-los
+- Usar a função de juntar para resolver problemas do tipo "união e interseção de dois vetores ordenados"
+
+O funcionamento do Merge-Sorte é:
+1. Dividir o vetor recursivamente na metade até que não possa mais ser dividido (1 elemento em cada subvetor)
+2. Cada subvetor é ordenado individualmente usando o algoritmo de juntar
+3. Junta-se os subvetores ordenados formando um vetor ordenado. O processo continua até que todos os elementos dos subvetores tenham sido juntados
+
+Análise de recorrência:
+
+$T(n) = \left\{ \begin{matrix} O(1), & \text{se } n = 1 \\ 2T\left(\frac{n}{2}\right) + O(n), & \text{se } n > 1 \end{matrix} \right.$
+
+Análise de complexidade:
+- Melhor caso: $O(n \log{n})$, quando o vetor já está ordenado ou quase ordenado
+- Caso médio: $O(n \log{n})$, quando o vetor está ordenado aleatoriamente
+- Pior caso: $O(n \log{n})$, quando o vetor está ordenado na ordem inversa
+- Espaço auxiliar: $O(n)$, o espaço adicional é preciso para o array temporário durante a junção.
+
+As vantagens do merge-sort são:
+- Ele é estável
+- Ele performa bem com grandes entradas garantidamente
+- Simples de implementar
+- Naturalmente paralelizável
+
+As desvantagens do merge-sort são:
+- Complexidade de espaço, ou seja, ele requer memória adicional
+- Mais lento que o quick-sort em geral
+## Bubble-Sort
 O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste em repetidas trocas de elementos adjacentes caso estejam na ordem errada. Entretanto, ele não é recomendado para casos com grande quantidade de dados, visto que a complexidade dele para o pior tempo é muito alta (em um vetor de $n$ elementos ele precisa de $n-1$ iterações)
 
 Nele, primeiro, começando da esquerda, comparamos os elementos adjacentes e os maiores são colocados a direita, desse jeito o maior elemento está no fim mais a direita. Esse processo então continua para o segundo maior e assim por diante.
