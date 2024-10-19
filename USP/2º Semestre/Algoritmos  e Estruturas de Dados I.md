@@ -222,7 +222,17 @@ struct lista{
 }
 ~~~
 
-A implementação é do criar lista, do lista vazia e do remover mudam um pouco mas tirando elas, as outras implementações são bem parecidas. De modo que a única alteração é mudar as referências ao ponteiro do inicio para o ponteiro cabeça. 
+A implementação é do criar lista, do lista vazia e do remover mudam um pouco mas tirando elas, as outras implementações são bem parecidas. De modo que a única alteração é mudar as referências ao ponteiro do inicio para o ponteiro cabeça.
+
+Nesse modelo, a remoção de um elemento é melhorada.
+## Listas Encadeadas Circulares
+Nessa implementação é substituída a ideia de que o próximo do último elemento é NULL para que o próximo do último elemento seja o primeiro. Esse modelo é interessante pois a partir de um nó qualquer da lista pode-se chegar até qualquer outro nó.
+
+Nessa implementação não é necessário um ponteiro para o início da lista, somente para o fim. Além disso, junto da ideia circular, será implementado um nó sentinela que faz papel parecido com o nó cabeça, só que ele guarda como informação a chave. Começa-se a busca pelo primeiro nó e vai até o último nó, se chegar nele e não achar a chave, ele vai analisar o nó sentinela como próximo e resultará que a busca não teve sucesso. Nesse modelo é economizado um teste, já que não precisa testar se a lista acabou e também ele melhora a busca.
+## Listas Encadeadas Ordenadas
+Esse modelo não requer um ponteiro de fim, pois a inserção será feita em qualquer posição da lista. Novamente o emprego do nó cabeça facilita a implementação uma vez que  vamos buscar a posição anterior à de inserção, e no caso de ser o menor item da lista não representará exceção.
+
+Além disso, esse modelo traz vantagens para a busca que por ser ordenada, podemos pará-la se achar um valor maior que a chave, não sendo preciso procurar até o final dela.
 ## Listas Duplamente Encadeadas
 Nas listas duplamente encadeadas, cada nó mantém um ponteiro para o nó anterior e o posterior. A manipulação da lista é mais complexa, porém algumas operações são diretamente beneficiadas. Por exemplo: as operações de inserção e remoção em uma dada posição. A interface é a mesma das outras listas.
 
