@@ -738,7 +738,7 @@ LISTA *lista_criar(void){
 	LISTA *lista = (LISTA *) malloc(sizeof(LISTA));
 
 	if(lista != NULL){
-		lista->inicio = inicial;
+		lista->inicio = 0;
 		lista->fim = lista->inicio; // Para lista vazia
 	}
 

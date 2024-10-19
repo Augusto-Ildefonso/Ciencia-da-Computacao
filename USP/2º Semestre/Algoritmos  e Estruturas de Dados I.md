@@ -7,8 +7,8 @@ O livro de referência usado nesse estudo foi:
 É um conjunto ordenado de itens, no qual podem ser adicionados novos itens ou retirados itens da pilha, através de uma extremidade chamada topo, que fica no final do conjunto. Ela é um objeto dinâmico e constantemente mutável. <br>
 O conceito de pilha compreende a inserção e remoção dos itens. <br>
 Ao acrescentar um item o topo da pilha move-se para cima, apontando para o novo topo. Ao remover um item da pilha, o topo move-se para baixo, apontando para o novo topo da pilha. <br>
-O último elemento a ser inserido é o primeiro a ser eliminado. Isso é conhecido como político LIFO (Last-In/First-Out). <br>
-A pilha não possui um registro dos itens que estiveram nela e saíram. <br>
+O último elemento a ser inserido é o primeiro a ser eliminado. Isso é conhecido como política LIFO (Last-In/First-Out). <br>
+A pilha não possu  i um registro dos itens que estiveram nela e saíram. <br>
 A pilha pode ser implementada de duas formas: sequencial (possui um limite de itens) ou encadeada (não possui limite de itens (exceto o limite físico da memória)).
 ## Operações Principais
 - push(Pilha, item): empilho/adiciono o item na Pilha. Conhecida como empilhar.
@@ -209,7 +209,20 @@ Pode-se melhorar a lista encadeada simples usando alguns outros algoritmos:
 - Listas Encadeadas Circulares
 - Nó-cabeça
 - Listas Ordenadas
-### Listas Encadeadas Nó-Cabeça
+## Listas Encadeadas com Nó-Cabeça
+Em listas encadeadas a operação mais complexa é a remoção de um elemento a partir de uma chave. Isso porque o algoritmo precisa apontar para o item anterior ao que será removido, o que, no caso da remoção do primeiro elemento, necessita de uma condicional pois é uma exceção que necessita ser tratada a parte.
+
+Para solucionar isso usa-se o nó-cabeça, nesse modelo o ponteiro que aponta para o início irá apontar para o nó-cabeça e esse apontará para o início. Desse modo sempre será possível usar o algoritmo de apontar para o próximo, até mesmo para o elemento do início.
+~~~C
+struct lista{
+	NO* cabeca;
+	NO* fim;
+	int tamanho;
+	bool ordenada
+}
+~~~
+
+A implementação é do criar lista, do lista vazia e do remover mudam um pouco mas tirando elas, as outras implementações são bem parecidas. De modo que a única alteração é mudar as referências ao ponteiro do inicio para o ponteiro cabeça. 
 ## Listas Duplamente Encadeadas
 Nas listas duplamente encadeadas, cada nó mantém um ponteiro para o nó anterior e o posterior. A manipulação da lista é mais complexa, porém algumas operações são diretamente beneficiadas. Por exemplo: as operações de inserção e remoção em uma dada posição. A interface é a mesma das outras listas.
 

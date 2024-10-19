@@ -370,3 +370,80 @@ void quicksort(int v[], int ini, int fim){
 }
 ~~~
 O pior caso do quicksort é $n^2$ e ocorre quando o pivô for o menor ou maior elemento, o primeiro ou último elemento para vetores ordenados, ou quando todos os elementos são repetidos.
+## Ordenação por contagem de menores
+~~~C
+#include <stdio.h>
+#include <string.h>
+
+void contagem_menores(int v[], int n){
+	int x[n], b[n], i, j;
+
+	memset(x, 0, sizeof(int) * n);
+
+	for(i = 0; i < n-1; i++){
+		for(j = i+1; j <= n; j++){ // Devido esse menor igual ele é estável, se fosse só menor aí seria instável
+			if(v[i] < v[j]){
+				x[j]++;
+			} else{
+				x[i]++;
+			}
+		}
+	}
+
+	for(i = 0; i < n; i++){
+		b[x[i]] = v[i];
+	}
+
+	memcpy(v, b, sizeof(int) * n);
+}
+
+int main (void){
+	int v[] = {4, 6, 72, 4, 5, 5, 9, 1, 5, 1};
+
+	contagem_menorees(v, 10);
+
+	for(int i = 0; i < 10; i++){
+		printf("%d ", v[i]);
+	}
+	printf("\n");
+}
+~~~
+
+Para a notação de espaço pode ser interessante manter as constantes porque expressa melhor. Nesse caso a complexidade de espaço é $O(3n)$ (devido os 3 vetores de n posições) ou então $O(n)$ (escondendo a constante). A complexidade de tempo é $O(n^{2})$.
+## Ordenação por Contagem de Tipos
+~~~C
+void contagem_tipos(int v[], int n){
+	int maior = -1; i, j;
+
+	for(i = 0; i < n; i++){
+		if(v[i] > maior){
+			maior = v[i];
+		}
+	}
+
+	int x[maior + 1];
+	memset(x, 0, sizeof(int) * n);
+
+	for(i = 0; i < n; i++){
+		x[v[i]]++;
+	}
+
+	for(i = 0; i < maior + 1; i++){
+		while(x[i] > 0){
+			v[j++] = i;
+			x[i]--;
+		}
+	}
+}
+
+int main (void){
+	int v[] = {4, 6, 72, 4, 5, 5, 9, 1, 5, 1};
+
+	contagem_tipos(v, 10);
+
+	for(int i = 0; i < 10; i++){
+		printf("%d ", v[i]);
+	}
+	printf("\n");
+}
+~~~
