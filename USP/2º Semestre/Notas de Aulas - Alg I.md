@@ -877,3 +877,25 @@ O nó aponta para o sucessor somente. As funções são:
 - Remover elemento
 
 Nós não colocamos o typedef da struct nó no .h pois o que queremos que ele veja é a lista e não a implementação dela, assim como não importa para ele se usa nó ou não, esconde-se o nó, colocando ele no .c
+# Árvores Binárias
+Uma árvore binária (AB) T é um conjunto finito de elementos, denominados nós ou vértices, tal que:
+- Se $T = \emptyset$, a árvore é dita vazia
+- T contém um nó especial r, chamado raiz de T, e os demais nós podem ser subdivididos em dois sub-conjuntos distintos $T_E$ e $T_D$, os quais também são árvores binárias (possivelmente vazias).
+	- $T_E$ e $T_D$ são denominados sub-árvore esquerda e sub-árvore direita de $T$, respectivamente
+
+Por que as árvores binárias são particularmente interessantes?
+- Problemas/diferenças de/para listas
+- Busca
+
+## Árvore estritamente binária
+Uma árvore estritamente binária (ou Árvore própria) tem nós com 0 (nenhum) ou 2 filhos. Nós interiores (não folhas) tem sempre 2 filhos. Altura é o caminho de um nó até a folha e Profundidade é o caminho de um nó até a raiz*. O objetivo é achar uma árvore com a menor altura, quanto menor, melhor. Uma árvore estritamente binária não garante que será obtida a árvore com a menor altura.
+## Árvore Binária Completa Cheia
+A árvore binária completa cheia (ABCC) é uma árvore estritamente binária e todos os seus nós-folha estão no mesmo nível. Esse tipo de estrutura tem um problema que seria o gerenciamento do nível, sendo necessário uma estrutura de dados auxiliar para manter o controle, por isso há outras estruturas.
+
+Podemos armazenar os nós, por nível, em um array.
+## Árvore Binária Completa
+Se a profundidade da árvore é $d$, então cada nó folha está no nível $d-1$ ou no nível $d$. O nível $d-1$ está totalmente preenchido. Os nós folha no nível $d$ estão todos mais à esquerda possível (convenção, poderia ser a direita). Essa árvore não precisa ser estritamente binária. É preciso trabalhar com nível.
+## Árvore Binária Perfeitamente Balanceada
+A árvore binária perfeitamente balanceada é a árvore para qual cada nó, o número de nós de suas sub-árvores esquerda e direita diferem em no máximo 1. Como ele não tem o requisito de estar mais a esquerda, não é necessário trabalhar com nível.
+## Árvore Binária Balanceada
+A árvore binária balanceada é a árvore para qual cada nó, as alturas de suas duas sub-árvores diferem de, no máximo 1. Toda árvore perfeitamente balanceada é balanceada, mas o contrário não é válido.

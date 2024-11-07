@@ -447,3 +447,124 @@ int main (void){
 	printf("\n");
 }
 ~~~
+# Métodos de Busca
+## Introdução
+A busca é uma tarefa muito comum e por isso é de grande importância estudá-la. Vários métodos e estruturas de dados podem ser empregados para se fazer busca. Certos métodos de organização/ordenação de dados podem tornar o processo de busca mais eficiente.
+
+O problema da busca é dado um conjunto de elementos, onde cada um é identificado por uma chave, o objetivo da busca é localizar, nesse conjunto, o elemento que corresponde a uma chave específica.
+
+Alguns termos relacionados são:
+- Tabela: termo genérico, pode ser qualquer estrutura de dados usada para armazenamento interno e organização dos dados. A tabela é um conjunto de elementos, que são chamados de registros
+- Chave: existe uma chave associada a cada registro, usada para diferenciar os registros entre si. Os tipos de chaves são:
+	- Chave interna: chave está contida dentro do registro, em uma localização específica
+	- Chave externa: essas chaves estão contidas em uma tabela de chaves separadas que inclui ponteiros para os registros
+	- Chave primária: para todo arquivo existe pelo menos um conjunto exclusivo de chaves. Dois registros não podem ter o mesmo valor de chave
+	- Chave secundária: são chaves que não precisam ter seus valores exclusivos. São chaves não 
+
+O algoritmo de busca, formalmente, é o algoritmo que aceita um argumento A e tenta encontrar o registro cuja a chave seja A.
+
+As operações na tabela são:
+- Inserção: adicionar um novo elemento na tabela
+- Busca e inserção: se não encontra o registro, insere um novo
+- Remoção: retirar um elemento da tabela
+- Recuperação: procura um elemento na tabela e se achá-lo retorna, para deixá-lo disponível
+
+## Tipos de busca
+A tabela pode ser:
+- Um vetor
+- Uma lista
+- Uma árvore
+- etc
+
+A tabela pode ficar:
+- Totalmente na memória (busca interna)
+- Totalmente no armazenamento auxilia (busca externa)
+- Pode ter um hibrido que ela fica num arquivo mas taca tudo na memória na hora da busca
+
+Algumas técnicas de busca: 
+- Busca sequencial
+- Busca binária
+- Busca por interpolação
+- Busca em árvores
+- Hashing
+## Busca Sequencial
+É a forma mais simples de busca. Ela percorre a tabela, registro por registro, em busca da chave e quando acha retorna a posição.
+~~~C
+int busca_sequencial (int v[], int n, int x){
+	int i;
+	for(i = 0; i < n; i++){
+		if(v[i] == x){
+			return i;
+		}
+	}
+	return -1;
+}
+~~~
+Pode-se melhorar a busca sequencial, usando um sentinela. Sentinela consiste em adicionar o elemento que estamos buscando no final do vetor, com ele nós economizamos uma comparação dentro do for. Para isso o arranjo tem que ter um elemento a mais.
+~~~C
+int busca_sequencial_com_sentinela(in v[], int n, int x){
+	int i;
+	v[n] = x;
+	for(i = 0; x!=v[i];i++);
+	if(i < n){
+		return i;
+	} else{
+		return -1;
+	}
+}
+~~~
+Nessa implementação temos a limitação do vetor que tem um tamanho fixo, o que pode resultar em desperdício de espaço ou falta de espaço. Uma alternativa é usar uma lista encadeada.
+
+A complexidade:
+- Se o registro for o primeiro: 1 comparação (melhor caso)
+- Se o registro for o último: N comparações (pior caso*)
+- Se for ordenada, podemos ou comparar até o final ou parar antes quando os registros forem maior
+- Se for igualmente provável que o argumento apareça em qualquer posição da tabela, em média: $\displaystyle \frac{(n + 1)}{2}$
+- Se for mal sucedida: N comparações  (pior caso)
+- Logo, a busca sequencial, no pior caso, é $O(n)$
+- Inserção: $O(1)$
+- Remoção: $O(n)$
+- Busca: $O(n)$
+### Arranjo não ordenado
+Em um arranjo não ordenado, insere no final do arranjo. Já a remoção dele tem dois casos:
+- Vetor: realocação dos registros acima do registro removido
+- Lista encadeada: atualização dos ponteiros
+### Para aumentar  eficiência
+- Reordenar continuamente a tabela de modo que os registros mais acessados sejam deslocados para o início.
+	- Método mover-para-frente: sempre que uma pesquisa obtiver êxito, o registro recuperado é colocado no início da lista
+	- Método da transposição: um registro recuperado com sucesso é trocado com o registro imediatamente anterior
+	- Ambos se baseiam no fenômeno da recuperação recorrente de registros
+
+Vantagens do método mover-para-frente:
+- Possui resultados melhores para quantidades pequenas e médias de buscas
+Desvantagens do método mover-para-frente:
+- Uma única recuperação não implica que o registro será frequentemente recuperado. Perda de eficiência para os outros registros
+- A penúltima busca em diante já não importa, a ordem do resto do vetor não importa, só o primeiro
+### Busca sequencial em tabela ordenada
+A eficiência da operação de busca melhora se as chaves dos registros estiverem ordenadas. No pior caso (caso em que a chave não é encontrada), são necessárias N comparações. No caso médio, $\frac{N}{2}$ comparações se as chaves estiverem ordenadas, pois a busca é interrompida assim que uma chave maior do que a procurada é encontrada. A complexidade das operações:
+ - Inserção: $O(n)$
+- Remoção: $O(n)$
+- Busca: $O(n)$
+
+Mas vale ressaltar que nessa implementação também o custo de fazer a ordenação antes. Por exemplo: $O(n log n)$.
+
+#### Busca sequencial indexada***
+Uma forma de melhorar o algoritmo é criar uma nova tabela K com P índices, que vão ser pegos de N/P em N/P índices. Então a busca começa por essa tabela K, e quando achar um índice maior que a chave, ela sabe que a chave está entre o índice anterior e o maior, então ela fará uma busca com menos elementos. Nesse caso, considerando P o tamanho da tabela K, a complexidade será de $O(P + \frac{N}{P})$. Se P for bem menor que N, o que importa será N, então pode pensar em P como uma constante e assim resultaria em $O(N)$.
+
+Pode-se ter ainda uma outra tabela de índices J para a tabela de índice K. Assim, pode-se ir criando várias tabelas.
+
+#### Vantagens e Desvantagens
+As vantagens são:
+- Os itens na tabela poderão ser examinados sequencialmente sem que todos os registros precisem ser acessados
+	- O tempo de busca diminui consideravelmente
+
+As desvantagens são:
+- A tabela tem que estar ordenada
+- Exige espaço adicional para armazenar as tabelas de índices
+- É preciso uma atualização constante das tabelas secundárias tanto para tirar o índice mas também para shiftar os outros registros
+#### Remoção
+Remove-se o elemento e rearranja-se a tabela inteira e os índices.
+
+Uma alternativa para isso, é marcar a posição do elemento removido, indicando que ela pode ser ocupada futuramente por um outro elemento. A posição da tabela pode ficar vazia
+#### Inserção
+Se houver espaço vago na tabela, rearranjam-se os elementos localmente. Se não houver espaço vago, rearranja a tabela a parti do ponto apropriado e reconstruir os índices.
