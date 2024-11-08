@@ -1,4 +1,4 @@
-# Tipos Abstratos de Dados
+	# Tipos Abstratos de Dados
 ## Tipo de dado 
 Método para interpretar o conteúdo da memória do computador. Define a quantidade de bytes a serem utilizados para representar um valor (dado) e como interpretar a sequência de bits correspondentes a esse valor.
 Caracteriza o conjunto de valores a que uma constante pertence, ou que podem ser assumidos por uma variável ou expressão, ou que podem ser gerados por uma função.
@@ -892,10 +892,12 @@ Uma árvore estritamente binária (ou Árvore própria) tem nós com 0 (nenhum) 
 ## Árvore Binária Completa Cheia
 A árvore binária completa cheia (ABCC) é uma árvore estritamente binária e todos os seus nós-folha estão no mesmo nível. Esse tipo de estrutura tem um problema que seria o gerenciamento do nível, sendo necessário uma estrutura de dados auxiliar para manter o controle, por isso há outras estruturas.
 
-Podemos armazenar os nós, por nível, em um array.
+Podemos armazenar os nós, por nível, em um array. Para achar o filho pega o index multiplica por 2 e soma ou 1 ou 2. Para achar o pai, subtrai 1 do index do nó e pega o piso da divisão desse resultado anterior por 2.
 ## Árvore Binária Completa
 Se a profundidade da árvore é $d$, então cada nó folha está no nível $d-1$ ou no nível $d$. O nível $d-1$ está totalmente preenchido. Os nós folha no nível $d$ estão todos mais à esquerda possível (convenção, poderia ser a direita). Essa árvore não precisa ser estritamente binária. É preciso trabalhar com nível.
 ## Árvore Binária Perfeitamente Balanceada
 A árvore binária perfeitamente balanceada é a árvore para qual cada nó, o número de nós de suas sub-árvores esquerda e direita diferem em no máximo 1. Como ele não tem o requisito de estar mais a esquerda, não é necessário trabalhar com nível.
 ## Árvore Binária Balanceada
 A árvore binária balanceada é a árvore para qual cada nó, as alturas de suas duas sub-árvores diferem de, no máximo 1. Toda árvore perfeitamente balanceada é balanceada, mas o contrário não é válido.
+## Percurso
+O percurso é sempre recursivo.
