@@ -125,7 +125,7 @@ Teorema: Seja $a \geq 1$ e $b > 1$, seja $f(n)$ uma função e seja $T(n)$ defin
 - Se $f(n) = \Omega(n^{\log_ba+x})$ para algum x > 0 e se $a\times f(\frac{n}{b}) \leq c \times f(n)$ para algum c < 1 e para todo n suficientemente grande, então $T(n) = \Theta(f(n))$
 
 Além disso, é necessário mencionar que além da relação de maior e menor já estabelecidas, para a primeira e a última, é necessário que a função seja polinomialmente maior (tenha 1 grau a mais, maior por um fator n).
-# Problemas de Ordenação
+# Métodos de Ordenação
 Ordenar é rearranjar elementos de um conjunto de modo a estabelecer uma relação de ordem entre eles (seja crescente ou decrescente), diz-se que os elementos $k_{1}, k_{2}, ..., k_{n}$ estarão dispostos de modo que $k_{1} \leq k_{2} \leq ... \leq k_{n}$. O principal objetivo da ordenação é facilitar a recuperação de itens do conjunto ordenado. Porém, às vezes da menos trabalho buscar um elemento em um conjunto desordenado do que em um ordenado. Basta então analisar se a busca é uma operação frequente, se for pode ser que valha a pena ordenar (isso só é feito uma vez), se não, pode ser que não valha.
 
 Os algoritmos de ordenação trabalham sobre registros de um arquivo (eles que são trocados de posição), e deles somente uma parte importa: a chave, o resto dos dados dos arquivos não interferem na ordenação. Além disso, um algoritmo de ordenação é estável se a ordem relativa dos itens com a mesma chave se mantém inalterada após a ordenação.
@@ -429,3 +429,165 @@ As desvantagens do Heap-Sort são:
 - Custoso: ele é custoso conforme as constantes são maiores, quando comparado ao merge-sort mesmo se o tempo de complexidade é $O(n \log{n})$ para os dois
 - Instável: heap-sort não é estável
 - Ineficiente: é pouco eficiente devido às altas constantes na complexidade de tempo
+## Ordenação por contagem de menores
+A ideia básica desse método é sabendo quantos são os elementos menores que um determinado valor, saberemos a posição que o mesmo deve ocupar no arranjo ordenado. Por exemplo, se há 5 valores menores que o elemento 7, sabemos que o elemento 7 será inserido na sexta posição do arranjo.
+
+Esse método requer um arranjo auxiliar para manter a contagem de menores e um outro para montar o arranjo ordenado.
+
+Complexidade:
+- Complexidade de tempo: $O(n^2)$, pois é necessário percorrer o vetor 2 vezes.
+- Complexidade de espaço: $O(3n)$
+
+Vantagens:
+- Estável*
+
+Desvantagens:
+- Necessita de 2 vetores adicionais
+## Ordenação por Contagem de Tipos
+Também chamado de Counting-Sort, a idea básica desse método é contar o número de vezes que cada elemento ocorre no arranjo, se há k elementos antes dele, ele será inserido na posição k+1 do arranjo ordenado. Esse método tem uma restrição: os elementos devem estar contido em um intervalo [min, max] do conjunto de números inteiros positivos.
+
+Esse método requer um arranjo auxiliar para manter a contagem de tipos e de um outro para montar o arranjo ordenado.
+
+Complexidade:
+- Complexidade de tempo: $O(n)$, se max $\leq$ n, pois não é por comparação
+- Complexidade de espaço: $O(3n)$
+
+Vantagens:
+- Ele é mais rápido que todos os algoritmos de ordenação baseados em comparação, se o intervalo de números da entrada é da ordem do número da entrada
+- Estável
+
+Desvantagens:
+- Não funciona com valores decimais
+- É ineficiente se o intervalo de números for muito grande
+- Não é um método de ordenação interno.
+
+Aplicações:
+- É usado para casos que temos um intervalo limitado de itens
+- É uma subrotina do radix sort
+- A ideia de contagem é usado no bucket sort para dividir os elementos em diferentes buckets
+## Radix-Sort
+Também chamado de ordenação de raízes, a ideia de método é ordenar os números através dos seus dígitos, dos menos significativos aos mais significativos. Por exemplo, ordenar os números 236 e 235 implica em comparar os últimos dígitos e se não bastar, comparam-se os do meio e assim em diante até comparar os mais significativos. 
+
+Para construir esse algoritmo, usam-se [[Algoritmos  e Estruturas de Dados I|filas]], uma fila para cada dígito (0, 1, 2, ..., 9). Nelas, os números vão sendo inseridos na fila de acordo com o dígito avaliado e a cada iteração, os números estão mais próximos da ordenação final.
+
+Para os números do arranjo terem a mesma quantidade de dígitos, pode-se completar com 0 à esquerda do dígito mais significativo.
+
+Para ordenar um arranjo cujo o maior número tem $m$ dígitos, são necessárias $m$ iterações no máximo.
+
+Complexidade:
+- Complexidade de tempo: $O(m \times n)$, se $m$ for pequeno então é $O(n)$ (m é o número de dígitos do maior número*)
+- Complexidade de espaço: Além do vetor, deve-se contar os espaços para as filas
+
+Vantagens:
+- Tem uma complexidade de tempo linear, o que o torna mais rápido que algoritmos a base de comparações
+- É estável
+- É eficiente para grandes números inteiros ou de strings
+- Pode ser facilmente paralelizado
+
+Desvantagens:
+- Não é eficiente para decimais (floats) ou outros tipos dedados que não podem ser mapeados para um pequeno número de dígitos
+- Requer uma quantidade considerável de memória para armazenar a contagem de número de vezes que cada valor aparece
+- Não é eficiente para base dados pequenos e com um pequeno número de chaves únicas
+- Ele precisa que o dado ordenado possa ser representado em um número fixo de dígitos
+## Comparação entre os algoritmos de ordenação
+Considerando uma ordem aleatória dos elementos, foi dado 1 ao mais rápido e o restante é calculado a partir disso:
+![[Pasted image 20241110154007.png]]
+Considerando uma ordem ascendente (já ordenado):
+![[Pasted image 20241110154144.png]]
+Considerando uma ordem descendente dos elementos (do maior para o menor):
+![[Pasted image 20241110154222.png]]
+Agora fazendo uma análise desses dados, sabemos que:
+- O quick-sort é o mais rápido para todos os arranjos com elementos aleatórios
+- O heap-sort e o quick-sort tem uma diferença constante, sendo o heap-sort mais lento
+- Apenas para arranjos grandes e com elementos aleatórios que o heap-sort é melhor do que o shell-sort
+- O método da inserção direta é mais rápido para arranjos ordenados
+- O método da inserção direta é melhor que o método da seleção direta para arranjos aleatórios
+- O shell-sort e o quick-sort são sensíveis em relação às ordenações ascendentes e descendentes
+
+Inserção direta:
+- Interessante para arquivos com menos de 20 elementos (pode ser mais eficiente do que algoritmos com menor comportamento assintótico)
+- Método estável
+- Melhor que o bubble-sort
+- Arranjo já ordenado: $O(n)0$
+
+Seleção:
+- Somente é vantajoso quanto ao número de movimentos de registros: $O(n)$
+- Pode ser usado para arquivos com registros grandes, desde que o tamanho não exceda 1000 elementos
+
+Shell-sort:
+- Eficiente para arquivos de tamanho moderado
+- Mesmo para arquivos grandes, é apenas 2 vezes mais lento que o quick-sort
+- Não possui pior caso
+- Trabalha menos com arquivos parcialmente ordenados
+
+Heap-Sort:
+- Anel interno é complexo, tornando-o cerca de 2x mais lento que o quick-sort
+- Não necessita de memória adicional
+- Executa sempre em $O(n\log{n})$
+
+ Merge-sort:
+ - Também executa sempre em $O(n \log{n})$
+ - Precisa de memória adicional
+ - Tanto ele quanto o heap-sort são úteis para aplicações que não podem tolerar variações no tempo esperado para ordenação
+
+Quick-sort:
+- Algoritmo mais eficiente que existe para uma grande variedade de situações
+- Método frágil para erros simples de implementação
+- Recursividade exige um pouco de memória adicional
+- No pior caso, seu comportamento é de ordem quadrática (necessário cuidado para escolha do pivô)
+
+Uma boa estratégia é:
+- Usar quick-sort com a mediana de três elementos para a escolha do pivô
+- Usar ordenação simples (ex: inserção) para subvetores com poucos registros (menos de 25 elementos) (o que vai reduzir o número de chamadas recursivas)
+## Cota inferior para Ordenação
+A cota ou limite inferior do problema é o tempo máximo em que um algoritmo considerado ótimo resolve o problema. Sabemos que é impossível resolver o problema em menos que $C(n)$ passos para uma entrada de tamanho $n$, então o algoritmo ótimo será aquele que resolve o problema em tempo igual à cota inferior. 
+
+Por exemplo, considerando a ordenação por comparação, pode-se achar a cota inferior por meio de uma árvore de decisão para representar o problema:
+![[Pasted image 20241110160048.png]]Dada a árvore, vemos, no mínimo, existem nessa árvore, assumindo um arranjo de tamanho $n$, $n!$ folhas. Para ordenar $n$ elementos, precisa-se de um número de comparações equivalente à altura máxima da árvore de decisão, aproximadamente. Ou seja, disso tudo temos:
+- Número máximo de folhas em uma árvore binária de altura h: $2^{h}$
+- Número de folhas de uma árvore de decisão para ordenação por comparação: $n!$
+
+Portanto:
+- $2^{h} \geq n! \longrightarrow h \geq \log{(n!)}$, usando a aproximação de Stirling, obtém-se $\log{(n!)} = O(n \log{n})$
+- Então, tem-se: $h = \Omega(n \log{n})$ 
+
+O resultado da conclusão anterior é que métodos de ordenação por comparação de elementos não podem ser melhores do que $O(n \log{n})$.
+# Métodos de Busca
+É importante estudar busca pois ela é uma tarefa muito comum. Tanto que vários métodos e estruturas de dados podem ser empregados para se fazer busca. Certos métodos de organização/ordenação de dados podem tornar o processo de busca mais eficiente.
+
+O problema da busca (ou pesquisa) é que dado um conjunto de elementos, onde cada um é identificado por uma chave, o objetivo da busca é localizar, nesse conjunto, o elemento que corresponde a uma chave específica.
+## Termos relacionados
+Alguns termos importante de saber para iniciar os estudos sobre busca são:
+- Tabela: termo genérico, pode ser qualquer estrutura de dados usada para armazenamento interno e organização dos dados
+- Registros: conjunto de elementos que formam a tabela
+- Chave: ela é associada a cada registro e é usada para diferenciar os registros entre si. Existem alguns tipos de chave:
+	- Chave interna: a chave está contida dentro do registro, em uma localização específica
+	- Chave externa: a chave está contida em uma tabela de chaves separada que inclui ponteiros para os registros
+	- Chave primária: para todo arquivo existe pelo menos um conjunto exclusivo de chaves (dois registros não podem  ter o mesmo valor de chave)
+	- Chave secundária: são as chaves não primárias (chaves que não precisam ter seus valores exclusivos)
+- Algoritmo de busca: é o algoritmo que aceita um argumento $a$ e tenta encontrar o registro cuja chave seja $a$
+- Operações na tabela:
+	- Inserção: adiciona um novo elemento à tabela
+	- Algoritmo de busca e inserção: se não encontra o registro, insere um novo
+	- Remoção: retirar um elemento da tabela
+	- Recuperação: procurar um elemento na tabela e, se achá-lo, torná-lo disponível
+## Tipos de Busca
+A tabela pode ser:
+- Um vetor de registros
+- Uma lista encadeada
+- Uma árvore
+- Entre outros
+
+A tabela pode ficar:
+- Totalmente na memória (busca interna)
+- Totalmente no armazenamento auxiliar (busca externa)
+- Dividida entre ambos
+
+Algumas técnicas de busca em memória interna são:
+- Busca sequencial
+- Busca binária
+- Busca por interpolação
+- Busca em árvores
+- Hashing
+
+O objetivo é encontrar um dado registro com o menor custo, por isso, ressalta-se que cada técnica tem vantagens e desvantagens.
