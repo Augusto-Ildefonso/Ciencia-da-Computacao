@@ -1,4 +1,4 @@
-	# Tipos Abstratos de Dados
+# Tipos Abstratos de Dados
 ## Tipo de dado 
 Método para interpretar o conteúdo da memória do computador. Define a quantidade de bytes a serem utilizados para representar um valor (dado) e como interpretar a sequência de bits correspondentes a esse valor.
 Caracteriza o conjunto de valores a que uma constante pertence, ou que podem ser assumidos por uma variável ou expressão, ou que podem ser gerados por uma função.
@@ -901,3 +901,17 @@ A árvore binária perfeitamente balanceada é a árvore para qual cada nó, o n
 A árvore binária balanceada é a árvore para qual cada nó, as alturas de suas duas sub-árvores diferem de, no máximo 1. Toda árvore perfeitamente balanceada é balanceada, mas o contrário não é válido.
 ## Percurso
 O percurso é sempre recursivo.
+## Árvore Binária de Busca
+Uma árvore binária de busca (ABB) possui as seguintes propriedades:
+- Seja $S = \{S_{1}, ..., S_{n}\}$ o conjunto de chaves dos nós da árvore $T$
+	- Esse conjunto satisfaz $S_{1} < ... < S_{n}$
+	- A cada nó $v_{j} \in T$ está associada uma chave distinta $S_{j} \in S$, que pode ser consultada por $r(v_{j}) = S_{j}$
+- Dado um nó $v$ de T
+	- Se $v_{j}$ pertence a sub-árvore esquerda de $v$, então $r(v_{j}) < r(v)$
+	- Se $v_{j}$ pertence a sub-árvore direita de $v$, então $r(v_{j}) > r(v)$
+
+Ou seja, os nós pertencentes à sub-árvore esquerda possuem valores de cave menores que o valor associado à chave do nó raiz. Já os nós pertencentes à sub-árvore direita possuem valores de chave maiores que o valor associado à chave do nó raiz.
+
+Um percurso em-ordem em uma ABB resulta na sequência de valores em ordem crescente.
+
+Se invertêssemos as propriedades 
