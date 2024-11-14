@@ -568,3 +568,4 @@ Remove-se o elemento e rearranja-se a tabela inteira e os índices.
 Uma alternativa para isso, é marcar a posição do elemento removido, indicando que ela pode ser ocupada futuramente por um outro elemento. A posição da tabela pode ficar vazia
 #### Inserção
 Se houver espaço vago na tabela, rearranjam-se os elementos localmente. Se não houver espaço vago, rearranja a tabela a parti do ponto apropriado e reconstruir os índices.
+

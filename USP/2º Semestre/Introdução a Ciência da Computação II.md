@@ -177,7 +177,7 @@ O bubble-sort é o algoritmo de ordenação mais simples. Ele consiste em repeti
 
 Nele, primeiro, começando da esquerda, comparamos os elementos adjacentes e os maiores são colocados a direita, desse jeito o maior elemento está no fim mais a direita. Esse processo então continua para o segundo maior e assim por diante.
 
-Pode-se aprimorar o algoritmo, detectando quando o vetor já está ordenado. Isso ocorre quando em um determinado passo, nenhuma troca é realizada e também diminuindo o número de vezes que o vetor é percorrido, de modo que o vetor percorra $n-i$ iterações.
+Pode-se aprimorar o algoritmo, detectando quando o vetor já está ordenado. Isso ocorre quando em um determinado passo, nenhuma troca é realizada e também diminuindo o número de vezes que o vetor é percorrido, de modo que o vetor percorra $n-i$ iterações. O Bubble-Sort aprimorado tem complexidade de $O(n)$ para o melhor caso, complexidade de espaço de $O(n)$ e complexidade no pior caso de $O(n \log{n})$
 
 O funcionamento dele é:
 1. Imagina-se o seguinte vetor {6, 0, 4, 3}
@@ -345,7 +345,7 @@ Análise de complexidade:
 	- Um loop para selecionar o elemento do vetor, um por um: $O(n)$
 	- Outro loop para comparar esse elemento com todos os outros elementos do array: $O(n)$
 	- Logo, a complexidade temporal é $O(n) \times O(n) = O(n \times n) = O(n^{2})$
-- Complexidade de espaço auxiliar é $O(1)$ dado que a única memória extra usada é para variáveis temporais enquanto troca dois valores do vetor. A seleção direta nunca faz mais que $O(n)$ trocas e pode ser útil  quando escrever na memória é custoso
+- Complexidade de espaço auxiliar é $O(1)$ dado que a única memória extra usada é para variáveis temporais enquanto troca dois valores do vetor. A seleção direta nunca faz mais que $O(n)$ trocas e pode ser útil quando escrever na memória é custoso
 
 As vantagens da seleção direta são:
 - Simples e fácil de entender
@@ -591,3 +591,239 @@ Algumas técnicas de busca em memória interna são:
 - Hashing
 
 O objetivo é encontrar um dado registro com o menor custo, por isso, ressalta-se que cada técnica tem vantagens e desvantagens.
+## Busca Sequencial
+A busca sequencial é a forma mais simples de busca. Ela é aplicável a uma tabela organizada como um vetor ou como uma lista encadeada.
+
+A idea dela é percorrer registro por registro em busca da chave.
+
+Uma maneira de tornar o algoritmo mais eficiente é usando um sentinela. Esse sentinela é adicionado no final da tabela e tem o mesmo valor da chave. Ele garante que o elemento sempre será encontrado, o que elimina um teste, melhorando a performance do algoritmo. Vale ressaltar que para usar o sentinela, é necessário que o arranjo seja declarado com uma posição a mais.
+
+O método acima é usado para implementações com vetores. Esse tipo de implementação tem como limitação o tamanho fixo do vetor, o que resulta ou em desperdício ou em falta de espaço. Uma alternativa para essa implementação é através do uso de uma lista encadeada.
+
+Complexidade:
+- Se o registro for o primeiro: 1 comparação
+- Se o registro for o último: N comparações
+- Se for igualmente provável que o argumento apareça em qualquer posição da tabela, em média: $\displaystyle \frac{(n+1)}{2}$ comparações
+- Se a busca for mal sucedida: N comparações
+- Logo, no pior caso é $O(n)$
+### Arranjo não ordenado
+É um tipo de busca sequencial em que os registros não estão ordenados. Nesse tipo de arranjo, a inserção é feita no final do arranjo. Já a remoção possui dois casos:
+- Se for vetor: é necessário realocar os registros acima do registro removido
+- Se for lista encadeada: é necessário atualizar ponteiros
+
+Para aumentar a eficiência desse tipo de busca, pode-se reordenar continuamente a tabela de modo que os registros mais acessados sejam deslocados para o início. Para isso, há duas formas de fazer:
+- Método mover-para-frente: sempre que uma pesquisa obtiver êxito, o registro recuperado é colocado no início da lista
+	- Vantagens: Possui resultados melhores para quantidades pequenas e médias
+	- Desvantagens: uma única recuperação não implica que o registro será frequentemente recuperado, o que gera uma perda de eficiência para os outros registros
+- Método da transposição: um registro recuperado com sucesso é trocado com o registro imediatamente anterior
+
+Ambos os métodos se baseiam no fenômeno da recuperação recorrente de registros.
+### Tabela Ordenada
+É um tipo de busca sequencial em que os registros estão ordenados. Esse tipo de busca é interessante pois a eficiência da operação de busca melhora se as chaves dos registros estão ordenadas. 
+
+No pior caso (caso em que a chave não é encontrada), são necessárias N comparações. Já no caso médio, são necessárias $\displaystyle \frac{N}{2}$ comparações se as chaves estiverem ordenadas, pois a busca é interrompida assim que uma chave maior do que a procurada é encontrada.
+### Busca Sequencial Indexada
+É um tipo de busca sequencial que usa uma tabela auxiliar chamada de tabela de índices, além do próprio arquivo ordenado.
+
+Cada elemento na tabela de índices contém uma chave (kindex) e um indicador do registro no arquivo que corresponde a kindex. Faz-se a busca a partir do ponto indicado na tabela, sendo que a busca não precisa ser feita desde o começo.
+
+Ela pode ser implementada como um vetor ou como uma lista encadeada. O indicador da posição na tabela pode ser um ponteiro ou uma variável inteira.
+
+Se a tabela for muito grande, pode-se ainda usar a tabela de índices secundária. O índice secundário é um índice para o índice primário.
+
+Vantagens:
+- Os itens na tabela poderão ser examinados sequencialmente sem que todos os registros precisem ser acessados.
+- Com isso, o tempo de busca diminui consideravelmente
+
+Desvantagens:
+- A tabela tem que estar ordenada
+- Exige espaço adicional para armazenar a(s) tabela(s) de índices
+- É preciso ter cuidado com a inserção e remoção
+	- Remoção tem duas opções:
+		- Remove-se o elemento e rearranja-se a tabela inteira e o(s) índice(s)
+		- Marca-se a posição do elemento removido, indicando que ela pode ser ocupada por um outro elemento futuramente (a tabela pode ficar vazia)
+	- Inserção:
+		- Se houver espaço vago na tabela, rearranjam-se os elementos localmente
+		- Se não houver espaço vago, rearranja-se a tabela a partir do ponto apropriado e reconstrói o(s) índice(s)
+
+Como montar o índice primário:
+1. Se a tabela não estiver ordenada, ordene-a
+2. Divide-se o número de elementos da tabela pelo tamanho do índice desejado: $\displaystyle \frac{n}{tamanho \, do \, índice}$
+3. Para montar o índice, recuperam-se os elementos $\displaystyle 0, \, \frac{0 + n}{tamanho \, do \, índice}, \, \frac{0 + 2 \times n}{tamanho \, do \, índice}, ...$
+4. Cada elemento do índice representa $\displaystyle \frac{n}{tamanho \, do \, índice}$ elementos da tabela
+
+Para montar um índice secundário aplica-se um raciocínio similar sobre o índice primário. Em geral, não são necessários mais que 2 índices.
+## Busca Binária
+É um método de busca recursivo com base no método de dividir-e-conquistar,  que requer que os dados estejam ordenados em no arranjo, seja em ordem crescente ou decrescente. Se for em ordem crescente, tem-se $A[i]  <= A[i + 1]$, já se for em ordem decrescente tem-se $A[i] >= A[i+1]$.
+
+A ideia desse método é comparar a chave com o elemento do meio do arranjo. Se for igual, a busca é bem-sucedida e retorna o elemento. Se for menor, acessa-se recursivamente a metade inferior do arranjo e verifica se o elemento dele do meio é a chave e assim por diante. Já se for maior, acessa-se recursivamente a metade superior do arranjo e verifica se o elemento dele do meio é a chave e assim por diante.
+
+Complexidade:
+- A complexidade é de $O(\log{n})$, pois cada comparação reduz o número de possíveis candidatos por um fator de 2
+
+Vantagens:
+- Eficiência da busca
+- Simplicidade da implementação
+
+Desvantagens:
+- Nem todo arranjo está ordenado
+- Exige o uso de um arranjo para armazenar os dados (faz uso do fato de que os índices do vetor são inteiros consecutivos)
+- Inserção e remoção de elementos são ineficientes, pois requer realocação de elementos
+
+A busca binária pode ser usada com a organização de tabela sequencial indexada, assim, em vez de pesquisar o índice sequencialmente, pode-se usar uma busca binária.
+## Busca por Interpolação
+É um tipo de busca que requer que as chaves estejam uniformemente distribuídas. Se elas estiverem, esse método pode ser ainda mais eficiente que a busca binária.
+
+A ideia é que com as chaves distribuídas, pode-se esperar que a chave x esteja aproximadamente na posição: $\displaystyle meio = inf + (sup-inf) \times \frac{(x - A[inf])}{(A[sup] - A[inf])}$, sendo que $inf$ e $sup$ são redefinidos iterativamente como na busca binária.
+
+Se as chaves estiverem uniformemente distribuídas, raramente precisará de mais comparações. Se as chaves não estiverem uniformemente distribuídas, a busca por interpolação pode ser tão ruim quanto uma busca sequencial
+
+Complexidade:
+- A complexidade de tempo é $O(\log{(\log{n})})$, se as chaves estiverem uniformemente distribuídas
+
+Desvantangem:
+- Em situações práticas, as chaves tendem a se aglomerar em torno de determinados valores e não são uniformemente distribuídas. Por exemplo, há uma quantidade maior de nomes começando com "S" do que com "Q".
+## Hashing
+### Acesso em tempo constante
+Tradicionalmente, é feito endereçamento direto em um arranjo. Ou seja, cada chave $k$ é mapeada na posição $k$ do arranjo. Logo, há uma função de mapeamento: $f(k) = k$.
+
+As vantagens do endereçamento direto são:
+- Acesso direto e, por isso, rápido via indexação do arranjo
+
+As desvantagens do endereçamento direto são:
+- Uso ineficiente do espaço armazenado
+	- Se declarar um arranjo do tamanho da maior chave?
+	- Se as chaves não forem contínuas?
+	- Pode sobrar espaço? Pode faltar?
+
+Assim, temos como alternativa o Hashing
+### O Hashing
+O hashing faz acesso direto ao vetor mas o endereçamento é indireto. Ou seja, temos uma função de mapeamento tal que, em geral, $h(k) \neq k$. Isso resolve o uso ineficiente do espaço de armazenamento. 
+
+A complexidade é, em média, $O(c)$ e independe do tamanho do arranjo. Idealmente temos que $c = 1$.
+
+O significado da palavra hash é fazer picadinho de carne/vegetais para cozinhar ou então fazer bagunça 
+### Conceitos e Definição
+O Hashing, também conhecido como tabela de espalhamento ou de dispersão, é uma técnica que utiliza uma função $h$ para transformar uma chave $k$ em endereço, que é usado para armazenar e recuperar registros.
+
+A ideia é particionar um conjunto de elementos (possivelmente infinito) em um número finito de classes. Temos $B$ classes, que vão do $0$ a $B - 1$. Essas classes são chamadas de Buckets.
+
+A função $h$ é chamada de função hash. Essa função retorna o valor hash de $k$, que é usado como o endereço para armazenar a informação cuja a chave é $k$. Dizemos também que $k$ pertence ao bucket $h(k)$. Por exemplo, se temos que a chave é $k = luis$, ao usar k na função hash temos $h(k) = 10$, logo a chave $luis$ será armazenada no endereço 10 da memória e chamamos o endereço de bucket, no caso bucket de $h(k)$.
+
+A função hash é utilizada para inserir, remover ou buscar um elemento. Ela deve ser determinística, ou seja, resultar sempre no mesmo valor para uma determinada chave.
+
+Dizemos que ocorre uma **colisão** quando a função hash produz o mesmo endereço para chaves diferentes. Essas chaves com mesmo endereço são ditas "sinônimos". O melhor caso é quando cada chave resulta em um endereço, o pior caso é quando todas as chaves resultam no mesmo endereço, mas é aceitável algumas chaves, apenas, resultarem no mesmo endereço.
+
+Uma distribuição uniforme, ou seja, cada chave resulta um endereço, é muito difícil, pois depende de cálculos matemáticos e estatísticos complexos. Poderíamos tomar uma solução que aparentemente gera endereços aleatórios, mas existe a chance de alguns endereços serem gerados mais de uma vez e de alguns nunca serem gerados. Então, existem alternativas melhores que a puramente aleatória.
+
+Os segredos para um bom hashing são:
+- Escolher uma boa função hash (em função dos dados)
+	- Uma que distribua uniformemente os dados, na medida do possível (Hash Uniforme)
+	- Uma que evita colisões
+	- Uma que é fácil e rápida de computar
+- Estabelecer uma boa estratégia para tratamento de colisões
+
+Uma técnica simples e muito utilizada, que produz bons resultados é:
+- Para chaves inteiras, calcular o resto da divisão $\displaystyle \frac{k}{B}$ ou então $k \, \% \, B$, sendo que o resto indica a posição de armazenamento. Nesse caso $k$ é o valor da chave e $B$ é o tamanho do espaço do endereçamento
+- Para chaves do tipo string, tratar cada caractere como um valor inteiro (ASCII), somá-los e pegar o resto da divisão por $B$
+- Vale ressaltar que $B$ deve ser primo, preferencialmente
+
+A ideia por trás de usar uma função hash que utiliza do resto é que os elementos sempre caem no intervalo entre $0$ e $n-1$, que coincidem com os valores que usamos como índices para acessar a memória.
+
+Entretanto, existem diversas outras funções hash:
+- Examinar as chaves em busca de um certo padrão
+- Extrair dígitos de uma parte da chave e somar
+- Elevar a chave ao quadrado e considerar os dígitos intermediários do resultado
+- Extrair a raiz e considerar apenas as casas decimais
+- Entre outras
+
+Chamamos de fator de carga, $\displaystyle \alpha = \frac{n}{m}$, o número esperado de elementos por posição na tabela, dado que $n$ é o número de elementos em uma tabela de $m$ posições.
+
+### Tipos de Hashing
+#### Estático
+Nesse tipo de hashing o espaço de endereçamento não muda. Ele pode ser de dois tipos:
+- Fechado
+	- Permite armazenar um conjunto de informações de tamanho limitado
+	- Usa-se técnicas de rehash como tratamento de colisões, entre elas:
+		- Overflow progressivo
+		- 2ª função hash
+- Aberto
+	- Permite armazenar um conjunto de informações de tamanho potencialmente ilimitado
+	- Usa o encadeamento de elementos para tratamento de colisões
+##### Hashing Fechado
+Esse tipo de hashing utiliza uma tabela de buckets para armazenar informações e os elementos são armazenados na própria tabela.
+
+Para colisões, aplica-se técnicas de rehash. Isso significa que se a posição $h(k)$ está ocupada (lembre-se de que h(k) é um índice da tabela), aplicar a técnica de rehash sobre $h(k)$ que deve retornar o próximo bucket livre. Algumas características de uma boa técnica de rehash são: cobrir o máximo de índices entre $0$ e $B-1$, e evitar agrupamento de dados. Além de utilizar o índice resultante de $h(k)$ na técnica de rehash, pode-se usar a própria chave k e outras funções de hash.
+
+Uma das técnicas rehash é o **Overflow Progressivo**, que pode utilizar a equação: $\displaystyle h(k) = (h(k) + i) \, \% \, B$ com $i$ variando de $1$ a $B-1$ ($i$ é incrementado a cada tentativa). Uma dificuldade nessa técnica é como saber que a informação procurada não está armazenada, pois, por exemplo, se houver uma remoção na tabela e a chave estiver depois dela, pode resultar em algum problema; mas para resolver isso, podemos não eliminar o elemento, mas indicar que a posição foi esvaziada e que a busca deve continuar. O uso da equação mostrada acima, é conhecido como **sondagem linear**, pois todas as posições da tabela são checadas no pior caso. Outra equação que pode ser usada é $h(k) = (h(k) + c_1 \times i + c_2 \times i^2) \, \% \, B$, com $i = 1, ..., B-1$ e constantes $c_1$ e $c_2$, essa é chamada de **sondagem quadrática**, considerada melhor que a linear pois evita "mais" o agrupamento de elementos, porém ela não garante encontrar um espaço vazio, mesmo que ele exista. A vantage, de usar um overflow progressivo é a simplicidade. Já as desvantagens são:
+- Agrupamento de dados (causado por colisões (característica do overflow progressivo))
+- Com estrutura cheia, a busca fica lenta (característica do hashing fechado)
+- Dificulta inserções e remoções (característica do hashing fechado)
+
+A outra técnica de rehash é a **2ª função hash**, ou **hash duplo**. Essa técnica faz o uso de duas funções:
+- h(k): função hash primária
+- haux(k): função hash secundária
+
+O rehash com uma segunda função fica, por exemplo: $h(k) = ( h(k) + i \times haux(k) ) \, \% \, B$. Algumas boas funções são:
+- $h(k) = k \, \% \, B$
+- $haux(k) = 1 + k \, \% \, (B - 1)$
+
+A vantagem dessa técnica é evitar o agrupamento de dados em geral. Já as desvantagens são:
+- Difícil de achar funções hash que, ao mesmo tempo, satisfaçam os critérios de cobrir o máximo de índices da tabela e evitem agrupamento de dados
+- Operações de busca, inserção e remoção são mais difíceis
+
+Uma alternativa para fazer o hashing com uma função hash e uma técnica de rehash é representar tudo isso em uma única função dependente do número da tentativa (i). Por exemplo: $h(k, i) = (k + i) \, \% \, B$, com $i = 0, ..., B-1$. Agora a função $h$ depende de dois fatores: a chave $k$ e a iteração $i$. Note que $i = 0$ na primeira execução, resulta na função hash tradicional de divisão que já conhecíamos. Quando $i = 1, ..., B-1$, já estamos aplicando a técnica de rehash de sondagem linear.
+##### Hashing Aberto
+Nesse tipo de hashing, a tabela de buckets, indo de $0$ a $B-1$, contém apenas ponteiros para uma lista de elementos. Quando há colisão, o sinônimo é inserido no bucket como um novo nó da lista. A busca deve percorrer a lista, com isso, nota-se que se as listas estiverem ordenadas, reduz-se o tempo de busca.
+
+As vantagens do hashing aberto são:
+- A tabela pode receber mais itens mesmo quando um bucket já foi ocupado
+- Permite percorrer a tabela por ordem de valor hash
+
+As desvantagens do hashing aberto são:
+- Espaço extra para as listas
+- Listas longas implicam em muito tempo gasto na busca
+	- Se as listas estiverem ordenadas, reduz-se o tempo de busca
+	- Custo extra com a ordenação
+##### Eficiência
+Para o hashing fechado:
+- Depende da técnica de rehash:
+	- Com overflow progressivo, após várias inserções e remoções, o número de acessos aumenta
+- A tabela pode ficar cheia
+- Pode haver mais espaço para a tabela, pois não são necessários ponteiros e campos extras como no hashing aberto
+
+Para o hashing aberto:
+- Depende do tamanho das listas e da função hash:
+	- Listas longas degradam desempenho
+	- Poucas colisões implicam em listas pequenas
+#### Dinâmico
+Nesse tipo de hashing o espaço de endereçamento pode aumentar (fora do escopo da disciplina).
+
+### Funções Hash
+Algumas funções boas para hash são:
+- Divisão
+	- $h(k) = k \, \% \, m$, com um $m$ (tamanho da tabela) tendo um tamanho primo de preferência.
+- Multiplicação
+	- $h(k) = (k \times A \, \% \, 1) \times m$, com $A$ sendo uma constante entre $0$ e $1$
+	- $(k \times A \, \% \, 1)$ recupera a parte fracionária de $k \times A$
+	- Knuth sugere $\displaystyle A = \frac{(\sqrt{5} - 1)}{2} = 0,6180...$
+- Hash Universal
+	- A função hash é escolhida aleatoriamente no início de cada execução, de forma que minimize/evite tendências de chave
+		- Por exemplo, $h(k) = ((A \times k + B) \, \% \, P) \, \% \, m$
+		- P é um número primo maior do que a chave k
+		- A é uma constante escolhida aleatoriamente de um conjunto de constantes $\{0, ..., P-1\}$ no início da execução
+		- B é uma constante escolhida aleatoriamente de um conjunto de constantes $\{0, ..., P-1\}$ no início da execução
+	- Diz-se que $h$ representa uma coleção universal de funções
+### Desvantagem
+A desvantagem de usar hashing é que os elementos da tabela não são armazenados sequencialmente e nem sequer existe um método prático de percorrê-los em sequência.
+### Complexidade de modo geral
+De modo geral pode-se dizer que a complexidade de tempo é de $O(1)$, mas colisões podem aumentar o tempo para $O(n)$.
+## Critérios para se eleger um método de busca
+- Eficiência da busca
+- Eficiência de outras operações
+	- Inserção e remoção
+	- Listagem e ordenação de elementos
+	- Etc.
+- Frequência das operações realizadas
+- Dificuldade de implementação
+- Consumo de memória (interna)
