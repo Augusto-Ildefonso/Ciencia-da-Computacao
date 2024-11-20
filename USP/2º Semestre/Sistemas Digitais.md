@@ -1,3 +1,4 @@
+Tem que completar com Latch, FF, Contadores, FMS
 # Gated D Latch 
 Esse latch é caracterizado por uma única entrada de dados, chamada D nas representações, e ele guarda o valor dessa entrada, dentro do controle de um sinal de clock.
 
@@ -77,3 +78,53 @@ TERMINAR
 # Contadores
 ## Contadores Assíncrono
 O circuito mais simples pode ser feito com flip-flop's do tipo T, porque a funcionalidade de troca é naturalmente boa para os contadores.
+# Máquina de Estados Finitos (FMS)
+As máquinas de estados são usadas para representar o funcionamento de circuitos sequenciais, ou seja, existe uma sequência (uma saída) que vai ser ativada dependendo das entradas e dos estados, esse último é armazenado através de flip-flops.
+
+Um circuito sequencial consiste de um circuito combinacional de uma rede de memória formadas por elementos de armazenamentos (usualmente Flip-Flops). A rede de memória é define o estado atual da máquina de estados.
+
+O circuito sequencial se difere de um circuito combinacional puro na medida em que o próximo estado será definido não só a partir das entradas atuais, como também do estado atual, aumentando enormemente as possibilidades de projeto.
+## Diagrama de Transição de Estados
+O Diagrama de Transição de Estados é um gráfico orientado usado para representar as funções de transição e de saída de um sistema sequencial. Veja abaixo um exemplo simples de diagrama.![[Pasted image 20241119173546.png]]
+Nele os estados são $S_k$ e $S_j$, mas eles podem receber qualquer nome que quisermos para identificar o estado. O que muda o estado é a entrada $X$ e o estado pode fornecer uma saída que é o $Z$.
+
+Agora, vejamos um diagrama de estado completo.
+![[Pasted image 20241119173951.png]]
+Podemos também simplificar esse diagrama:
+![[Pasted image 20241119174025.png]]
+Existem dois modelos que as máquinas de estado podem seguir. Em um deles a saída pode ser indicada dentro de cada estado, já no outro a saída pode ser indicada nos grafos (fora do estado). O comportamento de ambos os modelos é idêntico mas as suas implementações diferem.
+
+É importante ressaltar que cada estado deve ter todas as possibilidades de entradas, caso contrário pode ocorrer algum comportamento imprevisto.
+## Máquina de Estado de Mealy
+O modelo de Mealy é caracterizado pelos valores de saída dependerem do estado e do valor das entradas. Veja abaixo o circuito de uma máquina de Mealy.
+![[Pasted image 20241119180508.png]]
+Como a última lógica combinatória pode mudar a qualquer momento, independente do flip-flop, visto que ela depende da entrada pode-se dizer que essa máquina representa um modelo assíncrono. Ou seja, uma alteração na entrada pode causar diretamente uma alteração nos valores da saída.
+
+Na máquina de Mealy, nos arcos são representados os sinais causadores da transição de um 
+estado para outro junto dos respectivos valores para a saída. O diagrama dessa máquina de estados é aquele em que as saídas são indicadas fora dos estados. 
+![[Sem título0.jpg]]
+## Máquina de Estado de Moore
+O modelo de Moore é caracterizado pelos valores de saída dependerem apenas do estado do circuito. Veja abaixo o circuito de uma máquina de Moore.
+![[Pasted image 20241119181020.png]]
+Como a lógica da saída depende somente dos flip-flops, como pode ser observado acima, e eles dependem do sinal de clock (são síncronos), podemos dizer que a máquina de Moore é síncrona. Ou seja, como a saída é sincronizada com os estados, os quais são sincronizados com o clock, temos que as saídas só mudam quando o estado muda.
+
+Na máquina de Moore, somente os sinais de entrada causadores da transição de um estado para outro são representados no arco (nas setas). O diagrama dessa máquina de estados é aquele em que as saídas estão indicadas dentro dos estados.
+![[Sem título1.jpg]]
+## Como projetar uma máquina de estados?
+1. Elaborar o diagrama de estados que interprete fielmente o problema que deseja
+2. Opcionalmente, pode-se minimizar o número de estados no diagrama de estados
+3. Escrever a tabela de estados, com os estados atuais, próximos estados e saídas
+4. Atribuir a cada estado uma combinação de variáveis de estado (flip-flops)
+5. Construir a tabela de excitação do tipo de flip-flop utilizado
+6. Montar o mapa de Karnaugh para cada uma das entradas dos flip-flops do circuito, com o auxílio da tabela de excitação
+7. Obter a equação final de cada entrada para cada um dos flip-flops do circuito a partir da simplificação do mapa de Karnaugh
+8. Fazer o mesmo procedimento para as equações das variáveis de saída
+9. Elaborar o diagrama lógico do circuito, lembrando que todos os elementos de memória (flip-flops) recebem o mesmo sinal de clock
+## Tabela de Transição de Estados
+A tabela de transição de estados é uma tabela que possui o estado atual, a entrada, os próximos estados e a saída. A máquina de Mealy e Moore possuem uma diferença quanto a tabela, na parte da saída. A máquina de Moore só possui uma saída, já a máquina de Mealy possui cada possibilidade na parte de saída.
+
+Veja abaixo uma tabela de transição de estados de uma máquina de Moore (os números abaixo de "Próximo Estado" são as possíveis entradas).
+![[Sem título2.jpg]]
+Agora, veja a tabela de transição de estados de uma máquina de Mealy.
+![[Sem título3.jpg]]
+O $RST$ ou $Reset$ é a indicação de reset, ou seja, onde será iniciada a máquina quando for utilizado o reset.

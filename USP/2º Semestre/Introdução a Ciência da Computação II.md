@@ -199,7 +199,7 @@ As desvantagens do bubble-sort são:
 - Tem uma complexidade de $O(n^{2})$ o que o torna lento para entradas grandes
 - Ele faz o uso de um algoritmo de ordenação baseado em comparação, então ele usa um operador de comparação para determinar a ordem relativa dos dados de entrada, isso pode limitar a eficiência do algoritmo em alguns casos
 ## Quick-Sort
-O Quick-Sort é um algoritmo de ordenação baseado na lógica de dividir e conquistar. Ele tem um tempo de execução no pior caso de $O(n^{2})$. Porém ele é a melhor opção prática para ordenação pois ele possui um tempo médio de execução de $O(n \, \log{n})$ e os fatores que ficam ocultos na representação anterior são pequenos.
+O Quick-Sort é um algoritmo de ordenação baseado na lógica de dividir-e-conquistar. Ele tem um tempo de execução no pior caso de $O(n^{2})$. Porém ele é a melhor opção prática para ordenação pois ele possui um tempo médio de execução de $O(n \, \log{n})$ e os fatores que ficam ocultos na representação anterior são pequenos. Vale ressaltar que o tempo de melhor caso é $O(n \log{n})$.
 
 A lógica dele é: primeiro escolhe-se um elemento do vetor que será o pivô (pivot) e, a partir dele, dividirá o vetor. Essa divisão ocorre através da inserção do pivot na sua posição correta. Os vetores obtidos serão ordenados independentemente e combinados para produzir o resultado final.
 
@@ -301,7 +301,7 @@ As desvantagens da inserção simples são:
 - Não tão eficiente como outros algoritmos de ordenação para a maioria dos casos
 
 ### Shell-Sort
-O Shell-Sort é uma variação da ordenação simples. Enquanto a inserção simples compara elementos adjacentes e move uma posição a frente, a Shell-Sort permite a troca de elementos distantes. 
+O Shell-Sort é uma variação da inserção simples. Enquanto a inserção simples compara elementos adjacentes e move uma posição a frente, a Shell-Sort permite a troca de elementos distantes. 
 
 Elementos separados por h posições são ordenados de tal forma que todo h-ésimo elemento está em uma sequência ordenada. Essa sequência é dita estar h-ordenada.
 
