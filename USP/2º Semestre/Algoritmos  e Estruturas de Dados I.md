@@ -288,3 +288,30 @@ void lista_apagar(LISTA** p){
 }
 ~~~
 As mudanças aparecem na inserção e remoção praticamente. 
+
+# Árvores
+As árvores tem uma organização dos dados de forma não-linear mantendo um relacionamento hierárquico entre seus elementos. Diferente da lista que tem uma organização linear dos dados, onde sua propriedade básica é a relação sequencial mantida entre seus elementos.
+
+Essa estrutura hierárquica permite limitar o local da busca, reduzindo, assim, a complexidade. Logo, a operação beneficiada pelo uso de árvores é a busca.
+
+As vantagens desse tipo de representação são:
+- Representatividade no relacionamento entre os dados
+- Facilidades na manipulação computacional dos dados
+- Uma maior facilidade de extração de informações, dependendo de que tipo de dado estará sendo armazenado pela árvore
+
+Para extrair informações específicas de uma determinada ramificação da árvore não é necessário o percurso por toda estrutura de informação. Isso porque o relacionamento entre os dados nos permite uma consulta seletiva em regiões específicas da árvore. Isso implica em uma possibilidade de unir a vantagem da implementação encadeada com busca binária (em árvores binárias).
+
+## Definição
+Uma árvore enraizada $T$ é um conjunto finito de elementos denominados **nós** ou vértices tais que:
+- $T = \emptyset$, a árvore é dita vazia
+- $T = \{r\} \bigcup \{T_{1}\} \bigcup \{T_{2}\} \bigcup \{T_{3}\} \bigcup ... \bigcup \{T_{n}\}$ 
+
+Um nó especial da árvore, *r*, é chamado de raiz da árvore. Os elementos restantes da árvore constituem um único conjunto vazio ou são divididos em $n \geq 1$ conjuntos disjuntos não vazios, $T_{1}, T_{2}, T_{3}, ..., T_{n}$, as subárvores de *r*, cada qual por sua vez é uma árvore.
+
+Assim, para denotar uma árvore qualquer usamos $T = \{ T_{1}, T_{2}, T_{3}, ...,  T_{n} \}$, com *r* a raiz da árvore e $T_{v}$ a subárvore $T$ com raiz em *v*. Note que a definição apresentada é recursiva.
+## Representação Gráfica para Árvores
+A estrutura de árvore pode ser presentada graficamente de diversas maneiras, dentre elas:
+- Conjuntos aninhados
+	![[Pasted image 20241130170406.png]]
+- Indentação
+- Grafos (a mais utilizada)
