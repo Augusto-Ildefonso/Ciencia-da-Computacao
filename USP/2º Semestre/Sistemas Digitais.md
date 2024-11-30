@@ -29,6 +29,7 @@ Segue abaixo a tabela característica do *Gated SR Latch*.
 | 1   | 0   | 1   | 0                    |
 | 1   | 1   | 0   | 1                    |
 | 1   | 1   | 1   | X                    |
+
 O circuito dele, utilizando portas *NOR* pode ser visto abaixo.
 ![[Sem título7.jpg]]
 O circuito dele, utilizando portas *NAND*, pode ser visto abaixo. Note que nele as portas *S* e *R* são trocadas em relação ao circuito anterior.
