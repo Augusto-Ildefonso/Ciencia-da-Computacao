@@ -1,6 +1,6 @@
  # Circuitos Sequenciais
 O circuitos sequenciais são aqueles que o valor da saída depende da entrada e do valor do estado anterior do circuito. Geralmente, eles possuem um elemento de memória. Veja abaixo um simples elemento de memória, que não é utilizado para construção de circuitos reais.
-![[[Sem título4.jpg](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Sem%20t%C3%ADtulo4.jpg)]]
+![Sem título4.jpg](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Sem%20t%C3%ADtulo4.jpg)
 # Basic Latch
 O Basic Latch é um elemento de memória construído com portas *NOR*. Os inputs *Set* e *Reset* fornecem os meios de mudar o estado *Q* do circuito. Um outro jeito, mais comum, de fazer é quando as duas portas *NOR* estão conectadas de modo "cruzado".
 
