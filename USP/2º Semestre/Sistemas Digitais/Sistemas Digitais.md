@@ -1,4 +1,7 @@
- # Circuitos Sequenciais
+O livro de referência usado nesse estudo foi: 
+>Fundamentals of Digital Logic with Verilog Design
+>Brown, Stephen D.
+# Circuitos Sequenciais
 O circuitos sequenciais são aqueles que o valor da saída depende da entrada e do valor do estado anterior do circuito. Geralmente, eles possuem um elemento de memória. Veja abaixo um simples elemento de memória, que não é utilizado para construção de circuitos reais.
 ![[Sem título4.jpg]]
 # Basic Latch

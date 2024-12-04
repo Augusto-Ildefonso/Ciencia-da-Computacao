@@ -44,16 +44,3 @@ Qualquer grafo conexo com $n$ vértices e $n-1$ arestas é uma árvore. Ou seja,
 Uma consequência dos dois últimos resultados diz essencialmente que as árvores (finitas) são os grafos conexos que possuem a menor quantidade possível de arestas. Logo, se um grafo com $n$ vértices é conexo, então ele possui no mínimo $n-1$ arestas. Para demonstração temos de duas uma:
 - ou o grafo não possui ciclo, em cujo caso ele é uma árvore e possui $n-1$ arestas
 - ou o grafo possui ciclo, em cujo caso a quantidade de arestas é maior ou igual a $n$
-# Aritmética Modular
-## Algoritmo de Euclides e Congruência Modular
-### Divisão Euclidiana
-Sejam $a, b \in \mathbb{Z}$, com $b \neq 0$. Então existem, e são únicos, $q, r \in \mathbb{Z}$ tais que $a = q \cdot b + r$, com $0 \leq r < |b|$.  Os inteiros $q$ e $r$ da igualdade acima são chamados de *quociente* e *resto*, respectivamente, que resultam da divisão de $a$ por $b$.
-
-Para demonstrar a afirmação acima, considere o conjunto $S_{a, b} := \{ a + qb \, / \, q \in \mathbb{Z} \}$ possui um menor elemento positivo $r$, pelo princípio da boa ordenação. Se fosse $r \geq |b|$, teríamos que $r = |b| + s$ para algum $0 \leq s < r$ (pois $|b| > 0$). Daí, $a = qb + r = qb \pm b + s = (q \pm 1)b + s$ de modo que $s \in S_{a,b}$ também. Mas $s < r$ é uma contradição à minimalidade de $r$.
-
-Na situação do teorema anterior, escrevemos $a \equiv r \mod b$, e lemos "a é congruente a r módulo b". Em geral escrevemos $x \equiv y \mod b$, se $x - y$ (ou $y - x$) for múltiplo de $b$, ou, equivalentemente, se $x$ e $y$ deixam o mesmo resto quando dividido por b.
-## Algoritmo de Euclides
-Se $a = q \cdot b + r$ então $mdc{(a, b)} = mdc{(b, r)}$. Basta observar que o conjunto de divisores comuns de $a$ e $b$ é igual ao conjunto de divisores comuns de $b$ e $r$.
-## Relações de Equivalência e Partições
-Seja $\mathcal{C}$ um conjunto. Uma relação binária ~ em $\mathcal{C}$ é um subconjunto $R_{\sim}$ de $\mathcal{C} \times \mathcal{C}$. Se $(x, y) \in R_{\sim}$ escrevemos $x \sim y$. Dizemos que $\sim$ é uma relação de equivalência em $\mathcal{C}$ se
-- $x \sim y$ qualquer que seja $x \in \mathcal{C}$ ($\sim$ é reflexiva)

@@ -314,4 +314,208 @@ A estrutura de árvore pode ser presentada graficamente de diversas maneiras, de
 - Conjuntos aninhados
 	![[Pasted image 20241130170406.png]]
 - Indentação
+	![[Pasted image 20241130170719.png]]
 - Grafos (a mais utilizada)
+![[Pasted image 20241130171016.png]]
+- Aninhada
+	$T_{c} = \{ D, \{E, \{F\}\}, \{ G, \{ H, \{I\} \}, \{ J, \{K\}, \{L\} \}, \{M\}  \} \}$
+## Terminologias
+Considerando a árvore $T_{c}$ e a definição dada de árvores anteriormente, vejamos algumas terminologias básicas:
+- **Grau de um nó**: é o número de subárvores relacionadas àquele nó. Se um nó não tiver nenhuma subárvore relacionada à ele, ele tem grau 0
+- **Nó folha ou terminal**: é o nó com grau igual a zero, ou seja, que não possui subárvores
+- **Grau da árvore**: ele é relacionado à uma limitação que se impõe a uma árvore, então se a árvore possui um grau máximo e todos os nós possuem o mesmo grau máximo, esse grau máximo será o grau da árvore
+
+Para identificar os nós na estrutura, usamos denominações da relação hierárquica existente em uma árvore genealógica:
+- Cada raiz $r_{i}$ da subárvore $T_{i}$ é chamada **filho** de r. O termo neto é usado de forma análoga
+- O nó raiz $r$ da árvore $T$ é o **pai** de todas as raízes $r_{i}$ das subárvores $T_{i}$. O termo **avô** é definido de forma análoga
+- Duas raízes $r_{i}$ e $r_{j}$ das sub-árvores $T_{i}$ e $T_{j}$ de $T$ são ditas **irmãs**
+ 
+Outras definições importantes são obtidas a partir da distância de um nó em relação aos outros nós da árvore:
+- **Caminho**: sequência não vazia de nós, $P = \{ r_{1}, r_{2}, ..., r_{k} \}$, onde o i-ésimo nó $r_{i}$ da sequência é pai de $r_{i+1}$
+- **Comprimento**: tomando a definição de caminho, o comprimento de um caminho $P$ é igual a $k - 1$. Ele também pode ser visto como o número de arestas que formam o caminho
+- **Altura de um nó**: a altura de um nó $r_{i}$ é o comprimento do caminho mais longo do nó $r_{i}$ a uma folha. As folhas tem altura zero
+- **Altura de uma árvore**: é igual a altura da raiz $r$ de $T$
+- **Profundidade**: a profundidade de um nó $r_{i}$ de uma árvore $T$ é o comprimento do único caminho em $T$ entre a raiz $r$ e o nó $r_{i}$
+- **Nível**: um conjunto de nós com a mesma profundidade é denominado nível da árvore. A raiz está no nível zero.
+
+A maior profundidade da árvore será justamente a altura da árvore.
+
+Uma forma que facilita lembrar das relações acima é pensando numa árvore real. Quando falamos de uma altura estamos falando de folhas. Já quando pensamos em raízes, elas estão enterradas e possuem uma profundidade. Mas é preciso lembrar que a árvore computacional é invertida em relação a árvore do mundo real, ou seja, a raiz fica em cima e as folhas embaixo.
+
+Geralmente usamos as árvores para fazer busca de forma mais eficiente. Entretanto, essa busca só será eficiente se conseguirmos controlar a altura da árvore.
+
+**Ascendência e Descendência**: considerando dois nós $r_{i}$ e $r_{j}$, o nó $r_{i}$ é um ancestral de $r_{j}$ se existe um caminho em $T$ de $r_{i}$ a $r_{j}$, tal que, o comprimento de $P$ entre $r_{i}$ e $r_{j}$ seja diferente de zero. De forma análoga se define o descendente de um nó.
+## Árvores Binárias
+Uma árvore binária (AB) $T$ é um conjunto finito de elementos, denominados nós ou vértices, tal que:
+- Se $T = \emptyset$, a árvore é dita vazia
+- Se $T$ contém um nós especial $r$, chamado raiz de $T$, e os demais nós podem ser subdivididos em dois subconjuntos distintos $T_{E}$ e $T_{D}$, os quais também são árvores binárias (possivelmente vazias)
+
+$T_{E}$ e $T_{D}$ são denominados sub-árvore esquerda e sub-árvore direita de $T$, respectivamente.
+
+A raiz da sub-árvore esquerda/direita de um nó $v$, se existir, é denominada filho esquerdo/direito de $v$. Pela natureza da árvore binária, o filho esquerdo pode existir sem o direito, e vice-versa.
+
+Esse tipo de árvore é interessante para busca.
+
+Podemos implementar a árvore binária de forma encadeada, usando as duas structs a seguir:
+~~~c
+struct No {
+	ITEM* item;
+	NO* esq;
+	NO* dir;
+}
+
+struct arv_bin{
+	NO* raiz;
+	int profundidade;
+}
+~~~
+Operações do TAD Árvore binária:
+- Criar árvore
+	- Pré-condição: nenhuma
+	- Pós-condição: inicia a estrutura de dados
+- Inserir um nó filho:
+	- Pré-condição: nó pai não nulo
+	- Pós-condição: dado um nó pai, cria seu nó filho e o insere ã direita ou a esquerda do pai. Retorna verdadeiro se o nó pode ser criado e falso caso contrário
+~~~c
+AB* ab_criar(void){
+	AB* r = (AB*) malloc(sizeof(AB));
+	if(r != NULL){
+		r->raiz = NULL;
+		r->profundidade = -1;
+	}
+	return r;
+}
+
+void ab_preordem(NO* raiz){
+	if(raiz != NULL){
+		item_imprimir(raiz->item);
+		ab_preordem(raiz->esq);
+		ab_preordem(raiz->dir);
+	}
+}
+
+void ab_emordem(NO* raiz){
+	if(raiz != NULL){
+		ab_emordem(raiz->esq);
+		item_imprimir(raiz->item);
+		ab_emordem(raiz->dir);
+	}
+}
+
+void ab_posordem(NO* raiz){
+	if(raiz != NULL){
+		ab_posordem(raiz->esq);
+		ab_posordem(raiz->dir);
+		item_imprimir(raiz->item);
+	}
+}
+
+void ab_inserir_no(NO *raiz, NO *no, int lado, int chave_pai) {
+    if (raiz != NULL) {
+        ab_inserir_no(raiz->esq, no, lado, chave_pai);
+        ab_inserir_no(raiz->dir, no, lado, chave_pai);
+
+        if (chave_pai == item_get_chave(raiz->item)) {
+            if (lado == FILHO_ESQ)
+                raiz->esq = no;
+            else if (lado == FILHO_DIR)
+                raiz->dir = no;
+        }
+    }
+    return;
+}
+
+bool ab_inserir(AB *T, ITEM *item, int lado, int chave_pai) {
+    if (T->raiz == NULL)
+        return ((T->raiz = ab_cria_no(item)) != NULL);
+    else {
+        NO *novo_no = ab_cria_no(item);
+        if (novo_no != NULL) {
+            ab_inserir_no(T->raiz, novo_no, lado, chave_pai);
+            return true;
+        }
+        return false;
+    }
+}
+
+int ab_profundidade(NO *no) {
+    if (no == NULL) 
+        return -1;
+
+    int e = ab_profundidade(no->esq);
+    int d = ab_profundidade(no->dir);
+
+    return ((e > d) ? e : d) + 1;
+}
+
+void apagar_arvore(NO **raiz) {
+    if (*raiz != NULL) {
+        apagar_arvore(&(*raiz)->esq);
+        apagar_arvore(&(*raiz)->dir);
+        item_apagar(&(*raiz)->item);
+        free(*raiz);
+        *raiz = NULL;
+    }
+}
+
+void ab_apagar_arvore(AB **T) {
+    apagar_arvore(&(*T)->raiz);
+    free(*T);
+    *T = NULL;
+}
+
+~~~
+#### Percursos
+Muitas vezes queremos percorrer uma árvore binária "visitando" cada nó uma única vez. Nesse caso, "visitar" um nó pode ser: mostrar seu valor, modificar seu valor, etc. Um percurso gera uma sequência linear de nós e podemos então falar de nó predecessor ou sucessor de um nó, segundo um dado percurso.
+
+Não existe um percurso único para árvores (binárias ou não): diferentes percursos podem ser realizados, dependendo da aplicação.
+
+São três percursos básicos para árvores binárias:
+- Pré-ordem (pre-order)
+	- Visita a raíz
+	- Percorre a sub-árvore esquerda em pré-ordem
+	- Percorre a sub-árvore direita em pré-ordem
+- Em-ordem (in-order)
+	- Percorre a subárvore a esquerda em em-ordem
+	- Visita a raiz
+	- Percorre a sub-árvore a direita em em-ordem
+- Pós-ordem (post-order)
+	- Percorre a sub-árvore esquerda em pós-ordem
+	- Percorre a sub-árvore a direita em pós-ordem
+	- Visita a raiz
+
+A diferença entre eles está, basicamente, na ordem em que os nós são "visitados".
+
+Podemos utilizar os percursos para interpretar operações aritméticas. O percurso em-ordem representa: $a+(b \times c)$. O percurso pré-ordem representa: $+a \times bc$. Por fim o pós-ordem representa $abc\times+$. Daí, os algoritmos para cálculo podem usar pilhar
+
+### Árvore Estritamente Binária
+Uma Árvore Estritamente Binária (ou Árvore Própria) tem nós com 0 (nenhum) ou 2 filhos. Nesse tipo de árvore os nós interiores (não folhas) sempre tem 2 filhos.
+![[Pasted image 20241130183657.png]]
+### Árvore Binária Completa Cheia
+A árvore binária completa cheia é uma árvore estritamente binária que tem como característica todos os seus nós folha estarem no mesmo nível.
+![[Pasted image 20241201151826.png]]
+Dada uma árvore binária completa cheia ABCC e sua profundidade $d$, pode-se calcular o número total de nós na árvore por:
+- Nós do último nível: $2^{d}$
+- Total de nós: $2^{d+1} - 1$
+
+Portanto, se o número de nós, $n$, para uma árvore binária completa cheia de profundidade $d$ é $n = 2^{d+1}-1$, então, $n$ nós podem ser distribuídos em uma árvore binária completa cheia de profundidade:
+1. $n = 2^{d+1}-1$
+2. $\log_{2}{(n+1)} = \log_{2}{(2^{d+1})}$
+3. $d = \log_{2}{(n+1)}-1$
+
+O problema com esse tipo de árvore é a necessidade de manter os níveis cheios/completos.
+
+Para implementar esse tipo de árvore podemos adotar uma organização sequencial, de modo que vamos armazenar os nós, por nível, em um array.
+### Árvore Binária Completa
+A árvore binária completa (ABC) tem que se a profundidade da árvore é $d$, então cada nó folha está no nível $d-1$ ou no nível $d$. O nível $d-1$ pode estar totalmente preenchido, mas não é uma regra. Além disso, os nós folhas no nível d estão todos mais à esquerda possível.
+
+Para implementar esse tipo de árvore podemos adotar uma organização sequencial, de modo que para um vetor indexado a partir da posição 0, se um nó está na posição $i$, seus filhos diretos estão nas posições $2_{i}+1$, filho da esquerda, e $2_{i}+2$, filho da direita.
+
+A vantagem é que vamos ocupar o espaço necessário só para armazenar o conteúdo e temos ligações implícitas. Já a desvantagem é que teremos espaços vagos se a árvore não é completa por níveis ou, então, se sofrer eliminação.
+### Árvore Binária Perfeitamente Balanceada
+A árvore binária perfeitamente balanceada tem que para cada nó, o número de nós de suas sub-árvores esquerda e direita difere em, no máximo, 1.
+![[Pasted image 20241201153452.png]]
+### Árvore Binária Balanceada
+A árvore binária balanceada é caracterizada de modo que para cada nó, as alturas de suas duas sub-árvores diferem de, no máximo, 1. 
+
+Toda árvore perfeitamente balanceada é balanceada, mas o inverso não é necessariamente verdade.

@@ -915,3 +915,11 @@ Ou seja, os nós pertencentes à sub-árvore esquerda possuem valores de cave me
 Um percurso em-ordem em uma ABB resulta na sequência de valores em ordem crescente.
 
 Se invertêssemos as propriedades 
+# Árvore Rubro-Negra
+A semelhança dela com a AVL é a rotação para a esquerda (quando viola uma regra) que é semelhante à rotação para a esquerda da AVL.
+
+1. Aresta vermelha na direita
+2. Duas vermelhas em sequência 
+3. Ver a ultima regra
+
+A cor da raiz é sempre negra

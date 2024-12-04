@@ -98,4 +98,3 @@ Por fim, basta preencher a matriz horizontalmente com as letras do ciphertext e 
 A esteganografia (do grego ‘escrita escondida’) é o uso de de técnicas para ocultar a existência de uma mensagem dentro da outra, uma forma de segurança por obscurantismo. A diferença entre esteganografia e criptografia é que a primeira preocupa-se em ocultar a existência da mensagem, e a segunda o seu significado.
 ### Método NULL
 A simples representação também remete à esteganografia, que é uma técnica para omitir uma mensagem dentro de outra, com o objetivo de fazer com que uma forma escrita seja camuflada em outra a fim de mascarar sua própria existência. Uma técnica simples de esteganografia é o método NULL, no qual a letra do meio de cada palavra da mensagem original compõe a mensagem que se deseja esconder.
-# Criptografia Moderna
