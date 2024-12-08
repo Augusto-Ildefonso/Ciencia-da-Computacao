@@ -519,3 +519,720 @@ A árvore binária perfeitamente balanceada tem que para cada nó, o número de 
 A árvore binária balanceada é caracterizada de modo que para cada nó, as alturas de suas duas sub-árvores diferem de, no máximo, 1. 
 
 Toda árvore perfeitamente balanceada é balanceada, mas o inverso não é necessariamente verdade.
+### Árvore Binária de Busca
+Uma árvore binária de busca possui as seguintes propriedades:
+- Seja $S=\{ s_{1}, ..., s_{n} \}$ o conjunto de chaves dos nós da árvore $T$:
+	- Esse conjunto satisfaz $S_{1} < ... < S_{n}$
+	- A cada nó $v_{j} \in T$ está associada uma chave distinta $s_{j} \in S$, que pode ser consultada por $r(v_{j}) = S_{j}$
+- Dado um nó $v$ de $T$
+	- Se $v_{i}$ pertence a sub-árvore esquerda de $v$, então $r(v_{i}) < r(v)$
+	- Se $v_{i}$ pertence a sub-árvore direita de $v$, então $r(v_{i}) > r(v)$ 
+
+Ou seja, os nós pertencentes à sub-árvore direita possuem valores de chave maiores que o valor associado à chave do nó raiz $r$. Já os nós pertencentes à sub-árvore esquerda possuem valores de chaves menores que o valor associado à chave do nó raiz $r$.
+
+Um percurso em-ordem em uma ABB resulta na sequência de valores em ordem crescente. Se invertêssemos as propriedades descritas na definição anterior, de maneira que a sub-árvore esquerda de um nó contivesse valores maiores e a sub-árvore direita valores menores, o percurso em-ordem resultaria nos valores em ordem decrescente.
+
+Com base no parágrafo anterior, percebemos que uma ABB criada a partir de um conjunto de valores não é única, o resultado depende da sequência de inserção dos dados.
+
+A grande utilidade da árvore binária de busca é armazenar dados contra os quais outros dados são frequentemente verificados (busca). Uma árvore binária de busca é dinâmica e pode sofrer alterações (inserções e remoções de nós) após ter sido criada.
+
+Quando comparamos lista com ABB, percebemos que o tempo de busca é estimado pelo número de comparações entre chaves. Por exemplo, uma lista de $n$ elementos temos: se for sequencial $O(n)$ se não ordenadas ou $O(\log_{2}n)$ se ordenadas. Já as ABB constituem a alternativa que combina a vantagem de ambos: são encadeadas e permitem a busca binária $O(\log_{2}n)$.
+
+A inserção com ABB segue o algoritmo a seguir:
+- Procure um "local" para inserir o novo nó, começando a procura a partir do nó-raiz
+- Se um ponteiro (filho esquerdo/direito de um nó raiz) nulo é atingido, coloque o novo nó como sendo filho do nó-raiz
+- Para cada nó raiz de uma sub-árvore compare:
+	- Se o novo nó possui chave menor do que a a chave do nó-raiz, vai para a sub-árvore esquerda
+	- Se a chave é maior do que a chave do nó-raiz, vai para sub-árvore direita
+
+Veja abaixo o código da inserção:
+~~~C
+NO *abb_inserir_no(NO *raiz, NO *novo_no){
+	if (raiz == NULL)
+		raiz = novo_no;
+	else if(item_get_chave(novo_no->item) < item_get_chave(raiz->item))
+		raiz->esq = abb_inserir_no(raiz->esq,novo_no);
+	else if(item_get_chave(novo_no->item) > item_get_chave(raiz->item))
+		raiz->dir = abb_inserir_no(raiz->dir,item);
+	return(raiz);
+}
+
+bool abb_inserir (ABB *T, ITEM *item){
+	NO *novo_no;
+
+	if(T == NULL){
+		return false;
+	}
+
+	novo_no = abb_cria_no(item)
+
+	if(novo_no != NULL) {
+		T->raiz = abb_inserir_no(T->raiz, novo_no);
+		return true;
+	}
+
+	return false
+}
+~~~
+
+A busca em ABB segue o algoritmo a seguir:
+- Comece a busca a partir do nó-raiz
+- Caso o nó pesquisado seja nulo, retorne nulo; caso o nó contendo a chave pesquisada seja encontrado, retorne o "item" do nó pesquisado
+- Para cada nó-raiz de uma sub-árvore compare: se o valor procurado é menor que o valor do nó-raiz (continua pela sub-árvore esquerda), ou se o valor é maior que o valor no nó-raiz (sub-árvore direita)
+
+Veja abaixo o código da busca:
+~~~C
+ITEM *abb_busca2(NO *raiz, int chave){
+	if(raiz = NULL)
+		return NULL;
+	if (chave == item_get_chave(raiz->item))
+		return raiz->item;
+	if(chave < item_get_chave(raiz->item))
+		return (abb_busca2(raiz->esq, chave));
+	else
+		return (abb_busca2(raiz->dir, chave));
+}
+
+ITEM *abb_busca(ABB *T, int chave){
+	return abb_busca2(T->raiz, chave);
+}
+~~~
+
+A remoção em ABB precisa considerar alguns casos no seu algoritmo:
+- Caso 1: o nó é folha
+	- O nó pode ser retirado sem problema
+- Caso 2: o nó possui uma sub-árvore (esquerda ou direita)
+	- O nó raiz da sub-árvore (esquerda ou direita) "ocupa o lugar do nó retirado"
+- Caso 3: o nó possui duas sub-árvores
+	- O nó contendo o menor valor da sub-árvore direita pode "ocupar" o lugar
+	- Ou o maior valor da sub-árvore esquerda pode "ocupar o lugar"
+~~~C
+boolean abb_remover_aux (NO **raiz, int chave){
+	NO *p;
+	if(*raiz == NULL)
+		return (FALSE);
+	if(chave == item_get_chave((*raiz)->item)){
+		if ((*raiz)->esq == NULL|| (*raiz)->dir == NULL) {/*Caso 1 se resume ao caso 2: há um filho ou nenhum*/
+			p = *raiz;
+			if((*raiz)->esq == NULL)
+				*raiz = (*raiz)->dir;
+			else
+				*raiz = (*raiz)->esq;
+			free(p);
+			p = NULL;
+		}
+		else /*Caso 3: há ambos os filhos*/
+			troca_max_esq((*raiz)->esq, (*raiz), (*raiz));
+		return(TRUE);
+	}
+	else
+		if(chave < item_get_chave((*raiz)->item))
+			return abb_remover_aux (&(*raiz)->esq, chave);
+		else
+			return abb_remover_aux (&(*raiz)->dir, chave);
+}
+
+void troca_max_esq(NO *troca, NO *raiz, NO *ant){
+	if(troca->dir != NULL){
+		troca_max_esq(troca->dir, raiz, troca);
+		return;
+	}
+	if(raiz == ant)
+		ant->esq = troca->esq;
+	else
+		ant->dir = troca->esq;
+
+	raiz->item = troca->item;
+	free(troca); troca = NULL;
+}
+
+boolean abb_remover(ABB *T, int chave){
+	if (T != NULL)
+		return (abb_remover_aux(&T->raiz, chave));
+	return (FALSE);
+}
+~~~
+
+O custo da busca em ABB:
+- Pior caso
+	- Número de passos é determinado pela altura da árvore
+	- Árvore degenerada possui altura igual a $n$
+- Altura da árvore depende da sequência de inserção das chaves
+- Busca é eficiente se a árvore está razoavelmente balanceada
+	- $O(\log_{2}n)$
+
+O custo da remoção em ABB:
+- A inserção requer uma busca pelo lugar da chave, portanto, com custo de uma busca qualquer (tempo proporcional à altura da árvore)
+- O custo da inserção, após a localização do lugar, é constante, não depende do número de nós
+- Logo, tem complexidade análoga à da busca
+
+O custo da remoção em ABB:
+- A remoção requer uma busca pela chave do nó a ser removido, portanto, com o custo de uma busca qualquer(tempo proporcional à altura da árvore)
+- O custo da remoção, após localização do nó dependerá de dois fatores:
+	- do caso em que se enquadra a remoção: se o nó tem 0, 1 ou 2 sub-árvores, se tem 0 ou 1 filho, custo é constante
+	- de sua posição na árvore, caso tenha 2 sub-árvores (quanto mais próximo do último nível, menor esse custo)
+- Repare que um maior custo na busca implica num menor custo na remoção propriamente dita, e vice-versa.
+- Logo, tem complexidade dependente da altura da árvore
+	- Chamadas à `troca_max_esq` requerem localizar o maior elemento da sub-árvore esquerda. Mas o número de operações é sempre menor que a altura da árvore
+
+A árvore dita como ABB "aleatória" tem as seguintes características:
+- Nós externos: descendentes dos nós folha (não estão, de fato, na árvore)
+- Uma árvore $A$ com $n$ nós possui $n + 1$ nós externos
+- Uma inserção em $A$ é considerada aleatória se ela tem probabilidade igual de acontecer em qualquer um dos $n+1$ nós externos
+- Uma ABB aleatória com $n$ nós é uma árvore resultante de $n$ inserções aleatórias sucessivas em uma árvore inicialmente vazia
+
+É possível demonstrar que para uma ABB aleatória o número esperado de comparações para recuperar um registro qualquer é cerca de $1,39 \times \log_{2}(n)$ ($39\%$ pior do que o custo do acesso em uma árvore balanceada). Pode ser necessário garantir um melhor balanceamento da ABB para melhor desempenho na busca.
+
+As consequências das operações de inserção e remoção são:
+- Uma ABB balanceada ou perfeitamente balanceada tem organização ideal para buscas
+- Inserções e eliminações podem desbalancear uma ABB, tornando  futuras buscas ineficientes
+- Possível solução:
+	- Construir uma ABB inicialmente perfeitamente balanceada
+	- Após várias inserções/eliminações, aplicamos um processo de rebalanceamento
+
+O algoritmo para criar uma ABB perfeitamente balanceada é:
+1. Ordenar num array os registros em ordem crescente das chaves
+2. O registro do meio é inserido na ABB vazia (como raiz)
+3. Tome a metade esquerda do array e repita o passo 2 para a sub-árvore esquerda
+4. Idem para a metade direita e sub-árvore direita
+5. Repita o processo até não poder dividir mais
+
+O algoritmo para rebalanceamento:
+1. Percorra em em-ordem a árvore para obter uma sequência ordenada em array
+2. Repita os passos 2 a 5 do algoritmo de criação de ABB perfeitamente balanceada
+
+Resumo:
+- Boa opção como Estrutura de Dados para aplicações de pesquisa (busca) de chaves, se a árvore é balanceada temos $O(\log_{2}n)$
+- Inserções (como folhas) e eliminações (mais complexas) causam desbalanceamento
+- Inserções: melhor se em ordem aleatória de chaves, para evitar linearização (se ordenadas)
+- Para manter o balanceamento, temos 2 opções:
+	- ABB perfeitamente balanceada ou rebalancear
+	- Árvores Binárias Balanceadas, por exemplo, AVL
+### Árvores AVL
+A árvore AVL é uma árvore binária de busca na qual as alturas das duas sub-árvores de todo nó nunca diferem em mais de 1. Ela foi proposta em 1962 pelos matemáticos russos G.M. Adelson-Velskki e E.M. Landis.
+
+Esse tipo de árvore tem o que chamamos de "Fator de Balanceamento" de nó. Ele consiste na altura da sub-árvore esquerda menos a altura da sub-árvore direita do nó. Em uma AVL, todo nó tem fator de balanceamento igual a 1, -1 ou 0.
+
+O problema das árvores balanceadas, de uma forma geral, é como manter a estrutura balanceada após operações de inserção e remoção. As operações de inserção e remoção sobre ABBs não garantem o balanceamento.
+
+As seguintes situações podem levar ao desbalanceamento de uma AVL:
+- O nó inserido é descendente esquerdo de um nó que tinha fator de balanceamento 1
+- O nó inserido é descendente direito de um nó que tinha fator de balanceamento -1
+
+Para manter uma árvore balanceada é necessário aplicar uma transformação na árvore tal que:
+- O percurso em-ordem na árvore transformada seja igual ao da árvore original (isto é, a árvore transformada continua sendo uma ABB)
+- A árvore transformada fique balanceada
+
+A transformação que mantém a árvore balanceada é chamada de rotação. A rotação pode ser feita à esquerda ou à direita, dependendo do desbalanceamento a ser tratado. A rotação deve ser realizada de maneira a respeitar as regras 1 e 2 definidas acima. Dependendo do desbalanceamento a ser tratado, uma única rotação pode não ser o suficiente.
+#### Rotação Direita
+Abaixo vemos uma árvore na qual o nó mais jovem a se tornar desbalanceado é o A. Além disso $T_{1},T_{2}$ e $T_{3}$ pode ser sub-árvores de qualquer tamanho, inclusive $0$.
+![[Pasted image 20241207162107.png]]
+Aplicando a rotação direita, obtemos a seguinte árvore.
+![[Pasted image 20241207162222.png]]
+Note que nessa rotação o nó $B$ assume a posição do nó $A$, o qual passa a ser o filho direito de $B$. Já o nó que anteriormente era filho direito de $B$, agora é filho esquerdo de $A$.
+#### Rotação Esquerda
+Abaixo vemos uma árvore na qual o nó mais jovem a se tornar desbalanceado é o A. Além disso $T_{1},T_{2}$ e $T_{3}$ pode ser sub-árvores de qualquer tamanho, inclusive $0$.
+![[Pasted image 20241207164902.png]]
+Aplicando a rotação esquerda, obtemos a seguinte árvore.
+![[Pasted image 20241207164938.png]]
+Note que o nó $B$ ocupa agora a posição que anteriormente era do nó $A$, o qual se tornou o filho esquerdo de $B$. Além disso, a sub-árvore esquerda de $B$ antes da rotação, se tornou a sub-árvore direita de $A$ após a rotação para a esquerda.
+#### Rotação Simples
+Tanto para a rotação direita, quanto para a rotação esquerda, a sub-árvore resultante tem como altura a mesma altura da sub-árvore original. Isso significa que o fator de balanceamento de nenhum nó acima de $A$ é afetado. 
+
+Devemos usar a rotação direita quando o fator de balanceamento do nó $A$ é positivo. Já quando o fator de balanceamento é negativo, usamos a rotação esquerda.
+#### Rotações Duplas
+As rotações simples não solucionam todos os tipos de desbalanceamentos. Existem situações nas quais é necessário uma rotação dupla. Por exemplo, se o fator de balanceamento for $0$ e inserimos um nó.
+
+Veja abaixo um exemplo.
+![[Pasted image 20241207165632.png]]
+#### Rotação Esquerda/Direita
+É uma rotação dupla na qual primeiro se faz uma rotação para esquerda e depois uma para direita. Vamos considerar o nó $A$ como o nó mais jovem a se tornar desbalanceado. Além disso, $T_{1}, T_{2}, T_{3}$ e $T_{4}$ podem ser sub-árvores de qualquer tamanho, inclusive $0$.
+![[Pasted image 20241207165911.png]]
+O primeiro passo é fazer uma rotação para a esquerda em $B$. Ao realizar essa rotação, parece que a  árvore se tornou mais ainda desbalanceada. Porém mais adiante veremos que a árvore ficará balanceada.
+![[Pasted image 20241207170043.png]]
+O segundo passo então é rotacionar para direita em $A$. Repare que a altura final da sub-árvore é $n+2$, ou seja, manteve intacta a altura. Isso funciona também se o nó tivesse sido inserido em $T_{3}$.
+![[Pasted image 20241207170422.png]]
+#### Rotação Direita/Esquerda
+É uma rotação dupla na qual primeiro se rotaciona para a direita e depois para a esquerda. Vamos considerar o nó $A$ como o nó mais jovem a se tornar desbalanceado. Além disso, $T_{1}, T_{2}, T_{3}$ e $T_{4}$ podem ser sub-árvores de qualquer tamanho, inclusive $0$.
+![[Pasted image 20241207170254.png]]
+O primeiro passo é fazer uma rotação direita em $B$. Ao realizar essa rotação, parece que a  árvore se tornou mais ainda desbalanceada. Porém mais adiante veremos que a árvore ficará balanceada.
+![[Pasted image 20241207170339.png]]
+O segundo passo é fazer uma rotação esquerda em $A$. Repare que a altura final da sub-árvore é $n+2$, ou seja, a altura se manteve intacta. Isso funciona também se o novo nó tivesse sido inserido em $T_{2}$.
+#### Como decidir qual rotação usar
+Para decidir se usamos uma rotação simples ou dupla olhamos o sinal dos nós. Se o sinal do nó $A$ e do nó $B$ forem igual, então a rotação é simples. Entretanto, se o final do nó $A$ e do nó $B$ forem diferentes, então a rotação é dupla.
+
+Considerando as rotações simples, para decidir se a rotação é direita ou esquerda usamos o fator de balanceamento. Se o fator de balanceamento do nó $A$ (nó mais jovem a se tornar desbalanceado) for positivo, então a rotação é direita. Porém, se o fator de balanceamento do nó $A$ (nós mais jovem a se tornar desbalanceado) for negativo, então a rotação é esquerda.
+
+Agora, para as rotações duplas, para decidir se a rotação é dir/esq ou esq/dir, vamos olhar o fator de balanceamento. Se o fator de balanceamento do nó $A$ (nó mais jovem a se tornar desbalanceado) for positivo, então a rotação é esq/dir. Porém, se o fator de balanceamento do nó $A$ (nó mais jovem a se tornar desbalanceado) for negativo, então a rotação é dir/esq.
+#### Inserção
+Nós devemos utilizar as rotinas de rotação para definir um algoritmo de inserção em árvores AVL. A maioria das implementações guardam o fator de balanceamento, porém guardar a altura dos nós facilita.
+
+A inserção é feita em dois passos:
+- O primeiro é uma inserção em ABB como já vimos
+- O segundo é o rebalanceamento, se necessário
+
+Aprofundando mais, a primeira etapa é definir uma inserção em ABB e atualizar as alturas dos nós. Na volta da inserção o balanceamento é verificado, se a árvore estiver desbalanceada, aplicar as rotações necessárias. O desbalanceamento pode ser verificado de duas formas:
+- Com base na altura das sub-árvores: cada nó armazena sua altura e daí calcula-se o FB (fator de balanceamento)
+- Com base no fator de balanceamento: cada nó armazena seu FB
+
+Assim, temos que (consideremos a notação acima em que $A$ é o nó mais jovem a se tornar desbalanceado e $B$ é seu filho):
+- Se FB = -2, as rotações podem ser:
+	- Esquerda
+	- Direita/Esquerda
+	- Se FB do filho direito ($B$) é negativo, rotação esquerda, caso contrário rotação direita/esquerda
+- Se FB = 2, as rotações podem ser
+	- Direita
+	- Esquerda/Direita
+	- Se FB do filho esquerdo ($B$), é positivo, rotação direita, caso contrário rotação esquerda/direita
+#### Remoção
+Nós devemos utilizar as rotinas de rotação para definir um algoritmo de remoção para as AVLs. A remoção pode ser feita em dois passos:
+- O primeiro é uma remoção em ABB
+	- Existem três casos possíveis: o nó removido possui grau 0, 1 ou 2
+- O segundo é o rebalanceamento, se necessário
+
+Percebe-se que a função de troca é semelhante à da ABB, tirando o fato que o item é removido nesta implementação.
+#### Complexidade
+A altura máxima de uma ABB AVL é $1,44 \log_{2}n$, dessa forma, uma pesquisa nunca exige mais do que $44\%$ mais comparações que uma ABB completa cheia. Na prática, para $n$ grande, os tempos de busca são por volta de $\log_{2}n+0,25$. Na média, é necessária uma rotação em $46,5\%$ das inserções.
+#### Implementando a AVL
+Primeiramente vamos olhar na criação de um macro. Macro é uma construção fornecida ao pré-processador que permite substituir um identificador por um pedaço de código antes do processo de compilação. Quando a macro é processada pelo pré-processador, antes da compilação, ela é substituída pelo seu trecho de código equivalente. Vale ressaltar que não há verificação de tipos em macros. Então com qualquer tipo que suporte a operação irá funcionar, mas isso pode levar a erros inesperados caso o tipo não suporte a operação.
+
+Usaremos uma macro no código a seguir. Primeiro faremos a definição de tipos:
+~~~C
+// avl.h
+#define max(a, b) ((a > b) ? a : b)
+typedef struct avl AVL;
+
+// avl.c
+#include "avl.h"
+
+typedef struct no NO;
+
+struct no {
+    ITEM *item;
+    NO *fesq;
+    NO *fdir;
+    int FB;
+    int altura; // Para caso utilize a altura na hora da inserção
+};
+
+struct avl {
+    NO *raiz;
+    int profundidade;
+};
+
+~~~
+Vamos, agora, criar os métodos básicos:
+~~~C
+AVL *avl_criar(void) {
+    AVL *arvore = (AVL *) malloc(sizeof(AVL));
+    if (arvore != NULL) {
+        arvore->raiz = NULL;
+        arvore->profundidade = -1;
+    }
+    return arvore;
+}
+
+void avl_apagar_aux(NO *raiz) {
+    if (raiz != NULL) {
+        avl_apagar_aux(raiz->fesq);
+        avl_apagar_aux(raiz->fdir);
+        apagar_item(&raiz->item);
+        free(raiz);
+    }
+}
+
+void avl_apagar(AVL **arvore) {
+    avl_apagar_aux((*arvore)->raiz);
+    free(*arvore);
+    *arvore = NULL;
+}
+~~~
+Vejamos os métodos auxiliares:
+~~~C
+#define max(a, b) ((a > b) ? a : b)
+
+int avl_altura_no(NO *raiz) {
+    if (raiz == NULL) {
+        return -1;
+    } else {
+        return raiz->altura;
+    }
+}
+
+NO *avl_cria_no(ITEM *item) {
+    NO *no = (NO *) malloc(sizeof(NO));
+    if (no != NULL) {
+        no->FB = 0;
+        no->fdir = NULL;
+        no->fesq = NULL;
+        no->item = item;
+    }
+    return no;
+}
+~~~
+Agora, a rotação direita:
+~~~C
+NO *rodar_direita(NO *a) {
+    NO *b = a->fesq;
+    a->fesq = b->fdir;
+    b->fdir = a;
+    a->FB = b->FB = 0;
+    /*altura = max(avl_altura_no(a->fesq),
+                   avl_altura_no(a->fdir)) + 1;
+      b->altura = max(avl_altura_no(b->fesq),
+                      a->altura) + 1;*/
+    return b;
+}
+~~~
+Agora, a rotação esquerda:
+~~~C
+NO *rodar_esquerda(NO *a) {
+    NO *b = a->fdir;
+    a->fdir = b->fesq;
+    b->fesq = a;
+    a->FB = b->FB = 0;
+    /*a->altura = max(avl_altura_no(a->fesq),
+                      avl_altura_no(a->fdir)) + 1;
+      b->altura = max(avl_altura_no(b->fdir),
+                      a->altura) + 1;*/
+    return b;
+}
+~~~
+Para a rotação esq/dir:
+~~~C
+NO *rodar_esquerda_direita(NO *a) {
+    a->fesq = rodar_esquerda(a->fesq);
+    return rodar_direita(a);
+}
+~~~
+Para a rotação dir/esq:
+~~~C
+NO *rodar_direita_esquerda(NO *a) {
+    a->fdir = rodar_direita(a->fdir);
+    return rodar_esquerda(a);
+}
+~~~
+Inserção:
+~~~C
+NO *avl_inserir_no(NO *raiz, ITEM *item) {
+    if (raiz == NULL)
+        raiz = avl_cria_no(item);
+    else if (item_chave(item) < item_chave(raiz->item))
+        raiz->fesq = avl_inserir_no(raiz->fesq, item);
+    else if (item_chave(item) > item_chave(raiz->item))
+        raiz->fdir = avl_inserir_no(raiz->fdir, item);
+
+    raiz->FB = (avl_altura2(raiz->fesq)) - (avl_altura2(raiz->fdir));
+
+    if (raiz->FB == -2) {
+        if (raiz->fdir->FB <= 0)
+            raiz = rodar_esquerda(raiz);
+        else
+            raiz = rodar_direita_esquerda(raiz);
+    }
+
+    if (raiz->FB == 2) {
+        if (raiz->fesq->FB >= 0)
+            raiz = rodar_direita(raiz);
+        else
+            raiz = rodar_esquerda_direita(raiz);
+    }
+
+    return raiz;
+}
+
+bool avl_inserir(AVL *arvore, ITEM *item) {
+    return ((arvore->raiz = avl_inserir_no(arvore->raiz, item)) != NULL);
+}
+~~~
+Remoção:
+~~~C
+bool avl_remover(AVL *T, int chave) {
+    return (T->raiz = avl_remover_aux(&T->raiz, chave)) != NULL;
+}
+
+NO *avl_remover_aux(NO **raiz, int chave) {
+    NO *p;
+
+    if (*raiz == NULL)
+        return (NULL);
+    else if (chave == item_get_chave((*raiz)->item)) {
+        if ((*raiz)->esq == NULL || (*raiz)->dir == NULL) {
+            // Caso 1 se resume ao caso 2: há um filho ou nenhum
+            p = *raiz;
+            if ((*raiz)->esq == NULL)
+                *raiz = (*raiz)->dir;
+            else
+                *raiz = (*raiz)->esq;
+
+            item_apagar(&p->item);
+            free(p);
+            p = NULL;
+        } else {
+            // Caso 3: há ambos os filhos
+            troca_max_esq(&(*raiz)->esq, (*raiz), (*raiz));
+        }
+    } else if (chave < item_get_chave((*raiz)->item))
+        (*raiz)->esq = avl_remover_aux(&(*raiz)->esq, chave);
+    else if (chave > item_get_chave((*raiz)->item))
+        (*raiz)->dir = avl_remover_aux(&(*raiz)->dir, chave);
+
+    if (*raiz != NULL) {
+        (*raiz)->FB = avl_altura2((*raiz)->esq) - avl_altura2((*raiz)->dir);
+        if ((*raiz)->FB == 2) {
+            if ((*raiz)->esq->FB >= 0) // FB Filho esq positivo = rot simples
+                *raiz = rodar_direita(*raiz);
+            else
+                *raiz = rodar_esquerda_direita(*raiz);
+        }
+        if ((*raiz)->FB == -2) {
+            if ((*raiz)->dir->FB <= 0) // FB Filho dir negativo = rot simples
+                *raiz = rodar_esquerda(*raiz);
+            else
+                *raiz = rodar_direita_esquerda(*raiz);
+        }
+    }
+    return *raiz;
+}
+
+void troca_max_esq(NO *troca, NO *raiz, NO *ant) {
+    if (troca->dir != NULL) {
+        troca_max_esq(troca->dir, raiz, troca);
+        return;
+    }
+    if (raiz == ant)
+        ant->esq = troca->esq;
+    else
+        ant->dir = troca->esq;
+
+    ITEM *it = rem->item;
+    raiz->item = troca->item;
+    item_apagar(&it);
+    free(troca);
+    troca = NULL;
+}
+~~~
+### Árvore Rubro-Negra
+A árvore rubro-negra é um outro tipo de árvore balanceada de busca. A versão que será apresentada aqui é a Left-Leaning Red-Black Tree. Essa árvore possui as arestas coloridas de vermelho ou preto. Além disso, há algumas regras:
+- Aresta vermelha sempre vai para o filho esquerdo
+- Todo nó possui, no máximo, uma aresta vermelha
+- Balanceamento negro perfeito: todo filho nulo está à mesma distância negra da raiz (distância das arestas pretas)
+
+Nesse tipo de árvore, no pior caso, a altura será $h \leq 2 \log(n)$.
+
+A inserção nesse tipo de árvore é igual na ABB, porém todo nó inserido possui aresta incidente vermelha (a aresta que liga ele à raiz é vermelha).
+#### Inserção em nó (pai) sem incidência vermelha
+Se vamos inserir um nó sem incidência vermelha (não há uma aresta vermelha no pai) temos dois casos, ou iremos inserir ele como filho esquerdo ou como filho direito.
+
+Como filho esquerdo, ao inserí-lo, a aresta do nó será vermelha e como ele é filho esquerdo, nenhuma regra é quebrada. Porém se inserirmos o nó como filho direito, a primeira regra será quebrada e, assim, será necessária uma rotação para que a aresta vá para o filho esquerdo (essa rotação é a mesma que já vimos anteriormente). Veja a seguir uma inserção com filho esquerdo
+![[Pasted image 20241207182438.png]]
+Veja agora a inserção como filho direito.
+![[Pasted image 20241207182503.png]]
+![[Pasted image 20241207182510.png]]
+#### Inserção em nó (pai) com incidência vermelha
+Para a inserção em nó com incidência vermelha, temos três possíveis casos, mas em todos quebraremos a segunda regra. Então, é preciso que após a inserção e remoção, façamos a manutenção das três regras. As operações locais que podem ser feitas para arrumar são: rotação à esquerda, rotação à direita e inversão de cores.
+
+As rotações à esquerda e à direita são parecidas com AVL. Veja abaixo.
+![[Pasted image 20241207220018.png]]
+A inversão de corer é quando invertemos a cor de todas as arestas das quais o pai faz parte. Veja abaixo.
+![[Pasted image 20241207220111.png]]
+Importante ressaltar que nenhum das três operações infringe a regra 3. 
+
+Vamos, agora que já vimos as três operações, ver como podemos fazer a manutenção da árvore em cada um dos três casos.
+##### Primeiro caso
+Inserir como filho direito de $b$ e com a aresta esquerda vermelha.
+![[Pasted image 20241207221042.png]]
+Após a inserção é preciso:
+1. Inverter as cores de B
+##### Segundo caso
+Duas arestas esquerdas vermelhas consecutivas.
+![[Pasted image 20241207221116.png]]
+Após a inserção é preciso:
+1. Rotacionar à direita o C
+2. Inverter as cores do B
+##### Terceiro caso
+Duas arestas vermelhas consecutivas, mas a primeira é esquerda e a segunda é direita.
+![[Pasted image 20241207221219.png]]
+Após a inserção é preciso:
+1. Rotacionar à esquerda o A
+2. Rotacionar à direita o C
+3. Inverter as cores do B
+
+Fazendo um resumo da inserção, temos que:
+- Ela segue o algoritmo da ABB
+- Sempre insere aresta vermelha
+- Pode quebrar regras 1 e 2 (mas depois é preciso arrumar)
+- Operações locais (inverter e rotacionar) corrigem os problemas localmente
+- Operação inverte
+	- Propaga aresta vermelha para cimar
+	- Pode ser tratada recursivamente como inserção
+	- Até alcançar um nó
+		- Sem incidência vermelha; ou
+		- Raiz da árvore
+#### Remoção
+A remoção sempre de um nó folha com aresta vermelha:
+- Aplicar conceitos de remoção de ABB no caso do nó não ser folha
+	- Substituição de chave não altera formato/propriedades da árvore
+- Propagar aresta vermelha da raiz até a folha se necessário:
+	- Se busca pela esquerda moveRedLeft
+	- Se busca pela direita: moveRedRight
+- Na volta da recursão: operações inverte, rotação direita e esquerda para corrigir violações
+
+Para a remoção, podemos dividir em duas: moveRedLeft e moveRedRight. Ambos os passos a seguir são feitos antes da remoção. Então, é removido o item e depois, se for necessário, faz-se a manutenção da árvore.
+##### moveRedLeft
+Para esse tipo, temos dois casos:
+- `h->esq` é black e `h->esq->esq` é black
+- `h->dir->esq` é red
+![[Pasted image 20241207224409.png]]
+##### moveRedRight
+Para esse tipo, temos dois casos:
+- `h->dir` é preta e `h->dir->esq` é black
+- `h->esq->esq` é red
+![[Pasted image 20241207230318.png]]
+#### Implementação
+Primeiro vamos analisar a estrutura do nó:
+~~~C
+typedef struct no no_t;
+
+struct no {
+	no_t *esq, *dir;
+	int cor; // Preto = 0 e Vermelho = 1
+	int info;
+};
+~~~
+Agora veja a operação de inverter:
+~~~C
+void inverte(no_t *r){
+	r->cor = !r->cor;
+	if(r->esq)
+		r->esq->cor = !r->esq->cor;
+	if(r->dir)
+		r->dir->cor = !r->dir->cor;
+}
+~~~
+Vejamos agora a operação de inverter à direita:
+~~~C
+no_t *rotacaoDireita(no_t *c){
+	no_t *b = c->esq;
+	c->esq = b->dir;
+	b->dir = c;
+	b->cor = c->cor;
+	c->cor = 1;
+	return b;
+}
+~~~
+De modo semelhante, a rotação esquerda pode ser vista abaixo:
+~~~C
+no_t *rotacaoEsquerda(no_t *a){
+	no_t *b = a->dir;
+	a->dir = b->esq;
+	b->esq = a;
+	b->cor = a->cor;
+	a->cor = 1;
+	return b;
+}
+~~~
+Agora que já vimos as operações locais, vamos ver a inserção:
+~~~C
+int Vermelho(no_t* h){
+	if(h == NULL){
+		return 0;
+	}
+	return (h->cor == 1);
+}
+
+no_t* insere_llrb(no_t* h, int data){
+	if(h == NULL){
+		return criarNo(data);
+	}
+	if(data < h->info){
+		h->esq = insere_llrb(h->esq, data);
+	} else if (data > h->info){
+		h->dir = insere_llrb(h->dir, data);
+	}
+
+	if(Vermelho(h->dir) && !Vermelho(h->esq)){
+		h = rotacaEsquerda(h);
+	}
+	if(Vermelho(h->esq) && Vermelho(h->esq->esq)){
+		h = rotacaoDireita(h);
+	}
+	if(Vermelho(h->esq) && Vermelho(h->dir)){
+		inverte(h);
+	}
+
+	return h;
+}
+~~~
+### Heap
+Uma heap é uma árvore binária que satisfaz as propriedades a seguir:
+- Ordem: para cada nó $v$, exceto o nó raiz, tem-se que
+	- chave($v$) $\leq$ chave(pai($v$)) - heap máxima
+	- chave($v$) $\geq$ chave(pai($v$)) - heap mínima
+- Completude: dado que $h$ é a altura, a árvore é completa se:
+	- Todo nó folha está no nível $h$ ou $h-1$
+	- O nível $h-1$ está totalmente preenchido
+	- As folhas do nível $h$ estão todas mais a esquerda
+
+Uma convenção para trabalharmos com heaps é que o último nó é o nó interno mais à direita de profundidade $h$, ou seja, esse nó está no último nível.
+#### Altura de uma heap
+Uma heap armazenando $n$ nós possui altura $h$ de ordem $O(\log n)$. A prova do teorema anterior, é: "Dado que existem $2^{i}$ chaves na profundidade $i = 0, ..., h-1$ e ao menos 1 chave na profundidade $h$ tem-se que: $n \geq 1 + 2 + 4 + ...+ 2^{h-1} + 1$. Isso é uma progressão geométrica (PG) com razão $q = 2$. Dado que a soma de uma PG pode ser calculada por $$ S_{k} = \frac{a^{k} \times q-a_{1}}{q - 1},$$ temos que $(2^{h-1} \times 2 - 1)+ 1 = 2^{h}$. Logo, $n\geq 2$, então, $h \leq \log_{2}n \longrightarrow h$ é $O(\log n)$." 
+# Fila de Prioridade
+Nessa estrutura de dados os elementos são processados de acordo com sua importância, independentemente do momento que entraram na fila. Alguns exemplos são:
+- Atendimento preferencial em geral
+- Importância de processos em sistemas operacionais
+- Substituições de páginas menos utilizadas na memória
+- Filas de atendimento para análise de sinais em sistemas de controle (sensores prioritários)
+
+Esse TAD, da forma que iremos implementar, irá armazenar item. Os itens são compostos de um par(chave, informação).
+
+As operações principais são:
+- desenfileirar(F): remove e retorna o item com maior (menor) prioridade da fila F
+- enfileirar(F, x): insere um item $x = (k, i)$ com chave $k$
+
+As operações auxiliares são:
+- proximo(F): retorna o item com maior (menor) chave da fila F, sem removê-lo
+- vazia(F)
+- cheia(F)
+
+Ele possui diferentes implementações:
+- Estática
+	- Lista sequencial (arranjo) ordenada
+	- Lista sequencial (arranjo) não ordenada
+	- Heap em arranjo
+- Dinâmica
+	- Lista encadeada ordenada
+	- Lista encadeada não ordenada
+	- Heap encadeada
+
+Cada realização possui vantagens e desvantagens. Uma das escolhas diretas seria usar uma lista ordenada:
+- Inserção é $O(n)$
+- Remoção é $O(1)$
+- Próximo é $O(1)$
+
+Outra seria usar uma fila ou lista não-ordenada
+- Inserção é $O(1)$
+- Remoção é $O(n)$
+- Próximo é $O(n)$
+
+Portanto uma abordagem mais rápida precisa ser pensada quando grandes conjuntos de dados são considerados.
+## Filas de prioridade com heap
+Nesse tipo de implementação, iremos armazenar um item em cada nó. Mantém-se o controle sobre a localização do último nó ($w$). Remove-se sempre o item armazenado na raiz, devido a propriedade de ordem da heap:
+- Heap mínima: menor chave na raiz da heap
+- Heap máxima: maior chave na raiz da heap
+
+O método insere do TAD fila de prioridade corresponde à uma inserção de um item na heap. O algoritmo tem três passos:
+1. Encontrar e criar nó de inserção $z$ (novo último nó depois de $w$)
+2. Armazenar o item com chave $k$ em $z$
+3. Restaurar ordem da heap
+### Restauração da Ordem (fix-up)
+Após a inserção de um novo item, a propriedade de ordem da heap pode ser violada. Por isso temos que restaurar a ordem da heap trocando os itens caminho acima a partir do nós de inserção (em outras palavras, a manutenção é feita na volta da recursão). A restauração termina quando o item inserido alcança a raiz ou um nó cujo pai possui uma chave maior (ou menor).
+## Implementação
+Para uma heap máxima temos a seguinte implementação de restauração de ordem:
+~~~C
+w = F.ultimo;
+while((!isRoot(F,w)) && (key(F,w) > key(F, parent(F,W)))){
+	swap(F,w,parent(F,w));
+	w = parent(F,w)
+} 
+~~~
