@@ -486,7 +486,7 @@ São três percursos básicos para árvores binárias:
 
 A diferença entre eles está, basicamente, na ordem em que os nós são "visitados".
 
-Podemos utilizar os percursos para interpretar operações aritméticas. O percurso em-ordem representa: $a+(b \times c)$. O percurso pré-ordem representa: $+a \times bc$. Por fim o pós-ordem representa $abc\times+$. Daí, os algoritmos para cálculo podem usar pilhar
+Podemos utilizar os percursos para interpretar operações aritméticas. O percurso em-ordem representa: $a+(b \times c)$. O percurso pré-ordem representa: $+a \times bc$. Por fim o pós-ordem representa $abc\times+$. Daí, os algoritmos para cálculo podem usar pilhas.
 
 ### Árvore Estritamente Binária
 Uma Árvore Estritamente Binária (ou Árvore Própria) tem nós com 0 (nenhum) ou 2 filhos. Nesse tipo de árvore os nós interiores (não folhas) sempre tem 2 filhos.
@@ -494,7 +494,7 @@ Uma Árvore Estritamente Binária (ou Árvore Própria) tem nós com 0 (nenhum) 
 ### Árvore Binária Completa Cheia
 A árvore binária completa cheia é uma árvore estritamente binária que tem como característica todos os seus nós folha estarem no mesmo nível.
 ![[Pasted image 20241201151826.png]]
-Dada uma árvore binária completa cheia ABCC e sua profundidade $d$, pode-se calcular o número total de nós na árvore por:
+Dada uma árvore binária completa cheia (ABCC) e sua profundidade $d$, pode-se calcular o número total de nós na árvore por:
 - Nós do último nível: $2^{d}$
 - Total de nós: $2^{d+1} - 1$
 
@@ -507,9 +507,9 @@ O problema com esse tipo de árvore é a necessidade de manter os níveis cheios
 
 Para implementar esse tipo de árvore podemos adotar uma organização sequencial, de modo que vamos armazenar os nós, por nível, em um array.
 ### Árvore Binária Completa
-A árvore binária completa (ABC) tem que se a profundidade da árvore é $d$, então cada nó folha está no nível $d-1$ ou no nível $d$. O nível $d-1$ pode estar totalmente preenchido, mas não é uma regra. Além disso, os nós folhas no nível d estão todos mais à esquerda possível.
+A árvore binária completa (ABC) tem que se a profundidade da árvore é $d$, então cada nó folha está no nível $d-1$ ou no nível $d$. O nível $d-1$ pode estar totalmente preenchido, mas não é uma regra. Além disso, os nós folhas no nível $d$ estão todos mais à esquerda possível.
 
-Para implementar esse tipo de árvore podemos adotar uma organização sequencial, de modo que para um vetor indexado a partir da posição 0, se um nó está na posição $i$, seus filhos diretos estão nas posições $2_{i}+1$, filho da esquerda, e $2_{i}+2$, filho da direita.
+Para implementar esse tipo de árvore podemos adotar uma organização sequencial, de modo que para um vetor indexado a partir da posição 0, se um nó está na posição $i$, seus filhos diretos estão nas posições $2 \times i+1$, filho da esquerda, e $2 \times i+2$, filho da direita.
 
 A vantagem é que vamos ocupar o espaço necessário só para armazenar o conteúdo e temos ligações implícitas. Já a desvantagem é que teremos espaços vagos se a árvore não é completa por níveis ou, então, se sofrer eliminação.
 ### Árvore Binária Perfeitamente Balanceada
@@ -540,7 +540,7 @@ Quando comparamos lista com ABB, percebemos que o tempo de busca é estimado pel
 
 A inserção com ABB segue o algoritmo a seguir:
 - Procure um "local" para inserir o novo nó, começando a procura a partir do nó-raiz
-- Se um ponteiro (filho esquerdo/direito de um nó raiz) nulo é atingido, coloque o novo nó como sendo filho do nó-raiz
+- Se um ponteiro (filho esquerdo/direito de um nó raiz) nulo é atingido, coloque o novo nó como sendo filho do nó raiz
 - Para cada nó raiz de uma sub-árvore compare:
 	- Se o novo nó possui chave menor do que a a chave do nó-raiz, vai para a sub-árvore esquerda
 	- Se a chave é maior do que a chave do nó-raiz, vai para sub-árvore direita
@@ -607,7 +607,7 @@ A remoção em ABB precisa considerar alguns casos no seu algoritmo:
 	- O nó contendo o menor valor da sub-árvore direita pode "ocupar" o lugar
 	- Ou o maior valor da sub-árvore esquerda pode "ocupar o lugar"
 ~~~C
-boolean abb_remover_aux (NO **raiz, int chave){
+bool abb_remover_aux (NO **raiz, int chave){
 	NO *p;
 	if(*raiz == NULL)
 		return (FALSE);
@@ -646,7 +646,7 @@ void troca_max_esq(NO *troca, NO *raiz, NO *ant){
 	free(troca); troca = NULL;
 }
 
-boolean abb_remover(ABB *T, int chave){
+bool abb_remover(ABB *T, int chave){
 	if (T != NULL)
 		return (abb_remover_aux(&T->raiz, chave));
 	return (FALSE);
@@ -661,7 +661,7 @@ O custo da busca em ABB:
 - Busca é eficiente se a árvore está razoavelmente balanceada
 	- $O(\log_{2}n)$
 
-O custo da remoção em ABB:
+O custo da inserção em ABB:
 - A inserção requer uma busca pelo lugar da chave, portanto, com custo de uma busca qualquer (tempo proporcional à altura da árvore)
 - O custo da inserção, após a localização do lugar, é constante, não depende do número de nós
 - Logo, tem complexidade análoga à da busca
@@ -685,7 +685,7 @@ A árvore dita como ABB "aleatória" tem as seguintes características:
 
 As consequências das operações de inserção e remoção são:
 - Uma ABB balanceada ou perfeitamente balanceada tem organização ideal para buscas
-- Inserções e eliminações podem desbalancear uma ABB, tornando  futuras buscas ineficientes
+- Inserções e eliminações podem desbalancear uma ABB, tornando futuras buscas ineficientes
 - Possível solução:
 	- Construir uma ABB inicialmente perfeitamente balanceada
 	- Após várias inserções/eliminações, aplicamos um processo de rebalanceamento
@@ -759,7 +759,7 @@ O primeiro passo é fazer uma rotação direita em $B$. Ao realizar essa rotaç�
 ![[Pasted image 20241207170339.png]]
 O segundo passo é fazer uma rotação esquerda em $A$. Repare que a altura final da sub-árvore é $n+2$, ou seja, a altura se manteve intacta. Isso funciona também se o novo nó tivesse sido inserido em $T_{2}$.
 #### Como decidir qual rotação usar
-Para decidir se usamos uma rotação simples ou dupla olhamos o sinal dos nós. Se o sinal do nó $A$ e do nó $B$ forem igual, então a rotação é simples. Entretanto, se o final do nó $A$ e do nó $B$ forem diferentes, então a rotação é dupla.
+Para decidir se usamos uma rotação simples ou dupla olhamos o sinal dos nós. Se o sinal do nó $A$ e do nó $B$ forem igual, então a rotação é simples. Entretanto, se o sinal do nó $A$ e do nó $B$ forem diferentes, então a rotação é dupla.
 
 Considerando as rotações simples, para decidir se a rotação é direita ou esquerda usamos o fator de balanceamento. Se o fator de balanceamento do nó $A$ (nó mais jovem a se tornar desbalanceado) for positivo, então a rotação é direita. Porém, se o fator de balanceamento do nó $A$ (nós mais jovem a se tornar desbalanceado) for negativo, então a rotação é esquerda.
 
@@ -1021,6 +1021,8 @@ A árvore rubro-negra é um outro tipo de árvore balanceada de busca. A versão
 Nesse tipo de árvore, no pior caso, a altura será $h \leq 2 \log(n)$.
 
 A inserção nesse tipo de árvore é igual na ABB, porém todo nó inserido possui aresta incidente vermelha (a aresta que liga ele à raiz é vermelha).
+
+O primeiro nó inserido é preto.
 #### Inserção em nó (pai) sem incidência vermelha
 Se vamos inserir um nó sem incidência vermelha (não há uma aresta vermelha no pai) temos dois casos, ou iremos inserir ele como filho esquerdo ou como filho direito.
 
@@ -1034,7 +1036,7 @@ Para a inserção em nó com incidência vermelha, temos três possíveis casos,
 
 As rotações à esquerda e à direita são parecidas com AVL. Veja abaixo.
 ![[Pasted image 20241207220018.png]]
-A inversão de corer é quando invertemos a cor de todas as arestas das quais o pai faz parte. Veja abaixo.
+A inversão de cores é quando invertemos a cor de todas as arestas das quais o pai faz parte. Veja abaixo.
 ![[Pasted image 20241207220111.png]]
 Importante ressaltar que nenhum das três operações infringe a regra 3. 
 
@@ -1064,7 +1066,7 @@ Fazendo um resumo da inserção, temos que:
 - Pode quebrar regras 1 e 2 (mas depois é preciso arrumar)
 - Operações locais (inverter e rotacionar) corrigem os problemas localmente
 - Operação inverte
-	- Propaga aresta vermelha para cimar
+	- Propaga aresta vermelha para cima
 	- Pode ser tratada recursivamente como inserção
 	- Até alcançar um nó
 		- Sem incidência vermelha; ou
@@ -1175,8 +1177,91 @@ Uma heap é uma árvore binária que satisfaz as propriedades a seguir:
 	- As folhas do nível $h$ estão todas mais a esquerda
 
 Uma convenção para trabalharmos com heaps é que o último nó é o nó interno mais à direita de profundidade $h$, ou seja, esse nó está no último nível.
+
+A heap é usada como estrutura de apoio para algoritmos clássicos:
+- Ordenação
+	- Heapsort
+	- Mergesort
+- Algoritmos em grafos
+	- Algoritmo de Dijkstra: busca de menor caminho em grafo ponderado
+	- Algoritmo de Prim: geração de MST (Minimal Spaning Tree - Árvore Geradora Mínima)
 #### Altura de uma heap
 Uma heap armazenando $n$ nós possui altura $h$ de ordem $O(\log n)$. A prova do teorema anterior, é: "Dado que existem $2^{i}$ chaves na profundidade $i = 0, ..., h-1$ e ao menos 1 chave na profundidade $h$ tem-se que: $n \geq 1 + 2 + 4 + ...+ 2^{h-1} + 1$. Isso é uma progressão geométrica (PG) com razão $q = 2$. Dado que a soma de uma PG pode ser calculada por $$ S_{k} = \frac{a^{k} \times q-a_{1}}{q - 1},$$ temos que $(2^{h-1} \times 2 - 1)+ 1 = 2^{h}$. Logo, $n\geq 2$, então, $h \leq \log_{2}n \longrightarrow h$ é $O(\log n)$." 
+#### Fila de prioridade com arranjo
+Os vetores podem ser empregados para representar árvores binárias. Nessa implementação, caminhamos pela árvore nível por nível, da esquerda para direita, armazenando os nós no vetor. O primeiro nó fica na posição $0$ do vetor, seu filho a esquerda fica na posição $1$, e assim por diante.
+
+Usando essa definição, quando tivermos o índice de um item, podemos encontrar:
+- Filho esquerdo: $2\times índice + 1$
+- Filho direito: $2 \times índice + 2$
+- Pai: $\displaystyle \frac{índice - 1}{2}$
+
+Como a heap é uma árvore completa, o vetor não vai ter "buracos" faltando itens. Os itens que faltam sempre ficam no fim do vetor. Se a árvore não fosse completa, teríamos "buracos" no vetor.
+##### Implementação
+Veja abaixo a estrutura:
+~~~C
+// .h
+typedef struct heap_sequencial HEAP_SEQUENCIAL;
+
+#define TAM 100
+
+// .c
+struct heap_sequencial {
+	ITEM* vetor[TAM];
+	int fim;
+}
+
+// main.c
+HEAP_SEQUENCIL* Heap;
+~~~
+Agora, veja os métodos básicos:
+~~~C
+HEAP_SEQUENCIAL *hep_criar() {
+    HEAP_SEQUENCIAL *heap = (HEAP_SEQUENCIAL*) malloc(sizeof(HEAP_SEQUENCIAL));
+    if (heap != NULL) {
+        heap->fim = -1;
+    }
+    return heap;
+}
+
+int heap_cheia(HEAP_SEQUENCIAL *heap) {
+    return (heap->fim == TAM - 1);
+}
+
+int heap_vazia(HEAP_SEQUENCIAL *heap) {
+    return (heap->fim == -1);
+}
+
+~~~
+Segue o código da inserção:
+~~~C
+int heap_enfileirar(HEAP_SEQUENCIAL *heap, ITEM *item) {
+    if (!heap_cheia(heap)) {
+        heap->fim++;
+        heap->vetor[heap->fim] = item;
+        heap_fix_up(heap);
+        return 1;
+    }
+
+    return 0;
+}
+
+void heap_swap(HEAP_SEQUENCIAL *heap, int i, int j) {
+    ITEM *tmp = heap->vetor[i];
+    heap->vetor[i] = heap->vetor[j];
+    heap->vetor[j] = tmp;
+}
+
+void heap_fix_up(HEAP_SEQUENCIAL *heap) {
+    int w = heap->fim;
+    int pai = (w - 1) / 2;
+
+    while (w > 0 && item_get_chave(heap->vetor[w]) > item_get_chave(heap->vetor[pai])) {
+        heap_swap(heap, w, pai);
+        w = pai;
+        pai = (pai - 1) / 2;
+    }
+}
+~~~
 # Fila de Prioridade
 Nessa estrutura de dados os elementos são processados de acordo com sua importância, independentemente do momento que entraram na fila. Alguns exemplos são:
 - Atendimento preferencial em geral
@@ -1220,19 +1305,69 @@ Portanto uma abordagem mais rápida precisa ser pensada quando grandes conjuntos
 Nesse tipo de implementação, iremos armazenar um item em cada nó. Mantém-se o controle sobre a localização do último nó ($w$). Remove-se sempre o item armazenado na raiz, devido a propriedade de ordem da heap:
 - Heap mínima: menor chave na raiz da heap
 - Heap máxima: maior chave na raiz da heap
-
+### Inserção
 O método insere do TAD fila de prioridade corresponde à uma inserção de um item na heap. O algoritmo tem três passos:
 1. Encontrar e criar nó de inserção $z$ (novo último nó depois de $w$)
 2. Armazenar o item com chave $k$ em $z$
 3. Restaurar ordem da heap
 ### Restauração da Ordem (fix-up)
 Após a inserção de um novo item, a propriedade de ordem da heap pode ser violada. Por isso temos que restaurar a ordem da heap trocando os itens caminho acima a partir do nós de inserção (em outras palavras, a manutenção é feita na volta da recursão). A restauração termina quando o item inserido alcança a raiz ou um nó cujo pai possui uma chave maior (ou menor).
+### Remoção
+O método da remoção do TAD fila de prioridade corresponde a remoção do item da raiz. O algoritmo consiste em três passos:
+- Armazenar o conteúdo do nó raiz da heap (para retorno)
+- Copiar o conteúdo de $w$ (último nó) no nó raiz e remover o nó $w$
+- Restaurar ordem da heap
+
+O uso do último nó para substituir a raiz tem algumas vantagens, entre elas temos:
+completude garantida (passo 2) e implementação em tempo constante através de arranjo.
+### Restauração da Ordem (fix-down)
+Após a remoção, a propriedade de ordem da heap pode ser violada. Por isso, é preciso restaurar a ordem trocando os item caminho abaixo a partir da raiz. O algoritmo de fix-down termina quando o item movido para a raiz alcança um nó que não possui filho com chave maior que a sua.
 ## Implementação
+A inserção é:
+~~~C
+inserirNoFim(F)
+fix_up(F)
+~~~
 Para uma heap máxima temos a seguinte implementação de restauração de ordem:
 ~~~C
+//fix_up:
 w = F.ultimo;
 while((!isRoot(F,w)) && (key(F,w) > key(F, parent(F,W)))){
 	swap(F,w,parent(F,w));
 	w = parent(F,w)
 } 
+
 ~~~
+A remoção é:
+~~~C
+x = inicio(F)
+inicio(F) = fim(F)
+fix_down(F)
+~~~
+Para uma heap máximo, temos a seguinte implementação da restauração de ordem:
+~~~C
+w = inicio(F);
+while(tem_filho(w)){
+	m = maior_filho(w);
+	if(chave(w) >= chave(m)){
+		break;
+	}
+	swap(F, w, m);
+	w = m;
+}
+~~~
+## Comparação
+Via fila ordenada:
+- Inserção é $O(n)$
+- Remoção é $O(1)$
+- Próximo é $O(1)$
+
+Via fila não-ordenada:
+- Inserção é $O(1)$
+- Remoção é $O(n)$
+- Próximo é $O(n)$
+
+Via heap:
+- Inserção é $O(\log n)$
+- Remoção é $O(\log n)$
+- Próximo é $O(1)$
