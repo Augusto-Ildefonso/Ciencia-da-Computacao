@@ -1,5 +1,5 @@
 # Ciência da Computação
-Este repositório contém os meus estudos sobre diversas áreas da Computação.
+Este repositório contém anotações sobre diversas áreas de estudo.
 
 Ele é divido em:
 - Segurança da Informação
