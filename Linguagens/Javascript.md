@@ -7,6 +7,24 @@ O javascript possui dois tipos de variáveis principais: let e const. As variáv
 O javascript tem tipagem fraca (o javascript decide automaticamente o tipo das variáveis). Por causa disso, é necessário um cuidado, principalmente ao fazer comparações pois o javascript converte automaticamente (geralmente para número) os tipos de variáveis. Então em uma comparação tipo `' ' == 0` ele dará que é verdadeiro. Para evitar isso, pode-se utilizar `===` que é um operador de comparação que compara o tipo também.
 
 Para concatenar textos com variáveis (tipo a fstring do python) usa-se as crases para escrever a string e o operador ${} para escrever a variável.
+
+Para declarar uma variável usamos:
+~~~js
+var x = 1;
+
+ou
+
+let x = 1;
+
+ou
+
+const x = 1;
+~~~
+Quando usamos `new` para criar uma variável, estamos falando para o javascript que estamos criando um objeto. Um objeto é um dado que possui métodos com os quais pode ser operado. Métodos permitem realizar operações sobre objetos.
+~~~js
+var image = new SimpleImage('nome_da_imagem.png')
+~~~
+
 # Operador Ternário
 É uma simplificação da estrutura if.
 ~~~js
