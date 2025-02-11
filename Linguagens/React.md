@@ -58,7 +58,11 @@ Pode-se usar JSX dentro do component também:
 ~~~jsx
 import React from 'react';  
   
+<<<<<<< HEAD
 export default function Primeiro(){  
+=======
+export default  function Primeiro(){  
+>>>>>>> 4f0f45b2b323508e4b22a0ac405aa8e60e0f4d9f
     const msg = 'Seja bem-vindo(a)'  
     return(  
         <div>  
