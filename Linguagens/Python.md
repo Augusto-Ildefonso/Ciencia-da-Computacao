@@ -1,3 +1,30 @@
+# Sintaxe
+# Python Identifiers
+Um Python Identifier é um nome usado para identificar uma variável, função, classe, módulo ou outro objeto. Um Identifier como com a letra ``A`` até ``Z`` ou ``a`` até ``z`` ou um ``_``
+seguido por nenhuma ou mais letras, ``_`` ou dígitos de `0` até `9`. O Python é case sensitive, ou seja, há diferença entre letras maiúsculas e minúsculas.
+
+O Python tem algumas convenções para seus Identifiers:
+- O nome de classes no Python começa com uma letra maiúscula, já todos os outros identifiers começam com letra minúscula.
+- Começar o identifier com um único `_` indica que o identifier é um identifier privado.
+- Começar o identifier com dois `_` indica que ele é uma identifier fortemente privado
+- Se o identifier começar e terminar com dois `_`, então o identifier é um nome especial definido da linguagem.
+# Palavras Reservadas
+Palavras reservadas são palavras que não podem ser usadas como constantes, variáveis ou qualquer outro identifier. Veja a lista abaixo.
+
+| and     | as       | assert   |
+| ------- | -------- | -------- |
+| break   | class    | continue |
+| def     | del      | elif     |
+| else    | except   | False    |
+| finally | for      | from     |
+| global  | if       | import   |
+| in      | is       | lambda   |
+| None    | nonlocal | not      |
+| or      | pass     | raise    |
+| return  | True     | try      |
+| while   | with     | yield    |
+# Indentação
+
 # Tipo None
 O tipo de dado None em Python representa o tipo sem tipo, ou poderia ser conhecido também como tipo vazio, porém falar que é um tipo sem tipo é mais apropriado
 
