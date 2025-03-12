@@ -36,7 +36,7 @@ Essa nova proposta tem como base:
 
 Esses conceitos foram implementados no IAS em 1952, no Instituto de Estudos Avançados de Princeton.
 ### Estrutura de uma Máquina de von Neumann
-![[Pasted image 20250227090656.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250227090656.png)
 ### Estrutura do IAS
 ![[Pasted image 20250227090736.png]]
 ## 2ª Geração -> Transistores
@@ -94,4 +94,72 @@ A velocidade do processador aumentou muito, assim como a capacidade da memória.
 - Mudar interface da DRAM, incluindo cache na pastilha
 - Reduzir frequência de acessos à memória, usando estruturas de caches mais complexas, tanto na DRAM quanto no processador
 - Aumentar a largura de banda dos barramentos, tornando-os mais velozes e colocando uma hierarquia de barramentos
+## Dispositivos de E/S
+- Periféricos com demandas intensas de E/S
+- Grandes demandas de vazão de dados
+- Processadores podem tratar disso
+- Problema de movimentar dados
+- Soluções:
+	- Caching
+	- Buffering
+	- Barramentos de interconexão de maior velocidade
+	- Estruturas de barramentos mais elaboradas 
+## A chave é o balanço
+- Componentes do processador
+- Memória Principal
+- Dispositivos de E/S
+- Estruturas de Interconexão
+## Feedback
+Evolução dos computadores foi marcada por:
+- maior velocidade dos processadores
+- diminuição do tamanho dos componentes
+- maior capacidade (densidade) das memórias
+- maior capacidade e velocidade de E/S
+Velocidades maiores vêm da diminuição do tamanho:
+- menores distâncias entre os componentes
+- ganhos reais de desempenho vêm de mudanças na organização
+	- pipeline, execução paralela, especulativa e predição de desvios
+Balanceamento no desempenho dos componentes:
+- Ex.: ganhos na velocidade do processador podem ser prejudicados por atrasos devido à
+velocidade da memória 
+	- possíveis soluções: cache, barramentos mais largos, entre outras
+# Conceitos Gerais
+## Arquitetura de von Neumann
+Ela tem três pontos importantes:
+- Dados e instruções estão armazenados na memória
+- A memória é endereçada pela posição
+- A execução das instruções é sequencial
+## Programa
+O programa é uma sequencia de passos que tem operações:
+- lógica/aritmética
+- carregar/armazenar dados na memória
+- controle (muda a sequencia de execução)
 
+Cada operação requer um conjunto de sinais de controle.
+![[Pasted image 20250306084327.png]]
+Cada operação tem um só código. A unidade de controle gera todos os sinais de controle para que as instruções sejam executadas corretamente.
+## Componentes
+- CPU -> UC + ULA + Bloco de registradores (Livro do Patterson & Hennessy, caminho de dados/unidade de controle)
+- Memória -> armazena dados e instruções
+- Dispositivos de E/S -> fazem a comunicação com o usuário
+## Ciclo de instrução
+O ciclo de instrução é composto das seguintes etapas:
+- Busca (busca implica memória) da instrução
+- Execução da instrução (é dividida em)
+	- Decodificação (UC)
+	- Execução (ULA)
+## Ciclo de busca
+Esse ciclo busca a informação na memória. O PC aponta a próxima instrução a ser executada. O MAR (é o registrador que faz a interface do PC com o barramento) recebe o que está no PC (MAR = PC). O MBR recebe a posição de memória que o MAR estava apontando (MBR = memória(MAR)). O IR recebe o que está no MBR (IR = MBR). Por fim, PC recebe ele mesmo mais um valor que varia (por exemplo, PC = PC + 1). MBR significa memory buffer register (as imagens são da mesma arquitetura só que possuem algumas coisas q tem em uma e na outra não).
+![[ciclo de busca.png]]
+![[aula_11_03_2025 1.png]]
+Opcode é entrada para unidade de controle.
+## Ciclo de execução
+A UC <span style="color:rgb(0, 132, 255)">decodifica</span> a<span style="color:rgb(0, 0, 0)"> instrução</span> e gera os sinais de controle. Em seguida, <span style="color:rgb(0, 132, 255)">executa</span> a instrução. A execução tem quatro possibilidades:
+- Execução processador-memória: são aquelas que fazem transferência de dados entre o processador e a memória (load e store)
+- Execução processador-E/S
+- Execução de processamento de dados: qualquer operação aritmética
+- Execução de controle: jumps por exemplo
+# Arquitetura RISC-V
+## CISC vs RISC
+CISC significa *Complex Instruction Set Computer* e ela tem uma grande quantidade de instruções e elas são complexas, isso quer dizer que ela tem instruções de tamanhos variados e vários tipo de instruções.
+Já RISC significa *Reduced Instruction Set Computer* e ela tem poucas instruções e elas são mais simples, isso quer dizer que tem poucos tipos de instruções, com todas do mesmo tamanho e só as instruções de carga e armazenamento acessam a memória.
