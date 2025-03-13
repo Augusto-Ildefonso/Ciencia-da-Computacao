@@ -161,5 +161,88 @@ A UC <span style="color:rgb(0, 132, 255)">decodifica</span> a<span style="color:
 - Execução de controle: jumps por exemplo
 # Arquitetura RISC-V
 ## CISC vs RISC
-CISC significa *Complex Instruction Set Computer* e ela tem uma grande quantidade de instruções e elas são complexas, isso quer dizer que ela tem instruções de tamanhos variados e vários tipo de instruções.
-Já RISC significa *Reduced Instruction Set Computer* e ela tem poucas instruções e elas são mais simples, isso quer dizer que tem poucos tipos de instruções, com todas do mesmo tamanho e só as instruções de carga e armazenamento acessam a memória.
+CISC significa *Complex Instruction Set Computer* e ela tem uma grande quantidade de instruções e elas são complexas, isso quer dizer que ela tem instruções de tamanhos variados e vários tipo de instruções. O CISC tem ISA (instruction set architecture) complexo, pois tem muitas instruções, muitos formatos e instruções de tamanhos diferentes.
+Já RISC significa *Reduced Instruction Set Computer* e ela tem poucas instruções e elas são mais simples, isso quer dizer que tem poucos tipos de instruções, com todas do mesmo tamanho e só as instruções de carga e armazenamento acessam a memória. O RISC tem ISA simples, pois tem poucas instruções, poucos formatos e instruções de mesmo tamanho. Além disso, ela é uma arquitetura load/store.
+## História da arquitetura RISC
+Na década de 1980 tivemos os primeiros computadores RISC. Em 1980, foi desenvolvido o IBM 801, que é o antecessor do IBM PC/RT (RISC Technology). Entre 1980 e 1981, Patterson e Séquin desenvolveram o Berkeley RISC I e RISC II, que inspirou o projeto do processador SPARC, da SUN Microsystem. Por fim, em 1981 foi desenvolvido o Stanford MIPS, projetado por Hennessy, que originou a MIPS Computer Systems.
+## RISC-V
+A arquitetura RISC-V tem um conjunto de instrução universal e ela é uma arquitetura aberta. Ela tem vários requisitos:
+- Atender todos os tamanhos de processadores
+- Funcionar bem para uma grande quantidade de softwares e linguagens de programação
+- Acomodar tecnologias de implementação
+- Ser eficiente para todo tipo de microarquitetura (organização)
+- Ser estável (ISA base não deve mudar)
+Atualmente ela é mantida pela fundação RISC-V, que é uma fundação aberta e sem fins lucrativos.
+## Características da arquitetura
+A RISC-V tem uma arquitetura de 32 bits (atualmente existem arquiteturas mais recentes de 64 bits). Ela tem um bando de registradores inteiro de 32 bits e um banco de registradores de ponto flutuante de 32 bits.![[Pasted image 20250313083736.png]]
+## Registradores
+![[Pasted image 20250313083850.png]]
+Os registradores que usaremos são:
+- x0 -> zero
+- x1 -.> ra: return address
+- x2 -> sp: stack pointer
+- x5/x6/x7 -> t0/t1/t2: temporário
+- x8/x9 -> s0/s1: salvo
+- x10/x11 -> a0/a1: argumento de função/retorno de função
+- x12-x17 -> a2-a7: argumento de função
+- x18-x27 ->s2-s11: salvo
+- x28-x31 -> t3-t6: temporário
+Por convenção, o valor desses registradores, quando entrar em uma função e sair dela tem que ter o mesmo valor que tinha antes, ou seja, a convenção é que registrador salvo não deve ser alterado por funções, porém dependendo o caso, é possível alterar o valor dele usando pilhas e depois voltando ao valor inicial.
+Na arquitetura RISC-V a memória é endereçada a byte, ou seja, a menor unidade endereçável é 1 byte (a outra opção sem ser a byte é a palavra, por exemplo palavras de 32 bits, ou 4 bytes, só é possível endereçar de 4 em 4).
+![[Pasted image 20250313090054.png]]
+Os outros tipos de dados são:
+- Byte: 1 byte
+- Halfword: 2 bytes
+- Word (palavra): 4 bytes
+- Float: 4 bytes (Ponto flutuante)
+- Double: 8 bytes (Ponto flutuante)
+- String: não tem um valor definido
+## Conjunto de instruções
+A arquitetura RISC-V possui diversos conjuntos de instruções:
+- RV32I: conjunto base (32 bits) com instruções para operações em inteiro
+- RV32M: instruções de multiplicação e divisão
+- RV32F e RV32D:  instruções de ponto flutuante
+- RV32A: Instruções atômicas
+- RV32C: Instruções compactas, de 16 bits
+- RV32V: Instruções vetoriais (SIMD)
+## Arquitetura Load/Store
+Os valores que tem que ser carregados nos registradores antes de realizar as operações. Não há instruções que operam diretamente em valores na memória.
+## Estrutura do Código
+![[Pasted image 20250313091306.png]]
+## Diretivas
+Diretiva é tudo que é importante para a geração/carga do programa na memória, pois elas vão indicar em que parte da memória carregar as informações. Todas as diretivas começam com um . e não possuem correspondência no código binário gerado, elas servem só para direcionar o montador.
+~~~assembly
+.data
+# dados estáticos do seu código
+# O hashtag é comentário em assembly
+
+.text
+# código
+~~~
+As diretivas dos tipos de dados são:
+- Byte -> .byte
+- Halfword -> .half
+- Word -> .word
+- Float -> .float
+- Double -> .double
+- String -> .asciz
+Outras diretivas são:
+- .globl: ele diz qual é o ponto de entrada do código (onde é o main do programa), ou seja, onde ele quer começar o programa 
+## Hello World em Assembly
+~~~assembly
+	.data
+hello_msg: .asciz "Hello World!" # hello.msg é um label que referencia o primeiro byte da string
+	.text
+	.globl main
+main: la a0, hello_msg
+      li a7, 4 # imprimir string
+      ecall
+      li a7, 10
+      ecall
+~~~
+Pseudo instrução: é uma instrução que não existe implementação na arquitetura, mas depois o montador vai converter ela para instruções que existem. Exemplos:
+- la -> local address, ela carrega no registrador o endereço do 1º byte da string definida no label.
+- li -> load immediate, ela carrega no registrador o valor imediato definido na instrução. Essa instrução é convertida para ``addi a7, zero, 4``.
+O `ecall` é uma chamado ao sistema, essa instrução é usada para transferir o controle para o SO para ele realizar uma operação de entrada e saída. Veja abaixo os códigos do ecall:
+![[Pasted image 20250313094053.png]]
+Os registradores `a2-a7` vão armazenar os parâmetros. Nesse caso o `a7` tem o código da função a ser executada pela ecall. O `a7` é um parâmetro da função a ser executada pelo ecall e o código 4 pega o endereço `a0` do primeiro byte da string a ser impressa
