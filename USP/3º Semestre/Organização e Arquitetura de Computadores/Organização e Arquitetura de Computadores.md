@@ -50,7 +50,7 @@ Um compilador traduz todo o código-fonte de um programa para linguagem de máqu
 Na terceira geração a série IBM360 (1964) substituiu a série 7000 e não havia compatibilidade entre elas. Com a IBM360 foi criada a 1ª família de computadores:
 - Usavam arquitetura do conjunto de instruções similares ou idênticas
 - Tinham sistemas operacionais similares ou idênticos
-- Velocidade crescete
+- Velocidade crescente
 - Número crescente de portas de E/S e terminais
 - Capacidade de memória variada
 - Custo variado
