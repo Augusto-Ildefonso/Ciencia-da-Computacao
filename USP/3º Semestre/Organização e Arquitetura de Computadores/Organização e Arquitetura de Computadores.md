@@ -38,12 +38,12 @@ Esses conceitos foram implementados no IAS em 1952, no Instituto de Estudos Avan
 ### Estrutura de uma Máquina de von Neumann
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250227090656.png)
 ### Estrutura do IAS
-![[Pasted image 20250227090736.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250227090736.png)
 ## 2ª Geração -> Transistores
 Essa geração começou em 1947 com a invenção de transistores por William Shockley el al na Bell Laboratories. Outros pontos importantes dessa segunda geração são: ALU e UC mais complexas, presença de linguagens de programação de alto nível, software de sistema.
 ### Convertendo as linguagens
 Quando temos uma linguagem de alto nível, para poder executar o código dela, o compilador transforma o código em um código em assembly e por fim o assembler converte o assembly para código binário de máquina.
-![[Pasted image 20250227091750.png]]
+![Imagem](https://github.com/Augusto-Ildefonso/Ciencia-da-Computacao/blob/master/Imagens/Pasted%20image%2020250227091750.png?raw=true)
 ### Compilador vs Interpretador
 Um compilador traduz todo o código-fonte de um programa para linguagem de máquina de uma só vez, gerando um arquivo executável que pode ser executado posteriormente sem a necessidade do código original. Já um interpretador analisa e executa o código linha a linha, sem gerar um executável, o que facilita a depuração, mas pode tornar a execução mais lenta. Enquanto compiladores oferecem maior desempenho final, interpretadores trazem mais flexibilidade durante o desenvolvimento.
 ## 3ª Geração -> Diminui o tamanho dos transistores
@@ -58,7 +58,8 @@ Na terceira geração a série IBM360 (1964) substituiu a séria 7000 e não hav
 Além disso essa geração introduziu o conceito de multiprogramação, ou seja, ter vários programas na memória ao mesmo tempo (time-sharing e troca de contexto).
 ### DEC PDP - 8
 O DEC PDP - 8 foi o primeiro minicomputador, pequeno o suficiente para uso em uma bancada de laboratório. Eles eram mais baratos, custando mais ou menos 16 mil dólares, enquanto o IBM360 custava mais de 100 mil dólares. Eles tinham uma estrutura de barramento.
-![[Pasted image 20250227092545.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250227092545.png)
+
 ## 4ª Geração -> Microprocessadores
 Em 1971 surgiu o 4004 que foi o 1º microprocessador. Ele tinha todos os componentes da CPU em um único chip e tinha palavras de 4 bits.
 
@@ -136,7 +137,7 @@ O programa é uma sequencia de passos que tem operações:
 - controle (muda a sequencia de execução)
 
 Cada operação requer um conjunto de sinais de controle.
-![[Pasted image 20250306084327.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250306084327.png)
 Cada operação tem um só código. A unidade de controle gera todos os sinais de controle para que as instruções sejam executadas corretamente.
 ## Componentes
 - CPU -> UC + ULA + Bloco de registradores (Livro do Patterson & Hennessy, caminho de dados/unidade de controle)
@@ -150,8 +151,8 @@ O ciclo de instrução é composto das seguintes etapas:
 	- Execução (ULA)
 ## Ciclo de busca
 Esse ciclo busca a informação na memória. O PC aponta a próxima instrução a ser executada. O MAR (é o registrador que faz a interface do PC com o barramento) recebe o que está no PC (MAR = PC). O MBR recebe a posição de memória que o MAR estava apontando (MBR = memória(MAR)). O IR recebe o que está no MBR (IR = MBR). Por fim, PC recebe ele mesmo mais um valor que varia (por exemplo, PC = PC + 1). MBR significa memory buffer register (as imagens são da mesma arquitetura só que possuem algumas coisas q tem em uma e na outra não).
-![[ciclo de busca.png]]
-![[aula_11_03_2025 1.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/ciclo%20de%20busca.png)
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/aula_11_03_2025%201.png)
 Opcode é entrada para unidade de controle.
 ## Ciclo de execução
 A UC <span style="color:rgb(0, 132, 255)">decodifica</span> a<span style="color:rgb(0, 0, 0)"> instrução</span> e gera os sinais de controle. Em seguida, <span style="color:rgb(0, 132, 255)">executa</span> a instrução. A execução tem quatro possibilidades:
@@ -174,9 +175,9 @@ A arquitetura RISC-V tem um conjunto de instrução universal e ela é uma arqui
 - Ser estável (ISA base não deve mudar)
 Atualmente ela é mantida pela fundação RISC-V, que é uma fundação aberta e sem fins lucrativos.
 ## Características da arquitetura
-A RISC-V tem uma arquitetura de 32 bits (atualmente existem arquiteturas mais recentes de 64 bits). Ela tem um bando de registradores inteiro de 32 bits e um banco de registradores de ponto flutuante de 32 bits.![[Pasted image 20250313083736.png]]
+A RISC-V tem uma arquitetura de 32 bits (atualmente existem arquiteturas mais recentes de 64 bits). Ela tem um bando de registradores inteiro de 32 bits e um banco de registradores de ponto flutuante de 32 bits.![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313083736.png)
 ## Registradores
-![[Pasted image 20250313083850.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313083850.png)
 Os registradores que usaremos são:
 - x0 -> zero
 - x1 -.> ra: return address
@@ -189,7 +190,7 @@ Os registradores que usaremos são:
 - x28-x31 -> t3-t6: temporário
 Por convenção, o valor desses registradores, quando entrar em uma função e sair dela tem que ter o mesmo valor que tinha antes, ou seja, a convenção é que registrador salvo não deve ser alterado por funções, porém dependendo o caso, é possível alterar o valor dele usando pilhas e depois voltando ao valor inicial.
 Na arquitetura RISC-V a memória é endereçada a byte, ou seja, a menor unidade endereçável é 1 byte (a outra opção sem ser a byte é a palavra, por exemplo palavras de 32 bits, ou 4 bytes, só é possível endereçar de 4 em 4).
-![[Pasted image 20250313090054.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313090054.png)
 Os outros tipos de dados são:
 - Byte: 1 byte
 - Halfword: 2 bytes
@@ -208,7 +209,7 @@ A arquitetura RISC-V possui diversos conjuntos de instruções:
 ## Arquitetura Load/Store
 Os valores que tem que ser carregados nos registradores antes de realizar as operações. Não há instruções que operam diretamente em valores na memória.
 ## Estrutura do Código
-![[Pasted image 20250313091306.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313091306.png)
 ## Diretivas
 Diretiva é tudo que é importante para a geração/carga do programa na memória, pois elas vão indicar em que parte da memória carregar as informações. Todas as diretivas começam com um . e não possuem correspondência no código binário gerado, elas servem só para direcionar o montador.
 ~~~assembly
@@ -244,5 +245,5 @@ Pseudo instrução: é uma instrução que não existe implementação na arquit
 - la -> local address, ela carrega no registrador o endereço do 1º byte da string definida no label.
 - li -> load immediate, ela carrega no registrador o valor imediato definido na instrução. Essa instrução é convertida para ``addi a7, zero, 4``.
 O `ecall` é uma chamado ao sistema, essa instrução é usada para transferir o controle para o SO para ele realizar uma operação de entrada e saída. Veja abaixo os códigos do ecall:
-![[Pasted image 20250313094053.png]]
+![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313094053.png)
 Os registradores `a2-a7` vão armazenar os parâmetros. Nesse caso o `a7` tem o código da função a ser executada pela ecall. O `a7` é um parâmetro da função a ser executada pelo ecall e o código 4 pega o endereço `a0` do primeiro byte da string a ser impressa
