@@ -22,7 +22,7 @@ Obs: x32 ou x64 é referente ao número de registradores da CPU, esses registrad
 # Evolução e Questões de Desempenho
 ## 1ª Geração -> Válvulas
 ### ENIAC
-O ENIAC (Electronic Numerical Integrator And Computer) é o primeiro computador digital eletrônica de grande escala. Ele foi feito por John Presper Eckert e John Mauchly no laboratório de pesquisas balísticas do exército americano, ele ia ser usado num projeto para cálculo de alcance e trajetória de projéteis. Ele iniciou em 1943 e terminou em 1946, muito tarde para todo o esforço da guerra. Ele foi usado até 1955.
+O ENIAC (Electronic Numerical Integrator And Computer) é o primeiro computador digital eletrônico de grande escala. Ele foi feito por John Presper Eckert e John Mauchly no laboratório de pesquisas balísticas do exército americano, ele ia ser usado num projeto para cálculo de alcance e trajetória de projéteis. Ele iniciou em 1943 e terminou em 1946, muito tarde para todo o esforço da guerra. Ele foi usado até 1955.
 
 Ele foi programado manualmente por chaves (switches), por isso ele era complexo, demorado e suscetível à erros. Para resolver isso é preciso retirar a programação do hardware e inseri-la na memória. Assim a memória principal passou a armazenar programas e dados.
 ### von Neumann/Turing
@@ -47,8 +47,8 @@ Quando temos uma linguagem de alto nível, para poder executar o código dela, o
 ### Compilador vs Interpretador
 Um compilador traduz todo o código-fonte de um programa para linguagem de máquina de uma só vez, gerando um arquivo executável que pode ser executado posteriormente sem a necessidade do código original. Já um interpretador analisa e executa o código linha a linha, sem gerar um executável, o que facilita a depuração, mas pode tornar a execução mais lenta. Enquanto compiladores oferecem maior desempenho final, interpretadores trazem mais flexibilidade durante o desenvolvimento.
 ## 3ª Geração -> Diminui o tamanho dos transistores
-Na terceira geração a série IBM360 (1964) substituiu a séria 7000 e não havia compatibilidade entre elas. Com a IBM360 foi criada a 1ª família de computadores:
-- Usavam arquitetar do conjunto de instruções similares ou idênticas
+Na terceira geração a série IBM360 (1964) substituiu a série 7000 e não havia compatibilidade entre elas. Com a IBM360 foi criada a 1ª família de computadores:
+- Usavam arquitetura do conjunto de instruções similares ou idênticas
 - Tinham sistemas operacionais similares ou idênticos
 - Velocidade crescete
 - Número crescente de portas de E/S e terminais
