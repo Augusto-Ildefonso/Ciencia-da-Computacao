@@ -40,3 +40,16 @@ A teoria da informação é uma ferramenta matemática para determinar a quantid
 Ele estudou a transferência de informação em canais de comunicação. Desse estudo ele obteve a fórmula de Shannon:
 $$H^{n}_{i = 1} = - \sum P_{i} \, \log_{2} \, P_{i}$$
 Onde $n$ é o número de diferentes símbolos, $P_{i}$ é a probabilidade de ocorrência do símbolo $i$ e o $H$ é chamado de entropia. A entropia vai nos dar o valor mínimo de compressão que dá para obter.
+A eficiência de um esquema de compressão pode ser anali (pegar dos slides)
+### Objetivos e Problemas
+O objetivo da compressão sem perdas é gerar códigos com a quantidade mínima possível de bits.
+Os problemas desse tipo de compressão são:
+- Tamanho do código: fixo ou variável
+- Propriedade do prefixo: nenhum código de tamanho menor pode ser prefixo de um código de tamanho maior
+- Como gravar apenas os bits dos códigos gerados?
+### Codificação de Huffman
+Esse algoritmo resolve o problema do prefixo. Ele é um método estatístico que faz análise da frequência relativa dos símbolos. Ele usa árvores binárias não balanceadas, nas quais os símbolos estão nas folhas (essa árvore também é chamada de árvore de huffman)
+#### Como fazer o algoritmo?
+Para construir uma árvore de Huffman é necessário obter a frequência dos símbolos:
+- Os símbolos com maior frequência devem ter os menores códigos
+- Monta-se uma lista ordenada pela frequência

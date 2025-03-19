@@ -14,7 +14,7 @@ Os erros sistemáticos são cometidos de forma autêntica durante o experimento,
 ### Erros Aleatórios ou Estatísticos
 Os erros aleatórios são causados por mudanças aleatórias, não controladas, nas condições do processo de medida, incluindo o operador, os instrumentos, o ambiente e o próprio sistema físico. Esses erros são os mais importantes de analisar. Esse tipo de erro é inevitável, mas pela sua natureza aleatória é possível definir estratégias experimentais para minimizá-los e para estimar o quanto influenciam na confiabilidade do resultado numérico.
 ## Incerteza em Medidas Diretas
-Devido a existência de erros aleatórios, não é possível garantir que o resultado numérico $x_i$ obtido na medida de uma grandeza física $X$ será reprodutível caso repita o experimento. Desse modo, uma série de $N$ medidas pode mostrar uma dispersão dos valores e quando a dispersão é aleatória, aparecem valores acima e abaixo do valor verdadeira com a mesma probabilidade. Por causa disso, ao calcular a média aritmética dos $x_i$, dada pela equação abaixo, os erros aleatórios tendem a se cancelar mutuamente.
+Devido a existência de erros aleatórios, não é possível garantir que o resultado numérico $x_i$ obtido na medida de uma grandeza física $X$ será reprodutível caso repita o experimento. Desse modo, uma série de $N$ medidas pode mostrar uma dispersão dos valores e quando a dispersão é aleatória, aparecem valores acima e abaixo do valor verdadeiro com a mesma probabilidade. Por causa disso, ao calcular a média aritmética dos $x_i$, dada pela equação abaixo, os erros aleatórios tendem a se cancelar mutuamente.
 $$\bar{x} = \frac{\sum^{N}_{i = 1}x_{i}}{N}$$
 Para um $N$ suficientemente grande de medidas, podemos esperar que $\bar{x}$ se aproxime do valor verdadeiro e o resultado do experimento seja cada vez mais exato.
 Para mensurar a incerteza provável associada à dispersão dos resultados do experimento, existem duas formas comuns que permitem avaliar o grau de dispersão: o desvio médio e o desvio padrão.
@@ -27,14 +27,14 @@ $$\bar{x} \pm \sigma$$
 Ou de forma menos rigorosa:
 $$\bar{x} \pm \Delta$$
 A conclusão mais importante a se tirar disso é que o resultado do experimento não é simplesmente um valor mais provável, mas sim um intervalo de confiança que dá uma ideia de magnitude dos erros aleatórios afetando o experimento. Os experimentos de maior precisão são aqueles cujo desvio padrão é menor.  É importante ressaltar que um experimento preciso é diferente de um experimento exato, isso porque a presença de erros sistemáticos podem afastar todos os valores $x_{i}$ do valor verdadeiro.
-Apesar das fórmulas dos desvios mostrarem que os desvios tendem a reduzir quando o $N$ aumento (visto que são inversamente proporcionais) e, assim, poderíamos aumentar a precisão simplesmente repetindo as medidas, isso é falso. Isso porque a precisão da medida está limitada pela precisão dos próprios instrumentos, logo quando os valores calculados para os desvios são menores que a precisão $D$ do instrumento, a incerteza será dada pelo próprio valor $D$:
+Apesar das fórmulas dos desvios mostrarem que os desvios tendem a reduzir quando o $N$ aumenta (visto que são inversamente proporcionais) e, assim, poderíamos aumentar a precisão simplesmente repetindo as medidas, isso é falso. Isso porque a precisão da medida está limitada pela precisão dos próprios instrumentos, logo quando os valores calculados para os desvios são menores que a precisão $D$ do instrumento, a incerteza será dada pelo próprio valor $D$:
 $$\bar{x} \pm D$$
 ### Dados sem dispersão
 Em algumas medidas diretas, pode ocorrer de todos os valores $x_{i}$ medidos serem idênticos ou difiram no máximo no valor da mínima divisão da escala do instrumento $D$. Nesse caso a dispersão é nula e não há necessidade de calcular a média, pois o resultado do experimento é único. Isso significa que os erros aleatórios são pequenos, menores que a precisão $D$ do instrumento. Nesse caso, a incerteza do experimento pode ser atribuída à D e o resultado da medida é:
 $$x_{i} \pm D$$
 ### Forma correta de expressar o resultado de uma medida
 ![[Pasted image 20250317220255.png]]
-## Incerteza em medidas indiretas propagação de erros
+## Incerteza em medidas indiretas: propagação de erros
 Quando uma grandeza $z$, medida de forma indireta, é uma função de várias grandezas medidas de forma direta, junto das suas incertezas ($x \pm \Delta x, y \pm \Delta y, ...$), sua incerteza será determinada a partir das incertezas das grandezas medidas.
 Existe uma forma de calcular a propagação das incertezas para qualquer operação matemática elementar ou função. Supondo $z = f(x, y, ...)$ com as incertezas ($x \pm \Delta x, y \pm \Delta y, ...$), a incerteza propagada pode ser calculada como:
 $$\Delta z = \left| \frac{ \partial f}{\partial x} \right| \Delta x \, + \left| \frac{ \partial f }{ \partial y } \right| \Delta y \, + \, ...$$
