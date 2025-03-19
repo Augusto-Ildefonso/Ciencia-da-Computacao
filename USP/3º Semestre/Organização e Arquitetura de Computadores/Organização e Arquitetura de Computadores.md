@@ -246,3 +246,14 @@ Pseudo instrução: é uma instrução que não existe implementação na arquit
 O `ecall` é uma chamado ao sistema, essa instrução é usada para transferir o controle para o SO para ele realizar uma operação de entrada e saída. Veja abaixo os códigos do ecall:
 ![[Pasted image 20250313094053.png]]
 Os registradores `a2-a7` vão armazenar os parâmetros. Nesse caso o `a7` tem o código da função a ser executada pela ecall. O `a7` é um parâmetro da função a ser executada pelo ecall e o código 4 pega o endereço `a0` do primeiro byte da string a ser impressa
+## Acesso a Memória
+A arquitetura RISC-V é endereçada a byte e com palavra de 32 bits. Dizer que ela é endereçada a byte significa que os endereços iniciais de cada palavra começam sempre em múltiplos de 4. Veja abaixo a imagem para entender melhor.
+![[Pasted image 20250318105436.png]]
+### Ordenação
+A ordenação define como um valor grande (no caso uma palavra de 4 bytes) será quebrada em vários pedaços pequenos (no caso em bytes) para colocar na memória. Dessa forma, o conceito de ordenação só tem sentido quando se está falando de memória. A ordenação pode ser de dois tipos: big-endian e little-endian.
+O big-endian armazena o byte mais significativo no menor endereço. Já o little-endian armazena o byte mais significativo no maior endereço. A RISC-V é little-endian. Em outras arquiteturas, como a MIPS, ela é bi-endian, ou seja, ela tem a capacidade de comutar entre as duas ordenações, de acordo com a máquina hospedeira.
+![[Pasted image 20250318112103.png]]
+### Diretiva .align
+Essa diretiva enquadra os dados na memória de modo que ele se enquadre em $2^{n}$ bytes. Exemplos:
+- .align 2: utilizado para alinhar valores inteiros de 32 bits ($2^2 = 4$ bytes)
+- .align 0: utilizado para alinhar caracteres ($2^{0} = 1$ byte)

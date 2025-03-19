@@ -125,4 +125,15 @@ raios = [2, 5, 7.1, 0.3, 10, 44]
 
 areas = map(area, raios)
 ```
-Após utilizar a função map, o resultado dele zerá após o primeiro uso do resultado
+Após utilizar a função map, o resultado dele zerá após o primeiro uso do resultado.
+# Data Science
+A principal biblioteca usada será o `Pandas`. Para instalá-lo é preciso rodar:
+```
+$ pip install pandas
+```
+A parte mais importante da biblioteca são os dataframes. Eles armazenam dados parecidos com tabelas. O pandas tem métodos poderosos para muitos procedimentos feitos com esse tipo de dado.
+Para ler um csv como dataframe é necessário usar a função:
+~~~python
+df = pd.read_csv(caminho_do_csv)
+~~~
+O método `describe` imprime diversas informações estatísticas acerca do dataframe. O `count` informa quantas linhas tem valores não vazios. O `mean` é a média. O `std` é o desvio padrão que mede a dispersão dos valores. O `min`, é o menor valor da coluna. O `max` é o maior valor da coluna. Os `25%`, `50%` e `75%` mostram a porcentagem dos dados menores ou iguais o valor que aparece na frente.

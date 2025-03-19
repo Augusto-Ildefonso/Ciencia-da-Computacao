@@ -13,6 +13,7 @@ Uma linguagem dita segura é quando você pode baixar e rodar um pacote sem medo
 # Por que chama programação funcional?
 A palavra-chave para responder a pergunta é função, mas não o que conhecemos como função em outras linguagens, mas sim da ideia de função matemática. Programação Funcional é um paradigma de programação em que definimos programas a partir de funções que se comportem como funções matemáticas. Vale destacar que as funções não podem ter efeitos colaterais, por exemplo, uma função printa algo e retorna o valor.
 # Haskell
+## Introdução
 ~~~haskell
 main = do -- Monad
   putStrLn "Hello World!" -- Essa função putStrLn imprime uma linha de string na tela
@@ -79,3 +80,57 @@ O bloco `do` permite sequenciar múltiplas operações `IO`, tornando o código 
 Podemos usar parênteses no lugar do $ mas o mais comum em haskell é o $ pois o estilo de programação em haskell é dessa forma.
 
 O Haskell só calcula aquilo que realmente precisa, por exemplo na linha `putStrLn $ show $ g x`, o``x`` não é usado na função ``g`` então ele não é calculado e por isso não dá erro no código. Além disso, essa função é polimórfica, pois ela não depende do tipo de `t`
+## Guardas em Haskell
+Usamos a estrutura de guardas para poder escrever funções definidas por partes. Enquanto em outras linguagens usamos if then e else. Veja a seguir.
+~~~haskell
+sinal x
+	| x < 0 = -1
+	| x == 0 = 0
+	| otherwise = 1
+
+--Soma dos positivos de uma lista
+somaPos [] = 0 -- A soma positiva de uma lista vazia é 0
+somaPos (x:xs)
+  | x > 0 = x + somaPos xs
+  | otherwise = somaPos xs
+
+baskara a b c
+   | delta < 0 = []
+   | delta == 0 = [x]
+   | otherwise = [x', x'']
+     where 
+       delta = b ^ 2 - 4 * a * c
+       x = (-b) / (2 * a)
+       x' = (-b + sqrt delta) / (2 * a)
+       x'' = (-b - sqrt delta) / (2 * a)
+~~~
+O `otherwise` é true, tanto que poderia substituir ele por ``True``. É importante ter ele porque na função acima mesmo, sem ``otherwise`` teriam valores de x para os quais a função não funcionaria
+## Entrada e Saída de Dados
+~~~haskell
+main = do
+  la <- getLine -- Leio a linha a como string
+  let a = read la -- Converto de string para número
+  lb <- getLine -- Leio a linha b como string
+  let b = read lb -- Converto de string para número
+  lc <- getLine -- Leio a linha c como string
+  let c = read lc -- Converto de string para número
+  let res = explica $ baskara a b c
+  putStrLn $ res
+    where
+	  explica [] = "Nao ha raizes"
+	  explica [x] = "Ha uma raiz: " ++ show x
+	  explica [x1, x2] = "Ha duas raizes: " ++ show x1 ++ ", " ++ show x2
+  
+baskara a b c
+   | delta < 0 = []
+   | delta == 0 = [x]
+   | otherwise = [x', x'']
+     where
+       delta = b ^ 2 - 4 * a * c
+       x = (-b) / (2 * a)
+       x' = (-b + sqrt delta) / (2 * a)
+       x'' = (-b - sqrt delta) / (2 * a)
+~~~
+O `read` é o contrário do show, enquanto ele converte o tipo qualquer para string, o `read` converte a string para qualquer tipo que você precisar automaticamente, ele entende se é número, lista, árvore, etc. Ele sabe para qual tipo converter a string a partir da análise de para que você usa ele, tanto que se lesse uma variável que não é usada no código ele dá erro pois o read não tem como saber para qual tipo converter.
+Para funções impuras como a main, a ordem importa, ela é lida em ordem. Já em funções impuras a ordem não importa, ela não é executada em ordem.
+A `<-` é usada para atribuições de funções impuras, já o `=` é usado para função pura, em conjunto com o `let`.
