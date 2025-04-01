@@ -53,3 +53,27 @@ Esse algoritmo resolve o problema do prefixo. Ele é um método estatístico que
 Para construir uma árvore de Huffman é necessário obter a frequência dos símbolos:
 - Os símbolos com maior frequência devem ter os menores códigos
 - Monta-se uma lista ordenada pela frequência
+# Áudio
+## O que é o som?
+O som é um fenômeno físico e é uma onda mecânica.
+## Características físicas do som
+### Amplitude
+A amplitude é a intensidade. Ela está relacionada ao volume do som. Quanto maior a amplitude, mais alto ouvimos o som. A amplitude é medida em decibeis (dB).
+(colocar tabela)
+### Frequência
+A frequência determina a altura do som (ou seja, altura é diferente de volume). Frequências altas tem uma altura maior e geram sons agudos. Já frequências baixas tem altura menor e geram sons graves.
+(colocar tabela)
+## Digitalização de áudio
+### Princípios de Digitalização
+A princípio temos duas transformações:
+- Eletrônica: conversão de ondas mecânicas em sinais elétricos
+- Digital: conversão de sinais elétricos em bits
+A transformação eletrônica trabalha com um sinal de áudio que é analógico.
+
+(ver dos slides)
+- 8000 Hz -> fala, telefonia
+- 44100 Hz -> para música
+
+- 4 bits -> telefonia mas voz estranha
+- 8 bits -> telefonia usada hoje
+- 16 bits -> tele conferência

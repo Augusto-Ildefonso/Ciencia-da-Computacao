@@ -50,3 +50,35 @@ $$|x_{1} - x_{2}| < 2 (\sigma_{1} + \sigma_{2})$$
 Essa relação indica que a separação entre os valores é, no máximo, duas vezes a combinação das incertezas. Por outro lado, os resultados serão considerados como não equivalentes quando
 $$|x_{1} - x_{2}| > 3 (\sigma_{1} + \sigma_{2})$$
 Quando o valor da diferença $|x_{1} - x_{2}|$ fica entre as condições expressas entre as equações acima, o resultado desses experimentos não é suficientemente conclusivo para afirmar se há equivalência ou não entre as medidas.
+# Tabela de Dados e Gráficos
+## Tabelas
+Muitas vezes os experimentos tem resultados que vinculam duas grandezas físicas, ou dois parâmetros, formando o par $(x, y)$. Esse par pode ser representado diretamente em uma tabela de duas colunas. Cada grandeza tabelada deve ser identificada no cabeçalho de sua respectiva coluna junto com suas unidades. Se a incerteza dos valores for a mesma para todos, ela pode ser expressa no cabeçalho também, se não, deve ser expressa junto de cada valor.
+Cada tabela deve ter um número de identificação que deve ser usado no texto para referenciá-la. Além disso também deve ter uma legenda acima, explicando brevemente o conteúdo. Se necessário usa-se notação científica para simplificar os números.
+### Dicas para criar boas tabelas
+- Identifique a tabela com um número (ex.: Tabela 1), que será usado para citá-la no texto, e coloque no topo uma breve legenda explicativa do conteúdo.
+- Indique, no topo de cada coluna, a grandeza física e suas unidades.
+- Use notação científica para reduzir a quantidade de dígitos. Se a potência de 10 é a mesma para todos os valores, coloque-a no topo da tabela junto às unidades.
+- Indique a incerteza dos dados. Se for a mesma para todos, indique no topo da coluna.
+## Gráficos
+A representação dos dados através de gráficos tem a vantagem de permitir visualizar a relação entre as grandezas analisadas. Existem algumas regras gerais para elaboração de gráficos, que são aceitas pela comunidade científica:
+- O gráfico sempre deve estar numerado e ter uma legenda explicativa, de maneira que o leitor compreenda essencialmente o que se representa sem ter de ler o texto do relatório.
+- Os eixos do gráfico devem conter legendas que indiquem claramente a grandeza, as unidades e, se houver, o fator exponencial dos dados representados.
+- As escalas de cada eixo devem ser escolhidas para visualizar claramente o comportamento extremo dos dados. Dependendo da situação, não é obrigatório que a escala abranja a origem $(0,0)$ dos eixos de coordenadas.
+- A numeração das escalas deve ser equilibrada, correspondendo a números redondos. Nunca se colocam os valores dos dados experimentais sobre os eixos; para isso existe a tabela.
+- O tamanho dos símbolos deve ser suficientemente claro para identificar o dado experimental. Quando a incerteza 𝜎 (ou ∆) do dado é maior que o tamanho do símbolo sobre o gráfico, é conveniente traçar as barras de incerteza de comprimento േ𝜎 (ou േ∆). Na figura 2.1, são mostradas as barras de incerteza na variação dos comprimentos. A incerteza na temperatura é menor que o tamanho do círculo e, portanto, não se encontra representada no gráfico.
+-  A grandeza representada no eixo horizontal usualmente é escolhida como aquela que é melhor controlada durante o experimento; o aparelho experimental permite variá-la independentemente e tem menor incerteza relativa que a outra grandeza.
+- Se o gráfico evidencia uma relação linear entre as grandezas físicas representadas, é possível traçar a reta que mais perfeitamente represente essa relação. Ela deve ser a melhor aproximação aos dados experimentais em média e pode ser traçada graficamente de acordo com o critério do observador. Alternativamente, existem métodos quantitativos para determinar univocamente os coeficientes angular e linear.
+### Dicas para criar bons gráficos
+- A variável independente deve ser representada, sempre que possível, no eixo horizontal.
+- Linearize os dados quando for possível, operando sobre as colunas ou usando escalas logarítmicas.
+- Escolha as escalas de forma a aproveitar a maior área possível do gráfico com os dados. Porém, você deve encontrar um compromisso para que isso não resulte em escalas esdrúxulas (por exemplo com divisões fracionárias).
+- Identifique as grandezas sobre os eixos e suas unidades.
+- Numere as escalas com poucos números redondos. Use notação científica para reduzir os dígitos.
+- Desenhe claramente os dados experimentais e, caso haja mais de um conjunto, use símbolos (círculos, quadrados, cruzes etc.) ou cores diferentes.
+- Quando a incerteza dos dados for maior que o tamanho do símbolo, coloque bandas de erro.
+- Identifique o gráfico com um número (ex.: Figura 1), que será usado para citá-lo no texto. Coloque uma breve legenda no gráfico.
+## Linearização e escalas logarítmicas
+As escalas lineares são aquelas em que as divisões mantêm sempre a mesma relação de escala. Existem outras escalas possíveis, cuja relação não se mantém fixa, que podem ser convenientes para evidenciar certos comportamentos dos dados representados.  Como a reta é o único traço que pode ser facilmente visualizado sem ambiguidades sobre um gráfico, as transformações de escala mais úteis são aquelas que tendem a linearizar o gráfico dos dados experimentais.
+### Linearização dos dados
+Quando existe uma presunção sobre a relação matemática entre as duas grandezas y e x, representadas em um gráfico, é possível transformar os próprios dados para revelar se essa relação proposta é correta.
+Por exemplo, temos um gráfico no qual é possível ver que a relação de x e y não é linear. Porém não há como saber se é quadrática, cúbica, etc. Então, cria-se uma nova variável a partir da suposição (exemplo $X = x^{3}$) e representa-se graficamente X e y. Supondo que na representação fique claro que a relação entre as quantidade é linear. Assim, comprovou-se a teoria de que $y = \alpha x^{3}$ e o valor do coeficiente angular $\alpha$ pode ser calculado diretamente pela inclinação da reta.

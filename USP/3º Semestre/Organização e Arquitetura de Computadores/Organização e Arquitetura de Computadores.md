@@ -75,7 +75,7 @@ Ou seja, houve uma mudança de paradigma, não de arquitetura específica. Em de
 - Computação ubíqua ou pervasiva
 - Encolhimento dos CIs e embarcando a computação
 ## Lei de Moore (1965)
-Com o aumento da densidade dos componentes  em um chip, Gordon Moore (co-fundador da intel) propôs uma lei que dizia:
+Com o aumento da densidade dos componentes em um chip, Gordon Moore (co-fundador da intel) propôs uma lei que dizia:
 - O número de transistores no chip dobrará a cada 18-24 meses
 - Custo de um chip permaneceu quase o mesmo
 
@@ -150,10 +150,11 @@ O ciclo de instrução é composto das seguintes etapas:
 	- Decodificação (UC)
 	- Execução (ULA)
 ## Ciclo de busca
-Esse ciclo busca a informação na memória. O PC aponta a próxima instrução a ser executada. O MAR (é o registrador que faz a interface do PC com o barramento) recebe o que está no PC (MAR = PC). O MBR recebe a posição de memória que o MAR estava apontando (MBR = memória(MAR)). O IR recebe o que está no MBR (IR = MBR). Por fim, PC recebe ele mesmo mais um valor que varia (por exemplo, PC = PC + 1). MBR significa memory buffer register (as imagens são da mesma arquitetura só que possuem algumas coisas q tem em uma e na outra não).
+Esse ciclo busca a informação na memória. O PC aponta a próxima instrução a ser executada. O MAR (é o registrador que faz a interface do PC com o barramento) recebe o que está no PC (MAR = PC). O MBR recebe o valor da posição de memória que o MAR estava apontando (MBR = memória(MAR)). O IR recebe o que está no MBR (IR = MBR). Por fim, PC recebe ele mesmo mais um valor que varia (por exemplo, PC = PC + 1). MBR significa memory buffer register (as imagens são da mesma arquitetura só que possuem algumas coisas q tem em uma e na outra não).
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/ciclo%20de%20busca.png)
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/aula_11_03_2025%201.png)
 Opcode é entrada para unidade de controle.
+$$PC \longrightarrow MAR \longrightarrow memória \longrightarrow MBR \longrightarrow IR \longrightarrow PC + 1$$
 ## Ciclo de execução
 A UC <span style="color:rgb(0, 132, 255)">decodifica</span> a<span style="color:rgb(0, 0, 0)"> instrução</span> e gera os sinais de controle. Em seguida, <span style="color:rgb(0, 132, 255)">executa</span> a instrução. A execução tem quatro possibilidades:
 - Execução processador-memória: são aquelas que fazem transferência de dados entre o processador e a memória (load e store)
@@ -167,7 +168,7 @@ Já RISC significa *Reduced Instruction Set Computer* e ela tem poucas instruç�
 ## História da arquitetura RISC
 Na década de 1980 tivemos os primeiros computadores RISC. Em 1980, foi desenvolvido o IBM 801, que é o antecessor do IBM PC/RT (RISC Technology). Entre 1980 e 1981, Patterson e Séquin desenvolveram o Berkeley RISC I e RISC II, que inspirou o projeto do processador SPARC, da SUN Microsystem. Por fim, em 1981 foi desenvolvido o Stanford MIPS, projetado por Hennessy, que originou a MIPS Computer Systems.
 ## RISC-V
-A arquitetura RISC-V tem um conjunto de instrução universal e ela é uma arquitetura aberta. Ela tem vários requisitos:
+A arquitetura RISC-V tem um conjunto de instrução universal e ela é uma arquitetura aberta e de propósito geral. Isso significa que ela é projetada para ser flexível e capaz de executar uma ampla variedade de tarefas computacionais, ao contrário de arquiteturas especializadas que são otimizadas para funções específicas. Ela tem vários requisitos:
 - Atender todos os tamanhos de processadores
 - Funcionar bem para uma grande quantidade de softwares e linguagens de programação
 - Acomodar tecnologias de implementação
@@ -175,7 +176,7 @@ A arquitetura RISC-V tem um conjunto de instrução universal e ela é uma arqui
 - Ser estável (ISA base não deve mudar)
 Atualmente ela é mantida pela fundação RISC-V, que é uma fundação aberta e sem fins lucrativos.
 ## Características da arquitetura
-A RISC-V tem uma arquitetura de 32 bits (atualmente existem arquiteturas mais recentes de 64 bits). Ela tem um bando de registradores inteiro de 32 bits e um banco de registradores de ponto flutuante de 32 bits.![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313083736.png)
+A RISC-V tem uma arquitetura de 32 bits (atualmente existem arquiteturas mais recentes de 64 bits). Ela tem um banco de registradores inteiro de 32 bits e um banco de registradores de ponto flutuante de 32 bits.![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313083736.png)
 ## Registradores
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313083850.png)
 Os registradores que usaremos são:
@@ -188,7 +189,7 @@ Os registradores que usaremos são:
 - x12-x17 -> a2-a7: argumento de função
 - x18-x27 ->s2-s11: salvo
 - x28-x31 -> t3-t6: temporário
-Por convenção, o valor desses registradores, quando entrar em uma função e sair dela tem que ter o mesmo valor que tinha antes, ou seja, a convenção é que registrador salvo não deve ser alterado por funções, porém dependendo o caso, é possível alterar o valor dele usando pilhas e depois voltando ao valor inicial.
+Por convenção, o valor dos registradores salvo, quando entrar em uma função e sair dela tem que ter o mesmo valor que tinha antes, ou seja, a convenção é que registrador salvo não deve ser alterado por funções, porém dependendo o caso, é possível alterar o valor dele usando pilhas e depois voltando ao valor inicial.
 Na arquitetura RISC-V a memória é endereçada a byte, ou seja, a menor unidade endereçável é 1 byte (a outra opção sem ser a byte é a palavra, por exemplo palavras de 32 bits, ou 4 bytes, só é possível endereçar de 4 em 4).
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313090054.png)
 Os outros tipos de dados são:
@@ -207,7 +208,7 @@ A arquitetura RISC-V possui diversos conjuntos de instruções:
 - RV32C: Instruções compactas, de 16 bits
 - RV32V: Instruções vetoriais (SIMD)
 ## Arquitetura Load/Store
-Os valores que tem que ser carregados nos registradores antes de realizar as operações. Não há instruções que operam diretamente em valores na memória.
+Os valores tem que ser carregados nos registradores antes de realizar as operações. Não há instruções que operam diretamente em valores na memória.
 ## Estrutura do Código
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313091306.png)
 ## Diretivas
@@ -245,7 +246,6 @@ Pseudo instrução: é uma instrução que não existe implementação na arquit
 - la -> local address, ela carrega no registrador o endereço do 1º byte da string definida no label.
 - li -> load immediate, ela carrega no registrador o valor imediato definido na instrução. Essa instrução é convertida para ``addi a7, zero, 4``.
 O `ecall` é uma chamado ao sistema, essa instrução é usada para transferir o controle para o SO para ele realizar uma operação de entrada e saída. Veja abaixo os códigos do ecall:
-<<<<<<< HEAD
 ![[Pasted image 20250313094053.png]]
 Os registradores `a2-a7` vão armazenar os parâmetros. Nesse caso o `a7` tem o código da função a ser executada pela ecall. O `a7` é um parâmetro da função a ser executada pelo ecall e o código 4 pega o endereço `a0` do primeiro byte da string a ser impressa
 ## Acesso a Memória
@@ -259,6 +259,111 @@ O big-endian armazena o byte mais significativo no menor endereço. Já o little
 Essa diretiva enquadra os dados na memória de modo que ele se enquadre em $2^{n}$ bytes. Exemplos:
 - .align 2: utilizado para alinhar valores inteiros de 32 bits ($2^2 = 4$ bytes)
 - .align 0: utilizado para alinhar caracteres ($2^{0} = 1$ byte)
-=======
-![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250313094053.png)
-Os registradores `a2-a7` vão armazenar os parâmetros. Nesse caso o `a7` tem o código da função a ser executada pela ecall. O `a7` é um parâmetro da função a ser executada pelo ecall e o código 4 pega o endereço `a0` do primeiro byte da string a ser impressa.
+Devemos colocar o ``.align 2`` depois do `.text` e antes do `.globl` pois as instruções são words.
+### Instruções para acessar a memória
+A função `load` (carga) carrega dados da memória principal para o banco de registradores. As instruções começam com `l` e são seguidas por uma letra que especifica a quantidade de bytes que serão carregados:
+- w: word (4 bytes)
+- b: byte (1 byte)
+- f: float (4 bytes)
+O formato da instrução é `lw reg_destino, deslocamento (reg_base)`. Ela armazena em reg_destino o conteúdo da memória do endereço reg_base.
+### Store (armazenamento na memória)
+Essas instruções armazenam dados do banco de registradores na memória principal. As intruções começam com `s` e seguem a mesma regra das instruções de carga. Formato: `sw <reg_origem>, deslocamento (reg_base)`. Ela armazena o conteúdo do `reg_origem` no endereço de memória (`reg_base`) mais deslocamento.
+### Str_cpy Estático
+![[Pasted image 20250325103034.png]]
+O `0` no fim é o terminador de strings, ou seja, o `\0`.
+Parte do código:
+~~~assembly
+		.data
+str_src: .asciz "Oi mãe!!"
+str_dst: .space 11
+
+loop:
+		la s0, str_src
+		la s1, str_dst
+		lb t0, 0(s0)
+		sb t0, 0(s1)
+		addi s0, s0, 1
+		addi s1, s1, 1
+		bne t0, zero, loop
+~~~
+O `.space` reserva na memória o número de bytes que foi passado para ele.
+### Alocação dinâmica
+A alocação dinâmica é o serviço 9 (sbrk) da `ecall`. O parâmetro é:
+- ``a0``: número de bytes a ser reservado na heap
+O retorno é:
+- ``a0``: endereço do 1º byte endereçado
+### Str_cpy Dinâmico
+![[Pasted image 20250325113014.png]]
+~~~assembly
+		.data
+		.align 0
+str_src:	.asciz "Oi mae!!"
+		.align 2
+	p:		.word # ponteiro
+		.text
+		.align 2
+		.globl main
+		
+main:		# Contar o número de caracteres da string
+		# t1: contador
+		li t1, 0
+		# s0: endereço
+		la s0, str_src
+		# t0: caracter lido
+loop_tam:	lb t0, 0(s0)
+		addi s0, s0, 1 # incrementa a posição de memória (avança para o próximo caracter)
+		addi t1, t1, 1 # incrementa o contador
+		bne t0, zero, loop_tam # branch para inicio do loop caso a posição não seja 0
+		
+		# Alocação dinâmica na heap
+		li a7, 9
+		# Tamanho em a0
+		add a0, t1, zero
+		ecall # a0 = endereço do 1º byte reservado na heap
+		# Tudo acima foi para reservar a memória na heap, agora temos que colocar no ponteiro o endereço do primeiro byte (da heap) que tem o conteúdo alocado
+
+		# Armeanar o endereço do 1º byte (a0) na posição de memória p
+		la t2, p
+		# Escrever em t2 o conteúdo de a0
+		sw a0, 0(t2) # s -> store, w -> word
+		
+		# Preparar para copiar
+		# s0 = endereço string origem
+		la s0, str_src
+		# s1 = endereço string destino
+		la t2, p
+		lw s1, 0(t2)
+		
+		# Fazer a cópia
+loop_cpy:	lb t0, 0(s0)
+		sb t0, 0(s1)
+		# Avança na string
+		addi s0, s0, 1
+		addi s1, s1, 1
+		bne t0, zero, loop_cpy
+		
+		# Imprimir a string copiada
+		li a7, 4
+		# a0 = endereço da string a ser impressa
+		la t2, p
+		lw a0, 0(t2)
+		ecall
+		# Encerramos
+		li a7, 10
+		ecall
+~~~
+## Função e Procedimento
+A princípio procedimento não retorna nada, já função retorna algo. Será usada uma convenção em que os parâmetros das funções estarão sempre entre `a0` e `a7` e o retorno estará sempre em `a0` ou `a1`.
+Para fazer funções precisamos de duas instruções: ``jal`` e `jr`. A `jal` significa jump and link. A sintaxe é: `jal <reg>, label`. Ela desvia para o label e salva PC + 4 (ou seja, salva o endereço da próxima instrução no `<reg>`). A `jal` é como se fosse a chamada pois ela que desvia. A `jal` faz um desvio incondicional, salvando o endereço de memória da próxima instrução no `ra` (convenção). Já a `jr` significa jump register e ela faz o PC = `<reg>`, ou seja, PC aponta para a próxima instrução (como se fosse o retorno). A sintaxe dela é: `jr <reg>`. A `jr` faz um desvio incondicional para o endereço armazenado em $ra (convenção).
+O registrador ra é sempre utilizado para armazenar o endereço de retorno. Então, o que acontece quando se tem chamadas de procedimentos aninhadas? Deve-se utilizar a pilha para salvar o valor do registrador ra.
+#### Procedimentos
+Para realizar procedimentos:
+1. Colocar os parâmetros em um local onde o procedimento possa encontrá-lo
+2. Transferir o controle para o procedimento
+3. Adquirir os recursos de armazenamento necessários para o procedimento
+4. Realizar a tarefa desejada
+5. Colocar o valor de retorno em um local onde o programa que chamou possa acessá-lo
+Temos a seguinte convenção para os registrados:
+- `a0` e `a1`: argumento de funções e valores de retorno
+- `a2` a `a7`: argumento de funções
+- `ra`: endereço de retorno

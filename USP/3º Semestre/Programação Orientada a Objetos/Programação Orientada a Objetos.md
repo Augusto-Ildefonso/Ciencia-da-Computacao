@@ -11,7 +11,7 @@ O paradigma orientado a objetos modela um sistema em termos de objetos, que são
 ## Paradigma funcional
 O paradigma funcional se baseia no uso de funções puras e imutabilidade de dados, priorizando a expressão de lógica matemática na programação.
 A recursão e a composição de funções são características essenciais desse paradigma, promovendo a modularização e o reuso de código.
-Ela tem um foco forte na descrição de comportamento e na minimização de efeitos colaterais torna o funciona adequado para ambientes concorrentes e distribuídos.
+Ela tem um foco forte na descrição de comportamento e na minimização de efeitos colaterais o que torna o funcionamento adequado para ambientes concorrentes e distribuídos.
 Exemplos de linguagens são: Lisp, Haskell e Scala.
 ## Paradigma lógico
 As linguagens principais são Prolog, Datalog, Answer set Programing. Ele tem uma abordagem baseada em lógica matemática e regras de inferência. Ela trabalha com resolução de problemas a partir de fatos, regras e consultas.
@@ -81,3 +81,236 @@ A composição de objetos envolve a criação de objetos complexos combinando v�
 ### Membros estáticos
 É como se fosse uma variável global. Ela é uma variável da classe em si e não somente do objeto. Então ela modifica valores para todos os objetos da classe. Podem ser tanto atributos estáticos quando métodos estáticos.
 Por exemplo, numa classe que representa cadeira. Se tivermos criando várias cadeiras e tivermos um atributo estático que conta quantas cadeiras, quando imprimirmos esse valor ele terá a quantidade de cadeira, desde que o valor seja alterado toda vez que uma cadeira é criada.
+# Ambiente de Programação JAVA
+## Java Oracle
+Existem diversos compiladores e ferramentas Java. O mais usado é o da oracle, o Java Plataform, Standard Edition (JDK). Ele inclui um conjunto de ferramentas e código que permite o desenvolvimento de aplicações Java. O Java utiliza uma máquina virtual (JVM) para executar o "executável"
+## Primeiro programa
+~~~java
+public class MeuPrograma
+{
+	public static void main(String args[])
+	{
+		System.out.println("Meu primeiro programa Java.")
+	}
+}
+~~~
+## Compilando
+Rodamos o seguinte comando para compilar
+```
+$ javac MeuPrograma.java
+```
+Esse arquivo é o arquivo "executável" do seu programa Java. Na verdade, ele contém uma representação intermediária do seu programa. Essa representação precisa da JVM.
+O nome do arquivo tem que ser o mesmo nome usado para a classe.
+## Executando
+Rodamos o seguinte comando para executar.
+```
+$ java MeuPrograma
+```
+Esse comando vai procurar o arquivo e vai executá-lo, através da JVM. Em tese ela interpreta o código Java. Ela segue a lógica "*Write once, run anywhere*" (WORA), isso significa que qualquer máquina que tem a JVM vai executar o programa independente da arquitetura.
+# Linguagem Java
+## Uma classe em Java
+O modificador de acesso `public` torna essa classe acessível a outras classes. Isso significa que outras classes, independentemente de estarem no mesmo pacote ou em pacotes diferentes, ordem criar instâncias dessa classe.
+Veja abaixo um exemplo para uma classe chamada cadeira.
+~~~java
+public class Cadeira
+{
+	String posicao;
+	boolean ocupado;
+	// Métodos
+	void sentar(){ 
+	}
+	void levantar(){
+	}
+	void virar(){
+	}
+	String getPosicao(){
+	}
+	
+}
+~~~
+Tem um erro no código, pois cada membro tem que ter o seu controle de acesso. Veja o código arrumado abaixo.
+~~~java
+public class Cadeira
+{
+	// Atributos
+	private String posicao;
+	private boolean ocupado;
+	
+	// Métodos
+	public void sentar(){ 
+	}
+	public void levantar(){
+	}
+	public void virar(){
+	}
+	public String getPosicao(){
+	}
+	
+}
+~~~
+Os membros declarados como ``private`` significa que esse membro só pode ser acessado dentro da própria classe onde foi definido. Isso cria um encapsulamento dos detalhes internos da classe, impedindo o acesso direto a esses membros por outras classes.
+Já os membros declarados como ``public`` são acessíveis de fora da classe em que são definidos. Isso significa que eles podem ser acessados e utilizados por outras classes, independentemente de estarem no mesmo pacote ou em pacotes diferentes.
+Também é preciso que a classe tenha um construtor. O construtor é um método que tem o mesmo nome da classe. Ele não tem um tipo declarado. Podemos ter mais do que um construtor.
+~~~java
+public class Cadeira
+{
+	// Atributos
+	private String posicao;
+	private boolean ocupado;
+
+	// Construtores
+	public Cadeira(){
+	}
+	public Cadeira(String p, boolean oc){
+	}
+	
+	// Métodos
+	public void sentar(){ 
+	}
+	public void levantar(){
+	}
+	public void virar(){
+	}
+	public String getPosicao(){
+	}
+	
+}
+~~~
+Veja que ela tem dois construtores. Isso pode ser feito e para selecionar qual deles usar é só passar os parâmetros de acordo com os parâmetros do construtor. Veja abaixo.
+~~~java
+c1 = new Cadeira(); // Usa o primeiro construtor
+c2 = new Cadeira("Oi", True); // Usa o segundo construtor
+~~~
+Java é uma linguagem com verificação estática de tipos. Por causa disso, todos os membros precisam ser declarados e ter um tipo. Isso permite que o compilador verifique se existe alguma inconsistência.
+Repare nos nomes das classes e dos membros. O padrão (não é regra, mas é convenção) é usar as classes com a primeira letra maiúscula, se tiver duas palavras a primeira letra de cada palavra é maiúscula. Variáveis são todas minúsculas, porém se tiver mais de uma palavra o início das próximas palavras são maiúsculas.
+Os comentários seguem o mesmo padrão da linguagem C.
+## Tipos de dados
+- int -> 4 bytes
+- long -> 8 bytes
+- float -> 4 bytes
+- double -> 8 bytes
+- char -> 2 bytes
+- short -> 2 bytes
+- byte -> 1 byte
+- boolean -> 1 bit
+Em C o int tem o tamanho da palavra que o computador usa, se a palavra da arquitetura for de 4 bytes, o int tem 4 bytes, se a palavra tiver 8 então int tem 8 bytes. Isso não acontece em Java, pois tudo é executado na JVM que segue um padrão fixo. Os tipos da linguagem Java são semelhantes aos tipos da linguagem C. O char tem 2 bytes pois em Java não é usada a representação ASCII, e sim UTF-8 por exemplo.
+Condições de comando como if e while aceita apenas booleano.
+## Operadores
+- Sufixal: ++ ou --
+- Prefixal: ++, --, +, -, !
+- Multiplicativos: ``*``, /, %
+- Aditivos: + ou -
+- Shift binário: <<, >>, >>>
+- Comparativos: <, >, <=, >=, instanceof
+- Igualdade: == ou !=
+- Bit-a-bit E: &
+- Bit-a-bit XOU: ^
+- Bit-a-bit OU: |
+- Lógico E: &&
+- Lógico OU: ||
+- Ternário: ? e :
+- Atribuição: =, +=, -=, $*=$, /=, %=, &=, ^=, |=, <<=, >>= ou >>>=
+Obs: o `==` para strings verifica se os objetos são iguais, ou seja, é como se verificasse se dois ponteiros apontam para a mesma variável, no caso objeto. Para verificar o conteúdo é preciso usar o método `equals`, exemplo: `variável.equals("Meu texto")`
+## Casting
+Em C é possível fazer casting dos tipos. Em Java é obrigatório um muitos casos fazer o casting. Quando há a possibilidade de se perder informação o casting é requerido. Caso seja necessário, o compilador vai avisar.
+Veja abaixo a tabela de conversão.
+![[Pasted image 20250327131614.png]]
+Se for ir de uma variável maior para uma menor é obrigatório o uso do casting, caso contrário não é obrigatório. Além disso, não é possível fazer o casting de uma variável boolean para outro tipo.
+## Declaração de variáveis
+As variáveis podem ser declaradas na hora que forem usadas. Vale a mesma regra de escopo. Por exemplo uma variável declarada dentro de um ``if`` vale apenas naquele escopo. Os parâmetros são variáveis locais.
+## Comandos de seleção
+### If-else
+~~~java
+if (expressão booleana)
+{
+	comando 1;
+	comando 2;
+}
+else {
+	comando 3;
+	comando 4;
+}
+~~~
+### Switch
+~~~java
+switch (s) {
+	case "abc":
+		b = 10;
+		break;
+	case "cde":
+		c = 20;
+		break
+	default:
+		b = 0;
+}
+~~~
+Diferente de C que o valor do case tem que ser um inteiro, aqui em Java pode ser qualquer tipo.
+## Comandos de repetição
+O comando for não muda, mas podemos declarar a variável que será usada como controle. Também existe for para percorrer arrays, strings e outros. Os comandos while não mudam.
+### For (padrão, igual C)
+~~~java
+for (int i = 0; i < 10; i++){
+}
+~~~
+### For (para arrays, strings, etc)
+~~~java
+for (int k : v){
+}
+~~~
+### While
+~~~java
+while (i < 10){
+}
+~~~
+### Do-While
+~~~java
+do{
+} while (i < 10)
+~~~
+## Break e Continue
+Tudo igual ao C, mas podemos ter um rótulo que indica qual comando quebrar ou continuar.
+~~~java
+boolean achou = False;
+label1: // Aqui está o rótulo
+for (int i = 0; i < 10; i++){
+	for (int j = 0; j < 10; j++){
+		if(t[i][j] == 0){
+			achou = True;
+			break label1; // Ele vai dar break no for de fora
+		}
+	}
+}
+~~~
+## Exceções
+Para tratar os erros tem o `try` e `catch`. Qualquer exceção dentro do bloco é tratada. Evita que a exceção seja propagada para quem chamou o método em questão. Se a exceção for propagada, quem fez a chamada ainda pode tratar a exceção.
+~~~java
+try {
+	código
+}
+catch (Exception nome_da_variavel) {
+	código
+}
+~~~
+Obs: O `fscanf` retorna o número de variáveis que leu, assim dá para saber se ocorreu um erro ou não.
+### Tratamento de exceções
+![[Pasted image 20250327131843.png]]
+## Print
+~~~java
+System.out.println(variável ou string);
+~~~
+## Arrays
+
+Em Java, um array é um objeto que tem uma sequência de valores do mesmo tipo.
+~~~java
+private int [] table; // Define uma variável
+
+table = new int[16];
+tamanho = table.length
+
+for (int i = 0; i < tamanho; i++){
+	table[i] = i;
+}
+~~~
+Uma matriz é um array de array. Para criar é semelhante à C, basta só usar int`[][]`.
+## Criando variável
+Além de declarar a variável, é preciso usar o comando `new` para instanciar ela e criá-la de fato.
