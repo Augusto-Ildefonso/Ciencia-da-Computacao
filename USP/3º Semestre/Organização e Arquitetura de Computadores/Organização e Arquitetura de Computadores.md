@@ -19,6 +19,13 @@ Obs:
 - $2^{3} \times 2^{30}$ -> 8 GB
 
 Obs: x32 ou x64 é referente ao número de registradores da CPU, esses registradores são os responsáveis por endereçar as posições de memória.
+O computador encontra-se no coração da computação. Sem ele as disciplinas da computação seriam um ramo da matemática teórica. Sendo assim, devemos estudar a arquitetura e organização pois:
+- Devemos adquirir conhecimentos dos componentes funcionais, suas características, seus desempenhos e suas interações
+- É preciso entender a arquitetura de computadores para estruturar programas, para execução eficiente em uma máquina real
+- Deve-se entender o relacionamento entre componentes e as implicações desses relacionamentos
+Ou seja, não podemos estudar o computador como uma caixa preta.
+# Estrutura e Função
+Estrutura é a maneira na qual componentes relacionam-se entre si. Já função é a operação de componentes individuais, como parte de uma estrutura.
 # Evolução e Questões de Desempenho
 ## 1ª Geração -> Válvulas
 ### ENIAC
@@ -126,10 +133,17 @@ velocidade da memória
 	- possíveis soluções: cache, barramentos mais largos, entre outras
 # Conceitos Gerais
 ## Arquitetura de von Neumann
+A arquitetura proposta por Von Neumann é composta por um conjunto de componentes lógicos básicos mais programação.
+Veja abaixo a visão hierárquica do hardware e das camadas de software.
+![[Pasted image 20250402185625.png]]
 Ela tem três pontos importantes:
 - Dados e instruções estão armazenados na memória
 - A memória é endereçada pela posição
 - A execução das instruções é sequencial
+## Hardware de propósito geral
+Em um hardware de propósito geral, o programa determina uma sequência de passos, onde cada passo faz uma operação aritmética ou lógica e cada operação requer sinais de controle diferentes.
+## Função da unidade de controle
+Para cada operação, um código único é fornecido, por exemplo: ADD, MOVE, etc. A função da unidade de controle interpretar o código e gerar os sinais de controle que executarão a instrução requerida.
 ## Programa
 O programa é uma sequencia de passos que tem operações:
 - lógica/aritmética
@@ -140,27 +154,33 @@ Cada operação requer um conjunto de sinais de controle.
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/Pasted%20image%2020250306084327.png)
 Cada operação tem um só código. A unidade de controle gera todos os sinais de controle para que as instruções sejam executadas corretamente.
 ## Componentes
-- CPU -> UC + ULA + Bloco de registradores (Livro do Patterson & Hennessy, caminho de dados/unidade de controle)
-- Memória -> armazena dados e instruções
-- Dispositivos de E/S -> fazem a comunicação com o usuário
+- CPU -> UC + ULA + Bloco de registradores
+- Memória -> armazena dados e instruções (fornecer instruções e operandos para execução, armazenar resultados fora da CPU)
+- Dispositivos de E/S -> fazem a comunicação com o usuário (mundo exterior) e permite inserir dados e instruções no computador, assim como enviar resultados para fora do computador
 ## Ciclo de instrução
-O ciclo de instrução é composto das seguintes etapas:
+O objetivo do ciclo de instrução é buscar a instrução que está na posição apontada por PC e executá-la. Ele é composto das seguintes etapas:
 - Busca (busca implica memória) da instrução
 - Execução da instrução (é dividida em)
 	- Decodificação (UC)
 	- Execução (ULA)
 ## Ciclo de busca
-Esse ciclo busca a informação na memória. O PC aponta a próxima instrução a ser executada. O MAR (é o registrador que faz a interface do PC com o barramento) recebe o que está no PC (MAR = PC). O MBR recebe o valor da posição de memória que o MAR estava apontando (MBR = memória(MAR)). O IR recebe o que está no MBR (IR = MBR). Por fim, PC recebe ele mesmo mais um valor que varia (por exemplo, PC = PC + 1). MBR significa memory buffer register (as imagens são da mesma arquitetura só que possuem algumas coisas q tem em uma e na outra não).
+Esse ciclo busca a informação na memória. O PC aponta a próxima instrução a ser executada (ele não conta programa algum, apenas aponta para a próxima instrução). O MAR (é o registrador que faz a interface do PC com o barramento) recebe o que está no PC (MAR = PC). O MBR recebe o valor da posição de memória que o MAR estava apontando (MBR = memória(MAR)). O IR recebe o que está no MBR (IR = MBR). Por fim, PC recebe ele mesmo mais um valor que varia (por exemplo, PC = PC + 1, a não ser que a próxima instrução não esteja armazenada na posição seguinte, ou seja, há uma instrução de desvio). MBR significa memory buffer register (as imagens são da mesma arquitetura só que possuem algumas coisas q tem em uma e na outra não).
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/ciclo%20de%20busca.png)
 ![Imagem](https://raw.githubusercontent.com/Augusto-Ildefonso/Ciencia-da-Computacao/refs/heads/master/Imagens/aula_11_03_2025%201.png)
 Opcode é entrada para unidade de controle.
-$$PC \longrightarrow MAR \longrightarrow memória \longrightarrow MBR \longrightarrow IR \longrightarrow PC + 1$$
+$$PC \longrightarrow MAR \longrightarrow bar(endereço) \longrightarrow memória \longrightarrow bar(dados) \longrightarrow MBR \longrightarrow IR \longrightarrow PC + 1$$
+Pode ter um acumulador que é conectado com o MBR.
 ## Ciclo de execução
-A UC <span style="color:rgb(0, 132, 255)">decodifica</span> a<span style="color:rgb(0, 0, 0)"> instrução</span> e gera os sinais de controle. Em seguida, <span style="color:rgb(0, 132, 255)">executa</span> a instrução. A execução tem quatro possibilidades:
+A UC recebe o opcode (nem a UC nem o IR quebra em opcode e endereço/dado, ele já chega assim no IR) <span style="color:rgb(0, 132, 255)">decodifica</span> o opcode e determina quais ações são necessárias, ou seja, a UC configura (gera) os sinais de controle de acordo com a instrução. Em seguida, <span style="color:rgb(0, 132, 255)">executa</span> a instrução. A execução tem quatro possibilidades:
 - Execução processador-memória: são aquelas que fazem transferência de dados entre o processador e a memória (load e store)
 - Execução processador-E/S
 - Execução de processamento de dados: qualquer operação aritmética
 - Execução de controle: jumps por exemplo
+O MBR em ciclo de execução (ou seja, quando ele vai receber dado) envia o valor para o IR e o IR envia para o MAR, ou então ele pode enviar para o próprio acumulador.
+**Decodificação:**
+$$IR \longrightarrow UC \longrightarrow sinais\,de\,controle$$
+**Execução:** a execução tem vários sinais de controle, dependendo da instrução que ele tem que fazer. Por exemplo, sinal para habilitar o acumulador, para fazer operação na ULA, para a ULA escrever no AC (acumulador), etc.
+
 # Arquitetura RISC-V
 ## CISC vs RISC
 CISC significa *Complex Instruction Set Computer* e ela tem uma grande quantidade de instruções e elas são complexas, isso quer dizer que ela tem instruções de tamanhos variados e vários tipo de instruções. O CISC tem ISA (instruction set architecture) complexo, pois tem muitas instruções, muitos formatos e instruções de tamanhos diferentes.
@@ -354,9 +374,9 @@ loop_cpy:	lb t0, 0(s0)
 ~~~
 ## Função e Procedimento
 A princípio procedimento não retorna nada, já função retorna algo. Será usada uma convenção em que os parâmetros das funções estarão sempre entre `a0` e `a7` e o retorno estará sempre em `a0` ou `a1`.
-Para fazer funções precisamos de duas instruções: ``jal`` e `jr`. A `jal` significa jump and link. A sintaxe é: `jal <reg>, label`. Ela desvia para o label e salva PC + 4 (ou seja, salva o endereço da próxima instrução no `<reg>`). A `jal` é como se fosse a chamada pois ela que desvia. A `jal` faz um desvio incondicional, salvando o endereço de memória da próxima instrução no `ra` (convenção). Já a `jr` significa jump register e ela faz o PC = `<reg>`, ou seja, PC aponta para a próxima instrução (como se fosse o retorno). A sintaxe dela é: `jr <reg>`. A `jr` faz um desvio incondicional para o endereço armazenado em $ra (convenção).
+Para fazer funções precisamos de duas instruções: ``jal`` e `jr`. A `jal` significa jump and link. A sintaxe é: `jal <reg>, label`. Ela desvia para o label e salva PC + 4 (ou seja, salva o endereço da próxima instrução no `<reg>`). A `jal` é como se fosse a chamada pois ela que desvia. A `jal` faz um desvio incondicional, salvando o endereço de memória da próxima instrução no `ra` (convenção). Já a `jr` significa jump register e ela faz o PC = `<reg>`, ou seja, PC aponta para a próxima instrução (como se fosse o retorno). A sintaxe dela é: `jr <reg>`. A `jr` faz um desvio incondicional para o endereço armazenado em $ra$ (convenção).
 O registrador ra é sempre utilizado para armazenar o endereço de retorno. Então, o que acontece quando se tem chamadas de procedimentos aninhadas? Deve-se utilizar a pilha para salvar o valor do registrador ra.
-#### Procedimentos
+### Procedimentos
 Para realizar procedimentos:
 1. Colocar os parâmetros em um local onde o procedimento possa encontrá-lo
 2. Transferir o controle para o procedimento
@@ -367,3 +387,236 @@ Temos a seguinte convenção para os registrados:
 - `a0` e `a1`: argumento de funções e valores de retorno
 - `a2` a `a7`: argumento de funções
 - `ra`: endereço de retorno
+### Fatorial com função
+~~~assembly
+		.data
+		.align 0
+str_entrada:	.asciz "Digite um número: "
+str_saida:	.asciz "Fatorial calculado: "
+		.text
+		.align 2
+		.globl main
+main: 		# imprime a string de entrada
+		li a7, 4
+		la a0, str_entrada
+		ecall
+		# lê o valor digitado
+		li a7, 5
+		ecall
+		# salva o valor em s0
+		add s0, zero, a0
+		# chamando função
+		jal fatorial
+		# Salva valor retornado em s1
+		add s1, zero, a1
+		# imprimir str_saida
+		li a7, 4
+		la a0, str_saida
+		ecall
+		# imprimir valor
+		li a7, 1
+		add a0, zero, s1
+		ecall
+		# encerrar
+		li a7, 10
+		ecall
+		
+		# Função fatorial
+		# a0 -> nº a ser calculado
+		# a1 -> valor calculado
+		# retorno inicial
+fatorial:	addi a1, zero, 1
+		# contador
+		add t0, zero, a0
+loop_fat:	beq t0, zero, sai_loop_fat
+		mul a1, a1, t0
+		addi t0, t0, -1
+		j loop_fat
+sai_loop_fat:	jr ra
+
+~~~
+Obs: quando lemos uma string e definimos no a1 o tamanho de temos três possíveis opções:
+- A string ocupa todo o espaço -> sem `\n` e sem `\0`
+- A string não ocupa todo espaço e sobra só 1 caractere -> tem `\n` e não `\0`
+- A string não ocupa todo espaço e sobra 2 ou mai caracteres -> tem `\n` e `\0`
+## Conjunto de Instruções
+Também chamado de ISA (Instruction Set Architecture), elas definem a quantidade e funções dos registradores (bloco de registradores). Existem 6 tipos de instrução (todas de 32 bits):
+- Tipo R - Register
+- Tipo I - Immediate
+- Tipo S - Store
+- Tipo B - Branch
+- Tipo U - Upper
+- Tipo J - Jump
+Em todas as instruções, o opcode vai estar nos 7 primeiros bits (0 a 6). Como temos só 7 bits, estamos limitador a 128 instruções. Mas para contornar isso usamos além do campo do opcode, o campo F3 para especificar a operação, ampliando a capacidade de instruções.
+Das imagens abaixo, o montador vai dividir os bits em grupos de 4 e converter para hexadecimal, ficando por exemplo `0x00012903` e assim em diante. Vale ressaltar que ele não respeita a divisão dos bits entre os registradores. Cada registrador tem um valor, exemplo o `s2` é `x18` e aí salvamos o 18 em binário nos registradores.
+### Tipo R
+![[Pasted image 20250408103739.png]]
+Exemplo de instrução: `add <rd>, <rs1>, <rs2>`.
+### Tipo I
+Todas as instruções que tem um valor imediato definido na instrução.
+![[Pasted image 20250408104633.png]]
+Exemplos de instruções: `addi <rd>, <rs1>, immediate` ou `lw <rd>, imm(<rs1>)`.
+A combinação de f3 + opcode que diz se é `lw` ou `lb`, etc. 
+### Tipo S
+![[Pasted image 20250408105810.png]]
+Exemplo de instrução: `sw <rs2>, imm(<rs1>)`.
+É importante para a arquitetura que os registradores estejam sempre nas mesmas posições, então o `rs1` sempre vai estar entre 15 e 19, o `rs2` entre 20 e 24 e assim em diante. Por isso, o immediate é dividido em duas partes, de modo a não alterar as posições dos registradores.
+A combinação de f3 + opcode que diz se é `sw` ou `sb`, etc.
+### Tipo B
+![[Pasted image 20250408114559.png]]
+Exemplo de instrução: `beq <rs1>, <rs2>, imm`.
+O immediate é o número de meias-palavras que tem do branch até onde é para pular. Como trabalhamos com half-words, o próprio montador, quando gera o assembly, vai colocar o valor 0 no início do valor imediato para multiplicá-lo por 2 e então obter o número de bits. E trabalhamos com half-words pois isso dobra a capacidade de representação, quando comparado com bytes.
+O 12 tem que estar no final pois o último bit tem que ser o de sinal. Por causa disso, não há espaço para o 11 e por isso colocamos ele no primeiro bit do immediate.
+### Tipo U
+![[Pasted image 20250408114526.png]]
+Exemplo de instrução: ``lui <rd>, imm``.
+# RISC-V: Monociclo
+## Caminho de Dados
+## Unidade de Controle
+### Imm Gen
+Para a unidade de controle gerar os sinais de controle, a implementação pode ser feita de acordo com a tabela abaixo.
+
+| Imm Src | Imm Ext                                                            | Tipo Instrução |
+| ------- | ------------------------------------------------------------------ | -------------- |
+| 00      | {{20 x {Inst{31}}}, inst{31:20}}                                   | Tipo I         |
+| 01      | {{20 x {Inst{31}}}, inst{31:25}, inst{11:07}}                      | Tipo S         |
+| 10      | {{19 x {Inst{31}}, inst{31}, inst{7}, inst{30:25}, inst{11:8}, 0}} | Tipo B         |
+### Sinais de Controle
+| Opcode | ALU Src | ALU Op | Imm Src | Branch | Mem Read | Mem Write | Mem Reg | Reg Write |
+| ------ | ------- | ------ | ------- | ------ | -------- | --------- | ------- | --------- |
+| Tipo R | 0       | 10     | XX      | 0      | 0        | 0         | 0       | 1         |
+| lw     | 1       | 00     | 00      | 0      | 1        | 0         | 1       | 1         |
+| sw     | 1       | 00     | 01      | 0      | 0        | 1         | X       | 0         |
+| beq    | 0       | 01     | 10      | 1      | 0        | 0         | X       | 0         |
+| addi   |         |        |         |        |          |           |         |           |
+Para entender o que significa os códigos acima, verifique as informações abaixo.
+- `ALU Src`:
+	- 0 - Bloco Reg
+	- 1 - Imm
+- `ALU Op`:
+	ALU Control
+	- lw/sw/addi: 00
+	- beq: 01
+	- Tipo R: 10
+- `Imm Src`: só verificar o Imm Gen
+- `Branch`:
+	- 0 - $\bar{beq}$
+	- 1 - $beq$
+- `Mem Read`:
+	- 0 - Não lê da memória
+	- 1 - Lê da memória
+- `Mem Write`:
+	- 0 - Não escreve na memória
+	- 1 - Escreve na memória
+- `Mem Reg`:
+	- 0 - é da ULA
+	- 1 - é da memória de dados
+- `Reg Write`:
+	- 0 - Não escreve no banco de registradores
+	- 1 - Escreve no banco de registradores
+## Desvantagem de usar essa arquitetura
+A desvantagem de usar uma arquitetura monociclo é que o ciclo de clock é o suficiente para executar a instrução mais lenta (lw).
+![[Pasted image 20250424090442.png]]
+A solução para essa desvantagem é dividir a execução da instrução em etapas, onde cada etapa é executada em 1 ciclo de clock. Veja abaixo.
+![[Pasted image 20250424091058.png]]
+# RISC-V: Pipeline
+A implementação pipeline consiste em dividir a execução da instrução em etapas. Cada etapa consome 1 ciclo de clock. Além disso, temos a sobreposição das etapas de diferentes instruções no mesmo ciclo de clock. Ou seja, a ideia do pipeline é diversas instruções estarem sendo executadas no mesmo ciclo de clock (usando instruções diferentes) e usando componentes diferentes.
+Nessa implementação, todas as instruções vão passar por todas as etapas (mesmo naquelas que elas não usam), pois se não teremos duas instruções diferentes na mesma etapa no mesmo ciclo de clock. Para evitar isso, fazemos as instruções passar por todas as etapas (gastando um ciclo de clock).
+As etapas são:
+- IF: Busca da instrução, na memória de instruções
+- ID: Decodificação e busca de dados no bando de registradores
+- EX: Execução na ULA
+- MEM: Escrita na memória de dados
+- WB: Escrita do resultado no banco de registradores
+![[Pasted image 20250424092353.png]]
+Na imagem podemos ver um problema do pipeline, que é que temos duas instruções usando o mesmo componente. Mas temos um jeito de contornar isso, que é dividindo o ciclo de clock em duas partes, na primeira é realizada uma escrita e na segunda parte uma leitura.
+Na implementação pipeline, tempo de execução da instrução não diminui, mas aumenta o throughput (também chamado a vazão, que é bits por segundo).
+Nesse tipo de implementação, o ciclo de clock é limitado pelo estágio mais lento.
+### Cálculo do tempo para executar instrução no Pipeline
+Antes de mostrarmos o cálculo, precisamos ver quais fatores devemos levar em conta.
+- nº de intruções (n)
+- nº de estágios do pipeline (profundidade do pipeline)
+Vejamos agora o cálculo.
+$$nº \, de \, ciclos \, de \, clock = (nº \, de \, estágios) + (n-1) * 1 cc = (nº \, de \, estágios - 1) + (n) * 1 cc$$
+Onde $1cc$ é 1 ciclo de clock.
+Vejamos um exemplos agora. Para 100 instruções:
+- Monociclo:
+	- ciclo de clock = 45 ns
+	- Tempo = 100 * 45 = 4500 ns
+- Multiciclo:
+	- ciclo de clock = 10 ns
+	- nº médio de etapas = 4,2 (Tipo R tem 4 etapas, lw tem 5, sw tem 4 e beq tem 4, então fazemos uma média)
+	- Tempo = 100 * 4,2 * 10 = 4200 ns
+- Pipeline:
+	- ciclo de clock: 10 ns
+	- nº de ciclos de clock: (usando a fórmula anterior) 5 + 99 = 104
+	- Tempo: 104 * 10ns = 1040 ns
+	- 1 instrução finaliza em 10 ns, logo em 1 segundo temos $1 \times 10^8$ instruções sendo executadas
+## Implementação Pipeline
+![[Pasted image 20250429112524.png]]
+Os blocos em azul são um conjunto de registradores (como se fosse um banco de registradores intermediários) para que as informações que eu busquei anteriormente estejam armazenadas neles e no próximo ciclo de clock eu possa buscar as informações nesse conjunto de registradores. Esses registradores são chamados de registradores intermediários do pipeline.
+Alguns dos registradores desses conjuntos são:
+- IF/ID.IR
+- IF/ID.PC
+- ID/EX.PC
+- ID/EX.A
+- ID/EX.B
+- ID/EX.Imm
+- ID/EX.rd
+- EX/MEM.ALUOutput
+- EX/MEM.rd
+- EX/MEM.BranchTarget
+- EX/MEM.B
+O que está sublinhado em vermelho é sinal de controle vindo da UC.
+## Dependências do Pipeline
+O pipeline apresenta três problemas:
+- Conflito estrutural
+- Dependência de dados
+- Dependência de controle
+### Conflito Estrutural
+O conflito estrutural ocorre devido o acesso instantâneo ao mesmo recurso por instruções em estágios diferentes. Exemplo:
+- Acesso a memória
+- Acesso ao banco de registradores
+- Uso simultâneo da unidade funcional (ULA)
+Para resolver os problemas relacionados à memória, temos duas soluções:
+- Separa dados e instruções
+- Cache de dados e instruções
+Para resolver os problemas relacionados ao banco de registradores:
+- Divide o ciclo de clock em 2 fases, onde na primeira (baixa) escreve no banco de registradores e na segunda (alta) lê
+Para resolver o uso simultâneo da ULA:
+- Acrescentamos mais unidades funcionais (no nosso caso acrescentamos dois somadores)
+### Dependências de Dados
+O problema da dependência de dados é quando uma instrução faz uso de um operando que vai ser produzido por outra instrução que ainda está no pipeline. Isso é chamado por alguns autores como *Hazard* (perigo).
+Temos dois tipos de dependência de dados:
+- Dependência verdadeira/direta 
+	O tipo de dependência que temos aqui é chamada Read After Write (RAW)
+	Exemplo:
+	![[Pasted image 20250508085910.png]]
+	De vermelho temos a dependência.
+	Veja que o R1 é usado como operando na segunda instrução e ele é obtida na primeira. Analisando na estrutura, o R1 só será escrito no `WB`, ou seja, no 5º ciclo de clock, mas ele será lido da memória no `ID` da segunda instrução, que ocorrerá no 3º ciclo de clock.
+	Quando temos ciclos de clock em que não tem nenhuma instrução finalizada, devido a prorrogação das instruções, chamamos esses ciclos de bolha
+	Para resolver isso postergamos a instrução até ela chegar no `WB`, porque assim na primeira parte do clock será a escrita e na segunda será a leitura. Como consequência, todas as próximas instruções também terão que ser postergadas.
+- Dependência Falsa
+	Só existe se a arquitetura suporta execução fora de ordem (out-of-order execution). Ela só existe em arquiteturas superescalares. A execução fora de ordem consiste em permitir colocar instruções que vem mais adiante, que não possuem uma dependência, antes de instruções que tem dependência.
+	Aqui temos dois tipos de dependências:
+	- Write After Read (WAR)
+		```
+		add R1, R2, R3
+		sub R2, R5, R6
+		```
+		Supondo que ainda não temos o R3, veja que a ``sub`` pode ser calculada mas não pode ser escrita ainda pois temos que realizar o ``add`` antes.
+	- Write After Write (WAW)
+		```
+		add R1, R2, R3
+		sub R1, R5, R6
+		```
+		Supondo que ainda não temos o R3, veja que a `sub` pode ser calculada antes mas também não pode ser escrita pois temos que fazer o `add` antes.
+Para evitar as dependências verdadeiras, o compilador faz o que conhecemos como escalonamento das instruções.
+#### Escalonamento das Instruções
+Veja nas imagens a seguir como ocorre esse escalonamento e repare que o grafo que o compilador monta das dependências é o grafo colorido que está nas instruções.
+![[aula_org_arq_08_05_1.jpg]]
+![[aula_org_arq_08_05_2.jpg]]
+Agora o compilador reordena as instruções para diminuir o número de bolhas.
+![[aula_org_arq_08_05_3.jpg]]
+![[aula_org_arq_08_05_4.jpg]]
+Esse processo é feito automático pelo compilador, mas em alguns casos podemos usar a função `nop` para forçar um auxílio (ver melhor ó que o nop faz) mas não é obrigatório, ele mesmo já faz toda a manipulação necessária.

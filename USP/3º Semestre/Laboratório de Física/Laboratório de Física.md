@@ -54,6 +54,8 @@ Quando o valor da diferença $|x_{1} - x_{2}|$ fica entre as condições express
 ## Tabelas
 Muitas vezes os experimentos tem resultados que vinculam duas grandezas físicas, ou dois parâmetros, formando o par $(x, y)$. Esse par pode ser representado diretamente em uma tabela de duas colunas. Cada grandeza tabelada deve ser identificada no cabeçalho de sua respectiva coluna junto com suas unidades. Se a incerteza dos valores for a mesma para todos, ela pode ser expressa no cabeçalho também, se não, deve ser expressa junto de cada valor.
 Cada tabela deve ter um número de identificação que deve ser usado no texto para referenciá-la. Além disso também deve ter uma legenda acima, explicando brevemente o conteúdo. Se necessário usa-se notação científica para simplificar os números.
+Veja abaixo um exemplo.
+![[Pasted image 20250402080618.png]]
 ### Dicas para criar boas tabelas
 - Identifique a tabela com um número (ex.: Tabela 1), que será usado para citá-la no texto, e coloque no topo uma breve legenda explicativa do conteúdo.
 - Indique, no topo de cada coluna, a grandeza física e suas unidades.
@@ -65,9 +67,11 @@ A representação dos dados através de gráficos tem a vantagem de permitir vis
 - Os eixos do gráfico devem conter legendas que indiquem claramente a grandeza, as unidades e, se houver, o fator exponencial dos dados representados.
 - As escalas de cada eixo devem ser escolhidas para visualizar claramente o comportamento extremo dos dados. Dependendo da situação, não é obrigatório que a escala abranja a origem $(0,0)$ dos eixos de coordenadas.
 - A numeração das escalas deve ser equilibrada, correspondendo a números redondos. Nunca se colocam os valores dos dados experimentais sobre os eixos; para isso existe a tabela.
-- O tamanho dos símbolos deve ser suficientemente claro para identificar o dado experimental. Quando a incerteza 𝜎 (ou ∆) do dado é maior que o tamanho do símbolo sobre o gráfico, é conveniente traçar as barras de incerteza de comprimento േ𝜎 (ou േ∆). Na figura 2.1, são mostradas as barras de incerteza na variação dos comprimentos. A incerteza na temperatura é menor que o tamanho do círculo e, portanto, não se encontra representada no gráfico.
+- O tamanho dos símbolos deve ser suficientemente claro para identificar o dado experimental. Quando a incerteza 𝜎 (ou ∆) do dado é maior que o tamanho do símbolo sobre o gráfico, é conveniente traçar as barras de incerteza de comprimento $\pm$𝜎 (ou $\pm$∆). Na figura 2.1, são mostradas as barras de incerteza na variação dos comprimentos. A incerteza na temperatura é menor que o tamanho do círculo e, portanto, não se encontra representada no gráfico.
 -  A grandeza representada no eixo horizontal usualmente é escolhida como aquela que é melhor controlada durante o experimento; o aparelho experimental permite variá-la independentemente e tem menor incerteza relativa que a outra grandeza.
 - Se o gráfico evidencia uma relação linear entre as grandezas físicas representadas, é possível traçar a reta que mais perfeitamente represente essa relação. Ela deve ser a melhor aproximação aos dados experimentais em média e pode ser traçada graficamente de acordo com o critério do observador. Alternativamente, existem métodos quantitativos para determinar univocamente os coeficientes angular e linear.
+Veja um exemplo abaixo.
+![[Pasted image 20250402081338.png]]
 ### Dicas para criar bons gráficos
 - A variável independente deve ser representada, sempre que possível, no eixo horizontal.
 - Linearize os dados quando for possível, operando sobre as colunas ou usando escalas logarítmicas.
@@ -82,3 +86,40 @@ As escalas lineares são aquelas em que as divisões mantêm sempre a mesma rela
 ### Linearização dos dados
 Quando existe uma presunção sobre a relação matemática entre as duas grandezas y e x, representadas em um gráfico, é possível transformar os próprios dados para revelar se essa relação proposta é correta.
 Por exemplo, temos um gráfico no qual é possível ver que a relação de x e y não é linear. Porém não há como saber se é quadrática, cúbica, etc. Então, cria-se uma nova variável a partir da suposição (exemplo $X = x^{3}$) e representa-se graficamente X e y. Supondo que na representação fique claro que a relação entre as quantidade é linear. Assim, comprovou-se a teoria de que $y = \alpha x^{3}$ e o valor do coeficiente angular $\alpha$ pode ser calculado diretamente pela inclinação da reta.
+### Escalas Logarítmicas
+Um outro método de linearização consiste em manter os valores $x$ e $y$ que estão nas tabelas e transformar as escalas do gráfico de maneira logarítmica. Para fazer isso existem duas formas: usar papéis especiais que já contém escalas transformadas em logarítmico ou usar programas de computadores que fazem essa transformação. Um gráfico em escala logarítmica também é chamado de "log-log" quando os dois eixos estão em escala logarítmica.
+Veja abaixa os gráficos. O gráfico **a** tem uma escala linear e o **b** tem uma escala logarítmica. Vale ressaltar que ambos foram criados a partir da mesma tabela.
+![[Pasted image 20250402074847.png]]
+Para extrair informações do gráfico **b** deve-se lembrar que as coordenadas representam valores logarítmicos de grandeza. Por exemplo, o valor 10 no eixo representa $\log 10$.
+Perceba também que a distância entre os valores $\log 1$ e $\log 10$, assim como $\log 10$ e $\log 100$, e também $\log 100$ e $\log 1000$, são as mesmas. Isso resulta de uma propriedade de logarítmicos. Se fizer a distância deles verá que é 1. Essa distância é chamada de ciclo ou década e corresponde a um incremento de 10 na grandeza representada.
+Observe, ainda, que, diferentemente do que ocorre na escala linear, a escala logarítmica é progressivamente comprimida para valores mais altos dentro de uma mesma década.
+#### Linearização de função potência
+Uma aplicação muito importante das escalas logarítmicas é na linearização de dados. Suponha a seguinte relação entre grandezas: $$y = a x^{n}$$sendo $a$ e $n$ constantes. Aplicando o logarítmico dos dois lados da igualdade, temos: $\log y = \log a + n \log x$. Portanto, um gráfico das grandezas (x, y), em escalas logarítmicas, resultará em uma reta de inclinação n ($y = ax + b$). O valor de n é obtido tomando as coordenadas, de dois pontos ($x_1$ ; $y_1$) e ($x_2$; $y_2$) quaisquer, pertencentes à reta traçada, lembrando que as coordenadas lidas correspondem aos logarítmicos dos valores lidos: $$n = \frac{ \log{y_{2}} - \log{y_{1}}}{ \log{x_{2}} - \log{x_{1}} }$$.
+#### Linearização da função exponencial
+Outra aplicação de linearização importante é o caso de uma relação exponencial, como: $$y = a b^{cx}$$, sendo $a$, $b$ e $c$ constantes. Aplicando logaritmo em ambos os lados dessa equação, encontramos: $\log y = \log {(a)} - c \log {(b)} \, x$.
+A equação acima mostra que existe uma relação linear entre $\log y$ e $x$. Portanto existe um gráfico "mono-log" (um eixo linear e outro logarítmico) com o eixo vertical em escala logarítmica e o
+eixo horizontal em escala linear, que mostrará uma reta. A inclinação da reta é dada pelo coeficiente $B = c \log(b)$ que pode ser calculado por: $$B = \frac{  \log{y_{2}} - \log{y_{1}} }{ x_{2} - x_{1}}$$
+# Relações Lineares entre Dados Experimentais
+Muitas vezes a relação encontrada entre grandezas físicas é linear ou pode ser linearizada. Isso significa que ela pode ser escrita da seguinte forma: 
+$$y = ax + b$$
+Nesse caso, devemos determinar a melhor reta que representa os dados experimentais e calcular o valor dos parâmetros $a$ e $b$, também conhecidos como coeficiente angular (ou inclinação) e coeficiente linear (ou ordenada na origem), respectivamente. Existem duas formas de realizar essa determinação: do modo gráfico ou do modo analítico. Para o método analítico, uma das formas é o método dos mínimos quadrados.
+## Método Gráfico
+Esse método consiste em representar os dados experimentais $(x, y)$ em um gráfico e traçar a reta que mais se aproxima da maioria deles. Isto é válido para qualquer combinação de escalas nos eixos: lineares ou logarítmicas.
+O defeito desse método é que a reta resultante depende do critério do observador.
+Uma vez que temos a reta, podemos determinar os coeficientes de forma analítica, a partir das coordenadas de dois pontos arbitrários da reta, de coordenadas $(x_1, y_1)$ e $(x_2, y_2)$. Para minimizar os erros de cálculos, devemos escolher dois pontos bem separados entre si. Assim, temos que o coeficiente angular é: $$a = \frac{y_2 - y_1}{x_2 - x_1}$$
+E o coeficiente linear é: $$b = \frac{y_1 x_2 - y_2 x_1}{x_2 - x_1}$$
+De forma alternativa, se é possível visualizar um ponto que intersecta o eixo y, ou seja, um ponto de coordenada $(0, y_3)$ temos $b = y_3$.
+Se um ou dois eixos forem logarítmicos, deve-se ter o cuidado de usar o logarítmico da grandeza correspondente. Por exemplo, para o cálculo da inclinação:
+- Escala di-log: $$a = \frac{\log{y_2} - \log{y_1}}{\log{x_2} - \log{x_1}}$$
+- Escala mono-log (eixo vertical): $$a = \frac{\log{y_2} - \log{y_1}}{x_2 - x_1}$$
+## Método dos Mínimos Quadrados
+Esse é um método analítico para encontrar a melhor reta que represente o conjunto de $N$ pares de dados experimentais $(x_i, y_i)$ com $i = 1, 2, ..., N$, independentemente de critérios do observador. A ideia desse método é definir a melhor reta como aquela que minimiza as distâncias verticais em relação aos dados experimentais.
+O método dos mínimos quadrados, ou regressão linear, considera a soma dos quadrados das distâncias: $$S = \sum_{i = 1}^{N}(y_{ci} - y_{i})^{2}$$
+Onde $y_{ci}$ é o valor calculado para o i-ésimo dado com a equação da melhor reta $y_{ci} = ax_{i} + b$. O processo de minimização de $S$, como função dos parâmetros da reta, fornece as seguintes expressões:
+- Coeficiente angular: $$a = \frac{ \sum(x_{i} - \bar{x}) y_{i} }{ \sum(x_{i} - \bar{x})^{2} }$$
+- Coeficiente linear: $$b = \bar{y} - a \bar{x}$$
+Onde todos os somatórios correm com $i = 1, 2, ..., N$ e $\bar{x} = \frac{\sum x_{i}}{N}$ e $\bar{y} = \frac{\sum y_{i}}{N}$.
+O método também fornece as incertezas destes parâmetros ($\Delta a$ e $\Delta b$) que estão diretamente relacionadas com a dispersão média $\Delta y$ dos dados experimentais em relação a reta:
+- Dispersão média do ajuste $$\Delta y = \sqrt{\frac{\sum (ax_{i} + b - y_{i})^{2}} { N - 2 }}$$
+- Incerteza do coeficiente angular: $$\Delta a = \frac{\Delta y}{\sqrt{\sum (x_{i} - \bar{x})^{2}}}$$
+- Incerteza do coeficiente linear: $$\Delta b = \sqrt{ \frac{ \sum x_{i}^{2} }{ N \sum (x_{i} - \bar{x})^{2} } } \Delta y$$

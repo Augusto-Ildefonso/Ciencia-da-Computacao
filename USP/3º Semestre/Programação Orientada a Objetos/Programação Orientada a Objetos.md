@@ -314,3 +314,101 @@ for (int i = 0; i < tamanho; i++){
 Uma matriz é um array de array. Para criar é semelhante à C, basta só usar int`[][]`.
 ## Criando variável
 Além de declarar a variável, é preciso usar o comando `new` para instanciar ela e criá-la de fato.
+# POO com Python
+## Classe
+~~~python
+class Cadeira:
+	def __init__(self): # Construtor da classe
+		self.posição = "Em pé" # Como não temos declaração de variáveis, o que for criado aqui será os atributos da classe. Só pode ter um construtor
+		# Para fazer referência a uma variável da classe tem que usar o self.
+		self.ocupado = False
+~~~
+Na declaração dos métodos sempre tem que ter o self como parâmetro. Python não permite dois métodos com mesmo nome. Para contornar usamos valores default para parâmetros.
+~~~Python
+class Cadeira:
+	def __init__(self, p="Em pé", oc=False):
+		self.posição = "Em pé"
+		self.ocupado = False
+~~~
+Definição dos métodos é igual a definição de função normal do python, mas com o self como um dos parâmetros.
+O mesmo arquivo pode conter mais do que uma classe e não precisa ter o mesmo nome. Pode ter código fora da classe também.
+# Herança
+Herança é um conceito fundamental que permite que uma classe herde atributos e métodos de outra classe. A herança permite que você crie hierarquias de classes, onde classes mais específicas (subclasse) podem herdar características de classes mais gerais (superclasses), e ao mesmo tempo adicionar novos comportamentos ou substituir comportamentos existentes, se necessários.
+A classe que herda é chamada de classe filha ou subclasse, e a classe da qual ela herda é chamada de classe pai ou superclasse.
+A principal vantagem da herança é a reutilização de código. Ao invés de escrever novamente (completar).
+## Herança com Java
+Para declarar uma subclasse em Java usamos:
+~~~java
+public class Nome_Subclass extends Nome_Superclass{
+	public Nome_Subclass(){
+		super(...);
+	}
+
+	@Override
+	public void funcao_super(){
+		...
+	}
+
+	// Sem override pq é um método específico da subclasse
+	public void funcao_sub(){
+		...
+	}
+}
+~~~
+Para chamar um construtor da própria classe dentro dela usamos o `this()`. Mas quando queremos chamar o construtor da superclasse usamos `super()`.
+Para sobrescrever um método da superclasse usamos o `@Override` antes de criar o método.
+Em Java toda classe tem uma superclasse. Mesmo que seja implícito, por exemplo, se você tiver só um objeto em Java, ele vai usar a superclasse Object do próprio Java. Um exemplo de método dessa superclasse é o ``toString()``.
+Se quer chamar um método da superclasse dentro da subclasse, usa-se `super.nome_metodo()`. Vale ressaltar que o método tem que ser public ou então protected (que não é possível acessar fora da classe, mas dentro das subclasses é possível acessar, assim como dentro da própria classe).
+Quando nossa superclasse serve só para fornecer características gerais e ele não será instanciada e sim será usada somente por subclasses, usamos o `abstract` para que ele não possa ser instanciada sozinha. Exemplo: `public abstract class Animal`. Podemos exigir que toda subclasse tenha um método, mas que esse método só seja definido na subclasse e não na superclasse. Para isso usamos também o `abstract` para o método, exemplo `public abstract void fazerSom()`, desse jeito, as subclasses terão que implementar e definir o método marcado como ``abstract``. Os métodos que não são marcados como `abstract` não precisam necessariamente serem reimplementados na subclasse. Para ter um método `abstract` temos que ter uma superclasse `abstract`. O contrário do `abstract` é concreto, então uma classe concreta é aquela que não tem métodos abstratos.
+Em Java, uma classe só tem uma classe pai. Isso é conhecido como herança simples
+### Criando Interface gráfica
+Usamos a superclasse ``JFrame``. Dentro dela são criados todos os componentes e na subclasse só chamamos eles.
+## Herança com Python
+Os conceitos teóricos de Java valem para Python também. Mas ele tem mudanças em como são implementados os conceitos.
+~~~python
+class Animal: # Superclasse
+	def __init__(self, nome):
+		self.nome = nome
+
+	def fazer_som(self):
+		print("O animal faz som não identificado")
+
+	def get_nome(self):
+		return self.nome
+
+class Cachorro(Animal):
+	def fazer_som(self):
+		print("O cachorro late")
+~~~
+Em python não é preciso chamar o construtor da subclasse nem da superclasse, se não tiver um ``__init__`` dentro da subclasse ele usa o construtor da superclasse. Caso eu coloque um construtor na subclasse, temos:
+~~~python
+class Gato(Animal):
+	def __init__(self, nome, sobre):
+		super().__init__(nome)
+		self.sobrenome = sobre
+
+	def fazer_som(self):
+		print("O gato mia")
+
+	def get_nome(self):
+		return self.nome + ' ' + self.sobrenome
+~~~
+Aqui o uso do super é `super().nome_do_método`, até mesmo para o construtor. Perceba que não é necessário um override para redefinir a função.
+Para criarmos uma classe abstrata é preciso usar uma biblioteca:
+~~~python
+from abc import ABC, abstractmethod
+
+class Animal(ABC): # Definindo classe abstrata
+	def __init__(self, nome):
+		self.nome = nome
+
+	@abstractmethod # Criando método abstrato, para isso usa-se esse decorator
+	def fazer_som(self):
+		pass ## Para poder deixar sem implementar
+
+	def get_nome(self):
+		return self.nome
+~~~
+Em python temos herança múltipla, ou seja, podemos ter mais de uma classe pai. É recomendado evitar usar herança múltipla, exceto no caso que é para usar uma classe abstrata. Essa recomendação existe pois pode resultar em um comportamento inesperado.
+Para contornar esse problema, recorremos ao MRO (Ordem de Resolução de Métodos). Ele estabelece qual a ordem de procura do método na hierarquia. Em python é da esquerda para direita. Para conhecer a ordem, basta usar o método MRO da classe. Toda linguagem que tem herança múltipla vai ter esse método MRO.
+PORÉM, ainda sim é recomendado evitar esse uso. Além disso, temos esse problema nos construtores também. Para complicar, construtores de classes diferentes podem ter parâmetros diferentes. Nesse caso não tem como passar os parâmetros corretos para os construtores corretos.

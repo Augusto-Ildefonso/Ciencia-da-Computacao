@@ -1,52 +1,18 @@
-# Sintaxe básica
-## Print
+# Exceptions
+Exceções em python fornecem um mecanismo par lidar com erros que ocorrem durante a execução do programa.
+## Entendendo Exceções e Erros de Sintaxe
+Erros de sintaxe ocorrem quando o parser detecta uma declaração incorreta. Geralmente uma `^` mostra o local onde ocorreu o erro de sintaxe.
+Já os erros de exceções ocorrem quando códigos sintaticamente corretos resultam em erros.
+## Raise Exceptions
+As vezes nós mesmo queremos criar uma exceção para parar o nosso código caso ocorra alguma coisa. Para isso usamos o `raise`. É possível até colocar uma mensagem customizada. Por exemplo:
 ~~~python
-# Print
-print(var, "string")
+number = 10
+if number > 5:
+    raise Exception(f"The number should not exceed 5. ({number=})")
+print(number)
 ~~~
-## Python Identifiers
-Um Python Identifier é um nome usado para identificar uma variável, função, classe, módulo ou outro objeto. Um Identifier como com a letra ``A`` até ``Z`` ou ``a`` até ``z`` ou um ``_``
-seguido por nenhuma ou mais letras, ``_`` ou dígitos de `0` até `9`. O Python é case sensitive, ou seja, há diferença entre letras maiúsculas e minúsculas.
+## Debugando Durante Desenvolvimento com `assert`
 
-O Python tem algumas convenções para seus Identifiers:
-- O nome de classes no Python começa com uma letra maiúscula, já todos os outros identifiers começam com letra minúscula.
-- Começar o identifier com um único `_` indica que o identifier é um identifier privado.
-- Começar o identifier com dois `_` indica que ele é uma identifier fortemente privado
-- Se o identifier começar e terminar com dois `_`, então o identifier é um nome especial definido da linguagem.
-## Palavras Reservadas
-Palavras reservadas são palavras que não podem ser usadas como constantes, variáveis ou qualquer outro identifier. Veja a lista abaixo.
-
-| and     | as       | assert   |
-| ------- | -------- | -------- |
-| break   | class    | continue |
-| def     | del      | elif     |
-| else    | except   | False    |
-| finally | for      | from     |
-| global  | if       | import   |
-| in      | is       | lambda   |
-| None    | nonlocal | not      |
-| or      | pass     | raise    |
-| return  | True     | try      |
-| while   | with     | yield    |
-## Indentação
-O Python não usa chaves para identificar blocos de código e escopo. No lugar ele usa a indentação, então blocos de mesma indentação estão no mesmo escopo.
-## Declaração em múltipla linhas
-Usualmente as declarações em Python terminam com uma nova linha, mas se usar o caracter de continuação de linha`\` é possível fazer declarações em múltiplas linhas.
-~~~python
-total = item_um + \
-		item_dois + \
-		item_tres
-~~~
-Para declarações usando `[]`, `{}`, `()` não é preciso usar o `\`.
-## Quotation
-O Python aceita `'`, `"` e `"""` para declarar strings. As aspas triplas definem strings de múltiplas linhas.
-## Comentários
-Comentários em Python usam `#` ou `"""`, sendo o último para múltiplas linhas.
-## Entrada e Saída
-A saída de dados é feita com `print`. Ele pode receber uma string, número, variável, etc.
-Já e entrada de dados é feita com `input`, ele pode ter ou não uma string dentro para imprimir na tela. Ele converte para string toda a entrada e aí é necessário converter de string para algum outro tipo.
-## Múltiplas declarações na mesma linha
-Para fazer múltiplas declarações na mesma linha usa-se `;` para separar as declarações.
 # Tipo None
 O tipo de dado None em Python representa o tipo sem tipo, ou poderia ser conhecido também como tipo vazio, porém falar que é um tipo sem tipo é mais apropriado
 

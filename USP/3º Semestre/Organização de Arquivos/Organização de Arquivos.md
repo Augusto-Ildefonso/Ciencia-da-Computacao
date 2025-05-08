@@ -27,8 +27,28 @@ O tempo de transferência (transfer time) é o tempo para transferir o dado para
 ## Disco Físico e Disco Lógico
 A formatação física (disco físico) é a organização do disco em setores/trilhas/cilindros que já vem de fábrica. Ela pode ser mudada por meio de partições.
 A formatação lógica (disco lógico) instala o sistema de arquivos no disco, subdivide o disco em regiões endereçáveis e introduz o overhead relacionado ao espaço ocupado com informações para gerenciamento.
-
-(ver se precisa completar)
+## Sistema de Arquivos
+O sistema de arquivos faz parte do SO. Ele fornece a infraestrutura básica para manipulação de arquivos em memória secundária via software. Ela oferece um conjunto de operações para manipulação de arquivos. Por exemplo:
+- criar: create, open
+- renomear: rename
+- fechar: close
+- escrever dados: write
+- ler dados: read
+- posicionar: seek
+- destruir ou remover: delete
+- abrir: open
+- escrever dados no final: append
+## Arquivo Físico
+O arquivo físico é a sequência de bytes armazenados no disco.
+![[Pasted image 20250405125411.png]]
+## Página de disco
+É o conjunto de setores **logicamente** (ou seja, eles não são necessariamente contíguos no disco físico) contíguos no disco. Um arquivo é visto pelo sistema de arquivos como um conjunto de páginas de disco. Os arquivos são alocados em uma ou mais páginas de disco. Ele é a unidade de transferência de dados entre a RAM e o disco. A página de disco também pode ser chamado de bloco de disco ou cluster (livro).
+![[Pasted image 20250405125650.png]]
+## Posição corrente no Arquivo
+A posição corrente no arquivo é uma abstração que permite a especificação de uma chamada do sistema para indicar onde um arquivo deve ser lido ou escrito. As características dela são:
+- A leitura e escrita ocorrem a partir da posição corrente
+- A posição corrente é então avançada para imediatamente após o último byte lido ou escrito
+- É possível informar um endereço específico a ser lido, o qual faz com que a posição corrente seja a informada no endereço
 # Organização de Arquivos
 Arquivos são uma sequência de bytes armazenadas em disco. Nós usamos ilusões para trabalhar com eles. As ilusões que usamos são **campos** e **registros**. Os campos são semelhante aos campos da struct em C, mas a struct é feita para memória primária, já o campo é feito para memória secundária. Já o registro é semelhante à struct. Sendo assim, um registro é composto por 1 ou mais campos. O registro é uma estrutura que determina todas as características de uma entidade do mundo real. Quando vamos armazenar no disco, temos que especificar onde começa e termina cada campo e cada registro, além de quando termina ou não.
 ## Organização em Campos
@@ -137,3 +157,58 @@ Temos que escolher a organização que melhor se adequa à aplicação e tem sup
 Veja o exemplo abaixo.
 ![[Pasted image 20250325153148.png]]
 ![[Pasted image 20250325153206.png]]
+# Remoção Lógica de Registros
+## Abordagem Estática de Reuso de Espaço
+Até agora só vimos a inserção de registros. Porém vamos ver nesse momento a remoção de registros. Isso é feita com a remoção lógica, que pode ser feita de duas formas:
+- atribui um valor para um campo, exemplo: *
+- usa um campo extra, exemplo: removido 0 ou  1
+Na abordagem estática não faz nada em um intervalo de tempo $\Delta t$. Durante o $\Delta t$, ocorre a remoção lógica:
+- registros removidos são marcados, porém não são reaproveitados
+- novas inserções são realizadas no final do arquivo
+- buscas desconsideram os registros marcados como removidos
+Após $\Delta t$, ocorre a remoção física:
+- programa é executado para reconstruir o arquivo
+- todos os registros removidos são descartados
+### Compactação
+A compactação de um arquivo é fazer a remoção física dos registros que foram removidos logicamente. A forma mais eficiente de fazer isso é usando dois arquivos:
+- Um que eu vou ler ele todo e pegar todas as informações dele, incluindo os registros que serão apagados
+- Um segundo arquivo que eu vou escrever tudo, exceto o que foi marcado como removido
+### Algoritmo de busca por RNN
+1. Se arquivo existe e se arquivo tem dados
+2. Abrir arquivo para leitura
+3. byte offset = RNN * tamRegistro
+4. Posicionar a posição corrente para o byte offset
+5. Se encontrou e o registro não foi marcado como removido, então retorna o registro, senão registro não encontrado
+6. fechar arquivo
+### Algoritmo de inserção por RNN
+1. Se arquivo existe
+2. Abrir arquivo para escrita
+3. Posicionar a posição corrente para o final do arquivo
+4. Escrever o registro
+5. Fechar arquivo 
+### Algoritmo de remoção por RNN
+1. Se arquivo existe, se arquivo tem dados...
+2. Abrir arquivo para escrita
+3. byte offset = RNN * tamRegistro
+4. Posicionar a posição_corrente para o byte offset
+5. Se encontrou e o registro não foi marcado como removido, então marca o registro como removido, senão registro não encontrado
+6. Fechar arquivo
+### Algoritmo de compactação
+1. Abrir arquivo 1 para leitura
+2. Abrir arquivo 2 para escrita
+3. enquanto não terminou o arquivo 1
+	1. Ler o registro do arquivo 1
+	2. Se o registro não foi marcado logicamente como removido
+		1. Então escrever o registro no arquivo 2
+4. Fechar arquivo 1
+5. Fechar arquivo 2
+6. Remover arquivo 1
+7. Renomear arquivo 2 para arquivo 1
+Esse método é bom também pois quando for criar o arquivo 2, já sabemos o tamanho máximo do arquivo e então é possível reservar um tamanho no arquivo do disco e selecionar setores e páginas sequenciais para armazenar. Enquanto o arquivo 1, que não sabia a quantidade máxima, tem seus dados gravados em diferentes setores do arquivo.
+### Abordagem estática
+Essa técnica pode ser aplicada a:
+- registros de tamanho fixo
+- registros de tamanho variável
+A frequência para se aplicar a técnica depende da aplicação e da porcentagem de registros marcados como removidos. Além disso, é usada quando tenho certeza que terá pouca remoção e inserção nos arquivos.
+# Estruturas de Indexação de Dados
+## Índice Simples ou Linear
