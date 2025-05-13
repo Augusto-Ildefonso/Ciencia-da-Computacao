@@ -248,6 +248,70 @@ nouns = ["hobo","frog","pope"]
 adjectives = ["lazy","grouchy","scheming"]
 [adjective ++ " " ++ noun | adjective <- adjectives, noun <- nouns]
 ~~~
+Como strings são listas, podemos usar list comprehension para processar e produzir strings. Além disso, podemos fazer list comprehension para listas aninhadas também.
+## Tuplas
+As tuplas são parecidas com as listas, dado que elas podem guardar diferentes valores em um único valor. Tuplas são usadas quando você sabe quantos valores você quer combinar e o tipo dele depende de quantos componentes ele tem e o tipo dos componentes. Ela é denotada por parênteses e separada por vírgula. Uma outra diferença para as listas é que ela pode ser composta de elementos de diferentes tipos.
+Uma tupla de dois elementos é o seu próprio tipo, assim como uma de três elementos. Então se criar uma lista que tem uma tupla de dois elementos e uma de três ela vai apontar um erro, pois a lista não pode ter tipos diferentes.
+Não existe tupla de um só elemento.
+Assim como listas, podemos comparar os elementos de tuplas se eles forem comparáveis. Só que não podemos comparar tuplas de tamanhos diferentes.
+Vejamos agora algumas funções úteis para operar em pares.
+### fst
+Ela recebe um par e retorna o primeiro elemento.
+~~~haskell
+fst (8, 11)
+~~~
+### snd
+Ela recebe um par e retorna o segundo elemento.
+~~~haskell
+snd (8, 11)
+~~~
+Agora vejamos algumas outras funções.
+### zip
+Ela permite produzir uma lista de pares a partir de duas listas. As duas listas podem ter tipos diferentes e tamanhos diferentes também (ela vai parar quando acabar a menor lista). Como haskell é preguiçoso podemos usar zip em listas finitas e infinitas.
+~~~haskell
+zip [1,2,3,4,5] [5,5,5,5,5]
+zip [1 .. 5] ["one", "two", "three", "four", "five"]
+zip [5,3,2,6,2,7,2,5,4,6,6] ["im","a","turtle"]
+zip [1..] ["apple", "orange", "cherry", "mango"]
+~~~
+## Types e Typeclasses
+Como já dissemos, Haskell tem um sistema de tipos estático. Logo, o tipo de cada expressão é conhecido no tempo de compilação, o que leva a um código mais seguro. Em Haskell, tudo tem um tipo, então o compilador pode pensar muito sobre o seu programa antes de compilá-lo.
+Haskell tem inferência de tipo, então se escrevemos um número em Haskell não precisamos falar que é um número, ele pode inferir que é um número sozinho. Logo, não precisamos escrever os tipos das nossas funções e expressões para compilar.
+### Type
+Um tipo em Haskell é um tipo de label que toda expressão tem. Ele nos diz a qual categoria de coisas aquela expressão se encaixa.
+Quando temos uma expressão e imprimimos o seu tipo (ou então que vamos explicitamente escrever o tipo) temos o seguinte resultado: `expressão :: Tipo`. O `::` é lido como `has type of`. Os tipos tem sempre a primeira letra maiúscula.
+Funções também tem tipos. Quando escrevemos as nossas funções, podemos escolher dar a ela uma declaração explícita de tipo. Isso é considerado uma boa prática, exceto se estamos escrevendo funções muito curtas, mas num geral vamos sempre declarar explicitamente. Por exemplo, se vamos fazer uma função de remover as letras não maiúsculas, vamos receber uma string e retornar uma string, então temos:
+~~~haskell
+removeNaoMaiusculas :: [Char] -> [Char]
+removeNaoMaiusculas str = [ c | c <- str, c `elem` ['A'..'Z']]
+~~~
+Vale notar que o tipo `[Char]` é sinônimo do tipo `String`, então podemos trocar um pelo o outro.
+Agora, se tivermos uma função que tem vários parâmetros:
+~~~haskell
+addThree :: Int -> Int -> Int -> Int
+addThree x y z = x + y + z
+~~~
+Os parâmetros são separados por `->` e não há distinção especial entre parâmetros e retorno. O retorno será o último item na declaração e os parâmetros são os três primeiros.
+Veja abaixo alguns tipos comuns:
+- `Int`: Inteiro, ele é usado para números inteiros. Ele tem um valor máximo e mínimo. Geralmente em máquinas 32 bits o máximo é 2147483647 e o mínimo é -2147483648.
+- `Integer`: Inteiro, ele também é usado para números inteiros. Mas diferente do `Int` ele não tem limite máximo e mínimo, então pode ser usado para representar números muito grandes. Entre tanto o `Int` é mais eficiente.
+- `Float`:Float, é um número de ponto flutuante com precisão única.
+- `Double`: Double, é um número de ponto flutuante com o dobro de precisão.
+- `Bool`: Booleano, é um tipo que tem dois valores: ``True`` ou ``False``.
+- `Char`: Caracter, ele representa caracteres. Ele é denotado por aspas simples. Uma lista de caracteres (`[Char]`) é uma `String`.
+- As tuplas são tipos dependentes do seu tamanho e do seus componentes, então existe uma infinidade de tipos. Mas vale ressaltar que `()` também é um tipo que só pode ter um valor: 0.
+### Type variables
+Uma type variable pode ter qualquer tipo, ela é usada quando queremos fazer uma função que pode ser usada para qualquer tipo, deixando, assim, ela mais geral. Funções que tem type variables é chamada de função polimórfica. Veja abaixo como ela é usada:
+~~~haskell
+head :: [a] -> a
+~~~
+Então como podemos ver pelo tipo da função ``head``, ela pode receber uma lista de qualquer tipo e retorna um elemento de qualquer tipo.
+As type variables podem ter nomes maiores mas geralmente nomeamos elas de: a, b, c, d, ....
+Veja para a função `fst`:
+~~~haskell
+fst :: (a, b) -> a
+~~~
+Ela recebe uma tupla de dois elementos que podem ou não ter tipos diferentes e retorna um elemento do mesmo tipo do primeiro elemento.
 ## Anotações da Aula
 ### Introdução
 ~~~haskell
@@ -742,3 +806,5 @@ putStrLn $ show $
 -- O encontra retorna Nada ou Algum x onde x é um valor de algum tipo
 ~~~
 Podemos usar o case of nas funções também para selecionar o que retornar
+### Monad
+O tipo nomad é `IO`. Se ele não tiver nenhum valor, colocamos o unit `()` depois que é um tipo sem valor, tipo o void.

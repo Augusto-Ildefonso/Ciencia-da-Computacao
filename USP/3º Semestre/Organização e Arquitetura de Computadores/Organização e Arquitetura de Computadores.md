@@ -470,7 +470,123 @@ O 12 tem que estar no final pois o último bit tem que ser o de sinal. Por causa
 ### Tipo U
 ![[Pasted image 20250408114526.png]]
 Exemplo de instrução: ``lui <rd>, imm``.
+# RISC-V: Conjunto de Instruções
+O conjunto de instruções, também chamado de ISA (Instructions Set Architecture), define quais são as instruções implementadas na arquitetura. Ele também define a quantidade e função dos registradores, por exemplo, arquiteturas 32 bits (como é o caso da que estamos trabalhando: RV32I ou Risc-V 32 Bits Integer Architecture) tem 32 bits no bloco de registradores, podendo ser endereçado a $2^5$ bits.
+Primeiramente podemos dividir nossas instruções em classes, veja abaixo.
+## Classes de Instruções
+Temos 5 classes de instruções:
+- Instruções Aritméticas e Simples
+	- add, addi, sub
+- Instruções de Operandos Lógicos
+	- and, andi, or, ori
+- Instruções de Uso da Memória
+	- lw, lh, lb, sw, sh, sb
+- Instruções de Controle de Fluxo
+	- beq, bne, jal
+- Instruções de comparação
+	- slt
+## Tipos de Instruções
+A RISC-V tem 6 tipos de instruções:
+- Tipo R
+- Tipo I
+- Tipo S
+- Tipo B
+- Tipo U
+- Tipo J
+A imagem abaixo mostra a divisão dos bits de cada tipo de instrução.
+![[Pasted image 20250510121733.png]]
+Vamos agora aprofundar em cada tipo de instrução
+### Tipo R (Register)
+![[Pasted image 20250510121831.png]]
+O campos dela são:
+- opcode: código da operação
+- rd: endereço do registrador destino
+- funct3: auxílio para definição da operação
+- rs1: endereço do primeiro registrador de origem
+- rs2: endereço do segundo registrador de origem
+- funct7: auxílio para definição da operação
+Um exemplo de instrução do tipo R é `add`:
+- `add s2, s1, 0`
+- opcode: 0110011
+- rd: s2 (10010)
+- funct3: 000
+- rs1: s1 (01001)
+- rs2: s0 (01000)
+- funct7: 0000000
+![[Pasted image 20250510122153.png]]
+### Tipo I (Immediate)
+![[Pasted image 20250510122416.png]]
+Os campos dela são:
+- opcode: código da operação
+- rd: endereço do registrador destino
+- funct3: auxílio para definição da operação
+- rs1: endereço do primeiro registrador de origem
+- imm: valor imediato
+Um exemplo de instrução do tipo I é `lw`:
+- `lw s2 0(sp)`
+- opcode: 0000011
+- rd: s2 (10010)
+- funct3: 010
+- rs1: sp(00010)
+- imm: 000000000000
+![[Pasted image 20250510122716.png]]
+### Tipo S (Store)
+![[Pasted image 20250510122739.png]]
+Os campos dela são:
+- opcode: código da operação
+- imm\[4:0] e imm\[11:5]: valor imediato
+- funct3: auxílio para definição de operação
+- rs1: endereço do primeiro registrador de origem
+- rs2: endereço do segundo registrador de origem
+Um exemplo de instrução do tipo S é `sw`:
+- `sw s2, 0(sp)`
+- opcode: 0100011
+- imm\[4:0] e imm\[11:5]: 00000 0000000
+- funct3: 010
+- rs1: sp(00001)
+- rs2: sp(10010)
+![[Pasted image 20250510123426.png]]
+### Tipo B (Branch)
+![[Pasted image 20250510124618.png]]
+Os campos dela são:
+- opcode: código da operação
+- imm\[4:0], imm\[11], imm\[10:5] e imm\[12]: valor imediato
+- funct3: auxílio para definição da operação
+- rs1: endereço do primeiro registrador de origem
+- rs2: endereço do segundo registrador de origem
+Um exemplo de instrução do tipo B é `beq`:
+- `beq s1, s0, 4`
+- opcode: 1100011
+- imm\[4:0], imm\[11], imm\[11:5] e imm\[12]: 000000000100
+- funct3: 000
+- rs1: s1 (01001)
+- rs2: s0 (01000)
+![[Pasted image 20250510124949.png]]
+### Tipo U (Upper)
+![[Pasted image 20250510125221.png]]
+Os campos dela são:
+- opcode: código da operação
+- rd: endereço do registrador destino
+- imm\[31:12]: valor imediato
+Um exemplo de instrução do tipo U é `lui`:
+- `lui s0, 0x01234`
+- opcode: 0110111
+- rd: s0(01000)
+- imm\[31:12]: 00000001001000110100
+![[Pasted image 20250510125428.png]]
+### Tipo J (Jump)
+![[Pasted image 20250510130037.png]]
+Os campos dela são:
+- opcode: código da operação
+- rd: endereço do registrador de destino
+- imm\[20], imm\[10:1], imm\[11] e imm\[19:12]: valor imediato
+Um exemplo de instrução J é `jal`:
+- `jal s0, -4`
+- opcode: 1101111
+- rd: s0 (01000)
+- imm\[20], imm\[10:1], imm\[11] e imm\[19:12]:1 1111111100 1 11111111
 # RISC-V: Monociclo
+A arquitetura RISC-V
 ## Caminho de Dados
 ## Unidade de Controle
 ### Imm Gen

@@ -103,16 +103,59 @@ O som é um fenômeno físico e é uma onda mecânica.
 ## Características físicas do som
 ### Amplitude
 A amplitude é a intensidade. Ela está relacionada ao volume do som. Quanto maior a amplitude, mais alto ouvimos o som. A amplitude é medida em decibeis (dB).
-(colocar tabela)
+![[Pasted image 20250508172045.png]]
 ### Frequência
 A frequência determina a altura do som (ou seja, altura é diferente de volume). Frequências altas tem uma altura maior e geram sons agudos. Já frequências baixas tem altura menor e geram sons graves.
-(colocar tabela)
+![[Pasted image 20250508172122.png]]
 ## Digitalização de áudio
 ### Princípios de Digitalização
 A princípio temos duas transformações:
 - Eletrônica: conversão de ondas mecânicas em sinais elétricos
 - Digital: conversão de sinais elétricos em bits
 A transformação eletrônica trabalha com um sinal de áudio que é analógico.
+Veja abaixo um sinal analógico e suas componentes.
+![[Pasted image 20250508172235.png]]
+Aqui temos a frequência sendo a taxa com que o sinal varia entre valores positivos e negativos. Ela é medida em Hertz (Hz). Já a amplitude é a diferença entre os máximos valores positivos e negativos do sinal de áudio, ela pode ser expressa observando-se a voltagem (dependente do sistema) e normalmente é expressa em decibéis (dB).
+A conversão de analógico para digital leva em conta a voltagem e o tempo. Nós fazemos uma amostragem, ou seja, realiza leituras periódicas e instantâneas da voltagem em espaço de tempo uniforme. Em seguida, fazemos uma quantização que converte os valores analógicos amostrados em valores digitais.
+### Amostragem
+Deve-se fazer a amostragem usando o mesmo valor para os intervalos de amostragem.
+![[Pasted image 20250508173316.png]]
+Agora nos deparamos com um problema: quanto deve ser amostrado? Bem, se quisermos reconstruir o sinal de antes precisaremos de infinitas amostragem. Mas também se fizermos poucas amostragem o sinal fica distorcido.
+Para responder essa dúvida, usamos o Teorema de Nyquist: "Para obter uma representação precisa de um sinal analógico, sua amplitude deve ser amostrada a uma taxa mínima igual ou superior ao dobro da componente de mais alta frequência presente no sinal". Isso ficou conhecido como Taxa de Nyquist.
+Se fizermos a amostragem seguindo o Teorema de Nyquist, nós evitaremos o aliasing. O aliasing, também conhecido como dobramento da frequência, ocorre quando pegamos um valor abaixo da taxa de Nyquist, o que leva a distorções. Veja abaixo o sinal analógico real e o aliasing dele.
+![[Pasted image 20250508174112.png]]
+Para evitar o aliasing, usamos filtros anti-aliasing, que removem os componentes de alta frequência.
+Em sistemas multimídia, a largura de banda do canal é normalmente menor que a largura de banda do sinal. Por causa disso, a taxa de amostragem é determinada pela largura de banda do canal. Além disso, a taxa de Nyquist será baseada na frequência mais alta suportada pelo canal.
+### Quantização
+A quantização é o processo pelo qual os valores analógicos das amostras tomadas da amplitude são convertidos em valores digitais. Para reconstruir o sinal precisaríamos de um número infinito de bits, o que não é viável. Então, usando um número finito de bits, representa-se cada amostra através de um número correspondente de níveis discretos.
+![[Pasted image 20250508174822.png]]
+Para fazer a amostragem e quantização é importante perceber que há uma relação entre o número de amostras e o número de níveis. É importante, também, ressaltar que a quantização resulta em distorções.
+### Digitalização
+Temos as seguintes taxas comuns de amostragem:
+- 8000 Hz
+- 11025 Hz
+- 22050 Hz
+- 44100 Hz
+Temos as seguintes quantidades comuns de bits por amostra:
+- 4
+- 8
+- 16
+- 24
+Temos os seguintes canais de som:
+- 1 (mono)
+- 2 (stereo)
+- 3
+- 5
+- 7
+- ...
+Um padrão comum é a qualidade de CD: amostras a 44100 Hz (4,1 kHz), 16 bits por amostra e 2 canais de som (estéreo).
+O circuito que realiza amostragem e quantização é o conversor analógico-digital (analog to digital converter - ADC). O caminho inverso dele, DAC, é usado para reprodução de áudio digital. Ele normalmente é implementado em hardware. Veja abaixo seu circuito.
+![[Pasted image 20250508175633.png]]
+Após a captura, os dados amostrados e quantizados devem ser guardados em algum formato (mídia de representação). Os mais comuns são WAV e MP3.
+Olhando agora os aspectos quantitativos da digitalização, se quisermos saber quantos bytes serão necessários para armazenar 1 segundo de áudio, capturado com qualidade de CD, como fazermos?
+Podemos realizar a segunda operação:
+$$1 \, (segundo) \times 44.100 \, (taxa \, de \, amostragem) \times 2 \, (16 \, bits \, por \, amostra) \times 2 \, (som \, estéro) = 176.400 \, bytes$$
+Então para transmitir esse áudio precisamos de 1,41 Mbps.
 
 (ver dos slides)
 - 8000 Hz -> fala, telefonia

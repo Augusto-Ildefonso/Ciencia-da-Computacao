@@ -210,5 +210,102 @@ Essa técnica pode ser aplicada a:
 - registros de tamanho fixo
 - registros de tamanho variável
 A frequência para se aplicar a técnica depende da aplicação e da porcentagem de registros marcados como removidos. Além disso, é usada quando tenho certeza que terá pouca remoção e inserção nos arquivos.
+## Abordagem Dinâmica
+Essa abordagem é indicada para aplicações interativas que acessam arquivos altamente voláteis. Os principais desafios dela são:
+- marcar registros como logicamente removidos
+- identificar se existem registros marcados como logicamente removidos, ou seja, se existem espaços a serem reaproveitados
+- localizar os espaços ocupados por esses registros logicamente removidos sem realizar buscas exaustivas
+### Registros de Tamanho Fixo
+A solução para esses tipos de registros é usar uma lista encadeada de registros eliminados. As características dessa lista são:
+- A lista constitui-se dos RNNs dos registros marcados como logicamente removidos
+- A cabeça da lista é armazenada no registro de cabeçalho do arquivo
+- A inserção e reuso de espaço ocorrem sempre no início da lista
+Para implementar essa lista será usada uma pilha.
+Os algoritmos são:
+- Na remoção de um registro de dados, marca o registro como logicamente removido e insere o registro na lista de registros logicamente removidos (empilha). 
+- Na inserção de um registro de dados, remove o registro da lista de registros logicamente removidos (desempilha) e insere os dados no espaço do registro desempilhado. 
+- Na atualização de um registro de dados ocorre no registro propriamente dito.
+### Registros de Tamanho Variável
+A solução para esses tipos de registros é usar uma lista encadeada de registros eliminados também. As características dessa lista são:
+- A lista constitui-se dos bytes offsets dos registros marcados como logicamente removidos
+- A cabeça da lista é armazenada no registro de cabeçalho do arquivo
+- É preciso de um dado adicional para guardar também o tamanho do registro
+Para implementar a lista usaremos uma lista mesmo.
+Os algoritmos são:
+- Na remoção de um registro de dados, marca o registro como logicamente removido e insere o registro na lista de registros logicamente removidos (empilha ou insere ordenado na lista)
+- Na inserção de um registro de dados, remove o registro da lista de registros logicamente removidos (de acordo com o tamanho solicitado) e insere os dados no espaço do registro desempilhado.
+- Na atualização de um registro de dados, pode requerer remoção e posterior inserção
+Para fazer o reuso do espaço que foi marcado como logicamente removido temos o seguinte algoritmo:
+- Fazemos uma busca sequencial na lista
+- Se encontro espaço disponível no tamanho adequado
+	- Então reaproveita o espaço para armazenar o novo registro, usando uma estratégia de alocação
+	- Senão, insere o novo registro no final do arquivo
+O tamanho do registro que foi removido deve ser do tamanho adequado, ou seja, grande o suficiente para armazenar os dados do novo registro que for usar aquele espaço. Para encontrar o espaço correto temos três estratégias:
+- First-Fit: utiliza o primeiro espaço que servir, nessa estratégia, pode sobrar lixo dentro do registro, o que é conhecido como fragmentação interna.
+- Best-Fit: escolhe o espaço mais justo possível
+- Worst-Fit: escolhe o maior espaço possível
 # Estruturas de Indexação de Dados
+## Índice
+O índice é uma estrutura de acesso auxiliar usada para melhorar o desempenho na recuperação de registros. Ele ajuda pois ele restringe a pesquisa a um subconjunto dos registros, em contrapartida à análise do conjunto completo, ou então faz com que ela seja realizada em resposta a certas condições. Além disso, com ele não é necessário ordenar o arquivo de dados, nem quando novos registros são adicionados.
+A estrutura de dados do índice é definida em termos das características do índice, ou seja, dos registros de dados. As operações que podemos realizar são:
+- Pesquisa/busca
+- Criação
+- Inserção
+- Remoção
+- Atualização
+- Destruição
+- Carregamento
+- Reescrita
+A busca é baseada na chave de busca. O algoritmo dela é:
+- Encontra a posição da chave no arquivo de índice
+- Obtém o RRN ou o byte offset do registro correspondente à posição encontrada
+- Encontra o registro no arquivo de dados
+- Recupera o registro solicitado do arquivo de dados
+Quando criamos um índice juntamente com a criação do arquivo de dados, criamos apenas o registro de cabeçalho. Entretanto, quando criamos o índice baseado em um arquivo já existente criamos o registro de cabeçalho e os demais registros (como chave de busca e campo de referência) que são obtidos a partir de uma varredura no arquivo de dados.
+A inserção adiciona registros no índice devido às inserções no arquivo de dados. Uma inserção de um novo registro no arquivo de dados, que é feita no arquivo não ordenado, ou seja, é realizada no final do arquivo ou com reaproveitamento de espaço, implica na inserção de um novo registro no arquivo índice, que tem necessidade de reorganização do índice, devido à ordenação da chave.
+A remoção remove registros no índice devido às remoções no arquivo de dados. Logo, uma remoção de um registro no arquivo de dados, que é lógica (há reaproveitamento de espaço), implica em uma remoção de um registro no arquivo de índice, essa inserção geralmente é física (resultando no deslocamento dos registros) mas pode ser lógica também.
+A atualização modifica registros no índice devido às modificações no arquivo de dados. Temos algumas formas de fazer a atualização:
+- Remoção seguida de inserção (técnica mais utilizada)
+- Campo chave: reordenação do índice
+- Campo não chave: ajuste do campo de referência se o registro mudar fisicamente no arquivo de dados
+A destruição exclui o arquivo de índice. As demais funcionalidades relacionadas são realizadas diretamente sobre o arquivo de dados.
+O carregamento carrega o arquivo de índice na memória principal antes de usá-lo. O passo a passo é:
+- Aponta para o primeiro registro do arquivo de índice em disco
+- Varre o arquivo de índices sequencialmente
+- Cria o índice em memória principal, em geral implementado como um vetor
+Por fim, a reescrita atualiza o arquivo de índice em disco com base no arquivo de índice em memória principal, quando necessário. Ele pode ser usado também para colocar alguma informação adicional, como o status no registro de cabeçalho (que indica inconsistência nos índices, devido à queda de energia, travamento do programa de atualização, etc).
 ## Índice Simples ou Linear
+### Tipos de Índice
+A princípio temos dois tipos de índice: primário e secundário. O índice primário é definido sobre um campo sem repetição. Já um índice secundário é definido sobre um campo com repetição. É importante ressaltar que essas classificações são diferentes das encontradas em bancos de dados, apesar de compartilharem o mesmo nome.
+O índice secundário pode ainda ser dividido em dois tipo: fracamente ligado (loosely binding) e fortemente ligado (tight binding).
+Apesar de simples, os índices proporcionam ferramentas poderosas para a recuperação de registros. Veja abaixo um esquema da estrutura de dados de um índice.
+![[Captura de tela 2025-05-10 101242.png]]
+Cada registro do índice contém pelo menos 2 campos de tamanho fixo: chave e posição inicial (byte offset) ou RRN do registro no arquivo de dados.
+### Índice Primário
+O índice primário é aquele definidos sobre campos que não possuem repetição. Veja um exemplo abaixo.
+![[Pasted image 20250510101553.png]]
+Na direita temos o índice e na esquerda o arquivo de dados. Perceba que o índice é formado pela junção de dois campo que assim formam identificadores únicos para cada registro, desse modo é possível definir criar índice primário.
+Outra observação importante é que no índice temos valores ordenados, enquanto no arquivo de dados os registros estão desordenados.
+Temos o índice com campos e registros de tamanho fixo enquanto o arquivo de dados tem campos e registros de tamanho fixo ou variável.
+### Índice Secundário
+#### Fracamente Ligado
+![[Pasted image 20250510101936.png]]
+O índice é dito fracamente ligado quando aplicamos ele sobre um índice primário. Aqui aplicamos um índice secundário sobre os dados do índice primário. Repare que o índice secundário é ordenado e permite repetição de valores. 
+#### Fortemente Ligado
+![[Pasted image 20250510102150.png]]
+O índice é dito fortemente ligado quando aplicamos ele sobre o arquivo de dados. Repare novamente que ele é ordenado e possui repetição, mas agora ele foi aplicado diretamente sobre o arquivo de dados.
+### Repetição de Valores
+Quando temos repetição de valores temos dois problemas:
+- Necessidade de armazenar a mesma chave secundária várias vezes
+- Necessidade de reordenar os índices sempre que um novo registro é inserido no arquivo (mesmo que esse registro já tenha um valor de chave secundária já existente no arquivo)
+Para isso temos algumas melhorias que amenizam esses problemas, são elas: vetores de tamanho fixo e lista invertidas.
+#### Vetores de Tamanho Fixo
+Associa-se um vetor de tamanho fixo a cada chave secundária. Veja o exemplo abaixo.
+![[Pasted image 20250510102456.png]]
+#### Listas Invertidas
+Associa-se uma lista encadeada das chaves primárias a cada chave secundária. Ou seja, temos uma lista encadeada das chaves e cada elementos aponta para um arquivo diferente que tem uma lista das chaves secundárias. Desse modo quando formos inserir, por exemplo, percorremos a lista inicial até achar a chave que queremos, então abrimos o arquivo que ela indica e adicionamos o valor nele.
+### Conclusão
+O índice simples ou linear é adequado quando cabe em memória primária. Se ele for armazenado em memória secundária:
+- Pode requerer vários acessos a disco, por causa da busca binária
+- Pode ter manutenção cara, devido à adição e remoção de registros
+- Requer o uso de outras organizações mais apropriadas, como árvore-B
