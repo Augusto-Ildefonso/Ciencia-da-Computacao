@@ -439,39 +439,12 @@ Obs: quando lemos uma string e definimos no a1 o tamanho de temos três possíve
 - A string ocupa todo o espaço -> sem `\n` e sem `\0`
 - A string não ocupa todo espaço e sobra só 1 caractere -> tem `\n` e não `\0`
 - A string não ocupa todo espaço e sobra 2 ou mai caracteres -> tem `\n` e `\0`
-## Conjunto de Instruções
-Também chamado de ISA (Instruction Set Architecture), elas definem a quantidade e funções dos registradores (bloco de registradores). Existem 6 tipos de instrução (todas de 32 bits):
-- Tipo R - Register
-- Tipo I - Immediate
-- Tipo S - Store
-- Tipo B - Branch
-- Tipo U - Upper
-- Tipo J - Jump
-Em todas as instruções, o opcode vai estar nos 7 primeiros bits (0 a 6). Como temos só 7 bits, estamos limitador a 128 instruções. Mas para contornar isso usamos além do campo do opcode, o campo F3 para especificar a operação, ampliando a capacidade de instruções.
-Das imagens abaixo, o montador vai dividir os bits em grupos de 4 e converter para hexadecimal, ficando por exemplo `0x00012903` e assim em diante. Vale ressaltar que ele não respeita a divisão dos bits entre os registradores. Cada registrador tem um valor, exemplo o `s2` é `x18` e aí salvamos o 18 em binário nos registradores.
-### Tipo R
-![[Pasted image 20250408103739.png]]
-Exemplo de instrução: `add <rd>, <rs1>, <rs2>`.
-### Tipo I
-Todas as instruções que tem um valor imediato definido na instrução.
-![[Pasted image 20250408104633.png]]
-Exemplos de instruções: `addi <rd>, <rs1>, immediate` ou `lw <rd>, imm(<rs1>)`.
-A combinação de f3 + opcode que diz se é `lw` ou `lb`, etc. 
-### Tipo S
-![[Pasted image 20250408105810.png]]
-Exemplo de instrução: `sw <rs2>, imm(<rs1>)`.
-É importante para a arquitetura que os registradores estejam sempre nas mesmas posições, então o `rs1` sempre vai estar entre 15 e 19, o `rs2` entre 20 e 24 e assim em diante. Por isso, o immediate é dividido em duas partes, de modo a não alterar as posições dos registradores.
-A combinação de f3 + opcode que diz se é `sw` ou `sb`, etc.
-### Tipo B
-![[Pasted image 20250408114559.png]]
-Exemplo de instrução: `beq <rs1>, <rs2>, imm`.
-O immediate é o número de meias-palavras que tem do branch até onde é para pular. Como trabalhamos com half-words, o próprio montador, quando gera o assembly, vai colocar o valor 0 no início do valor imediato para multiplicá-lo por 2 e então obter o número de bits. E trabalhamos com half-words pois isso dobra a capacidade de representação, quando comparado com bytes.
-O 12 tem que estar no final pois o último bit tem que ser o de sinal. Por causa disso, não há espaço para o 11 e por isso colocamos ele no primeiro bit do immediate.
-### Tipo U
-![[Pasted image 20250408114526.png]]
-Exemplo de instrução: ``lui <rd>, imm``.
 # RISC-V: Conjunto de Instruções
-O conjunto de instruções, também chamado de ISA (Instructions Set Architecture), define quais são as instruções implementadas na arquitetura. Ele também define a quantidade e função dos registradores, por exemplo, arquiteturas 32 bits (como é o caso da que estamos trabalhando: RV32I ou Risc-V 32 Bits Integer Architecture) tem 32 bits no bloco de registradores, podendo ser endereçado a $2^5$ bits.
+O conjunto de instruções, também chamado de ISA (Instructions Set Architecture), define quais são as instruções implementadas na arquitetura. Ele também define a quantidade e função dos registradores, por exemplo, arquiteturas 32 bits (como é o caso da que estamos trabalhando: RV32I ou Risc-V 32 Bits Integer Architecture) tem 32 bits no bloco de registradores, podendo ser endereçado $2^5$ bits.
+Veja abaixo uma visão geral das instruções.
+![[Pasted image 20250516115149.png]]
+Em todas as instruções, o opcode vai estar nos 7 primeiros bits (0 a 6). Como temos só 7 bits, estamos limitador a 128 instruções. Mas para contornar isso usamos além do campo do opcode, o campo F3 para especificar a operação, ampliando a capacidade de instruções.
+O montador vai dividir os bits em grupos de 4 e converter para hexadecimal, ficando por exemplo `0x00012903` e assim em diante. Vale ressaltar que ele não respeita a divisão dos bits entre os registradores. Cada registrador tem um valor, exemplo o `s2` é `x18` e aí salvamos o 18 em binário nos registradores.
 Primeiramente podemos dividir nossas instruções em classes, veja abaixo.
 ## Classes de Instruções
 Temos 5 classes de instruções:
@@ -487,17 +460,19 @@ Temos 5 classes de instruções:
 	- slt
 ## Tipos de Instruções
 A RISC-V tem 6 tipos de instruções:
-- Tipo R
-- Tipo I
-- Tipo S
-- Tipo B
-- Tipo U
-- Tipo J
+- Tipo R - Register
+- Tipo I - Immediate
+- Tipo S - Store
+- Tipo B - Branch
+- Tipo U - Upper
+- Tipo J - Jump
 A imagem abaixo mostra a divisão dos bits de cada tipo de instrução.
 ![[Pasted image 20250510121733.png]]
 Vamos agora aprofundar em cada tipo de instrução
 ### Tipo R (Register)
 ![[Pasted image 20250510121831.png]]
+![[Pasted image 20250408103739.png]]
+]Elas são usadas para operações aritméticas e lógicas entre registradores
 O campos dela são:
 - opcode: código da operação
 - rd: endereço do registrador destino
@@ -505,8 +480,8 @@ O campos dela são:
 - rs1: endereço do primeiro registrador de origem
 - rs2: endereço do segundo registrador de origem
 - funct7: auxílio para definição da operação
-Um exemplo de instrução do tipo R é `add`:
-- `add s2, s1, 0`
+Um exemplo de instrução do tipo R é `add <rd>, <rs1>, <rs2>`:
+- `add s2, s1, s0`
 - opcode: 0110011
 - rd: s2 (10010)
 - funct3: 000
@@ -514,8 +489,11 @@ Um exemplo de instrução do tipo R é `add`:
 - rs2: s0 (01000)
 - funct7: 0000000
 ![[Pasted image 20250510122153.png]]
+Outros exemplos: `add`, `sub`, `sll`, `slt`, `xor`, `or`, `and`
 ### Tipo I (Immediate)
 ![[Pasted image 20250510122416.png]]
+![[Pasted image 20250408104633.png]]
+Elas são usadas para operações com constantes imediatas, carregando dados e com chamadas ao sistema.
 Os campos dela são:
 - opcode: código da operação
 - rd: endereço do registrador destino
@@ -523,59 +501,75 @@ Os campos dela são:
 - rs1: endereço do primeiro registrador de origem
 - imm: valor imediato
 Um exemplo de instrução do tipo I é `lw`:
-- `lw s2 0(sp)`
+- `lw s2, 0(sp)`
 - opcode: 0000011
 - rd: s2 (10010)
 - funct3: 010
 - rs1: sp(00010)
 - imm: 000000000000
 ![[Pasted image 20250510122716.png]]
+Outros exemplos: `addi <rd>, <rs1>`, `andi`, `ori`, `lb`, `lh`, `lw <rd>, imm(<rs1>)`, `jalr`, `ecall`.
+A combinação de f3 + opcode que diz se é `lw` ou `lb`, etc. 
 ### Tipo S (Store)
 ![[Pasted image 20250510122739.png]]
+![[Pasted image 20250408105810.png]]
+Elas são usadas para instruções de armazenamento (store) na memória
 Os campos dela são:
 - opcode: código da operação
 - imm\[4:0] e imm\[11:5]: valor imediato
 - funct3: auxílio para definição de operação
 - rs1: endereço do primeiro registrador de origem
 - rs2: endereço do segundo registrador de origem
-Um exemplo de instrução do tipo S é `sw`:
+Um exemplo de instrução do tipo S é `sw <rs2>, imm(<rs1>)`:
 - `sw s2, 0(sp)`
 - opcode: 0100011
 - imm\[4:0] e imm\[11:5]: 00000 0000000
 - funct3: 010
 - rs1: sp(00001)
-- rs2: sp(10010)
+- rs2: s2(10010)
 ![[Pasted image 20250510123426.png]]
+Outros exemplos: `sb`, `sh`, `sw`.
+É importante para a arquitetura que os registradores estejam sempre nas mesmas posições, então o `rs1` sempre vai estar entre 15 e 19, o `rs2` entre 20 e 24 e assim em diante. Por isso, o immediate é dividido em duas partes, de modo a não alterar as posições dos registradores.
+A combinação de f3 + opcode que diz se é `sw` ou `sb`, etc.
 ### Tipo B (Branch)
 ![[Pasted image 20250510124618.png]]
+![[Pasted image 20250408114559.png]]
+Elas são usadas para instruções de desvio condicional (branches).
 Os campos dela são:
 - opcode: código da operação
 - imm\[4:0], imm\[11], imm\[10:5] e imm\[12]: valor imediato
 - funct3: auxílio para definição da operação
 - rs1: endereço do primeiro registrador de origem
 - rs2: endereço do segundo registrador de origem
-Um exemplo de instrução do tipo B é `beq`:
+Um exemplo de instrução do tipo B é `beq <rs1>, <rs2>, imm`:
 - `beq s1, s0, 4`
 - opcode: 1100011
-- imm\[4:0], imm\[11], imm\[11:5] e imm\[12]: 000000000100
+- imm\[4:0], imm\[11], imm\[10:5] e imm\[12]: 000000000100
 - funct3: 000
 - rs1: s1 (01001)
 - rs2: s0 (01000)
 ![[Pasted image 20250510124949.png]]
+Outros exemplos: `beq`, `bne`, `blt`, `bge`.
+O immediate é o número de meias-palavras que tem do branch até onde é para pular. Como trabalhamos com half-words, o próprio montador, quando gera o assembly, vai colocar o valor 0 no início do valor imediato para multiplicá-lo por 2 e então obter o número de bits. E trabalhamos com half-words pois isso dobra a capacidade de representação, quando comparado com bytes.
+O 12 tem que estar no final pois o último bit tem que ser o de sinal. Por causa disso, não há espaço para o 11 e por isso colocamos ele no primeiro bit do immediate.
 ### Tipo U (Upper)
 ![[Pasted image 20250510125221.png]]
+![[Pasted image 20250408114526.png]]
+Elas são usadas para carregar constantes grandes nos registradores
 Os campos dela são:
 - opcode: código da operação
 - rd: endereço do registrador destino
 - imm\[31:12]: valor imediato
-Um exemplo de instrução do tipo U é `lui`:
+Um exemplo de instrução do tipo U é ``lui <rd>, imm``:
 - `lui s0, 0x01234`
 - opcode: 0110111
 - rd: s0(01000)
 - imm\[31:12]: 00000001001000110100
 ![[Pasted image 20250510125428.png]]
+Outros exemplos: `lui`, `auipc`
 ### Tipo J (Jump)
 ![[Pasted image 20250510130037.png]]
+Elas são usadas para instruções de salto incondicional com endereço absoluto relativo.
 Os campos dela são:
 - opcode: código da operação
 - rd: endereço do registrador de destino
@@ -586,9 +580,68 @@ Um exemplo de instrução J é `jal`:
 - rd: s0 (01000)
 - imm\[20], imm\[10:1], imm\[11] e imm\[19:12]:1 1111111100 1 11111111
 # RISC-V: Monociclo
-A arquitetura RISC-V
+A arquitetura RISC-V tem os seguintes componentes:
+- Banco de registradores
+![[Pasted image 20250514175359.png]]
+- Unidade de controle
+- ULA
+![[Pasted image 20250514175446.png]]
+- Memória
+![[Pasted image 20250514175427.png]]
+- Entrada/Saída
+- Multiplexadores
+- Entre outros...
+![[Pasted image 20250514175524.png]]
+Para interconectar todos esses componentes temos dois tipos de linha:
+- Linha de dados: interconexões definidas pelo caminho de dados
+- Linha de controle: definidas pela unidade de controle de acordo com a fase da instrução e o que a instrução tem que fazer (decodificação)
+Temos múltiplas implementações para uma mesma arquitetura. São elas:
+- Monociclo (single cycle): cada instrução (busca, decode e execução) é executada em um ciclo de clock. O tamanho do ciclo de clock é o tamanho da instrução mais longa
+![[Pasted image 20250514175922.png]]
+- Multiciclo (multicycle): a execução da instrução é dividida em uma série de passos menores
+- Pipeline: a execução de cada instrução é dividida em uma série de passos menores e partes de múltiplas instruções são executadas ao mesmo tempo
 ## Caminho de Dados
+### Metodologia do Clocking
+Ela utiliza uma metodologia de sincronização acionada por transição. Ou seja, quaisquer valores armazenados em um elemento lógico sequencial são atualizados apenas em uma transição de clock.
+![[Pasted image 20250514175717.png]]
+### Conjunto de instruções básico
+Temos as seguintes instruções:
+- Instruções de memória: `lw` e `sw`
+- Instruções aritméticas: `add` e `sub`
+- Instruções lógicas: `or`, `and` e `slt`
+- Instruções de desvio: `beq`
+### Busca das instruções
+![[Pasted image 20250514180122.png]]
+### Execução das instruções do Tipo R
+O passo-a-passo é:
+- Leitura de dois registradores
+- Realização da operação aritmética/lógica
+- Escrita do resultado no registrador
+- Uso dos componentes:
+	- Banco de registradores
+	- ULA
+![[Pasted image 20250514180414.png]]
+### Execução das instruções Load e Store
+O passo-a-passo da Load é:
+- Leitura do operando a partir dos registradores (registrador origem e valor imediato)
+- Calcula o endereço usando um deslocamento de 12 bits (uso da ULA, com o componente de geração de valor imediato)
+- Lê a memória e atualiza o registrador
+O passo-a-passo da Store é:
+- Leitura dos operandos a partir dos registradores (dois registradores origem e um valor imediato)
+- Calcula o endereço usando um deslocamento de 12 bits (uso da ULA, com o componente de geração do valor imediato)
+- Escreve o valor do registrador na memória
+![[Pasted image 20250514182510.png]]
+### Execução das instruções de desvio
+Um exemplo de instrução de desvio é `beq t1, t2, offset`. O endereço destino é relativo a próxima instrução, logo, $endereço \, destino \, = PC  + byteoffset$. O offset já foi deslocado de 1 bit pela unidade de geração de valor imediato.
+O passo-a-passo é:
+- Leitura dos operandos a partir do banco de registradores
+- Comparação dos dois através da ULA (subtração dos dois e caso sejam iguais, a saída Zero é setada)
+- Cálculo do endereço destino (se houver desvio: PC + deslocamento)
+![[Pasted image 20250514182951.png]]
+### Implementação
+![[Pasted image 20250514183022.png]]
 ## Unidade de Controle
+![[Pasted image 20250514183321.png]]
 ### Imm Gen
 Para a unidade de controle gerar os sinais de controle, a implementação pode ser feita de acordo com a tabela abaixo.
 
@@ -597,14 +650,16 @@ Para a unidade de controle gerar os sinais de controle, a implementação pode s
 | 00      | {{20 x {Inst{31}}}, inst{31:20}}                                   | Tipo I         |
 | 01      | {{20 x {Inst{31}}}, inst{31:25}, inst{11:07}}                      | Tipo S         |
 | 10      | {{19 x {Inst{31}}, inst{31}, inst{7}, inst{30:25}, inst{11:8}, 0}} | Tipo B         |
+Veja abaixo como são divididos os bits em alguns tipos de instrução.
+![[Pasted image 20250514183242.png]]
 ### Sinais de Controle
-| Opcode | ALU Src | ALU Op | Imm Src | Branch | Mem Read | Mem Write | Mem Reg | Reg Write |
-| ------ | ------- | ------ | ------- | ------ | -------- | --------- | ------- | --------- |
-| Tipo R | 0       | 10     | XX      | 0      | 0        | 0         | 0       | 1         |
-| lw     | 1       | 00     | 00      | 0      | 1        | 0         | 1       | 1         |
-| sw     | 1       | 00     | 01      | 0      | 0        | 1         | X       | 0         |
-| beq    | 0       | 01     | 10      | 1      | 0        | 0         | X       | 0         |
-| addi   |         |        |         |        |          |           |         |           |
+| Opcode | ALU Src | ALU Op | Imm Src | Branch | Mem Read | Mem Write | Mem to Reg | Reg Write |
+| ------ | ------- | ------ | ------- | ------ | -------- | --------- | ---------- | --------- |
+| Tipo R | 0       | 10     | XX      | 0      | 0        | 0         | 0          | 1         |
+| lw     | 1       | 00     | 00      | 0      | 1        | 0         | 1          | 1         |
+| sw     | 1       | 00     | 01      | 0      | 0        | 1         | X          | 0         |
+| beq    | 0       | 01     | 10      | 1      | 0        | 0         | X          | 0         |
+| addi   | 1       | 00     | 00      | 0      | 0        | 0         | 0          | 1         |
 Para entender o que significa os códigos acima, verifique as informações abaixo.
 - `ALU Src`:
 	- 0 - Bloco Reg
@@ -624,7 +679,7 @@ Para entender o que significa os códigos acima, verifique as informações abai
 - `Mem Write`:
 	- 0 - Não escreve na memória
 	- 1 - Escreve na memória
-- `Mem Reg`:
+- `Mem to Reg`:
 	- 0 - é da ULA
 	- 1 - é da memória de dados
 - `Reg Write`:
@@ -633,17 +688,26 @@ Para entender o que significa os códigos acima, verifique as informações abai
 ## Desvantagem de usar essa arquitetura
 A desvantagem de usar uma arquitetura monociclo é que o ciclo de clock é o suficiente para executar a instrução mais lenta (lw).
 ![[Pasted image 20250424090442.png]]
-A solução para essa desvantagem é dividir a execução da instrução em etapas, onde cada etapa é executada em 1 ciclo de clock. Veja abaixo.
+A solução para essa desvantagem é fazer com que as instruções demorem mais do que um ciclo de clock para finalizar e dividir a execução da instrução em etapas, onde cada etapa é executada em 1 ciclo de clock. Importante ressaltar que nem todas as instruções demoram o mesmo números de ciclos de clock para finalizar. Veja abaixo.
 ![[Pasted image 20250424091058.png]]
 # RISC-V: Pipeline
-A implementação pipeline consiste em dividir a execução da instrução em etapas. Cada etapa consome 1 ciclo de clock. Além disso, temos a sobreposição das etapas de diferentes instruções no mesmo ciclo de clock. Ou seja, a ideia do pipeline é diversas instruções estarem sendo executadas no mesmo ciclo de clock (usando instruções diferentes) e usando componentes diferentes.
+A implementação pipeline consiste em dividir a execução da instrução em etapas. Cada etapa consome 1 ciclo de clock. Além disso, temos a sobreposição das etapas de diferentes instruções no mesmo ciclo de clock. Ou seja, a ideia do pipeline é diversas instruções estarem sendo executadas no mesmo ciclo de clock (usando etapas diferentes) e usando componentes diferentes.
 Nessa implementação, todas as instruções vão passar por todas as etapas (mesmo naquelas que elas não usam), pois se não teremos duas instruções diferentes na mesma etapa no mesmo ciclo de clock. Para evitar isso, fazemos as instruções passar por todas as etapas (gastando um ciclo de clock).
+Algumas considerações sobre o pipeline:
+- O pipeline não diminui o tempo de execução de cada tarefa, mas aumenta o throughput (instrução finalizada por segundo) de toda a carga de trabalho. 
+- A taxa do pipeline é limitado pelo estágio mais lento
+- Várias tarefas são realizadas simultaneamente utilizando diferentes recursos
+- Um speedup potencial é o número de estágios do pipeline
+- O tempo para encher o pipeline e para esvaziá-lo diminui o speedup
+- O pipeline trava se houver dependências
+- A instrução LOAD é a mais longa
 As etapas são:
-- IF: Busca da instrução, na memória de instruções
-- ID: Decodificação e busca de dados no bando de registradores
-- EX: Execução na ULA
-- MEM: Escrita na memória de dados
-- WB: Escrita do resultado no banco de registradores
+- IF (Instruction **Fetch**): Busca da instrução na memória de instruções
+- ID (Reg/Dec ou Register Read): Busca de dados no banco de registradores (Reg) e decodificação (Dec)
+- EX (Exec ou ALU Operation): Calcula o endereço de memória ou execução da operação na ULA
+- MEM (Data Acess): Escrita na memória de dados (acesso à memória principal)
+- WB (Register Write): Escrita do resultado calculado ou lido da memória no banco de registradores
+![[Pasted image 20250515204202.png]]
 ![[Pasted image 20250424092353.png]]
 Na imagem podemos ver um problema do pipeline, que é que temos duas instruções usando o mesmo componente. Mas temos um jeito de contornar isso, que é dividindo o ciclo de clock em duas partes, na primeira é realizada uma escrita e na segunda parte uma leitura.
 Na implementação pipeline, tempo de execução da instrução não diminui, mas aumenta o throughput (também chamado a vazão, que é bits por segundo).
@@ -671,7 +735,7 @@ Vejamos um exemplos agora. Para 100 instruções:
 ## Implementação Pipeline
 ![[Pasted image 20250429112524.png]]
 Os blocos em azul são um conjunto de registradores (como se fosse um banco de registradores intermediários) para que as informações que eu busquei anteriormente estejam armazenadas neles e no próximo ciclo de clock eu possa buscar as informações nesse conjunto de registradores. Esses registradores são chamados de registradores intermediários do pipeline.
-Alguns dos registradores desses conjuntos são:
+Os registradores desses conjuntos são:
 - IF/ID.IR
 - IF/ID.PC
 - ID/EX.PC
@@ -683,45 +747,82 @@ Alguns dos registradores desses conjuntos são:
 - EX/MEM.rd
 - EX/MEM.BranchTarget
 - EX/MEM.B
+- EX/MEM.zero
+- MEM/WB.LMD
+- MEM/WB.ALUOutput
+- MEM/WB.rd
 O que está sublinhado em vermelho é sinal de controle vindo da UC.
-## Dependências do Pipeline
+Os sinais de controle de cada etapa são:
+ - ID/EX
+	 - ALUOp
+	 - ALUSrc
+	 - MemRead
+	 - MemWrite
+	 - Branch
+	 - RegWrite
+	 - MemtoReg
+ - EX/MEM
+	 - MemRead
+	 - MemWrite
+	 - Branch
+	 - RegWrite
+	 - MemtoReg
+ - MEM/WB
+	 - RegWrite
+	 - MemtoReg
+## Dependências do Pipeline (Hazards)
 O pipeline apresenta três problemas:
 - Conflito estrutural
 - Dependência de dados
 - Dependência de controle
 ### Conflito Estrutural
-O conflito estrutural ocorre devido o acesso instantâneo ao mesmo recurso por instruções em estágios diferentes. Exemplo:
-- Acesso a memória
-- Acesso ao banco de registradores
+O conflito estrutural ocorre devido o acesso instantâneo ao mesmo recurso (memória) por instruções em estágios diferentes (dois ou mais). Exemplo:
+- Acesso Concorrente a memória
+	- Uso de memórias multi-portas ou com múltiplos bancos de acessos independentes
+- Leitura de instrução e leitura/escrita de dados simultâneos à memória
+	- Uso da arquitetura "Harvard" com caches de dados e instruções sepadrados
+- Acesso simultâneo ao banco de registradores
+	- Uso de banco de registradores com múltiplas portas
 - Uso simultâneo da unidade funcional (ULA)
+	- Replicação da unidade funcional ou implementação pipelined dessa unidade
 Para resolver os problemas relacionados à memória, temos duas soluções:
+![[Pasted image 20250515210214.png]]
 - Separa dados e instruções
 - Cache de dados e instruções
+- Memória com múltiplos acessos independentes
 Para resolver os problemas relacionados ao banco de registradores:
 - Divide o ciclo de clock em 2 fases, onde na primeira (baixa) escreve no banco de registradores e na segunda (alta) lê
 Para resolver o uso simultâneo da ULA:
 - Acrescentamos mais unidades funcionais (no nosso caso acrescentamos dois somadores)
 ### Dependências de Dados
-O problema da dependência de dados é quando uma instrução faz uso de um operando que vai ser produzido por outra instrução que ainda está no pipeline. Isso é chamado por alguns autores como *Hazard* (perigo).
+O problema da dependência de dados é quando uma instrução faz uso de um operando que vai ser produzido por outra instrução que ainda está no pipeline, ou seja, as instruções dependem de resultados de instruções anteriores ainda não completadas.
 Temos dois tipos de dependência de dados:
 - Dependência verdadeira/direta 
+	Temos uma instrução que utiliza um operando que é produzido por uma instrução anterior.
 	O tipo de dependência que temos aqui é chamada Read After Write (RAW)
 	Exemplo:
 	![[Pasted image 20250508085910.png]]
-	De vermelho temos a dependência.
+	De vermelho temos a dependência. Atenção, a representação da onde está a bolha está errado.
 	Veja que o R1 é usado como operando na segunda instrução e ele é obtida na primeira. Analisando na estrutura, o R1 só será escrito no `WB`, ou seja, no 5º ciclo de clock, mas ele será lido da memória no `ID` da segunda instrução, que ocorrerá no 3º ciclo de clock.
 	Quando temos ciclos de clock em que não tem nenhuma instrução finalizada, devido a prorrogação das instruções, chamamos esses ciclos de bolha
 	Para resolver isso postergamos a instrução até ela chegar no `WB`, porque assim na primeira parte do clock será a escrita e na segunda será a leitura. Como consequência, todas as próximas instruções também terão que ser postergadas.
+	Nessas dependências, o pipeline precisa ser parado durante certo número de ciclos (interlock).
+	Há a inserção de instruções `nop` ou escalonamento adequado das instruções pelo compilador.
+	O adiantamento (bypassing ou forwarding) dos dados pode resolver em alguns casos. Além dele, também pode ser usado o escalonamento para mitigar esses problemas.
 - Dependência Falsa
-	Só existe se a arquitetura suporta execução fora de ordem (out-of-order execution). Ela só existe em arquiteturas superescalares. A execução fora de ordem consiste em permitir colocar instruções que vem mais adiante, que não possuem uma dependência, antes de instruções que tem dependência.
+	Só existe se a arquitetura suporta execução fora de ordem (out-of-order execution). Ela só existe em processadores e arquiteturas superescalares. A execução fora de ordem consiste em permitir colocar instruções que vem mais adiante, que não possuem uma dependência, antes de instruções que tem dependência.
+	Elas não são um problema em pipelines onde a ordem de execução das instruções é mantida.
+	A renomeação dos registradores é uma solução usual para este problema.
 	Aqui temos dois tipos de dependências:
-	- Write After Read (WAR)
+	- Write After Read (WAR) ou antidependência
+		Nela temos uma instrução que lê um operando que é escrito por uma instrução sucessora.
 		```
 		add R1, R2, R3
 		sub R2, R5, R6
 		```
 		Supondo que ainda não temos o R3, veja que a ``sub`` pode ser calculada mas não pode ser escrita ainda pois temos que realizar o ``add`` antes.
-	- Write After Write (WAW)
+	- Write After Write (WAW) ou dependência de saída
+		Temos uma instrução que escreve um operando que é também escrito por uma instrução sucessora.
 		```
 		add R1, R2, R3
 		sub R1, R5, R6
@@ -735,4 +836,101 @@ Veja nas imagens a seguir como ocorre esse escalonamento e repare que o grafo qu
 Agora o compilador reordena as instruções para diminuir o número de bolhas.
 ![[aula_org_arq_08_05_3.jpg]]
 ![[aula_org_arq_08_05_4.jpg]]
-Esse processo é feito automático pelo compilador, mas em alguns casos podemos usar a função `nop` para forçar um auxílio (ver melhor ó que o nop faz) mas não é obrigatório, ele mesmo já faz toda a manipulação necessária.
+Esse processo é feito automático pelo compilador, mas em alguns casos podemos usar a função `nop` para forçar um auxílio mas não é obrigatório, ele mesmo já faz toda a manipulação necessária. Caso ele não consiga, inserimos a função como é visto abaixo.
+~~~assembly
+lw t1, 0(t0)
+lw t2, 4(t0)
+nop
+nop
+add t3, t1, t2
+nop
+nop
+sw t3, 12(t0)
+~~~
+Para resolver esse problema das dependências, temos que mudar nossa implementação. Veja como que ela fica abaixo. Vale ressaltar que alguns componentes e conexões não foram representados para facilitar a visualização mas eles estão lá.
+![[aula_org_arq_13_05.jpg]]
+### Forwarding ou Bypassing
+Nessa técnica é realizado o adiantamento de dados no caminho interno dentro do pipeline entre a saída e a entrada da ULA. Ela evita a parada do pipeline utilizando buffers internos em vez de esperar que o elemento de dado chegue nos registradores visíveis ao programador ou na memória.
+![[Pasted image 20250515211841.png]]
+Entretanto, em algumas situações, nem o forwarding pode resolver o problema de parada do pipeline.
+Para implementar o forwarding, primeiro temos que ter condições para que o adiantamento seja considerado:
+- Destino da instrução que está entre os ciclos de EX e MEM é igual a um dos registradores de origem da instrução que está nos ciclos de ID e EX
+	- EX/MEM.rd = ID/EX.rs
+	- EX/MEM.rd = ID/EX.rt
+- Destino da instrução que está entre os ciclos de MEM e WB é igual a um dos registradores de origem da instrução que está entre os ciclos de ID e EX
+	- MEM/WB.rd = ID/EX.rs
+	- MEM/WB.rd = ID/EX.rt
+Veja no exemplo abaixo que temos as seguintes dependências:
+![[Pasted image 20250515212530.png]]
+- Entre as instruções: `sub 2, 1, 3` e `and 12, 2, 5`
+- Entre as instruções: `sub 2, 1, 3` e `or 16, 6, 2`
+As duas dependências `sub-add` não são problema pois o banco de registradores irá fornecer os dados corretos no ciclo de decodificação. Logo não existe hazard entre as instruções `sub` e `sw`.
+#### Unidade de Forward
+![[Pasted image 20250515212604.png]]
+![[aula_org_arq_15_5_1.jpg]]
+![[Pasted image 20250515212625.png]]
+Veja agora as definições das condições para detecção de dependência de dados:
+- Dependência EX:
+	- `if(EX/MEM.RegWrite and (EX/MEM.rd != 0) and (EX/MEM.rd == ID/EX.rs1)) -> ForwardA = 1`
+	- `if(EX/MEM.RegWrite and (EX/MEM.rd != 0) and (EX/MEM.rd == ID/EX.rs2)) -> ForwardB = 1`
+- Dependência MEM:
+	- `if(MEM/WB.RegWrite and (MEM/WB.Rd != 0) and ( MEM/WB.Rd == ID/EX.rs1)) -> ForwardA = 01`
+	- `if(MEM/WB.RegWrite and (MEM/WB.Rd != 0) and ( MEM/WB.Rd == ID/EX.rs2)) -> ForwardB = 01`
+O circuito do pipeline fica então:
+![[Pasted image 20250515213115.png]]
+### Paradas
+Nem sempre é possível resolver as dependências com forwarding. A estrutura acima não resolve o problema da dependência quando se tem uma `lw` seguida por uma instrução que lê o desvio da `lw`. Nesses casos, a solução é parar o pipeline quando se detecta a dependência, através da unidade de parada (stall).
+Veja abaixo o circuito com a unidade de parada e também o circuito com a unidade de parada.
+![[aula_org_arq_15_5_2.jpg]]
+Se for detectada a dependência, deve ser inserida uma função `nop` no operation.
+![[Pasted image 20250515213427.png]]
+Caso a parada seja detectada no estágio ID, as instruções nos estágios ID e IF devem parar. Para isso basta impedir que o registrador PC e os registradores de pipeline IF/ID sejam alterados, preservando os seus conteúdos no próximo ciclo. Como a instrução está em um pipeline, ela caminha para o estágio EX, que precisa executar algo, mas não pode ser a instrução pois não tem os dados necessários. Então ele executa uma instrução que não tem efeito, ou seja, o `nop`. Para inserir essa bolha no pipeline, basta desativar todos os sinais de controle dos estágios EX, MEM e WB.
+Assim, obtemos o seguinte circuito completo:
+![[Pasted image 20250515213751.png]]
+### Dependência de Controle
+A dependência de controle ocorre quando a próxima instrução não está no endereço subsequente ao da instrução anterior. As instruções que podem alterar a ordem de execução do programa são:
+- Condicionais: if-then-else, for (bnez, bne, beq, etc)
+- Incondicionais: chamadas de procedimentos (jal), goto (j), return (jr), procurando o endereço de retorno de uma tabela (jalr)
+Os efeitos dos desvios condicionais são que se o desvio ocorre, o pipeline precisa ser esvaziado (e no lugar teremos bolhas). Não se sabe se o desvio ocorrerá ou não até o momento de sua execução.
+As soluções para para o problema são:
+- Congelar o pipeline quando se detecta que é uma instrução de desvio até que o resultado do desvio seja conhecido. Ele vai inserir bolhas no pipeline. Isso é uma solução ruim quando o pipeline é muito longo, pois congelar o pipeline pode ser muito lento.
+	![[Pasted image 20250515213844.png]]
+- Considerar que o desvio não vai ser tomado e que vai continuar no fluxo sequencial. Quando o desvio é tomado, as instruções buscadas, decodificadas e passadas pela ULA precisam ser descartadas. Para descartar, basta alterar os valores de controle para 0, como foi feito no tratamento de dependência de dados. Como a decisão do desvio é feita somente no estágio MEM, é necessário alterar as instruções nos estágios IF, ID e EX, isso significa dar flush (descartar) nas instruções. Ou seja, ele executa normalmente até chegar o momento em que o desvio seria executado, quando ele for executado temos que dar um flush no pipeline até chegar a instrução para a qual desviamos. 
+- Mover a execução do desvio para um estágio anterior a MEM, reduzindo o atraso dos desvios. Isso implica em:
+	- Cálculo do endereço destino
+	- Cálculo da condição (decisão de desvio)
+	Quando fazemos essa movimentação, utilizamos uma delayed branch (desvio atrasado) para as instruções de desvio. A ideia é pegar uma instrução que não depende do desvio (anteriores ou posteriores a ele) e colocá-la para ser executada logo após ele. Desse modo a instrução após o desvio é sempre executada. Essa próxima instrução é chamada de delay slot (posição de atraso). Só podemos fazer essa delayed branch com uma instrução, visto que como movemos o desvio em um ciclo de clock, teremos só uma instrução de atraso e estamos preenchendo ela. Isso vai implicar em um reordenamento das instruções (desvio atrasado otimizado).
+	Para facilitar o trabalho do compilador, no preenchimento do delay slot muitas arquiteturas permitem o uso do delay slot com a opção de anulação automática dessa instrução se o desvio condicional não for tomado. Desse modo, uma instrução do endereço alvo pode ser movida para o delay slot, o que é muito útil no caso de loops. Nesse caso, está implícita uma previsão de desvio estática que diz que o desvio será sempre tomado.
+	![[aula_org_arq_15_5_3.jpg]]
+- Tentar prever o comportamento do desvio
+	- Desvio tomado (branch taken): PC = PC + Imm
+	- Desvio não tomado (branch not taken): PC = PC + 4
+	Tipos de predição:
+	- Estática
+		- Geração de bolhas quando a previsão é errada, baixa taxa de acertos
+		- Não permite adaptações com relação ao comportamento do programa (não se baseia no comportamento do seu código)
+		- Pode fazer uso de um hardware para inserir bolha
+		Os tipos de previsão estática são:
+		- Assumir que todos os desvios não são tomados (predicted-untaken)
+		- Assumir que todos os desvios são tomados (predicted-taken)
+		- Assumir que todos os desvios com determinado operation code serão tomados
+		- Os desvios para trás são assumidos como tomados (branch taken) e os desvios para frente são assumidos como não tomados (branch not taken). Isso é conhecido como Backward-Taken, forward not-taken (BTFNT)
+	- Dinâmica
+		- Ela é baseada no comportamento do seu código
+		Preditor de 1-bit:
+		![[Pasted image 20250515101718.png]]
+		- Mantém uma pequena memória indexada pela parte menos significativa do endereço da instrução do desvio
+		- Ele tem um Buffer de previsão de desvios (Branch-Prediction Buffer) ou Tabela de histórico de desvios
+		- Essa tabela tem 1 bit que diz se o desvio foi tomado recentemente ou não e que indica se o próximo desvio deve ou não ser considerado
+		- Em casos de erros esse bit é alterado
+		- Ele erra duas vezes (quando temos um só loop): quando termina a primeira iteração (que acha que sai mas não sai) e quando sai do loop (que acha que não vai sair mas sai)
+		- Não mantém o histórico
+		- Um previsor de 1-bit prediz corretamente um desvio ao final de uma iteração de um loop, enquanto o loop não termina
+		- Em loops aninhados, um previsor de 1-bit irá causar duas predições incorretas para o loop interno:
+			- Uma vez ao final no final do loop, quando a iteração termina o loop ao invés de ir para o começo do loop
+			- Uma vez quando a primeira iteração do loop for reiniciada, quando ele prediz o término do loop ao invés do começo do loop
+		- Este erro duplo em loops aninhados é evitado por um esquema de previsão de dois bits
+		Preditor de 2-bits:
+		- Permite errar duas vezes antes de alterar a predição
+		- O previsor de 2-bits (bimodal) é essencialmente um contador de dois bits com valores entre 0 e 3.
+		![[Pasted image 20250515095903.png]]

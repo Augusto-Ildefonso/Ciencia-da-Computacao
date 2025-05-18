@@ -312,6 +312,68 @@ Veja para a função `fst`:
 fst :: (a, b) -> a
 ~~~
 Ela recebe uma tupla de dois elementos que podem ou não ter tipos diferentes e retorna um elemento do mesmo tipo do primeiro elemento.
+### Typeclasses
+Uma Typeclass é um tipo de interface que define determinado comportamento. Se um tipo faz parte de uma Typeclass significa que ele aguenta e implementa o comportamento que a Typeclass descreve.
+Quando estamos definindo uma função observamos que temos um símbolo `=>`. Veja abaixo.
+~~~haskell
+(==) :: (Eq a) => a -> a -> Bool
+~~~
+Tudo antes do símbolo `=>` é chamado de class constraint. Nós podemos ler essa definição de tipo como: a função igualdade pega quaisquer dois valores que são do mesmo tipo e retorna um booleano, onde o tipo dos dois valores deve ser um membro da classe Eq (isso era a class constraint).
+Alguns Typeclasses básicos são:
+- `Eq`: é usado para tipos que suportam testes de igualdade. As funções que seus membros implementam são `==` e `/=`. Então, se tem uma class constraint Eq para um type variable em uma função, ela usa `==` ou `/=` em algum lugar da sua definição. Todos os tipos que mencionamos antes, exceto funções, fazem parte de Eq.
+- `Ord`: é usado para tipos que podem ser ordenados. Todos os tipos, exceto funções, são parte de Ord. Ele cobre todos os tipos de comparação padrão, como `>, <, <=, >=`. Ordenação é um tipo que pode ser GT, LT ou EQ, ou seja, "greater than", "lesser than" e "equal", respectivamente. Para ser membro de Ord tem que ser membro de Eq.
+- `Show`: os membros de Show podem ser representador por strings. Todos os tipos que vimos até agora estão nela, exceto funções.
+- `Read`: ela é meio que o oposto do Show. A função dela é o read que pega uma string e retorna um tipo que é membro de Read. Podemos ter um problema de ler um tipo ambíguo, por exemplo se a string for "4", ele não sabe quais dos tipos membros de Read vai ser. Para resolver isso podemos usar type annotations explícitos. O type annotation é uma forma de explicitamente dizer qual o tipo de uma expressão. Para usá-lo adicionamos um `::` no final da expressão e depois especificamos um tipo. Por exemplo: `read "5" :: Int`.
+- `Enum`: é usado para tipos que podem ser enumerados, seus membros são tipos ordenados sequencialmente. Os tipos dessa classe podem ser usados em list ranges. Eles também tem sucessores e predecessores definidos, que podemos verificar com as funções `succ` e `pred`. Os tipos dessa classe são: (), Char, Ordering, Int, Integer, Float e Double.
+- `Bounded`: seus membros tem um limite superior e inferior. As funções `minBounded` e `maxBounded` pegam o mínimo e o máximo respectivamente. Até mesmo tuplas são membros dessa typeclass.
+- `Num`: é uma typeclass numérica. Seus membros tem a propriedade de serem capazes de agir como números. Os tipos dessa classe são: Int, Integer, Float, Double. Para ser membro de Num tem que ser parte de Show e Eq.
+- `Integral`: é uma typeclass numérica também. Integral inclui somente números inteiros. Logo seus tipos são: Int e Integer.
+- `Floating`: é uma typeclass numérica que inclui somente números de ponto flutuante. Logo seus tipos são: Float e Double.
+## Sintaxe em Funções
+### Pattern Matching
+Pattern Matching consiste de padrões específicos aos quais um dado deveria cumprir e então deveria verificar se ele cumpre de fato e desconstruir o dado de acordo com o padrão.
+Quando definimos funções, podemos definir diferentes corpos para diferentes padrões. Veja abaixo.
+~~~haskell
+lucky :: (Integral a) => a -> String
+lucky 7 = "LUCKY NUMBER SEVEN!"
+lucky x = "Sorry, you're out of luck, pal!"
+~~~
+Quando chamamos lucky, os padrões vão ser checados de cima para baixo e quando ele se adequar a um padrão, o corpo da função correspondente será usado. Um padrão genérico como o último não pode vir em primeiro porque se não todos vão entrar nele, até mesmo o 7.
+Quando fazemos padrões, temos que sempre incluir um padrão genérico para que nosso programa não quebre se tiver uma entrada inesperada. Ou então, devemos fazer padrões exaustivos para que cubra todas as possibilidades de padrão. Se não cobrirmos teremos um erro de que temos padrões não exaustivo.
+Há também uma coisa chamada pattern. Ele é uma forma fácil de quebrar algo de acordo com um padrão e juntar isso a um nome, enquanto ainda mantemos referência ao todo. Para fazer isso colocamos um nome, seguido de um @ na frente do padrão. Veja abaixo.
+~~~haskell
+capital :: String -> String
+capital "" = "Empty string, whoops!"
+capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+~~~
+Veja que podemos nos referir ao ``(x:xs)`` usando o nome `all`, poupando o trabalho de ter que digitar o padrão todas as vezes.
+### Guardas
+Guardas são uma forma de testar se uma propriedade de um valor (ou vários deles) são verdadeiras ou falsas. Ele é similar à um `if`. A diferença é que ela é mais legível quando temos várias condições e se dão bem com patterns.
+Veja o exemplo abaixo .
+~~~haskell
+bmiTell :: (RealFloat a) => a -> String
+bmiTell bmi
+    | bmi <= 18.5 = "You're underweight, you emo, you!"
+    | bmi <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"
+    | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"
+    | otherwise   = "You're a whale, congratulations!"
+~~~
+Se `bmi <= 18.5` então ele imprime a primeira frase, se `bmi <= 25` a segunda e assim em diante. Caso não seja nenhuma das condições explícitas, usamos o ``otherwise`` como um else que irá imprimir a frase dele para qualquer valor que não se enquadre em uma das guardas acima. As guardas são indicadas por `|`.
+### Where
+O `where` permite juntar uma expressão à um nome e usar esse nome no código ao invés de ficar repetindo a expressão. Veja abaixo.
+~~~haskell
+bmiTell :: (RealFloat a) => a -> a -> String
+bmiTell weight height
+    | bmi <= skinny = "You're underweight, you emo, you!"
+    | bmi <= normal = "You're supposedly normal. Pffft, I bet you're ugly!"
+    | bmi <= fat    = "You're fat! Lose some weight, fatty!"
+    | otherwise     = "You're a whale, congratulations!"
+    where bmi = weight / height ^ 2
+          skinny = 18.5
+          normal = 25.0
+          fat = 30.0
+~~~
+Geralmente colocamos o `where` após as guardas e indentamos ele o mesmo que elas ou um a mais, e então definimos vários nomes ou funções. Os nomes definidos `where` servem somente para essa função. Temos que alinhar os nomes igual acima em uma coluna. Podemos definir funções em `where`. Podemos aninhar `where`.
 ## Anotações da Aula
 ### Introdução
 ~~~haskell
@@ -808,3 +870,16 @@ putStrLn $ show $
 Podemos usar o case of nas funções também para selecionar o que retornar
 ### Monad
 O tipo nomad é `IO`. Se ele não tiver nenhum valor, colocamos o unit `()` depois que é um tipo sem valor, tipo o void.
+### Manipulando arquivo
+~~~haskell
+import System.IO
+
+main = do
+  h <- openFile "nome-arquivo.extensão" ReadMode
+  contents <- hGetContents h
+  let ls = lines contents
+  let l = length ls
+  putStrLn $ show l
+  hClose h
+~~~
+Essa biblioteca faz uma leitura lazy e por isso temos que fechar o arquivo somente depois da impressão porque se não vai dar erro pois ele não leu antes de fechar.

@@ -156,13 +156,36 @@ Olhando agora os aspectos quantitativos da digitalização, se quisermos saber q
 Podemos realizar a segunda operação:
 $$1 \, (segundo) \times 44.100 \, (taxa \, de \, amostragem) \times 2 \, (16 \, bits \, por \, amostra) \times 2 \, (som \, estéro) = 176.400 \, bytes$$
 Então para transmitir esse áudio precisamos de 1,41 Mbps.
-
-(ver dos slides)
-- 8000 Hz -> fala, telefonia
+## Compressão de Áudio
+### PCM
+O processo de digitalização do áudio é conhecido como Pulse Code Modulation (PCM) e o padrão internacional relacionado à isso é definido na ITU-T Recommendation. Esses circuitos de encoder e decoder possuem, além dos componentes mostrados antes, um compressor e um expansor, respectivamente. Veja abaixo o novo circuito.
+![[Pasted image 20250514214245.png]]
+Nós adicionamos esses circuitos para reduzir o efeito do ruído de quantização com apenas 8 bits por amostragem, em um sistema PCM os intervalos de quantização são não lineares (desiguais) com intervalos menores usados para sinais de menor amplitude. Quando exploramos essa quantização não linear, temos que amplitudes maiores tem intervalos de quantização maiores e amplitudes menores implicam em maior percepção de ruído de amostragem. O desempenho desse sistema pode ser visto no fato 8 bits equivale à quantização linear com 12 bits.
+Historicamente, temos dois sistemas de compressão-expansão diferentes em uso:
+- $\micro$-law: usado no EUA e Japão e usam 7 bits
+- A-law: usado na Europa e outros e usam 8 bits
+Ambos são usados em telefonia que tem largura de banda do sinal de voz: 200 Hz a 4.3 kHz. Além disso, a taxa limite do filtro é 8 kHz, o que resulta em imperfeições.
+- 8000 Hz -> fa la, telefonia
 - 44100 Hz -> para música
-
-- 4 bits -> telefonia mas voz estranha
-- 8 bits -> telefonia usada hoje
-- 16 bits -> tele conferência
-# Vídeo Digital
-## Codificação do Modelo Temporal
+### Codificadores para voz
+Para codificar a voz temos o Adaptative Differential PCM (ADPCM) que segue os padrões do IUT-T G.721, G.722 e G.726. Ele é um método de compressão que usa a diferença entre amostras consecutivas para reduzir o volume de dados. Além disso ele é dito adaptativo porque ajusta dinamicamente os parâmetros de quantização.
+Ele usa uma codificação linear preditiva (LPC) que é uma técnica que usa num modelo matemático simplificado do trato vocal (que permite representar sons da fala de forma eficiente) para prever amostras futuras com base em amostras passadas.
+Esse modelo é estendido, ou seja, existem codificadores mais avançados que vão além do modelo LPC básico. Ele também envolve CELP (Code Excited Linear Prediction), que é uma técnica que combina LPC com um banco de excitação codificado, melhorando a naturalidade da fala sintetizada. Ele tem os seguintes padrões associados: G.728, G.729 e G.729A; que são muito usados em VoIP e redes digitais por sua boa qualidade com baixa taxa de bits (ex: 8 kbps).
+### Perceptual Coding
+Também chamado de codificação Perceptual, ela é uma técnica de compressão de áudio baseada nas características da percepção humana do som. Essa abordagem é muito utilizada em formatos como MP3, AAC e outros codecs de áudio com perdas (lossy).
+O modelo psico-acústico refere-se ao uso de conhecimentos de psicoacústica (estudo de como o ser humano percebe o som) para decidir quais partes do sinal sonoro podem ser descartadas sem perda perceptível de qualidade. Temos as seguintes características:
+- Sensibilidade do ouvido
+	- O ouvido humano não percebe todas as frequências com a mesma intensidade.
+    - A codificação perceptual atribui mais bits às partes do som mais audíveis e menos bits ou nenhum às partes menos perceptíveis.
+- Mascaramento de frequência
+	- Quando dois sons ocorrem simultaneamente, um som forte pode mascarar (esconder) um som mais fraco em uma frequência próxima.
+	- O som mascarado pode ser descartado, pois o ouvinte não consegue percebê-lo.
+- Mascaramento temporal
+	- Um som alto e breve pode mascarar sons que vêm imediatamente antes ou depois dele.
+	- Essa característica permite eliminar dados que o cérebro não detectará, mesmo que existam no sinal original
+![[Pasted image 20250514220622.png]]
+![[Pasted image 20250514220628.png]]
+![[Pasted image 20250514220641.png]]
+### MP3
+O MPEG-1 Audio Layer 3 utiliza um modelo psico-acústico complexo. Ele elimina as frequências que o ouvido humano não é capaz de captar. Ele também faz compressão com perdas, que não são perceptível e ele faz o uso de DFT (Transformada Discreta de Fourier) para analisar o conteúdo espectral do sinal, o que ajuda a decidir quais partes eliminar com base na percepção. Ele entrega som de alta qualidade e a arquivos até 12 vezes menores.
+# Vídeo 3D

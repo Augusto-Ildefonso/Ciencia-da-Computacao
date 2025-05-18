@@ -123,3 +123,39 @@ O método também fornece as incertezas destes parâmetros ($\Delta a$ e $\Delta
 - Dispersão média do ajuste $$\Delta y = \sqrt{\frac{\sum (ax_{i} + b - y_{i})^{2}} { N - 2 }}$$
 - Incerteza do coeficiente angular: $$\Delta a = \frac{\Delta y}{\sqrt{\sum (x_{i} - \bar{x})^{2}}}$$
 - Incerteza do coeficiente linear: $$\Delta b = \sqrt{ \frac{ \sum x_{i}^{2} }{ N \sum (x_{i} - \bar{x})^{2} } } \Delta y$$
+# Estática
+## Equilíbrio Estático
+A estática é a área da física que estuda o equilíbrio de corpos rígidos. Equilíbrio significa ausência de aceleração e, portanto, velocidades de translação e rotação são constantes. Geralmente em problemas de equilíbrio estático consideramos elas nulas. As condições de equilíbrio de um sistema estão determinadas pelas Leis de Newton da Mecânica:
+$$somatória \, das \, forças \, externas \, nula: \, \sum_{i}\vec{F_{i}} = 0$$
+$$somatória \, dos \, torques \, externos \, nula: \, \sum_{i}\vec{r_{i}} \times \vec{F_{i}} = 0$$
+Nessas equações, $\vec{F_{i}}$ são as forças externas atuando sobre o sistema e $\vec{r_{i}}$ os pontos de aplicação de cada uma, quando o sistema é extenso, como um corpo rígido, por exemplo. A primeira condição garante que o centro de massa do sistema tem aceleração nula, então se inicialmente está em repouso ele se manterá nesse estado e não haverá translação. Já a segunda condição é necessária para garantir que o sistema não vai se acelerar angularmente e, assim, não vai rotacionar. Além disso, a condição dois é imprescindível para determinar o equilíbrio de corpos rígidos. Em problemas mais simples de estática, para garantir o equilíbrio translacional do centro de massa do corpo, muitas vezes é suficiente que somente a primeira condição seja satisfeita.
+É importante ressaltar que as equações acima são vetoriais, então para operar com elas é necessário decompô-las em três direções perpendiculares, resultando assim, em três equações escalares. Nos problemas que iremos trabalhar, as forças atuam em um plano, assim, basta decompor em duas direções perpendiculares, $x$ e $y$. Logo:
+$$\sum_{i}\vec{F_{i\,x}} = 0$$
+$$\sum_{i}\vec{F_{i\,y}} = 0$$
+## Diagrama de Forças
+Quando estamos analisando a condição de equilíbrio, as forças externas sobre o sistema podem ser representadas atuando sobre um ponto: a posição de uma massa pontual ou, no caso de um corpo extenso, o seu centro de massa. O diagrama vetorial das forças é conhecido como diagrama de forças de corpo isolado. Como a força resultado da soma das forças é nula, é possível representar o diagrama na forma do triângulo de forças. Veja abaixo na imagem o sistema real, o diagrama do corpo isolado no centro de massa e o triângulo de forças.
+![[Pasted image 20250513215426.png]]
+Com o triângulo de forças é possível obter a Lei dos Senos, vinculando a magnitude dos vetores com os ângulos. Veja abaixo.
+$$\frac{F_A}{sen{(\theta)}} = \frac{P}{sen{(90º)}} = \frac{N}{sen{(\beta)}}$$
+Onde $\beta = 90º - \theta$. Essa equação é equivalente àquelas obtidas anteriormente. Assim, fica a depender do problema e dos dados disponíveis para escolher qual equação usar.
+## Forças de Atrito
+Quando dois corpos são colocados em contato, forças em escala molecular são mutuamente exercidas sobre as superfícies. As forças de reação de contato que aparecem quando um objeto exerce pressão sobre outro são o exemplo mais direto desse fenômeno. Essas forças têm origem na repulsão entre os elétrons nas duas superfícies. Existem também forças atrativas na escala molecular, como as forças de van der Waals, que tendem a dificultar o deslizamento das superfícies e constituem a origem das forças de atrito. De acordo com a experiência cotidiana, duas superfícies aparentemente planas em escala macroscópica, mas rugosas, apresentam maior atrito que duas superfícies polidas dos mesmos materiais. No entanto, quando as superfícies
+são extremamente planas, em escala nanométrica, observa-se que o atrito aumenta devido à ação das forças atrativas de origem molecular. Isso pode ser verificado com duas placas planas de vidro; quanto menos rugosas e mais limpas se encontrarem, mais difícil será deslizar uma sobre a outra. No modelo de atrito que analisaremos aqui, estaremos considerando sempre o limite de
+superfícies planas e polidas.
+Abaixo encontra-se uma figura em que é mostrado um bloco, apoiada sobre um plano horizontal, sujeito a uma força de tração horizontal $\vec{T}$. Como o bloco se mantém em repouso, deve existir uma força líquida de atrito estático $\vec{F_A}$ atuando na direção horizontal, compensando a tração.
+![[Pasted image 20250513224104.png]]
+Experimentalmente, observa-se que:
+- A condição de repouso, quando $F_{A} = T$, satisfaz-se até certo limite máximo $F_{A_{máx}}$. Ou seja:
+$$F_A \leq F_{A_{máx}}$$
+- O limite máximo da força de atrito $F_{A_{máx}}$ depende da natureza das duas superfícies e é diretamente proporcional ao módulo da força normal. Ou seja:
+$$F_{A_{máx}} = \micro_{e} N$$
+Onde $\micro_{e}$ é o coeficiente de atrito estático, que depende das duas superfícies em contato. Veja abaixo um exemplo.
+A resposta do atrito diante da força de tração $T$ está representada graficamente abaixo.
+![[Pasted image 20250513224138.png]]
+Acima do limite máximo, quando $T > F_{A_{máx}}$, as forças atrativas intermoleculares são vencidas e as superfícies começam a deslizar. Nessas condições, o atrito decai bruscamente e assume um valor aproximadamente constante $F_{c} = \micro_{c} N$: esse é o regime de atrito cinético, sendo que $\micro_{c}$ é o coeficiente de atrito cinético ou dinâmico entre as superfícies.
+Quando temos um bloco de massa conhecida sobre um plano inclinado em um ângulo $\theta$, que pode ser variado gradualmente, se aumentarmos o ângulo, a força de atrito, necessária para manter o bloco em repouso, aumenta. Acima de certo valor crítico $\theta_M$, o bloco desliza, indicando que, para esse ângulo, foi atingida a máxima força de atrito que pode ocorrer nesse sistema. Analisando a condição de equilíbrio sobre o bloco, na iminência de deslizar, é possível calcular $F_{A_{máx}}$ e $N$ e, assim, determinar $\micro_e$. Na direção paralela ao plano, $F_{A_{máx}}$ deve ser igual à componente peso:
+$$F_{A_{máx}} = m \, g \, sen(\theta_M)$$
+Analogamente, na direção vertical, a reação do plano deve compensar a componente do peso:
+$$N = m \, g \, cos(\theta_M)$$
+Combinando essas equações, obtemos:
+$$\micro_e = tan(\theta_M)$$
