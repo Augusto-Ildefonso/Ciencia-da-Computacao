@@ -1,4 +1,4 @@
-# Sistema Computacional
+0.# Sistema Computacional
 Um sistema computacional é o conjunto de Hardware e Software usado como ferramenta na solução de problemas. Veja abaixo algumas definições:
 - Hardware são objetos tangíveis
 - Software são objetos não tangíveis (instruções detalhadas -> algoritmos)
@@ -445,6 +445,26 @@ Veja abaixo uma visão geral das instruções.
 ![[Pasted image 20250516115149.png]]
 Em todas as instruções, o opcode vai estar nos 7 primeiros bits (0 a 6). Como temos só 7 bits, estamos limitador a 128 instruções. Mas para contornar isso usamos além do campo do opcode, o campo F3 para especificar a operação, ampliando a capacidade de instruções.
 O montador vai dividir os bits em grupos de 4 e converter para hexadecimal, ficando por exemplo `0x00012903` e assim em diante. Vale ressaltar que ele não respeita a divisão dos bits entre os registradores. Cada registrador tem um valor, exemplo o `s2` é `x18` e aí salvamos o 18 em binário nos registradores.
+Uma das características das arquiteturas RISC é que a maioria das instruções possuem tamanhos
+iguais. As vantagens disso são:
+- Simplicidade no pipeline de execução:
+    - Como todas as instruções têm o mesmo tamanho (por exemplo, 32 bits), a decodificação é mais simples.
+    - Permite pipelining eficiente, pois cada estágio do pipeline sabe exatamente quantos bits esperar e como interpretar a instrução.
+- Maior previsibilidade:
+    - O fluxo de controle e os saltos (jumps/branches) são mais fáceis de prever e implementar, o que melhora a eficiência do hardware e reduz o risco de erros.
+- Facilidade na busca e decodificação de instruções:
+    - A unidade de busca de instruções (instruction fetch) pode buscar instruções de forma mais rápida e previsível, pois todas têm o mesmo tamanho.
+- Paralelismo e escalabilidade:
+    - Favorece técnicas como execução fora de ordem (out-of-order execution) e execução superescalar, já que o controle sobre múltiplas instruções simultaneamente é mais fácil com instruções uniformes.
+- Facilidade de análise e otimização por compiladores:
+    - Compiladores conseguem gerar código mais eficiente e otimizado, com melhor utilização do conjunto reduzido e uniforme de instruções.
+Já as desvantagens são:
+- Desperdício de espaço (ineficiência na codificação):
+    - Nem todas as instruções precisam de 32 bits. Instruções simples (como `ADD R1, R2, R3`) poderiam ser representadas com menos bits.
+    - Isso pode levar a código mais longo (em bytes) comparado a arquiteturas com instruções de tamanho variável (como CISC).
+- Menor densidade de código:
+    - O tamanho fixo pode significar que programas RISC ocupam mais memória que equivalentes CISC (ex: x86), especialmente em programas pequenos ou com muitas instruções simples.
+    - Pode afetar a eficiência do uso de cache e a largura de banda de memória.
 Primeiramente podemos dividir nossas instruções em classes, veja abaixo.
 ## Classes de Instruções
 Temos 5 classes de instruções:
@@ -780,7 +800,7 @@ O conflito estrutural ocorre devido o acesso instantâneo ao mesmo recurso (mem�
 - Acesso Concorrente a memória
 	- Uso de memórias multi-portas ou com múltiplos bancos de acessos independentes
 - Leitura de instrução e leitura/escrita de dados simultâneos à memória
-	- Uso da arquitetura "Harvard" com caches de dados e instruções sepadrados
+	- Uso da arquitetura "Harvard" com caches de dados e instruções separados
 - Acesso simultâneo ao banco de registradores
 	- Uso de banco de registradores com múltiplas portas
 - Uso simultâneo da unidade funcional (ULA)
@@ -803,7 +823,7 @@ Temos dois tipos de dependência de dados:
 	Exemplo:
 	![[Pasted image 20250508085910.png]]
 	De vermelho temos a dependência. Atenção, a representação da onde está a bolha está errado.
-	Veja que o R1 é usado como operando na segunda instrução e ele é obtida na primeira. Analisando na estrutura, o R1 só será escrito no `WB`, ou seja, no 5º ciclo de clock, mas ele será lido da memória no `ID` da segunda instrução, que ocorrerá no 3º ciclo de clock.
+	Veja que o R1 é usado como operando na segunda instrução e ele é obtido na primeira. Analisando na estrutura, o R1 só será escrito no `WB`, ou seja, no 5º ciclo de clock, mas ele será lido da memória no `ID` da segunda instrução, que ocorrerá no 3º ciclo de clock.
 	Quando temos ciclos de clock em que não tem nenhuma instrução finalizada, devido a prorrogação das instruções, chamamos esses ciclos de bolha
 	Para resolver isso postergamos a instrução até ela chegar no `WB`, porque assim na primeira parte do clock será a escrita e na segunda será a leitura. Como consequência, todas as próximas instruções também terão que ser postergadas.
 	Nessas dependências, o pipeline precisa ser parado durante certo número de ciclos (interlock).
@@ -847,9 +867,9 @@ nop
 nop
 sw t3, 12(t0)
 ~~~
-Para resolver esse problema das dependências, temos que mudar nossa implementação. Veja como que ela fica abaixo. Vale ressaltar que alguns componentes e conexões não foram representados para facilitar a visualização mas eles estão lá.
-![[aula_org_arq_13_05.jpg]]
 ### Forwarding ou Bypassing
+Uma outra forma de resolver esse problema das dependências é usando forwarding. Para usar ele temos que mudar nossa implementação. Veja como que ela fica abaixo. Vale ressaltar que alguns componentes e conexões não foram representados para facilitar a visualização mas eles estão lá.
+![[aula_org_arq_13_05.jpg]]
 Nessa técnica é realizado o adiantamento de dados no caminho interno dentro do pipeline entre a saída e a entrada da ULA. Ela evita a parada do pipeline utilizando buffers internos em vez de esperar que o elemento de dado chegue nos registradores visíveis ao programador ou na memória.
 ![[Pasted image 20250515211841.png]]
 Entretanto, em algumas situações, nem o forwarding pode resolver o problema de parada do pipeline.
