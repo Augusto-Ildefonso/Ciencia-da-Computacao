@@ -335,7 +335,7 @@ O mesmo arquivo pode conter mais do que uma classe e não precisa ter o mesmo no
 # Herança
 Herança é um conceito fundamental que permite que uma classe herde atributos e métodos de outra classe. A herança permite que você crie hierarquias de classes, onde classes mais específicas (subclasse) podem herdar características de classes mais gerais (superclasses), e ao mesmo tempo adicionar novos comportamentos ou substituir comportamentos existentes, se necessários.
 A classe que herda é chamada de classe filha ou subclasse, e a classe da qual ela herda é chamada de classe pai ou superclasse.
-A principal vantagem da herança é a reutilização de código. Ao invés de escrever novamente (completar).
+A principal vantagem da herança é a reutilização de código. Ao invés de escrever novamente código que já existe em uma classe, podemos simplesmente herdar essa funcionalidade em uma nova classe e adicionar ou modificar comportamentos conforme necessário.
 ## Herança com Java
 Para declarar uma subclasse em Java usamos:
 ~~~java
@@ -344,7 +344,7 @@ public class Nome_Subclass extends Nome_Superclass{
 		super(...);
 	}
 
-	@Override
+	@Override // Ele substitue o que havia na superclasse
 	public void funcao_super(){
 		...
 	}
@@ -411,12 +411,26 @@ class Animal(ABC): # Definindo classe abstrata
 ~~~
 Em python temos herança múltipla, ou seja, podemos ter mais de uma classe pai. É recomendado evitar usar herança múltipla, exceto no caso que é para usar uma classe abstrata. Essa recomendação existe pois pode resultar em um comportamento inesperado.
 Para contornar esse problema, recorremos ao MRO (Ordem de Resolução de Métodos). Ele estabelece qual a ordem de procura do método na hierarquia. Em python é da esquerda para direita. Para conhecer a ordem, basta usar o método MRO da classe. Toda linguagem que tem herança múltipla vai ter esse método MRO.
-PORÉM, ainda sim é recomendado evitar esse uso. Além disso, temos esse problema nos construtores também. Para complicar, construtores de classes diferentes podem ter parâmetros diferentes. Nesse caso não tem como passar os parâmetros corretos para os construtores corretos.
+Porém, ainda sim é recomendado evitar esse uso. Além disso, temos esse problema nos construtores também. Para complicar, construtores de classes diferentes podem ter parâmetros diferentes. Nesse caso não tem como passar os parâmetros corretos para os construtores corretos.
 # Polimorfismo
 ## Java
-Na programação orientada a objetos, o polimorfismo permite que referência de tipos de classes mais abstratas representem o comportamento das classes concretas que referenciam. Assim, é possível tratar vários tipos de maneira homogênea (através da interface do tipo mais abstrato). 
-O tipo é definido pela declaração e não pela instanciação. Então se declarar `Animal c = new Cachorro ("Rex")` o `c` será do tipo animal e não cachorro.
-(Inserir exemplos de polimorfismo)
+Na programação orientada a objetos, o polimorfismo permite que referências de tipos de classes mais abstratas representem o comportamento das classes concretas que referenciam. Assim, é possível tratar vários tipos de maneira homogênea (através da interface do tipo mais abstrato). 
+O tipo é definido pela declaração e não pela instanciação. Então se declarar `Animal c = new Cachorro ("Rex")` o `c` será do tipo animal e não cachorro. Por exemplo:
+~~~Java
+Animal g = new Gato("Whiskers", "da Silva");
+Animal c = new Cachorro("Rex");
+
+g.fazerSom();
+c.fazerSom();
+c.levantarPata();
+
+static void darBanho(Animal an){
+	...
+}
+
+darBanho(g);
+darBanho(c);
+~~~
 ### Polimorfismo de Sobrecarga
 Sobrecarga é quando temos o mesmo método (mesmo nome) mas com assinaturas diferentes.
 ~~~Java
@@ -433,10 +447,27 @@ private int altura (int no){
 int k = altura();
 int j = altura(16);
 ~~~
-Podemos até mesmo chamar um método dentro do outro
-## Python
-O que falamos pra Java sobre polimorfismo vale para Python também. Mas como ele não tem tipo estático, ele se difere um pouco do Java na questão da Herança. Em Python o que temos de fato é Duck Typing, que possui algumas diferenças quando comparada com herança em Java.
-### Duck typing
-Duck typing é um estilo de tipagem em que os métodos e propriedades de um objeto determinam a semântica válida, em vez de sua herança de uma classe particular. Se parece um pato, nada como um pato e anda como um pato, então é um pato.
+Podemos até mesmo chamar um método dentro do outro.
 ### Parâmetros Opcionais
-Não é possível (completar)
+Não é possível fazer sobrecarga de métodos como em Java no Python. Por outro lado, podemos ter parâmetros opcionais. Eles são aqueles que têm um valor padrão, caso não sejam utilizados na chamada.
+~~~python
+def altura(no=0):
+	...
+
+k = altura()
+j = altura(16)
+j = altura(no=16)
+
+def metodo(p1, p2, p3=0, p4="Achou"):
+	...
+
+k = altura(23, 18)
+j = altura(23,18, 10)
+i = altura(2,4,8, “Perdi”)
+m = altura(2,4,p4=”Perdi”)
+n = altura(2,4,p4=””,p3=9)
+~~~
+## Python
+O que falamos teoricamente para Java sobre polimorfismo vale para Python também. Mas como ele não tem tipo estático, ele se difere um pouco do Java na questão da Herança. Em Python o que temos de fato é Duck Typing, que possui algumas diferenças quando comparada com herança em Java.
+### Duck typing
+Duck typing é um estilo de tipagem em que os métodos e propriedades de um objeto determinam a semântica válida, em vez de sua herança de uma classe particular. Se parece um pato, nada como um pato e anda como um pato, então é um pato. Ou seja, as subclasses são consideradas para o python como a própria classe.

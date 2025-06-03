@@ -374,6 +374,60 @@ bmiTell weight height
           fat = 30.0
 ~~~
 Geralmente colocamos o `where` após as guardas e indentamos ele o mesmo que elas ou um a mais, e então definimos vários nomes ou funções. Os nomes definidos `where` servem somente para essa função. Temos que alinhar os nomes igual acima em uma coluna. Podemos definir funções em `where`. Podemos aninhar `where`.
+### Let
+O `let` permite juntar uma expressão à uma variável e ela se torna uma expressão. Mas ela é extremamente local, então ela serve somente para a guarda que foi definida e não para todas as guardas.
+~~~haskell
+cylinder :: (RealFloat a) => a -> a -> a
+cylinder r h =
+    let sideArea = 2 * pi * r * h
+        topArea = pi * r ^2
+    in  sideArea + 2 * topArea
+~~~
+O formato é `let <bindings> in expression`. Os nomes que definimos na parte do `let` são acessíveis somente para a parte do `in`.
+A diferença do `let` para o `where` é que os bindings do `let` são de fato expressões, enquanto os do `where` são construtores sintáticos.
+Podemos usar ele para definir funções em um escopo local:
+~~~haskell
+[let square x = x * x in (square 5, square 3, square 2)]
+~~~
+Se quisermos fazer vários bindings mas no formato acima usamos um `;` para separar. Veja abaixo.
+~~~haskell
+(let a = 100; b = 200; c = 300 in a*b*c, let foo="Hey "; bar = "there!" in foo ++ bar)
+~~~
+Não é necessário colocar um `;` depois do último binding mas pode colocar. 
+Podemos também usar o let dentro de list comprehensions.
+~~~haskell
+xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi >= 25.0]
+~~~
+Nós escondemos a parte do `in` em list comprehensions, porque a visibilidade dos nomes já está visível ali.
+### Case
+As expressões case em haskell além de ter a funcionalidade igual das linguagens imperativas, elas também pode ser usadas em pattern matching. O formato dela é:
+~~~haskell
+case expression of pattern -> result
+                   pattern -> result
+                   pattern -> result
+                   ...
+~~~
+Veja um exemplo:
+~~~haskell
+head' :: [a] -> a
+head' [] = error "No head for empty lists!"
+head' (x:_) = x
+
+head' :: [a] -> a
+head' xs = case xs of [] -> error "No head for empty lists!"
+                      (x:_) -> x
+~~~
+O primeiro pattern matching que achar vai ser executado, se ele rodar tudo e não achar nenhum matching, então vai dar um runtime error.
+## Funções de Alta Ordem
+Funções de alta ordem são funções que recebem funções como parâmetros e retorna funções como os valores de retorno.
+### Curry
+Haskell Curry foi um matemático que criou o conceito de curry. Esse conceito que permite ter compiladores eficientes para linguagens funcionais. A ideia de curry é que toda função recebe só um valor e retorna só um valor. Em todas as funções do haskell tem curry, até mesmo quando parece que não tem.
+Veja na função abaixo como definimos ela:
+~~~haskell
+max :: (Ord a) => a -> a -> a
+max 4 5
+~~~
+A gente lê ela como: max pega a e retorna (`->`) uma função que pega um a e retorna um a.
 ## Anotações da Aula
 ### Introdução
 ~~~haskell
@@ -883,3 +937,12 @@ main = do
   hClose h
 ~~~
 Essa biblioteca faz uma leitura lazy e por isso temos que fechar o arquivo somente depois da impressão porque se não vai dar erro pois ele não leu antes de fechar.
+### Pilares de funcional
+1. Preguiça
+2. Função de primeira classe
+3. Função de alta ordem
+4. Função pura
+5. Recursão
+6. Sistema de tipos
+7. Estado imutável
+8. Transparência Referencial

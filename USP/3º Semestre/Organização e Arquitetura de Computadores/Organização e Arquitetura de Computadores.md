@@ -1,4 +1,4 @@
-0.# Sistema Computacional
+# Sistema Computacional
 Um sistema computacional é o conjunto de Hardware e Software usado como ferramenta na solução de problemas. Veja abaixo algumas definições:
 - Hardware são objetos tangíveis
 - Software são objetos não tangíveis (instruções detalhadas -> algoritmos)
@@ -492,7 +492,7 @@ Vamos agora aprofundar em cada tipo de instrução
 ### Tipo R (Register)
 ![[Pasted image 20250510121831.png]]
 ![[Pasted image 20250408103739.png]]
-]Elas são usadas para operações aritméticas e lógicas entre registradores
+Elas são usadas para operações aritméticas e lógicas entre registradores
 O campos dela são:
 - opcode: código da operação
 - rd: endereço do registrador destino
@@ -520,7 +520,7 @@ Os campos dela são:
 - funct3: auxílio para definição da operação
 - rs1: endereço do primeiro registrador de origem
 - imm: valor imediato
-Um exemplo de instrução do tipo I é `lw`:
+Um exemplo de instrução do tipo I é `lw <rd>, Imm(rs1)`:
 - `lw s2, 0(sp)`
 - opcode: 0000011
 - rd: s2 (10010)
@@ -528,7 +528,7 @@ Um exemplo de instrução do tipo I é `lw`:
 - rs1: sp(00010)
 - imm: 000000000000
 ![[Pasted image 20250510122716.png]]
-Outros exemplos: `addi <rd>, <rs1>`, `andi`, `ori`, `lb`, `lh`, `lw <rd>, imm(<rs1>)`, `jalr`, `ecall`.
+Outros exemplos: `addi <rd>, <rs1>, Imm`, `andi`, `ori`, `lb`, `lh`, `lw <rd>, imm(<rs1>)`, `jalr`, `ecall`.
 A combinação de f3 + opcode que diz se é `lw` ou `lb`, etc. 
 ### Tipo S (Store)
 ![[Pasted image 20250510122739.png]]
@@ -564,7 +564,7 @@ Os campos dela são:
 Um exemplo de instrução do tipo B é `beq <rs1>, <rs2>, imm`:
 - `beq s1, s0, 4`
 - opcode: 1100011
-- imm\[4:0], imm\[11], imm\[10:5] e imm\[12]: 000000000100
+- imm\[4:1], imm\[11], imm\[10:5] e imm\[12]: 000000000100
 - funct3: 000
 - rs1: s1 (01001)
 - rs2: s0 (01000)
@@ -730,7 +730,7 @@ As etapas são:
 ![[Pasted image 20250515204202.png]]
 ![[Pasted image 20250424092353.png]]
 Na imagem podemos ver um problema do pipeline, que é que temos duas instruções usando o mesmo componente. Mas temos um jeito de contornar isso, que é dividindo o ciclo de clock em duas partes, na primeira é realizada uma escrita e na segunda parte uma leitura.
-Na implementação pipeline, tempo de execução da instrução não diminui, mas aumenta o throughput (também chamado a vazão, que é bits por segundo).
+Na implementação pipeline, tempo de execução da instrução não diminui, mas aumenta o throughput (também chamado a vazão, que instrução por segundo).
 Nesse tipo de implementação, o ciclo de clock é limitado pelo estágio mais lento.
 ### Cálculo do tempo para executar instrução no Pipeline
 Antes de mostrarmos o cálculo, precisamos ver quais fatores devemos levar em conta.
@@ -954,3 +954,145 @@ As soluções para para o problema são:
 		- Permite errar duas vezes antes de alterar a predição
 		- O previsor de 2-bits (bimodal) é essencialmente um contador de dois bits com valores entre 0 e 3.
 		![[Pasted image 20250515095903.png]]
+# Hierarquia de Memória
+## Memória
+Definimos como memória todo componente capaz de armazenar informação. As características desejáveis em uma memória são:
+- Rápida
+- Grande
+- Barata
+Só que essas características são conflitantes. Então para solucionar isso fazemos uma hierarquia de memória
+## Hierarquia de Memória
+![[Pasted image 20250522083528.png]]
+![[Pasted image 20250522084100.png]]
+As características do sistema de memória do computador são:
+- Localização
+	- Memória secundária: foram da placa
+	- Memória principal: na placa mas fora da CPU
+	- Cache: interna a CPU
+- Capacidade
+	- Tamanho da palavra: a palavra é a unidade de endereço da memória, ou seja, é o número de bits para representar um inteiro ou uma instrução
+	- Número de palavras
+	- Unidade de endereçamento: byte ou (exclusivo) palavra
+- Unidade de transferência
+	- Memória principal: número de bits lido ou escrito na memória principal, que é uma palavra
+	- Memória secundária: unidades maiores, que são chamadas de bloco
+- Forma de acesso
+	- Sequencial: 
+		- Dados organizados em registros
+		- Tempo de acesso ao registro varia
+		- Ex: fita magnética
+	- Direto:
+		- Dados organizados em bloco
+		- Tempo de acesso variável
+		- Cada bloco tem um endereço
+		- Ex: disco magnético
+	- Aleatório:
+		- Cada bloco tem um endereço único
+		- Tempo de acesso constante
+		- Ex: memória principal (RAM -> Random) (ROM -> Read)
+	- Associativo:
+		- Compara bits com conteúdo das posições de memória
+		- Ex: cache
+- Desempenho
+	- Tempo de acesso (latência): 
+		- Em memórias de acesso aleatório é o tempo gasto para realizar a operação de leitura ou escrita
+		- Em memórias de acesso não aleatório é o tempo gasto para posicionar o mecanismo de leitura/escrita
+	- Tempo de ciclo de memória:
+		- Em memória de acesso aleatório é o tempo necessário para que o sistema esteja pronto para fazer outra operação
+	- Tempo de transferência: taxa que os dados são transferidos
+- Características físicas
+	- Apagável/Não apagável
+		- Apagável: RAM, HD, SSD
+		- Não apagável: ROM, CD, DVD
+	- Mecanismo de escrita
+		- Elétrico
+		- Máscara
+	- Organização
+		- Arranjo físico de bits para formar uma palavra
+## Tipos de Memória
+### Memórias Não Voláteis
+Elas mantém o conteúdo mesmo quando são desconectadas da rede de alimentação.
+Ex: ROM, PROM, EPROM, EEPROM, FLASH
+### Memórias Não Voláteis
+Perdem o conteúdo quando a tensão de alimentação é desligada.
+Ex: RAM
+### ROM - Read Only Memory
+Ela consiste em uma tabela binária formada através de matrizes que geram produtos canônicos de acordo com a combinação das variáveis de entrada. Seu conteúdo é fixo (imutável). Como é uma matriz, temos que o endereço geralmente é bidimensional (linhas e colunas).
+![[Pasted image 20250522095228.png]]
+### PROM - ROM Programável
+Ela pode ser programada uma única vez. A organização é semelhante à ROM. No local do dado temos um fusível.
+### EPROM
+É uma ROM Programável (escrita) eletronicamente.
+### EEPROM
+É uma rum reprogramável (escrita e apaga) eletronicamente. Um exemplo é a flash.
+## Memória Cache
+Ela tem um método de acesso associativo. Ou seja, a localização dos dados na memória é feito pelo conteúdo e não pelo endereço.
+Hierarquia de acesso à memória principal:
+- um nível mais próximo do processador é normalmente um subconjunto de qualquer nível mais distante
+- todos os dados são armazenados no nível mais baixo
+![[Pasted image 20250527103235.png]]
+### Princípio da Localidade Temporal e Espacial
+Analisando a parte temporal desse princípio temos que se um conteúdo na memória foi utilizado em um instante, existe a probabilidade dele ser utilizado novamente em um instante futuro.
+Agora para a parte espacial, temos que se um conteúdo na memória foi utilizado, existe a probabilidade das posições que estão perto serem usadas também.
+Para manter a cache, existem políticas que determinam quais elementos devem ser mantidos na cache e que controlam a consistência da informação. Caches bem implementados atingem taxas de acerto (cache hit) superior a 95%. Além de ter políticas que determinam quais elementos devem ser mantidos na cache, as memórias devem ser estruturadas,
+### Conceitos
+- Bloco: menor unidade a ser transferida de um nível para outro
+- Acerto (hit): a informação está na cache (hit rate -> taxa de acerto)
+- Falha (miss): a informação não está na cache (miss rate -> taxa de falha)
+- Tempo de acerto: tempo necessário para acessar um nível da hierarquia incluindo o tempo para determinar se é acerto ou falha
+- Penalidade por falha: tempo necessário para buscar um bloco de um nível inferior para um nível superior incluindo o tempo para acessar o bloco, transmiti-lo de um nível para outro e inseri-lo no nível que ocorreu a falha
+### Implementação
+#### Tamanho da Cache
+É resultado de um compromisso entre a quantidade de dados armazenados, custo e desempenho. Se tivermos um tamanho suficientemente pequeno, estamos priorizando custo/complexidade. Já se tivermos um tamanho suficientemente grande, temos uma taxa de acerto alta e priorizamos o desempenho.
+O tamanho da memória cache depende da localização da cache.
+Quanto menor for a cache, mais rápida ela é, pois quanto maior a cache, maior é o número de portas envolvidas no endereçamento, o que torna ela mais lenta. Logo, quanto menor a cache, mais rápida ela é.
+#### Tamanho do Bloco
+Ele é baseado no princípio da localidade espacial. Assim, quanto maior o bloco, maior a taxa de acerto.
+Bloco grande é bom até que a probabilidade de utilizar os dados buscados recentemente se torne menor do que a probabilidade de reutilizar os dados que foram substituídos.
+#### Estrutura da Cache
+![[Pasted image 20250527113458.png]]
+Cada linha (informações sobre a linha + bloco (dados)) da cache possui as seguintes informações:
+- tag: identifica unicamente uma linha na cache (é aqui que vem o método associativo)
+- V: bit de validade, indica se é entrada é válida (1) ou não (0)
+- M: bit de modificação, indica se os dados armazenados na linha estão modificados (dirty) (1) ou não (0). Ele só é necessário se a política de escrita for write-back
+- Alg. Subs: bits para implementar o algoritmo de substituição. Só são necessários se o mapeamento for associativo total ou associativo por conjunto
+- Dados: bloco (conjunto de palavras) vindo do nível inferior
+### Função de Mapeamento
+O número de blocos na memória principal é maior do que o número de linhas na cache. Portanto, é necessário:
+- algoritmos para mapear blocos de memória principal em blocos da memória cache
+- mecanismos para determinar o bloco da memória principal que ocupa certo bloco da memória cache
+Temos os seguintes tipos de mapeamento:
+- mapeamento direto
+- mapeamento associativo
+- mapeamento associativo por conjunto
+#### Mapeamento Direto
+Cada bloco na memória principal é mapeado sempre na mesma linha da cache. Veja abaixo a expressão:
+$$i = j \,\,módulo \,\, m$$
+Onde:
+- i: é o número da linha na cache
+- j: é o número do bloco na memória principal
+- m: é o número de linhas na memória cache
+![[Pasted image 20250603111018.png]]
+Vários blocos da memória principal podem ser mapeados na mesma linha da cache. Para saber se o bloco que se quer acessar é o que está na cache usamos um campo chamado tag ou rótulo.
+Nós dividimos o endereço em campos:
+- byte offset: deslocamento do byte dentro da palavra
+- word offset: deslocamento da palavra dentro do bloco
+- index: dizer em qual linha o bloco será mapeado (resultado da operação módulo)
+- tag: identificar unicamente um bloco na cache 
+Para saber se a entrada na cache contém um endereço válido ou não, incluímos um bit de validade (v).
+Como temos 64 bytes, ou $2^6$ bytes, temos 6 bits para representar 64 posições
+![[aula_org_arq_03_06_1.jpg]]
+As vantagens desse mapeamento são:
+- técnica simples
+- baixo custo de implementação
+Já as desvantagens são:
+- cada bloco é mapeado em uma posição fixa na memória cache, então se houver referência a blocos distintos mapeadas na mesma linhas, teremos blocos trocados continuamente, logo, temos uma taxa de acerto baixa
+#### Mapeamento (Totalmente) Associativo
+Cada bloco da memória principal pode ser carregado em qualquer linha da memória cache, ou seja, ela evita a desvantagem do mapeamento direto. Os algoritmos de substituição que ele usa são:
+- FIFO (First-In, First-Out)
+- LRU (Least Recently Used)
+- LFU (Least Frequently Used)
+Para determinar se um bloco está na cache, comparamos simultaneamente o campo do rótulo do endereço do bloco acessado com o rótulo de todos os blocos da cache.
+![[Pasted image 20250603113506.png]]
+![[Pasted image 20250603113625.png]]
+#### Mapeamento Associativo por Conjunto

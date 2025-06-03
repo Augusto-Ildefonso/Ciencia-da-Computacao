@@ -109,9 +109,9 @@ Uma árvore enraizada é um grafo orientado no qual há um vértice (raiz) do qu
 ## Florestas
 Florestas é um conjunto de árvores.![[Pasted image 20250424133126.png]]
 ## Subgrafo Gerador
-Um subgrafo gerador $G' = (V', E')$ de um grafo $G = (V, E)$ é um grafo tal que $V = V'$ e $E' \subset E$ (está contido).![[Pasted image 20250424133750.png]]
+Um subgrafo gerador, ou subgrafo de espalhamento, $G' = (V', E')$ de um grafo $G = (V, E)$ é um grafo tal que $V = V'$ e $E' \subset E$ (está contido).![[Pasted image 20250424133750.png]]
 ## Árvore Geradora
-Uma árvore geradora $G' = (V', E')$ de um grafo $G = (V, E)$ é um subgrafo gerador que é uma árvore.
+Uma árvore geradora, ou de espalhamento, $G' = (V', E')$ de um grafo $G = (V, E)$ é um subgrafo gerador que é uma árvore.
 ![[Pasted image 20250424133921.png]]
 ![[Pasted image 20250424133927.png]]
 ## Subgrafo Induzido
@@ -349,4 +349,66 @@ A busca em profundidade (DFS - Depth-First Search) não é um algoritmo ótimo p
 A busca em largura (BFS - Breadth-First Search) pode-se dizer que é ótima em encontrar a solução mais curta (em termos de número de arestas) em grafos não ponderados, onde todas as arestas têm o mesmo custo. Não garante ser ótima para todos os problemas, mas é ótima para encontrar a solução mais curta.
 Em um grafo ponderado, onde as arestas têm pesos que representam custos, a DFS pode não encontrar o caminho mínimo entre dois vértices. Ela pode encontrar um caminho entre os vértices, mas não garante que seja o caminho com o menor custo.
 # Ordenação Topológica
-Define-se ordenação topológica para grafos orientados acíclicos. O objetivo da ordenação topológica é alinhar todos os vértices de um grafo em sequência, de forma que se a aresta $(u,v)$ pertence a $V$, então a aresta $u$ está antes de $v$ na sequência.
+Define-se ordenação topológica para grafos orientados acíclicos (gad). O objetivo da ordenação topológica é alinhar todos os vértices de um grafo em sequência, de forma que se a aresta $(u,v)$ pertence a $V$, então a aresta $u$ está antes de $v$ na sequência.
+Muitas aplicações usam gads para indicar precedência entre eventos.
+Podemos executar uma ordenação topológica no tempo $Q(V + E)$ já que a busca em profundidade demora esse tempo e inserir cada um dos vértices no início da lista leva o tempo $O(1)$.
+## Algoritmo
+1. Chame DFS para todos os vértices do grafo $G$, isto é, enquanto existirem vértices brancos.
+2. A cada vértice que é terminado (ou seja, se torna preto), insira-o na cabeça de uma lista encadeada.
+3. Retorna a lista encadeada de vértices do grafo produzida no item 2.
+### Sort Topológico
+Chame DFS para computador a timestamp, $f[v]$, relativa a finalização de um vértice $v$, para cada vértice $V$. Assim que o vértice for finalizado, inseri-lo na cabeça de uma lista e por fim retorne a lista. 
+### Implementação
+A implementação da ordenação topológica se dá adicionando um comando:
+```
+Insere_primeiro(u, L:lista)
+```
+A inserção ocorre na cabeça da lista L, na posição do algoritmo DFS logo após a determinação do tempo $f[u]$ e da finalização do nó, ou seja, após o momento em que ele se torna preto.
+Naturalmente, `Inicializa(L)` precisa ser chamado no início do algoritmo que chama DFS para todos os vértices brancos.
+![[Pasted image 20250524103923.png]]
+## Componentes Fortemente Conectados
+Define-se componentes fortemente conectados para um grafo orientado. Um componente fortemente conectado (ou fortemente conexo) $C$ de um grafo $G$ é um conjunto de vértices maximal de $G$ de forma que para todos os vértices $u$ e $v$ em $C$, $u$ é alcançável a partir de $v$ e $v$ é alcançável a partir de $u$.
+### Algoritmo
+O algoritmo para determinar os componentes fortemente conectados faz uso de duas buscas em profundidade, do transposto de $G$ e do fato de que $G$ e $G^T$ têm as mesmas componentes fortemente conexas.
+![[Pasted image 20250524103904.png]]
+Antes de analisarmos o algoritmo, vamos ver algumas definições:
+- O transposto de um grafo $G = (V, E)$ é definido como $G^T = (V, E^T)$, onde $E^T = {(u, v):(v, u) \in E}$. 
+- Grafo de componentes: é obtido pela contração de cada componente conexa. O grafo de componentes é um grafo acíclico dirigido, pois se existe um caminho de um componente A para um componente B e vice-versa A e B não podem ser componentes fortemente conexas distintas.
+O algoritmo para obter os componentes fortemente conectados é:
+1. Chama DFS(G) para obter os tempos de término $f[u]$ para todos os vértices de $G$, isto é, enquanto existirem vértices brancos em $G$.
+2. Obtém $G^T$.
+3. Chama DFS($G^T$) em ordem decrescente de $f[u]$ obtido no passo 1, enquanto existirem vértices brancos em $G^T$.
+4. Retorne todas as árvores obtidas no passo 3.
+### Classificação de Arestas
+A DFS(G) pode ser usada para classificar as arestas de $G$. Veja abaixo.
+- Aresta de árvore: arestas na floresta em profundidade. A aresta (u, v) é aresta de árvore se foi descoberta primeiro pela exploração da aresta (u, v).
+- Aresta de retorno: arestas (u, v) que conectam $u$ a um ancestral $v$ em uma árvore de profundidade (laços em grafos dirigidos devido à aresta de retorno).
+- Aresta direta: arestas (u, v) não de árvores
+- Arestas cruzadas: todas as outras arestas
+![[Pasted image 20250524124249.png]]
+# Árvores Geradoras Mínimas
+## Subgrafo Gerador de Custo Mínimo
+Dado um grafo não-orientado $G(V,E)$, onde $w: E \longrightarrow R^+$ define os custos das arestas. Queremos encontrar um subgrafo gerador conexo de $T$ de $G$ tal que, para todo subgrafo gerador conexo $T'$ de $G$ temos:
+$$\sum_{e \in T}w(e) \leq \sum_{e \in T} w(e)$$
+Ou seja, queremos achar um subconjunto que conecte todos os vértices e cujo peso total é minimizado.
+Claramente o problema só tem solução se $G$ é conexo. A partir de agora, assumimos $G$ conexo. Também não é difícil ver que a solução para esse problema será sempre uma árvore, já que basta notar que $T$ não terá ciclos, pois poderíamos obter um outro subgrafo $T'$, ainda conexo e com custo menor que o de $T$, removendo o ciclo. A árvore formado por $T$ é chamada de árvore geradora, já que gera o grafo.A Árvore Geradora (Spanning Tree) de um grafo $G$ é um subgrafo de $G$ que contém todos os seus vértices e, ainda, é uma árvore.
+O problema de determinar a árvore $T$ é denominado problema da árvore geradora mínima. Veja uma árvore geradora mínima abaixo.
+![[Pasted image 20250524131021.png]]
+## Árvore Geradora Mínima
+A Árvore Geradora Mínima (Minimun Spanning Tree - MST) é a árvore geradora de um grafo valorado cuja soma dos pesos associados às arestas é mínimo, logo, é uma árvore geradora de custo mínimo. 
+Os dois algoritmos que veremos para resolver o problema da árvore geradora mínima apresentam abordagem gulosa. Essa estratégia gulosa é representada pelo método genérico que é apresentado a seguir. Ele desenvolve a árvore geradora mínima uma aresta por vez.
+Antes de vermos o algoritmos precisamos ver algumas definições.
+### Definições
+Um corte ($S$, $V - S$) de um grafo não dirigido $G = (V, E)$ é uma partição de $V$. Dizemos que uma aresta ($u$, $v$) $\in E$ cruza o corte ($S$, $V - S$) se um de seus pontos extremos está em S e o outro está em $V - S$. Dizemos que um corte respeita um conjunto $A$ de arestas se nenhuma aresta em $A$ cruza o corte. Uma aresta é leve se cruza um corte e seu peso é mínimo de qualquer aresta que cruza o corte.
+Uma aresta segura é uma aresta leve que cruza ($S$, $V - S$).
+Na imagem abaixo podemos ver o corte e as arestas seguras.
+![[Pasted image 20250524133038.png]]
+### Algoritmo
+```
+Generic-MST(G, w)
+
+while A não formar uma árvore geradora
+	encontre uma aresta (u,v) que seja segura para A
+	A = A U {(u, v)}
+return A
+```

@@ -159,3 +159,19 @@ Analogamente, na direção vertical, a reação do plano deve compensar a compon
 $$N = m \, g \, cos(\theta_M)$$
 Combinando essas equações, obtemos:
 $$\micro_e = tan(\theta_M)$$
+# Conservação de Energia Mecânica
+## Introdução
+A energia mecânica de uma partícula de massa $m$, sujeita a forças conservativas, pode ser descrita como a soma de duas contribuições: a energia cinética, $E_C = \frac{1}{2}mv^2$, e a energia potencial, $E_p$. Essa última está associada ao trabalho feito sobre a massa pelas forças conservativas atuantes no sistema.
+Considere um sistema massa-mola suspenso verticalmente, como o mostrado abaixo.
+![[Pasted image 20250527215430.png]]
+Temos duas forças conservativas atuando: a força peso e a força elástica produzida pela mola. Para o trabalho de cada uma dessas forças é possível associar um termo de energia potencial da partícula. A energia potencial gravitacional pode ser escrita como: $E_G = mgh$, onde $h$ é a posição vertical da partícula medida desde uma altura de referência escolhida arbitrariamente. A energia potencial elástica, associada à compressão/expansão da mola é dada por $E_E = \frac{1}{2} k (L - L_0)^2$, em que $k$ é a constante elástica da mola e $L - L_0$ é sua elongação, medida com relação ao seu comprimento $L_0$ sem carga. Logo a energia mecânica da partícula é dada por:
+$$E = E_C + E_G + E_E = \frac{1}{2}mv^2 + mgh + \frac{1}{2}k(L-L_0)^2$$
+Para calcular a energia é necessário adotar um referencial e determinar os valores das distâncias $h$ e $L-L_0$ e da velocidade.
+## Energia Mecânica Durante o Movimento
+Se a massa suspensa é afastada da posição de equilíbrio, o sistema terá oscilações verticalmente. Considere dois cenários:
+![[Pasted image 20250527221922.png]]
+No primeiro, a energia mecânica é dada por:
+$$E_a = mgh_a + \frac{1}{2}k(L_a-L_0)^2$$
+Já no segundo, que ocorre após a massa ser solta, temos:
+$$E_b = \frac{1}{2}mv^2 + mgh_b+ \frac{1}{2}k(L_b- L_0)^2$$
+Caso não atuem outras forças sobre o sistema, a energia mecânica total deve ser conservada, ou seja, $E_a = E_b$
